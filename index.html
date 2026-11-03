@@ -510,33 +510,76 @@ function v3Rate(rating){
  v3SaveState();saveWords();
 }
 function v3SpeechSupported(){return 'speechSynthesis' in window&&'SpeechSynthesisUtterance' in window;}
+const v3AppleMobile=/iPad|iPhone|iPod/.test(navigator.userAgent) ||
+  (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
 let speechRequestId=0;
+let activeSpeechUtterance=null; // Keep a reference until speech finishes, particularly on mobile.
 function v3SpeechNotice(message,error=false){
  const el=document.getElementById('speechFeedback');
  if(!el)return;
  el.textContent=message;el.dataset.error=error?'true':'false';el.classList.remove('hidden');
 }
 function speakGerman(text,slow=false){
- if(!text){v3SpeechNotice('There is no pronunciation text for this word.',true);return;}
+ const spokenText=String(text||'').trim();
+ if(!spokenText){v3SpeechNotice('There is no German text to pronounce.',true);return;}
  if(!v3SpeechSupported()){
-  v3SpeechNotice('Audio is not supported in this browser. Try Microsoft Edge or Chrome on Windows.',true);return;
+  v3SpeechNotice('This browser does not support speech. Try Safari on iPhone or Chrome on Android.',true);return;
  }
+ const synth=window.speechSynthesis;
  const requestId=++speechRequestId;
  try{
-  const synth=window.speechSynthesis;
-  const utterance=new SpeechSynthesisUtterance(String(text));
-  utterance.lang='de-DE';utterance.rate=slow?0.72:0.95;utterance.pitch=1;utterance.volume=1;
-  const voices=typeof synth.getVoices==='function'?synth.getVoices():[];
-  const german=voices.find(v=>v.lang?.toLowerCase()==='de-de')||voices.find(v=>v.lang?.toLowerCase().startsWith('de'));
-  if(german)utterance.voice=german;
-  v3SpeechNotice(german?`🔊 Playing German: ${text}`:`🔊 Audio requested: ${text}. If you hear nothing, install a German voice in Windows Settings → Time & language → Speech.`);
-  utterance.onstart=()=>{if(requestId===speechRequestId)v3SpeechNotice(`🔊 Speaking: ${text}`);};
-  utterance.onerror=e=>{if(requestId===speechRequestId)v3SpeechNotice(`Audio failed (${e.error||'voice unavailable'}). Check device volume and install a German text-to-speech voice in Windows Settings → Time & language → Speech.`,true);};
-  utterance.onend=()=>{if(requestId===speechRequestId)v3SpeechNotice(`✓ Pronunciation finished: ${text}`);};
-  if(synth.speaking||synth.pending||synth.paused)synth.cancel();
-  synth.speak(utterance);
+  // Apple mobile devices sometimes drop the next utterance when cancel()
+  // is immediately followed by speak(). Let the current one finish instead.
+  if(v3AppleMobile && (synth.speaking||synth.pending)){
+   v3SpeechNotice('Another pronunciation is playing. Let it finish, then tap Hear again. If no sound plays, reload this page.',true);
+   return;
+  }
+  if(!v3AppleMobile && (synth.speaking||synth.pending))synth.cancel();
   if(synth.paused)synth.resume();
- }catch(e){console.warn('Speech not available',e);v3SpeechNotice('Audio could not start. Try Edge or Chrome and check the German voice in Windows Speech settings.',true);}
+  const utterance=new SpeechSynthesisUtterance(spokenText);
+  activeSpeechUtterance=utterance;
+  utterance.lang='de-DE';
+  utterance.rate=slow?0.72:0.95;
+  utterance.pitch=1;utterance.volume=1;
+  const voices=typeof synth.getVoices==='function'?synth.getVoices():[];
+  const german=voices.find(v=>(v.lang||'').toLowerCase()==='de-de')||
+    voices.find(v=>(v.lang||'').toLowerCase().startsWith('de'));
+  // Let iOS choose its own de-DE voice; forcing a voice can be unreliable.
+  if(german&&!v3AppleMobile)utterance.voice=german;
+  let started=false;
+  let finished=false;
+  utterance.onstart=()=>{
+   started=true;
+   if(requestId===speechRequestId)v3SpeechNotice('🔊 Speaking: '+spokenText);
+  };
+  utterance.onerror=e=>{
+   finished=true;
+   if(activeSpeechUtterance===utterance)activeSpeechUtterance=null;
+   if(requestId!==speechRequestId)return;
+   const mobileHelp=v3AppleMobile
+     ?' On iPhone/iPad, turn off Silent Mode, raise media volume and try Safari.'
+     :' Check media volume and availability of a German speech voice.';
+   v3SpeechNotice('Pronunciation failed ('+(e.error||'speech unavailable')+').'+mobileHelp,true);
+  };
+  utterance.onend=()=>{
+   finished=true;
+   if(activeSpeechUtterance===utterance)activeSpeechUtterance=null;
+   if(requestId===speechRequestId)v3SpeechNotice('✓ Finished: '+spokenText);
+  };
+  v3SpeechNotice('🔊 Starting German pronunciation…');
+  // This stays directly inside the user's click event; required on iOS.
+  synth.speak(utterance);
+  setTimeout(()=>{
+   if(requestId!==speechRequestId||started||finished)return;
+   v3SpeechNotice(v3AppleMobile
+     ?'No speech started. On iPhone, turn off Silent Mode, increase media volume and open the app directly in Safari. Then tap Hear again.'
+     :'No speech started. Check device volume, the available German voice and browser speech permissions.',true);
+  },1800);
+ }catch(e){
+  if(activeSpeechUtterance)activeSpeechUtterance=null;
+  console.warn('German pronunciation error',e);
+  v3SpeechNotice('Pronunciation could not start. Try Safari on iPhone or Chrome on Android, and check device sound settings.',true);
+ }
 }
 document.getElementById('todayReveal').addEventListener('click',()=>{if(!v3Current())return;v3Session.revealed=!v3Session.revealed;renderToday();});
 document.getElementById('todayRefresh').addEventListener('click',()=>{v3BuildSession();renderToday();});
