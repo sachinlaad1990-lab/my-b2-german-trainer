@@ -53,10 +53,18 @@ body[data-theme="dark"] .wordbuttons button.is-active{color:var(--ink)}
 .appearance-colors{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
 .appearance-colors label{flex:1;min-width:145px}
 .appearance-colors input[type=color]{height:44px;padding:4px;cursor:pointer}
+
+/* Version 3 — daily sessions, spaced repetition and pronunciation */
+.today-hero{padding:22px}.today-heading{display:flex;justify-content:space-between;align-items:start;gap:16px}.today-heading h2{font-size:clamp(1.3rem,2.8vw,1.9rem);margin:5px 0 7px}.today-heading p{margin:0}.eyebrow{font-size:.73rem;letter-spacing:.13em;font-weight:800;color:var(--accent)}
+.today-target{flex:0 0 auto;text-align:center;min-width:110px;font-size:2rem;font-weight:850;border-radius:14px;background:var(--accent2);color:var(--accent);padding:12px}.today-target span{display:block;font-size:.75rem;font-weight:600}
+.today-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:20px}.today-stats>div{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--panel)}.today-stats strong{display:block;font-size:1.65rem}.today-stats span{color:var(--muted);font-size:.85rem}
+.today-progress-track{margin-top:18px;height:11px;border-radius:100px;background:var(--line);overflow:hidden}.today-progress-track>div{width:0;height:100%;border-radius:100px;background:var(--good);transition:width .2s}.today-session-row{display:flex;gap:14px;justify-content:space-between;align-items:center;margin-top:13px}.today-session-row span{color:var(--muted);font-size:.91rem}
+.today-card{margin-top:16px;max-width:850px;margin-left:auto;margin-right:auto;text-align:center;padding:32px 24px}.today-pill{display:inline-block;border:1px solid var(--line);background:var(--accent2);color:var(--accent);font-size:.83rem;font-weight:800;padding:6px 13px;border-radius:100px}.today-word{font-size:clamp(1.65rem,4.5vw,2.65rem);font-weight:800;margin:18px 0 13px;overflow-wrap:anywhere}.today-audio{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin:10px 0 17px}.today-audio button{font-size:.91rem;padding:8px 13px}.today-answer{margin:18px auto;max-width:640px;padding:16px;border:1px solid var(--line);border-radius:12px;line-height:1.7;background:var(--accent2);text-align:left;white-space:pre-wrap}.today-answer strong{color:var(--ink)}.today-card>.primary{min-width:200px}.today-rating{margin-top:22px;border-top:1px solid var(--line);padding-top:10px}.rating-buttons{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.rating-buttons button{font-weight:750;min-height:60px}.rating-buttons button span{display:block;font-size:.73rem;font-weight:500;color:var(--muted);margin-top:3px}.rating-buttons button:hover{border-color:var(--accent)}.today-footnote{text-align:center;margin-top:14px}
+@media(max-width:700px){.today-heading{flex-direction:column}.today-target{min-width:0;width:100%;font-size:1.35rem}.today-target span{display:inline;margin-left:7px}.today-stats{gap:7px}.today-stats>div{padding:9px}.today-stats strong{font-size:1.35rem}.today-stats span{font-size:.75rem}.today-session-row{flex-direction:column;align-items:stretch}.today-card{padding:22px 13px}.rating-buttons{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
-<header><div class="brandhead"><img id="headerPhoto" class="profile-pic" alt="Your profile photo"><div class="brandcopy"><h1>Deutsch B2 Beruf</h1><p>Your personal German vocabulary trainer · works locally in this browser</p><div class="credit">Created by <strong id="headerCreator">Sachin Laad</strong></div></div></div></header>
+<header><div class="brandhead"><img id="headerPhoto" class="profile-pic" alt="Your profile photo"><div class="brandcopy"><h1>Deutsch B2 Beruf <span style="font-size:.52em;vertical-align:middle;color:var(--accent);font-weight:700">v3</span></h1><p>Your personal German vocabulary trainer · works locally in this browser</p><div class="credit">Created by <strong id="headerCreator">Sachin Laad</strong></div></div></div></header>
 <main>
 
 
@@ -82,15 +90,51 @@ body[data-theme="dark"] .wordbuttons button.is-active{color:var(--ink)}
     <div class="stat"><strong id="difficultStat">0</strong><span>Need practice</span></div>
   </section>
   <nav aria-label="Main navigation">
-    <button class="tab active" data-tab="library">📚 Vocabulary</button>
+    <button class="tab active" data-tab="today">🏠 Today</button>
+    <button class="tab" data-tab="library">📚 Vocabulary</button>
     <button class="tab" data-tab="flashcards">🗂️ Flashcards</button>
     <button class="tab" data-tab="quiz">🧠 Quiz</button>
-    <button class="tab" data-tab="grammarTrainer">✍️ Grammar Trainer</button>
+    <button class="tab hidden" data-tab="grammarTrainer" aria-hidden="true" tabindex="-1">✍️ Grammar Trainer (future)</button>
     <button class="tab" data-tab="import">⇅ Import / Export</button>
     <button class="tab" data-tab="settings">⚙️ Settings</button>
   </nav>
 
-  <section id="library" class="view">
+  <section id="today" class="view">
+    <div class="panel today-hero">
+      <div class="today-heading"><div><span class="eyebrow">YOUR DAILY GERMAN PRACTICE</span><h2>Learn a little, remember a lot.</h2><p class="muted">Up to 20 scheduled reviews and 10 new words in each session. No API calls or AI tokens.</p></div><div class="today-target">30 <span>max words/session</span></div></div>
+      <div class="today-stats" aria-live="polite">
+        <div><strong id="todayDue">0</strong><span>Due for review</span></div>
+        <div><strong id="todayNew">0</strong><span>New words waiting</span></div>
+        <div><strong id="todayDone">0</strong><span>Practised today</span></div>
+      </div>
+      <div class="today-progress-track" role="progressbar" aria-label="Daily session progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="todayProgressTrack"><div id="todayProgressBar"></div></div>
+      <div class="today-session-row"><span id="todaySessionStatus" aria-live="polite">Preparing your daily practice…</span><button type="button" id="todayRefresh" class="secondary">Start another set</button></div>
+    </div>
+    <div class="panel today-card" id="todayCard">
+      <div id="todayWordType" class="today-pill">Daily practice</div>
+      <div id="todayWord" class="today-word">Your next German word appears here</div>
+      <div class="today-audio">
+        <button type="button" id="todaySpeakWord" aria-label="Hear German word">🔊 Hear word</button>
+        <button type="button" id="todaySpeakSlow" aria-label="Hear German word slowly">🐢 Slow</button>
+        <button type="button" id="todaySpeakExample" class="hidden" aria-label="Hear German example sentence">🔊 Example</button>
+      </div>
+      <div id="todayAnswer" class="today-answer hidden" aria-live="polite"></div>
+      <button type="button" id="todayReveal" class="primary">Show meaning</button>
+      <div id="todayRating" class="today-rating hidden">
+        <p class="muted small">How well did you remember it?</p>
+        <div class="rating-buttons">
+          <button type="button" data-rating="again">↩ Again <span>10 min</span></button>
+          <button type="button" data-rating="hard">◐ Hard <span>1 day</span></button>
+          <button type="button" data-rating="good">✓ Good <span>Adaptive</span></button>
+          <button type="button" data-rating="easy">★ Easy <span>Adaptive</span></button>
+        </div>
+      </div>
+      <p id="todayHelp" class="small muted" aria-live="polite">Reveal the answer, then rate your recall to schedule the next review.</p>
+    </div>
+    <p class="small muted today-footnote">Review dates, session counts and voice preferences are stored in this browser. Existing word progress still uses your current Supabase sync. Grammar correction is reserved for a future version.</p>
+  </section>
+
+  <section id="library" class="view hidden">
     <div class="panel" id="wordEditorPanel" style="display:none">
       <h2 id="formTitle">Edit vocabulary word</h2>
       <form id="wordForm">
@@ -123,6 +167,11 @@ body[data-theme="dark"] .wordbuttons button.is-active{color:var(--ink)}
       <div class="muted" id="deckStatus" aria-live="polite">Deck progress appears here.</div>
       <div class="muted" id="flashCount">No cards yet</div><div class="progress"><div id="flashProgress"></div></div>
       <div class="german" id="flashGerman">Add or import words to begin</div>
+      <div class="today-audio" style="justify-content:center">
+        <button type="button" id="flashSpeakWord">🔊 Hear word</button>
+        <button type="button" id="flashSpeakSlow">🐢 Slow</button>
+        <button type="button" id="flashSpeakExample">🔊 Example</button>
+      </div>
       <div class="english hidden" id="flashEnglish"></div>
       <div class="example hidden" id="flashExample"></div>
       <div class="actions" style="justify-content:center"><button class="secondary" id="revealBtn">Show answer</button><button id="mnemonicBtn" type="button">Show mnemonic</button><div id="mnemonicText" class="mnemonic hidden"></div></div>
@@ -380,6 +429,107 @@ function updateLearningProgress() {
   }
 }
 
+/* Version 3: study scheduler and speech. No paid API or extra Supabase tables. */
+const V3_STORAGE_KEY='deutschB2DailySrs_v3';
+function v3LoadState(){
+ try{const value=JSON.parse(localStorage.getItem(V3_STORAGE_KEY)||'null');return value&&typeof value==='object'&&value.records&&value.activity?value:{records:{},activity:{}};}
+ catch(e){return {records:{},activity:{}};}
+}
+let v3State=v3LoadState(),v3Session=null;
+function v3SaveState(){try{localStorage.setItem(V3_STORAGE_KEY,JSON.stringify(v3State));}catch(e){console.warn('Could not save review schedule',e);}}
+function v3LocalDay(d=new Date()){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+function v3WordKey(w){return String(w?.german||'').trim().toLocaleLowerCase('de-DE');}
+function v3GetDue(){const now=Date.now();return words.filter(w=>{const record=v3State.records[v3WordKey(w)];return record?Number(record.dueAt)<=now:!!w.learned;});}
+function v3GetNew(){return words.filter(w=>!w.learned&&!v3State.records[v3WordKey(w)]);}
+function v3BuildSession(){
+ const due=shuffleArray(v3GetDue()).slice(0,20).map(w=>({id:w.id,kind:'review'}));
+ const recent=shuffleArray(v3GetNew()).slice(0,10).map(w=>({id:w.id,kind:'new'}));
+ v3Session={day:v3LocalDay(),queue:[...due,...recent],position:0,total:due.length+recent.length,revealed:false};
+}
+function v3Current(){return v3Session?.queue[v3Session.position]||null;}
+function renderToday(){
+ if(!document.getElementById('today'))return;
+ if(!v3Session||v3Session.day!==v3LocalDay())v3BuildSession();
+ const due=v3GetDue().length,newWords=v3GetNew().length;
+ const count=v3State.activity[v3LocalDay()]||{total:0};
+ document.getElementById('todayDue').textContent=due;
+ document.getElementById('todayNew').textContent=newWords;
+ document.getElementById('todayDone').textContent=count.total||0;
+ const finished=v3Session.position,percent=v3Session.total?Math.round(finished/v3Session.total*100):0;
+ document.getElementById('todayProgressBar').style.width=percent+'%';
+ document.getElementById('todayProgressTrack').setAttribute('aria-valuenow',String(percent));
+ document.getElementById('todaySessionStatus').textContent=`${finished} of ${v3Session.total} words completed in this session`;
+ const card=v3Current(),word=card?byId(card.id):null;
+ document.getElementById('todayRating').classList.add('hidden');
+ document.getElementById('todayAnswer').classList.add('hidden');
+ document.getElementById('todaySpeakExample').classList.add('hidden');
+ const canSpeak=v3SpeechSupported();
+ document.getElementById('todaySpeakWord').disabled=!word||!canSpeak;
+ document.getElementById('todaySpeakSlow').disabled=!word||!canSpeak;
+ document.getElementById('todaySpeakExample').disabled=!word?.example||!canSpeak;
+ document.getElementById('todayReveal').disabled=!word;
+ if(!word){
+  document.getElementById('todayWordType').textContent=v3Session.total?'Session complete':'All caught up';
+  document.getElementById('todayWord').textContent=words.length?'Well done! You are finished for now.':'Your vocabulary list is empty.';
+  document.getElementById('todayReveal').classList.add('hidden');
+  document.getElementById('todayHelp').textContent=words.length?'New reviews will appear when they are due. Use “Start another set” to check for available words.':'Import vocabulary in the Import / Export tab to begin.';
+  return;
+ }
+ document.getElementById('todayWordType').textContent=`${card.kind==='review'?'↻ Scheduled review':'✦ New word'} · ${v3Session.position+1} / ${v3Session.total}`;
+ document.getElementById('todayWord').textContent=word.german;
+ document.getElementById('todayReveal').classList.remove('hidden');
+ document.getElementById('todayReveal').textContent=v3Session.revealed?'Hide meaning':'Show meaning';
+ document.getElementById('todayHelp').textContent=canSpeak?'Tap the speaker to practise pronunciation. Reveal and rate your recall to continue.':'Speech playback is unavailable in this browser. You can still study normally.';
+ if(v3Session.revealed){
+  document.getElementById('todayAnswer').textContent=[`Meaning: ${word.english}`,word.article?`Article / plural: ${word.article}`:'',word.example?`Example: ${word.example}`:'',word.translation?`Translation: ${word.translation}`:'',word.grammar?`Grammar: ${word.grammar}`:''].filter(Boolean).join('\n');
+  document.getElementById('todayAnswer').classList.remove('hidden');
+  document.getElementById('todayRating').classList.remove('hidden');
+  document.getElementById('todaySpeakExample').classList.toggle('hidden',!word.example);
+ }
+}
+function v3Rate(rating){
+ if(!v3Session?.revealed)return;
+ const card=v3Current(),word=card?byId(card.id):null;
+ if(!word)return;
+ const key=v3WordKey(word),prior=v3State.records[key]||{},now=Date.now();
+ const repetitions=Number(prior.repetitions)||0,previousInterval=Number(prior.intervalDays)||0;
+ let intervalDays,delayMs,nextRepetitions;
+ if(rating==='again'){intervalDays=0;delayMs=10*60*1000;nextRepetitions=0;word.learned=false;word.difficult=true;}
+ else if(rating==='hard'){intervalDays=1;delayMs=24*60*60*1000;nextRepetitions=Math.max(0,repetitions);word.difficult=true;}
+ else if(rating==='good'){intervalDays=previousInterval?Math.max(3,Math.round(previousInterval*2.3)):3;delayMs=intervalDays*86400000;nextRepetitions=repetitions+1;word.learned=true;word.difficult=false;}
+ else if(rating==='easy'){intervalDays=previousInterval?Math.max(7,Math.round(previousInterval*2.8)):7;delayMs=intervalDays*86400000;nextRepetitions=repetitions+1;word.learned=true;word.difficult=false;}
+ else return;
+ v3State.records[key]={dueAt:now+delayMs,intervalDays,repetitions:nextRepetitions,lastRating:rating,lastReviewedAt:now};
+ const today=v3LocalDay(),activity=v3State.activity[today]||{total:0,newCount:0,reviewCount:0};
+ activity.total++;if(card.kind==='new')activity.newCount++;else activity.reviewCount++;
+ v3State.activity[today]=activity;
+ v3Session.position++;v3Session.revealed=false;
+ v3SaveState();saveWords();
+}
+function v3SpeechSupported(){return 'speechSynthesis' in window&&'SpeechSynthesisUtterance' in window;}
+function speakGerman(text,slow=false){
+ if(!text)return;
+ if(!v3SpeechSupported()){alert('Your browser does not support spoken pronunciation. Try Chrome or Edge with a German voice installed.');return;}
+ try{
+  window.speechSynthesis.cancel();
+  const utterance=new SpeechSynthesisUtterance(text);utterance.lang='de-DE';utterance.rate=slow?0.72:0.96;utterance.pitch=1;
+  const voices=window.speechSynthesis.getVoices();
+  const german=voices.find(v=>v.lang.toLowerCase()==='de-de')||voices.find(v=>v.lang.toLowerCase().startsWith('de'));
+  if(german)utterance.voice=german;
+  window.speechSynthesis.speak(utterance);
+ }catch(e){console.warn('Speech not available',e);alert('German pronunciation could not start. Check the German voice in your browser or device settings.');}
+}
+document.getElementById('todayReveal').addEventListener('click',()=>{if(!v3Current())return;v3Session.revealed=!v3Session.revealed;renderToday();});
+document.getElementById('todayRefresh').addEventListener('click',()=>{v3BuildSession();renderToday();});
+document.querySelectorAll('#todayRating [data-rating]').forEach(button=>button.addEventListener('click',()=>v3Rate(button.dataset.rating)));
+document.getElementById('todaySpeakWord').addEventListener('click',()=>{const item=v3Current(),w=item?byId(item.id):null;if(w)speakGerman(w.german);});
+document.getElementById('todaySpeakSlow').addEventListener('click',()=>{const item=v3Current(),w=item?byId(item.id):null;if(w)speakGerman(w.german,true);});
+document.getElementById('todaySpeakExample').addEventListener('click',()=>{const item=v3Current(),w=item?byId(item.id):null;if(w)speakGerman(w.example);});
+function v3CurrentFlashWord(){const deck=getFlashDecks()[flashDeckIndex]||[];return deck[flashIndex]||null;}
+document.getElementById('flashSpeakWord').addEventListener('click',()=>{const w=v3CurrentFlashWord();if(w)speakGerman(w.german);});
+document.getElementById('flashSpeakSlow').addEventListener('click',()=>{const w=v3CurrentFlashWord();if(w)speakGerman(w.german,true);});
+document.getElementById('flashSpeakExample').addEventListener('click',()=>{const w=v3CurrentFlashWord();if(w)speakGerman(w.example);});
+
 function saveWords() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(words));
   reconcileOrders();
@@ -448,11 +598,11 @@ function renderList() {
  el.innerHTML='<div class="vocab-decks">'+decks.map(({number,words:deck},index)=>{
   const learned=deck.filter(w=>w.learned).length,total=deck.length;
   const percent=Math.round(learned/total*100),mastered=total>0&&learned===total;
-  const cards=deck.map(w=>`<article class="word"><div><h3>${esc(w.german)}</h3><p>${esc(w.english)}</p>${w.article?`<div class="small">${esc(w.article)}</div>`:''}${w.example?`<p><strong>Example:</strong> ${esc(w.example)}</p>`:''}${w.translation?`<p><strong>Translation:</strong> ${esc(w.translation)}</p>`:''}${w.grammar?`<p><strong>Grammar:</strong> ${esc(w.grammar).replace(/\n/g,'<br>')}</p>`:''}${w.notes?`<p class="user-notes"><strong>📝 Your notes:</strong> ${esc(w.notes).replace(/\n/g,'<br>')}</p>`:''}<span class="tag">${esc(w.category||'Uncategorised')}</span><span class="tag">${esc(w.level||'Important')}</span>${w.bookmarked?'<span class="tag">★ Bookmarked</span>':''}${w.examBookmark?'<span class="tag">🎯 For exam</span>':''}${w.azeezSuggestion?'<span class="tag">💡 Azeez suggestion</span>':''}${w.difficult?'<span class="tag">Need practice</span>':''}${w.learned?'<span class="tag">✓ Learned</span>':''}</div><div class="wordbuttons"><button data-action="bookmark" data-id="${esc(w.id)}" class="${w.bookmarked?'is-active':''}" title="General bookmark">${w.bookmarked?'★':'☆'}</button><button data-action="exam" data-id="${esc(w.id)}" class="${w.examBookmark?'is-active':''}" title="Mark for exam">${w.examBookmark?'🎯 Exam ✓':'🎯 For exam'}</button><button data-action="azeez" data-id="${esc(w.id)}" class="${w.azeezSuggestion?'is-active':''}" title="Azeez suggestion">${w.azeezSuggestion?'💡 Azeez ✓':'💡 Azeez suggestion'}</button><button data-action="difficult" data-id="${esc(w.id)}" class="${w.difficult?'is-active':''}" title="Need practice">${w.difficult?'Practise ✓':'Difficult'}</button><button data-action="learned" data-id="${esc(w.id)}" class="${w.learned?'is-active':''}" title="Learned">${w.learned?'Learned ✓':'Learned'}</button><button data-action="edit" data-id="${esc(w.id)}">Edit</button><button class="danger" data-action="delete" data-id="${esc(w.id)}">Delete</button></div></article>`).join('');
+  const cards=deck.map(w=>`<article class="word"><div><h3>${esc(w.german)}</h3><p>${esc(w.english)}</p>${w.article?`<div class="small">${esc(w.article)}</div>`:''}${w.example?`<p><strong>Example:</strong> ${esc(w.example)}</p>`:''}${w.translation?`<p><strong>Translation:</strong> ${esc(w.translation)}</p>`:''}${w.grammar?`<p><strong>Grammar:</strong> ${esc(w.grammar).replace(/\n/g,'<br>')}</p>`:''}${w.notes?`<p class="user-notes"><strong>📝 Your notes:</strong> ${esc(w.notes).replace(/\n/g,'<br>')}</p>`:''}<span class="tag">${esc(w.category||'Uncategorised')}</span><span class="tag">${esc(w.level||'Important')}</span>${w.bookmarked?'<span class="tag">★ Bookmarked</span>':''}${w.examBookmark?'<span class="tag">🎯 For exam</span>':''}${w.azeezSuggestion?'<span class="tag">💡 Azeez suggestion</span>':''}${w.difficult?'<span class="tag">Need practice</span>':''}${w.learned?'<span class="tag">✓ Learned</span>':''}</div><div class="wordbuttons"><button data-action="speak-word" data-id="${esc(w.id)}" title="Hear German pronunciation" aria-label="Hear German word">🔊 Word</button>${w.example?`<button data-action="speak-example" data-id="${esc(w.id)}" title="Hear the German example sentence">🔊 Sentence</button>`:''}<button data-action="bookmark" data-id="${esc(w.id)}" class="${w.bookmarked?'is-active':''}" title="General bookmark">${w.bookmarked?'★':'☆'}</button><button data-action="exam" data-id="${esc(w.id)}" class="${w.examBookmark?'is-active':''}" title="Mark for exam">${w.examBookmark?'🎯 Exam ✓':'🎯 For exam'}</button><button data-action="azeez" data-id="${esc(w.id)}" class="${w.azeezSuggestion?'is-active':''}" title="Azeez suggestion">${w.azeezSuggestion?'💡 Azeez ✓':'💡 Azeez suggestion'}</button><button data-action="difficult" data-id="${esc(w.id)}" class="${w.difficult?'is-active':''}" title="Need practice">${w.difficult?'Practise ✓':'Difficult'}</button><button data-action="learned" data-id="${esc(w.id)}" class="${w.learned?'is-active':''}" title="Learned">${w.learned?'Learned ✓':'Learned'}</button><button data-action="edit" data-id="${esc(w.id)}">Edit</button><button class="danger" data-action="delete" data-id="${esc(w.id)}">Delete</button></div></article>`).join('');
   return `<details class="vocab-deck ${mastered?'deck-mastered':''}" ${index===0?'open':''}><summary><span class="deck-heading"><span class="deck-chevron">▶</span><span>Deck ${number}${mastered?' ✓':''}</span></span><span class="deck-meta">${learned}/${total} learned · ${percent}%${mastered?' · Mastered':''}</span></summary><div class="deck-progress"><div style="width:${percent}%"></div></div><div class="deck-words">${cards}</div></details>`;
  }).join('')+'</div>';
 }
-function renderAll(){renderStats();renderList();renderFlash();updateLearningProgress()}
+function renderAll(){renderStats();renderList();renderFlash();updateLearningProgress();renderToday()}
 function resetForm(){document.getElementById('wordForm').reset();document.getElementById('editId').value='';document.getElementById('formTitle').textContent='Edit vocabulary word';document.getElementById('saveWord').textContent='Save changes';document.getElementById('cancelEdit').classList.add('hidden');document.getElementById('wordEditorPanel').style.display='none'}
 document.getElementById('wordForm').addEventListener('submit',e=>{
  e.preventDefault();const id=document.getElementById('editId').value;
@@ -466,16 +616,18 @@ document.getElementById('search').addEventListener('input',renderList);document.
 document.getElementById('wordList').addEventListener('click',e=>{
  const b=e.target.closest('button[data-action]');if(!b)return;const w=byId(b.dataset.id);if(!w)return;
  switch(b.dataset.action){
+ case 'speak-word':speakGerman(w.german);return;
+ case 'speak-example':speakGerman(w.example);return;
  case 'bookmark':w.bookmarked=!w.bookmarked;break;
  case 'exam':w.examBookmark=!w.examBookmark;break;
  case 'azeez':w.azeezSuggestion=!w.azeezSuggestion;break;
  case 'difficult':w.difficult=!w.difficult;break;
- case 'learned':w.learned=!w.learned;if(w.learned)w.difficult=false;break;
+ case 'learned':w.learned=!w.learned;if(w.learned)w.difficult=false;else{delete v3State.records[v3WordKey(w)];v3SaveState();}break;
  case 'edit':document.getElementById('wordEditorPanel').style.display='block';document.getElementById('editId').value=w.id;for(const k of ['german','english','category','article','example','translation','grammar','notes','pronunciation','level'])document.getElementById(k).value=w[k]||'';document.getElementById('formTitle').textContent='Edit vocabulary word';document.getElementById('saveWord').textContent='Save changes';document.getElementById('cancelEdit').classList.remove('hidden');document.getElementById('wordEditorPanel').scrollIntoView({behavior:'smooth',block:'start'});return;
- case 'delete':if(!confirm(`Delete "${w.german}"?`))return;words=words.filter(x=>x.id!==w.id);break;
+ case 'delete':if(!confirm(`Delete "${w.german}"?`))return;delete v3State.records[v3WordKey(w)];v3SaveState();words=words.filter(x=>x.id!==w.id);break;
  }saveWords();
 });
-document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.view').forEach(v=>v.classList.toggle('hidden',v.id!==b.dataset.tab));if(b.dataset.tab==='quiz')startQuiz();if(b.dataset.tab==='flashcards')renderFlash()});
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.view').forEach(v=>v.classList.toggle('hidden',v.id!==b.dataset.tab));if(b.dataset.tab==='quiz')startQuiz();if(b.dataset.tab==='flashcards')renderFlash();if(b.dataset.tab==='today')renderToday()});
 function getSet(mode){return words.filter(w=>mode==='bookmarked'?w.bookmarked:mode==='exam'?w.examBookmark:mode==='azeez'?w.azeezSuggestion:mode==='difficult'?w.difficult:mode==='unlearned'?!w.learned:true)}
 document.getElementById('flashMode').onchange=()=>{flashDeckIndex=0;flashIndex=0;flashRevealed=false;renderFlash()};
 function getFlashDecks(){
@@ -522,6 +674,7 @@ function renderFlash(){
  document.getElementById('flashEnglish').textContent=w?`Meaning: ${w.english}`:'';
  document.getElementById('flashExample').textContent=w?[w.article,w.example,w.translation,w.grammar?`Grammar: ${w.grammar}`:'',w.notes?`Your notes: ${w.notes}`:''].filter(Boolean).join('\n'):'';
  ['flashEnglish','flashExample'].forEach(id=>document.getElementById(id).classList.toggle('hidden',!w||!flashRevealed));
+ document.getElementById('flashSpeakWord').disabled=!w||!v3SpeechSupported();document.getElementById('flashSpeakSlow').disabled=!w||!v3SpeechSupported();document.getElementById('flashSpeakExample').disabled=!w?.example||!v3SpeechSupported();
  document.getElementById('revealBtn').disabled=!w;document.getElementById('prevCard').disabled=!deck.length||flashIndex===0;document.getElementById('nextCard').disabled=!deck.length||flashIndex>=deck.length-1;document.getElementById('markDifficult').disabled=!w;document.getElementById('markLearned').disabled=!w||w.learned;
  document.getElementById('nextDeck').disabled=!decks.length||flashDeckIndex>=decks.length-1;
  document.getElementById('markLearned').textContent=w&&w.learned?'✓ Already learned':'Mark learned ✓';
@@ -540,6 +693,7 @@ document.getElementById('markDifficult').onclick = () => {
   if (word) {
     word.difficult = true;
     word.learned = false;
+    delete v3State.records[v3WordKey(word)];v3SaveState();
     saveWords();
   }
 };
@@ -791,9 +945,10 @@ async function resetLearningProgressToFresh() {
       }
     }
     affected.forEach(word => {
-      if (scope !== 'difficult') word.learned = false;
+      if (scope !== 'difficult') {word.learned = false;delete v3State.records[v3WordKey(word)];}
       word.difficult = false;
     });
+    v3SaveState();v3Session=null;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(words));
     flashIndex = 0;
     quizGroupKey = '';
@@ -1047,6 +1202,9 @@ document.getElementById('grammarCheckBtn').onclick=async()=>{
   });
   apply();
 })();
+
+// Populate every tab even when the visitor has not signed in.
+renderAll();
 
 </script>
 </body>
