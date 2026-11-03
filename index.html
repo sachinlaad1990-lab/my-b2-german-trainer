@@ -298,6 +298,21 @@ body[data-theme="dark"] .wordbuttons button.is-active{color:var(--ink)}
   </div>
   <p id="appearanceStatus" class="small muted" aria-live="polite"></p>
 </section>
+<section class="panel" id="pronunciationPanel">
+  <h2>🔊 German Pronunciation (free)</h2>
+  <p class="muted small">Uses your device's speech voices; no Gemini tokens or paid API. On iPhone, select a German voice below if the Hear button shows “Speaking” but stays silent.</p>
+  <label for="speechVoiceSelect">German voice on this device
+    <select id="speechVoiceSelect"><option value="">Automatic German voice</option></select>
+  </label>
+  <div class="actions">
+    <button type="button" id="speechVoiceTest" class="primary">🔊 Test German voice</button>
+    <button type="button" id="speechSoundTest">♫ Test device sound</button>
+    <button type="button" id="speechVoiceRefresh">↻ Refresh voices</button>
+    <button type="button" id="speechVoiceReset">Reset speaker</button>
+  </div>
+  <p id="speechSettingsStatus" class="small muted" aria-live="polite">Voice options will load from your browser.</p>
+  <p class="small muted">If the sound test is audible but German speech is silent, choose another German voice and tap Test German voice. If both are silent, check Silent Mode, Bluetooth output and media volume. Safari's “Speaking” message alone does not prove sound played.</p>
+</section>
 <section class="panel" id="authPanel" style="margin-bottom:18px">
   <h2>Account & Cloud Sync</h2>
   <p class="muted small">
@@ -509,78 +524,161 @@ function v3Rate(rating){
  v3Session.position++;v3Session.revealed=false;
  v3SaveState();saveWords();
 }
-function v3SpeechSupported(){return 'speechSynthesis' in window&&'SpeechSynthesisUtterance' in window;}
+function v3SpeechSupported(){return 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;}
 const v3AppleMobile=/iPad|iPhone|iPod/.test(navigator.userAgent) ||
   (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
+const V3_VOICE_KEY='deutschB2GermanVoice_v1';
 let speechRequestId=0;
-let activeSpeechUtterance=null; // Keep a reference until speech finishes, particularly on mobile.
+let activeSpeechUtterance=null; // Keep a strong reference while mobile speech is active.
 function v3SpeechNotice(message,error=false){
  const el=document.getElementById('speechFeedback');
  if(!el)return;
  el.textContent=message;el.dataset.error=error?'true':'false';el.classList.remove('hidden');
 }
+function v3GermanVoices(){
+ if(!v3SpeechSupported())return [];
+ const all=window.speechSynthesis.getVoices();
+ return all.filter(v=>(v.lang||'').toLowerCase().startsWith('de'));
+}
+function v3PreferredGermanVoice(){
+ const voices=v3GermanVoices();
+ let saved='';
+ try{saved=localStorage.getItem(V3_VOICE_KEY)||'';}catch(e){}
+ const chosen=voices.find(v=>v.voiceURI===saved)||null;
+ // Prefer local voices and de-DE. Safari can be silent if voice is unset.
+ return chosen||voices.find(v=>v.localService&&(v.lang||'').toLowerCase()==='de-de')||
+  voices.find(v=>(v.lang||'').toLowerCase()==='de-de')||
+  voices.find(v=>v.localService)||voices[0]||null;
+}
+function v3PopulateSpeechVoices(){
+ const select=document.getElementById('speechVoiceSelect');
+ const status=document.getElementById('speechSettingsStatus');
+ if(!select||!status)return;
+ select.replaceChildren();
+ const auto=new Option('Automatic German voice','');
+ select.add(auto);
+ if(!v3SpeechSupported()){
+  select.disabled=true;
+  status.textContent='This browser does not support its built-in speech synthesis.';
+  return;
+ }
+ const voices=v3GermanVoices();
+ voices.forEach(v=>select.add(new Option(
+  v.name+' ('+v.lang+')'+(v.localService?' · on device':''),
+  v.voiceURI
+ )));
+ let saved='';try{saved=localStorage.getItem(V3_VOICE_KEY)||'';}catch(e){}
+ select.value=voices.some(v=>v.voiceURI===saved)?saved:'';
+ status.textContent=voices.length
+  ?voices.length+' German voice'+(voices.length===1?'':'s')+' detected. Try a different voice if iPhone Safari stays silent.'
+  :'No German voices reported yet. Tap Refresh voices, or install a German voice in iPhone Settings → Accessibility → Spoken Content → Voices.';
+}
+function v3ResetSpeaker(){
+ speechRequestId++;
+ if(v3SpeechSupported()){
+  try{window.speechSynthesis.cancel();}catch(e){}
+ }
+ activeSpeechUtterance=null;
+ v3SpeechNotice('Speaker reset. Tap Hear Word or Test German voice again.');
+}
+function v3TestSound(){
+ const AudioContextType=window.AudioContext||window.webkitAudioContext;
+ if(!AudioContextType){
+  v3SpeechNotice('Audio test is unavailable in this browser.',true);return;
+ }
+ try{
+  const ctx=new AudioContextType();
+  const note=ctx.createOscillator();
+  const gain=ctx.createGain();
+  const t=ctx.currentTime;
+  note.type='sine';
+  note.frequency.setValueAtTime(700,t);
+  note.frequency.setValueAtTime(880,t+0.18);
+  gain.gain.setValueAtTime(0.001,t);
+  gain.gain.exponentialRampToValueAtTime(0.18,t+0.035);
+  gain.gain.exponentialRampToValueAtTime(0.001,t+0.38);
+  note.connect(gain);gain.connect(ctx.destination);
+  note.start(t);note.stop(t+0.41);
+  note.onended=()=>ctx.close().catch(()=>{});
+  if(ctx.state==='suspended'){
+   ctx.resume().catch(()=>v3SpeechNotice('iPhone blocked the audio test. Check Silent Mode and audio output.',true));
+  }
+  v3SpeechNotice('♫ Device test tone requested. If you hear it but not German speech, try another voice under Settings → German Pronunciation.');
+ }catch(e){
+  console.warn('Audio test failed',e);
+  v3SpeechNotice('The device audio test could not start. Check Safari audio settings.',true);
+ }
+}
 function speakGerman(text,slow=false){
  const spokenText=String(text||'').trim();
- if(!spokenText){v3SpeechNotice('There is no German text to pronounce.',true);return;}
+ if(!spokenText){v3SpeechNotice('No German text available to pronounce.',true);return;}
  if(!v3SpeechSupported()){
-  v3SpeechNotice('This browser does not support speech. Try Safari on iPhone or Chrome on Android.',true);return;
+  v3SpeechNotice('Speech is unavailable. Try Safari on iPhone or Chrome/Edge on Windows.',true);return;
  }
  const synth=window.speechSynthesis;
+ // A stuck mobile speech queue requires an explicit reset, not silent queuing.
+ if(v3AppleMobile&&(synth.speaking||synth.pending||synth.paused)){
+  v3SpeechNotice('Safari says speech is already active. Go to Settings → German Pronunciation → Reset speaker, then tap Hear again.',true);
+  return;
+ }
  const requestId=++speechRequestId;
  try{
-  // Apple mobile devices sometimes drop the next utterance when cancel()
-  // is immediately followed by speak(). Let the current one finish instead.
-  if(v3AppleMobile && (synth.speaking||synth.pending)){
-   v3SpeechNotice('Another pronunciation is playing. Let it finish, then tap Hear again. If no sound plays, reload this page.',true);
-   return;
-  }
-  if(!v3AppleMobile && (synth.speaking||synth.pending))synth.cancel();
-  if(synth.paused)synth.resume();
+  if(!v3AppleMobile&&(synth.speaking||synth.pending||synth.paused))synth.cancel();
   const utterance=new SpeechSynthesisUtterance(spokenText);
   activeSpeechUtterance=utterance;
-  utterance.lang='de-DE';
-  utterance.rate=slow?0.72:0.95;
+  utterance.lang='de-DE';utterance.rate=slow?0.72:0.95;
   utterance.pitch=1;utterance.volume=1;
-  const voices=typeof synth.getVoices==='function'?synth.getVoices():[];
-  const german=voices.find(v=>(v.lang||'').toLowerCase()==='de-de')||
-    voices.find(v=>(v.lang||'').toLowerCase().startsWith('de'));
-  // Let iOS choose its own de-DE voice; forcing a voice can be unreliable.
-  if(german&&!v3AppleMobile)utterance.voice=german;
-  let started=false;
-  let finished=false;
+  const german=v3PreferredGermanVoice();
+  // IMPORTANT: Unlike the previous version, assign an explicit voice on iOS.
+  // WebKit has had a nullable voice regression which can cause silent speech.
+  if(german)utterance.voice=german;
+  let started=false,finished=false;
+  const usingVoice=german?german.name:'system default (no German voice returned)';
   utterance.onstart=()=>{
    started=true;
-   if(requestId===speechRequestId)v3SpeechNotice('🔊 Speaking: '+spokenText);
+   if(requestId===speechRequestId)
+    v3SpeechNotice('🔊 Safari started '+usingVoice+'. If silent, open Settings → German Pronunciation and try Test device sound.');
   };
   utterance.onerror=e=>{
    finished=true;
    if(activeSpeechUtterance===utterance)activeSpeechUtterance=null;
-   if(requestId!==speechRequestId)return;
-   const mobileHelp=v3AppleMobile
-     ?' On iPhone/iPad, turn off Silent Mode, raise media volume and try Safari.'
-     :' Check media volume and availability of a German speech voice.';
-   v3SpeechNotice('Pronunciation failed ('+(e.error||'speech unavailable')+').'+mobileHelp,true);
+   if(requestId===speechRequestId)
+    v3SpeechNotice('Voice failed ('+(e.error||'unknown error')+'). Open Settings → German Pronunciation → Reset speaker or select another voice.',true);
   };
   utterance.onend=()=>{
    finished=true;
    if(activeSpeechUtterance===utterance)activeSpeechUtterance=null;
-   if(requestId===speechRequestId)v3SpeechNotice('✓ Finished: '+spokenText);
+   if(requestId===speechRequestId)
+    v3SpeechNotice('Speech request finished ('+usingVoice+'). If you heard nothing, test sound and select another German voice in Settings.');
   };
-  v3SpeechNotice('🔊 Starting German pronunciation…');
-  // This stays directly inside the user's click event; required on iOS.
+  v3SpeechNotice('Starting German voice ('+usingVoice+')…');
+  // Keep speak() synchronous inside the button click to honor iOS gesture rules.
   synth.speak(utterance);
   setTimeout(()=>{
    if(requestId!==speechRequestId||started||finished)return;
-   v3SpeechNotice(v3AppleMobile
-     ?'No speech started. On iPhone, turn off Silent Mode, increase media volume and open the app directly in Safari. Then tap Hear again.'
-     :'No speech started. Check device volume, the available German voice and browser speech permissions.',true);
-  },1800);
+   v3SpeechNotice('Speech did not start. Try Settings → German Pronunciation → Reset speaker, then Test German voice.',true);
+  },2000);
  }catch(e){
-  if(activeSpeechUtterance)activeSpeechUtterance=null;
-  console.warn('German pronunciation error',e);
-  v3SpeechNotice('Pronunciation could not start. Try Safari on iPhone or Chrome on Android, and check device sound settings.',true);
+  activeSpeechUtterance=null;
+  console.warn('German speech failed',e);
+  v3SpeechNotice('Speech could not start. Select a different German voice or reset the speaker under Settings.',true);
  }
 }
+document.getElementById('speechVoiceSelect').addEventListener('change',e=>{
+ try{localStorage.setItem(V3_VOICE_KEY,e.target.value);}catch(err){}
+ v3ResetSpeaker();
+ v3SpeechNotice('German voice updated. Tap Hear Word or Test German voice to listen.');
+});
+document.getElementById('speechVoiceTest').addEventListener('click',()=>speakGerman('Guten Morgen. Willkommen beim Deutschtraining.'));
+document.getElementById('speechSoundTest').addEventListener('click',v3TestSound);
+document.getElementById('speechVoiceRefresh').addEventListener('click',v3PopulateSpeechVoices);
+document.getElementById('speechVoiceReset').addEventListener('click',v3ResetSpeaker);
+if(v3SpeechSupported()){
+ window.speechSynthesis.addEventListener('voiceschanged',v3PopulateSpeechVoices);
+}
+v3PopulateSpeechVoices();
+// Safari may populate its voice list after the document has loaded.
+[300,1000,2500].forEach(delay=>setTimeout(v3PopulateSpeechVoices,delay));
 document.getElementById('todayReveal').addEventListener('click',()=>{if(!v3Current())return;v3Session.revealed=!v3Session.revealed;renderToday();});
 document.getElementById('todayRefresh').addEventListener('click',()=>{v3BuildSession();renderToday();});
 document.querySelectorAll('#todayRating [data-rating]').forEach(button=>button.addEventListener('click',()=>v3Rate(button.dataset.rating)));
