@@ -1,0 +1,1053 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deutsch B2 Beruf – Vocabulary Trainer</title>
+<style>
+:root{--bg:#f5f7fb;--panel:#fff;--ink:#172033;--muted:#657087;--line:#dfe5ef;--accent:#315ee8;--accent2:#eaf0ff;--good:#147d54;--bad:#b42318;--radius:16px}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{background:#fff;border-bottom:1px solid var(--line);padding:20px max(18px,calc((100vw - 1120px)/2));}.brandhead{display:flex;align-items:center;gap:16px}.profile-pic{width:76px;height:76px;object-fit:cover;border-radius:50%;border:2px solid var(--line);display:none}.brandcopy{min-width:0}.credit{font-size:.88rem;color:var(--muted);margin-top:5px}.preview-pic{width:100px;height:100px;object-fit:cover;border-radius:50%;border:1px solid var(--line);display:none;background:var(--bg)}
+h1{font-size:clamp(1.35rem,3vw,2rem);margin:0 0 5px}header p{margin:0;color:var(--muted)}
+main{max-width:1120px;margin:22px auto;padding:0 16px 40px}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px}.stat,.panel,.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px}.stat strong{display:block;font-size:1.6rem}.stat span{color:var(--muted);font-size:.9rem}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px}.tab,button{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:10px;padding:10px 13px;font:inherit;cursor:pointer}.tab.active,button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}button.secondary{background:var(--accent2);color:var(--accent);border-color:#d6e0ff}button.danger{color:var(--bad)}button:disabled{opacity:.45;cursor:not-allowed}
+.panel h2{margin:0 0 12px;font-size:1.2rem}.muted{color:var(--muted)}.small{font-size:.88rem}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row>*{flex:1}.row .fit{flex:0 0 auto}
+label{display:block;font-size:.9rem;font-weight:650;margin:0 0 5px}input,select,textarea{width:100%;padding:10px 11px;border:1px solid #cbd4e2;border-radius:9px;background:#fff;color:var(--ink);font:inherit}textarea{min-height:76px;resize:vertical}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field.full{grid-column:1/-1}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.hidden{display:none!important}.wordlist{display:grid;gap:10px;margin-top:14px}.word{border:1px solid var(--line);border-radius:12px;padding:13px;background:#fff;display:grid;grid-template-columns:1fr auto;gap:10px}.word h3{margin:0;font-size:1.05rem}.word p{margin:3px 0;color:var(--muted)}.tag{display:inline-block;background:#eef2f8;border-radius:20px;padding:3px 8px;font-size:.78rem;margin:4px 4px 0 0}.wordbuttons{display:flex;gap:6px;align-items:start;flex-wrap:wrap}.wordbuttons button{padding:7px 9px;font-size:.88rem}
+.flash{max-width:720px;margin:0 auto;text-align:center;min-height:300px;display:flex;flex-direction:column;justify-content:center;gap:12px}.flash .german{font-size:clamp(1.7rem,5vw,2.7rem);font-weight:750}.flash .english{font-size:1.25rem}.flash .example{font-size:1rem;color:var(--muted);white-space:pre-wrap}.flash-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.progress{height:9px;background:#e8edf5;border-radius:10px;overflow:hidden;margin:12px 0}.progress div{height:100%;background:var(--accent);width:0%}#deckStatus{font-weight:700;padding:8px 12px;border-radius:10px;background:var(--accent2);color:var(--accent)}.quiz-options{display:grid;gap:9px;max-width:620px;margin:16px auto}.quiz-options button{text-align:left}.feedback{font-weight:600;margin:12px auto;max-width:720px;text-align:left;line-height:1.55}.feedback p{margin:8px 0;font-weight:400}.feedback strong{font-weight:750}.empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}
+/* Expandable vocabulary decks */
+.vocab-decks{display:grid;gap:12px;margin-top:14px}
+.vocab-deck{border:1px solid var(--line);border-radius:14px;background:#fff;overflow:hidden}
+.vocab-deck summary{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:15px;cursor:pointer;list-style:none}
+.vocab-deck summary::-webkit-details-marker{display:none}
+.vocab-deck summary:hover{background:#f7f9ff}
+.deck-heading{display:flex;align-items:center;gap:10px;font-weight:750}
+.deck-chevron{color:var(--muted);transition:transform .2s ease}
+.vocab-deck[open] .deck-chevron{transform:rotate(90deg)}
+.deck-meta{color:var(--muted);font-size:.86rem;text-align:right}
+.deck-progress{height:7px;background:#e8edf5;margin:0 15px 12px;border-radius:10px;overflow:hidden}
+.deck-progress div{height:100%;background:var(--good);transition:width .25s ease}
+.deck-words{display:grid;gap:10px;padding:0 12px 12px}
+.deck-mastered{border-color:#8bc9a9}
+.deck-mastered summary{background:#f0faf4}
+.wordbuttons button.is-active{background:#e7f7ee;color:#147d54;border-color:#83c9a1;font-weight:700}
+.wordbuttons button[data-action="learned"].is-active{background:#147d54;color:#fff;border-color:#147d54}
+.wordbuttons button[data-action="difficult"].is-active{background:#fff0e8;color:#a34212;border-color:#e9b18e}
+@media(max-width:650px){.vocab-deck summary{align-items:flex-start}.deck-meta{font-size:.78rem}}
+
+@media(max-width:650px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.word{grid-template-columns:1fr}.wordbuttons{justify-content:flex-start}.stat{padding:12px}}
+.live-grammar-results{display:grid;gap:9px;margin-top:10px}.live-grammar-item{padding:11px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}.live-grammar-item button{margin:7px 0 0;padding:6px 10px}.live-grammar-item .original{color:var(--bad);text-decoration:underline wavy}.live-grammar-item .suggested{color:var(--good);font-weight:700}.ai-result{margin-top:16px;white-space:pre-wrap;line-height:1.65;background:#f7f9ff;border:1px solid var(--line);border-radius:12px;padding:14px;min-height:48px}.topic-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:7px;margin-top:10px}.topic-grid span{font-size:.86rem;background:#f1f4fa;padding:7px;border-radius:7px}.mnemonic{background:#fff7e6;padding:9px;border-radius:9px;margin-top:8px}
+
+/* Appearance preferences, saved on this device */
+body{transition:background-color .2s,color .2s}
+body[data-theme="dark"] header,body[data-theme="dark"] .tab,body[data-theme="dark"] button:not(.primary):not(.secondary),body[data-theme="dark"] .word,body[data-theme="dark"] .vocab-deck,body[data-theme="dark"] input,body[data-theme="dark"] select,body[data-theme="dark"] textarea{background:var(--panel);color:var(--ink)}
+body[data-theme="dark"] .vocab-deck summary:hover,body[data-theme="dark"] .deck-mastered summary{background:var(--accent2)}
+body[data-theme="dark"] .tag,body[data-theme="dark"] .topic-grid span,body[data-theme="dark"] .ai-result,body[data-theme="dark"] .mnemonic{background:var(--accent2);color:var(--ink)}
+body[data-theme="dark"] .progress,body[data-theme="dark"] .deck-progress{background:var(--line)}
+body[data-theme="dark"] button.primary,body[data-theme="dark"] .tab.active{background:var(--accent);color:#fff}
+body[data-theme="dark"] button.secondary{background:var(--accent2);color:var(--ink)}
+body[data-theme="dark"] .wordbuttons button.is-active{color:var(--ink)}
+#appearancePanel{margin-bottom:18px}
+.appearance-colors{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.appearance-colors label{flex:1;min-width:145px}
+.appearance-colors input[type=color]{height:44px;padding:4px;cursor:pointer}
+</style>
+</head>
+<body>
+<header><div class="brandhead"><img id="headerPhoto" class="profile-pic" alt="Your profile photo"><div class="brandcopy"><h1>Deutsch B2 Beruf</h1><p>Your personal German vocabulary trainer · works locally in this browser</p><div class="credit">Created by <strong id="headerCreator">Sachin Laad</strong></div></div></div></header>
+<main>
+
+
+
+  
+<section class="panel" id="learningProgressPanel">
+  <h2>My Learning Progress</h2>
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+    <span id="progressCount">0 of 0 words mastered</span>
+    <strong id="progressPercent">0%</strong>
+  </div>
+  <div style="background:var(--border-color, #ddd);height:12px;border-radius:99px;overflow:hidden;margin-top:10px">
+    <div id="progressBar" style="height:100%;width:0%;background:#16a34a;border-radius:99px;transition:width .3s"></div>
+  </div>
+</section>
+
+  
+
+  <section class="stats">
+    <div class="stat"><strong id="totalStat">0</strong><span>Vocabulary words</span></div>
+    <div class="stat"><strong id="learnedStat">0</strong><span>Marked learned</span></div>
+    <div class="stat"><strong id="bookmarkedStat">0</strong><span>Bookmarked</span></div>
+    <div class="stat"><strong id="difficultStat">0</strong><span>Need practice</span></div>
+  </section>
+  <nav aria-label="Main navigation">
+    <button class="tab active" data-tab="library">📚 Vocabulary</button>
+    <button class="tab" data-tab="flashcards">🗂️ Flashcards</button>
+    <button class="tab" data-tab="quiz">🧠 Quiz</button>
+    <button class="tab" data-tab="grammarTrainer">✍️ Grammar Trainer</button>
+    <button class="tab" data-tab="import">⇅ Import / Export</button>
+    <button class="tab" data-tab="settings">⚙️ Settings</button>
+  </nav>
+
+  <section id="library" class="view">
+    <div class="panel" id="wordEditorPanel" style="display:none">
+      <h2 id="formTitle">Edit vocabulary word</h2>
+      <form id="wordForm">
+        <input type="hidden" id="editId">
+        <div class="formgrid">
+          <div class="field"><label for="german">German word / phrase *</label><input id="german" required placeholder="z. B. die Herausforderung"></div>
+          <div class="field"><label for="english">English meaning *</label><input id="english" required placeholder="the challenge"></div>
+          <div class="field"><label for="category">Category</label><input id="category" placeholder="Workplace, Meetings…"></div>
+          <div class="field"><label for="article">Article / full form</label><input id="article" placeholder="die; plural: die Herausforderungen"></div>
+          <div class="field full"><label for="example">Natural German example sentence</label><textarea id="example" placeholder="Diese Aufgabe ist eine große Herausforderung."></textarea></div>
+          <div class="field full"><label for="translation">English translation</label><textarea id="translation" placeholder="This task is a big challenge."></textarea></div>
+          <div class="field full"><label for="grammar">Grammar in this example</label><textarea id="grammar" placeholder="Example: „eine große Herausforderung“ is accusative here because it follows „ist“ with „sein“? Explain the actual structure, case, word order, and verb/preposition pattern."></textarea></div>
+          <div class="field full"><label for="notes">Your notes</label><textarea id="notes" placeholder="Your own reminder, exam tip, Azeez's explanation, memory trick, or extra example…"></textarea></div>
+          <div class="field"><label for="pronunciation">Pronunciation / notes</label><input id="pronunciation" placeholder="optional"></div>
+          <div class="field"><label for="level">Importance</label><select id="level"><option>Essential</option><option selected>Important</option><option>Advanced</option></select></div>
+        </div>
+        <div class="actions"><button class="primary" type="submit" id="saveWord">Save word</button><button type="button" id="cancelEdit" class="hidden">Cancel edit</button><button type="button" id="demoBtn" class="secondary">Add 5 sample words</button></div>
+        <p class="small muted">Your entries are saved in this browser on this device. Use Export regularly for a backup.</p>
+      </form>
+    </div>
+    <div class="panel" style="margin-top:14px">
+      <div class="row"><div><h2 style="margin:0">Your vocabulary</h2><p class="muted small" style="margin:4px 0 0">Stable 20-word decks. Word positions stay fixed even when you filter or reopen the app.</p></div><div><label for="search">Search</label><input id="search" placeholder="Search German, English, category…"></div><div><label for="filter">Show</label><select id="filter"><option value="all">All words</option><option value="bookmarked">All bookmarks</option><option value="exam">For exam</option><option value="azeez">Azeez suggestion</option><option value="difficult">Need practice</option><option value="learned">Learned</option><option value="unlearned">Not learned yet</option></select></div></div>
+      <div id="wordList" class="wordlist"></div>
+    </div>
+  </section>
+
+  <section id="flashcards" class="view hidden">
+    <div class="panel flash">
+      <div class="row"><div><label for="flashMode">Flashcard set</label><select id="flashMode"><option value="all">All vocabulary</option><option value="bookmarked">All bookmarks</option><option value="exam">For exam</option><option value="azeez">Azeez suggestion</option><option value="difficult">Need practice</option><option value="unlearned">Not learned yet</option></select></div><div><label for="deckSelect">Deck (10 words each)</label><select id="deckSelect"><option value="0">Deck 1</option></select></div></div>
+      <div class="muted" id="deckStatus" aria-live="polite">Deck progress appears here.</div>
+      <div class="muted" id="flashCount">No cards yet</div><div class="progress"><div id="flashProgress"></div></div>
+      <div class="german" id="flashGerman">Add or import words to begin</div>
+      <div class="english hidden" id="flashEnglish"></div>
+      <div class="example hidden" id="flashExample"></div>
+      <div class="actions" style="justify-content:center"><button class="secondary" id="revealBtn">Show answer</button><button id="mnemonicBtn" type="button">Show mnemonic</button><div id="mnemonicText" class="mnemonic hidden"></div></div>
+      <div class="flash-actions"><button id="prevCard">← Previous</button><button class="danger" id="markDifficult">Need practice</button><button class="secondary" id="markLearned">Mark learned ✓</button><button class="primary" id="nextCard">Next →</button><button id="nextDeck">Next deck →</button></div>
+      <p class="small muted">Each flashcard deck contains up to 10 words. A deck is mastered when every word in it is marked learned. Mastered decks are labelled ✓ and the app opens an unmastered deck by default, so you can move on without repeating the same deck.</p>
+    </div>
+  </section>
+
+  <section id="quiz" class="view hidden">
+    <div class="panel" style="text-align:center">
+      <h2>German → English quiz</h2><p class="muted">Choose the correct English meaning. Your score is kept for this session.</p>
+      <div class="row" style="max-width:650px;margin:0 auto"><div><label for="quizMode">Question set</label><select id="quizMode"><option value="all">All vocabulary</option><option value="bookmarked">All bookmarks</option><option value="exam">For exam</option><option value="azeez">Azeez suggestion</option><option value="difficult">Need practice</option></select></div><div><label for="quizDeck">Word group (10 words)</label><select id="quizDeck"><option value="0">Group 1</option></select></div><div><label>Score</label><div style="padding:10px;font-weight:700" id="score">0 correct / 0 answered</div></div></div>
+      <div style="font-size:1.7rem;font-weight:750;margin:25px 0 10px" id="quizQuestion">Add or import at least 4 words to start a quiz.</div>
+      <div id="quizOptions" class="quiz-options"></div><div id="quizFeedback" class="feedback" aria-live="polite"></div>
+      <button class="primary" id="nextQuestion">Next question</button>
+    </div>
+  </section>
+
+
+  <section id="grammarTrainer" class="view hidden">
+    <div class="panel">
+      <h2>Real-Time Grammar Trainer</h2>
+      <p class="muted">Instant offline checks for selected common German mistakes while you type. For broader corrections and translations, use the optional Gemini button (sign-in required and API limits apply).</p>
+      <label for="grammarMode">Direction</label>
+      <select id="grammarMode"><option value="de-en">German → English · Correct my German</option><option value="en-de">English → German · Translate and explain</option></select>
+      <label for="grammarInput" style="margin-top:12px">Your sentence</label>
+      <textarea id="grammarInput" placeholder="Die Firma stellt dem Mitarbeiter nach der Schulung ein Zertifikat aus."></textarea>
+      <div class="actions"><button type="button" class="secondary" id="grammarDemoBtn">Try sample correction</button></div>
+      <p class="muted small" id="liveGrammarStatus" aria-live="polite">Type German to see instant suggestions. No API calls.</p><div id="liveGrammarResults" class="live-grammar-results" aria-live="polite"></div><div class="actions"><button type="button" class="secondary" id="grammarCheckBtn">Explain / translate with Gemini (optional)</button></div>
+      <div id="grammarResult" class="ai-result" aria-live="polite"></div>
+      <h3>Grammar topics covered</h3>
+      <details><summary>View all 29 topics</summary><div id="grammarTopics" class="topic-grid"></div></details>
+    </div>
+  </section>
+
+  <section id="import" class="view hidden">
+    <div class="panel">
+      <h2>Personalise your app</h2>
+      <p class="muted">Add your photo whenever you are ready. The photo and creator name are saved in this browser on this device.</p>
+      <div class="row" style="align-items:flex-start">
+        <div class="fit"><img id="photoPreview" class="preview-pic" alt="Photo preview"></div>
+        <div style="min-width:220px">
+          <label for="creatorName">Creator credit</label>
+          <input id="creatorName" value="Sachin Laad" maxlength="60" placeholder="Your name">
+          <label for="profilePhoto" style="margin-top:12px">Upload a photo (optional)</label>
+          <input id="profilePhoto" type="file" accept="image/*">
+          <p class="small muted">Choose a JPG, PNG, or other image from your device. It will appear beside the app title.</p>
+          <div class="actions"><button class="primary" type="button" id="saveProfileBtn">Save personalisation</button><button type="button" id="removePhotoBtn">Remove photo</button></div>
+          <p id="profileStatus" class="small" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+    <div class="panel" style="margin-top:14px">
+      <h2>Sync your Google Sheet</h2>
+      <p>Load the latest vocabulary from your published Google Sheet. When you add words to the sheet, open this app and click “Sync Google Sheet” again. This imports words into this browser; progress you mark in the app stays local.</p>
+      <div class="actions"><button class="primary" id="syncSheetBtn">Sync Google Sheet</button></div>
+      <p class="small muted">Your sheet is published to the web, so anyone with its published link may be able to read the vocabulary. This connection is read-only: changes made in the app do not write back to the sheet.</p>
+      <hr style="border:0;border-top:1px solid var(--line);margin:18px 0">
+      <h2>Or import a CSV file</h2>
+      <p>Choose a CSV file exported from Excel or Google Sheets. The first row should contain column names.</p>
+      <input type="file" id="csvFile" accept=".csv,text/csv">
+      <div class="actions"><button class="secondary" id="importBtn">Import CSV</button><button id="downloadTemplate">Download CSV template</button></div>
+      <p id="importStatus" class="small" aria-live="polite"></p>
+    </div>
+    <div class="panel" style="margin-top:14px">
+      <h2>✨ Add a word prepared by ChatGPT</h2>
+      <p>Ask ChatGPT to research a new word, review the details, and approve it. Then copy the tab-separated row ChatGPT gives you and paste it below. The app will add it to your local vocabulary.</p>
+      <label for="chatgptPrompt">Prompt to copy into ChatGPT</label>
+      <textarea id="chatgptPrompt" readonly style="min-height:150px">For this German B2 Beruf vocabulary word: [TYPE WORD HERE], prepare a complete entry for my vocabulary app. Include: correct German spelling, article and plural/full form, English meaning, category, a natural easy German example sentence, its English translation, a clear grammar explanation of the example (word order, case/article endings, verb/preposition pattern, and why the structure is used), a short learner note or memory tip, pronunciation, importance (Essential/Important/Advanced), whether it is useful for the B2 Beruf exam (Yes/No), and whether it is an Azeez suggestion (Yes/No). First show me the details clearly and ask: “Do you want to add this word to your app?” Do not prepare the import row until I say yes. After I approve, output exactly ONE tab-separated row with 12 fields and NO header, in this order: German, English, Category, Article/full form, Example sentence, English translation, Grammar explanation, Your notes, Pronunciation, Importance, For exam (Yes/No), Azeez suggestion (Yes/No). Do not put tabs or line breaks inside a field. No markdown table or extra text in the row.</textarea>
+      <div class="actions"><button type="button" class="secondary" id="copyChatgptPromptBtn">Copy prompt</button></div>
+      <hr style="border:0;border-top:1px solid var(--line);margin:18px 0">
+      <label for="chatgptPaste">Paste the approved tab-separated row here</label>
+      <textarea id="chatgptPaste" placeholder="Paste the row ChatGPT prepared after you approved the word…" style="min-height:110px"></textarea>
+      <p class="small muted">Field order: German → English → Category → Article/full form → Example → Translation → Grammar explanation → Your notes → Pronunciation → Importance → For exam (Yes/No) → Azeez suggestion (Yes/No). You can paste multiple rows, one word per line.</p>
+      <div class="actions"><button type="button" class="primary" id="addChatGPTWordsBtn">Add approved word(s) to app</button><button type="button" id="clearChatGPTPasteBtn">Clear</button></div>
+      <p id="chatgptPasteStatus" class="small" aria-live="polite"></p>
+    </div>
+    <div class="panel" style="margin-top:14px">
+      <h2>Export / backup</h2><p>Export all words and your progress as a CSV backup. Keep a copy somewhere safe.</p>
+      <div class="actions"><button class="primary" id="exportBtn">Export all words (CSV)</button><button class="danger" id="clearBtn">Delete all local words</button></div>
+      <p class="small muted">This app does not send your data anywhere. Clearing browser data can erase locally saved entries, so keep backups.</p>
+    </div>
+    <div class="panel" style="margin-top:14px"><h2>Suggested spreadsheet columns</h2><p class="small">ID, Category, German, English, Example, Translation, Article, Pronunciation, Importance, Bookmarked, Difficult, Learned</p></div>
+  </section>
+<section id="settings" class="view hidden">
+  <div class="panel"><h2>⚙️ Settings</h2><p class="muted small">Personalize your app, manage your account, and reset progress here. Your study screens stay distraction-free.</p></div>
+<section class="panel" id="appearancePanel">
+  <h2>🎨 Personalize app appearance</h2>
+  <p class="muted small">Choose a style and colors you like. Your choices are remembered on this device and do not change your vocabulary or learning progress.</p>
+  <div class="formgrid">
+    <label for="appearanceTheme">Color theme
+      <select id="appearanceTheme">
+        <option value="light">Classic light</option>
+        <option value="dark">Dark mode</option>
+        <option value="ocean">Ocean blue</option>
+        <option value="forest">Forest green</option>
+        <option value="lavender">Lavender</option>
+        <option value="warm">Warm cream</option>
+        <option value="custom">My custom colors</option>
+      </select>
+    </label>
+    <label for="appearanceFontSize">Text size
+      <select id="appearanceFontSize">
+        <option value="14">Compact</option>
+        <option value="16">Normal</option>
+        <option value="18">Large</option>
+        <option value="20">Extra large</option>
+      </select>
+    </label>
+  </div>
+  <div class="appearance-colors" style="margin-top:12px">
+    <label for="appearanceBackground">Background color
+      <input id="appearanceBackground" type="color" value="#f5f7fb">
+    </label>
+    <label for="appearanceAccent">Buttons / accent color
+      <input id="appearanceAccent" type="color" value="#315ee8">
+    </label>
+  </div>
+  <div class="actions">
+    <button type="button" id="appearanceReset">Restore default appearance</button>
+  </div>
+  <p id="appearanceStatus" class="small muted" aria-live="polite"></p>
+</section>
+<section class="panel" id="authPanel" style="margin-bottom:18px">
+  <h2>Account & Cloud Sync</h2>
+  <p class="muted small">
+    Log in to save your learning progress online. Each account has separate progress.
+  </p>
+
+  <div id="authLoggedOut">
+    <div class="formgrid">
+      <div class="field">
+        <label for="authEmail">Email</label>
+        <input id="authEmail" type="email" autocomplete="email"
+               placeholder="you@example.com">
+      </div>
+      <div class="field">
+        <label for="authPassword">Password</label>
+        <input id="authPassword" type="password"
+               autocomplete="current-password"
+               placeholder="At least 6 characters">
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="primary" type="button" id="signInBtn">Log in</button>
+      <button type="button" id="signUpBtn">Create account</button>
+    </div>
+  </div>
+
+  <div id="authLoggedIn" class="hidden">
+    <p>Logged in as <strong id="authUserEmail"></strong></p>
+    <div class="actions">
+      <button class="secondary" type="button" id="syncProgressBtn">
+        Sync progress now
+      </button>
+      <button type="button" id="signOutBtn">Log out</button>
+    </div>
+  </div>
+
+  <p id="authStatus" class="small" aria-live="polite"></p>
+</section>
+<section class="panel" id="resetSettingsPanel"><h2>Reset learning progress</h2>
+  <div class="formgrid" style="margin-top:14px">
+    <label>What would you like to reset?
+      <select id="resetScope">
+        <option value="all">All vocabulary — entire learning progress</option>
+        <option value="vocab">One vocabulary deck (20 words)</option>
+        <option value="flash">One flashcard deck (10 words)</option>
+        <option value="difficult">Difficult-word flags only (all words)</option>
+      </select>
+    </label>
+    <label id="resetDeckWrap" class="hidden">Choose the deck
+      <select id="resetDeckNumber"></select>
+    </label>
+  </div>
+  <div class="actions" style="margin-top:14px">
+    <button type="button" id="resetLearningProgressBtn" class="danger">Reset selected progress</button>
+  </div>
+  <p id="resetLearningProgressStatus" class="small muted" aria-live="polite">Only the selected progress is reset. Vocabulary, bookmarks and fixed deck assignments are preserved. Learned status is shared between vocabulary, flashcards and quizzes.</p>
+</section>
+</section>
+</main>
+<script>
+
+const STORAGE_KEY = 'deutschB2BerufWords_v1';
+const DECK_ORDER_KEY = 'deutschB2BerufDeckOrder_v2';
+
+const SUPABASE_URL = 'https://enofenxfytuavujnbfdj.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_eqNdYvhQhyLI8rqKNM-msQ_ew39cLe7';
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+
+let currentUser = null;
+let cloudReady = false;
+let cloudSyncTimer = null;
+let cloudSyncRunning = false;
+let cloudSyncPending = false;
+
+let words=loadWords(), flashIndex=0, flashDeckIndex=0, flashRevealed=false, quizCurrent=null, quizAnswered=false, quizCorrect=0, quizAnsweredCount=0;
+let deckOrder=loadDeckOrder(), listOrder=[];
+let quizQueue=[], quizQueueIndex=0, quizGroupKey='';
+function shuffleArray(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function loadDeckOrder(){try{return JSON.parse(localStorage.getItem(DECK_ORDER_KEY)||'[]')}catch(e){return []}}
+function saveDeckOrder(){localStorage.setItem(DECK_ORDER_KEY,JSON.stringify(deckOrder))}
+function reconcileOrders(){
+ const ids=words.map(w=>w.id), idSet=new Set(ids);
+ deckOrder=deckOrder.filter(id=>idSet.has(id));
+ const missing=ids.filter(id=>!deckOrder.includes(id));
+ deckOrder.push(...shuffleArray(missing));saveDeckOrder();
+ listOrder=listOrder.filter(id=>idSet.has(id));
+ const newListIds=ids.filter(id=>!listOrder.includes(id));
+ listOrder.push(...shuffleArray(newListIds));
+}
+function loadWords(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]')}catch(e){return []}}
+
+function updateLearningProgress() {
+  const total = words.length;
+  const learned = words.filter(word => word.learned).length;
+  const percent = total ? Math.round((learned / total) * 100) : 0;
+
+  document.getElementById('progressCount').textContent =
+    `${learned} of ${total} words mastered`;
+
+  document.getElementById('progressPercent').textContent =
+    `${percent}%`;
+
+  document.getElementById('progressBar').style.width =
+    `${percent}%`;
+}
+
+
+function updateLearningProgress() {
+  const total = words.length;
+  const learned = words.filter(word => word.learned).length;
+  const percent = total > 0 ? Math.round((learned / total) * 100) : 0;
+
+  const countElement = document.getElementById('progressCount');
+  const percentElement = document.getElementById('progressPercent');
+  const barElement = document.getElementById('progressBar');
+
+  if (countElement) {
+    countElement.textContent = `${learned} of ${total} words mastered`;
+  }
+
+  if (percentElement) {
+    percentElement.textContent = `${percent}%`;
+  }
+
+  if (barElement) {
+    barElement.style.width = `${percent}%`;
+  }
+}
+
+function saveWords() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(words));
+  reconcileOrders();
+  renderAll();
+  updateLearningProgress();
+
+  if (cloudReady && currentUser) {
+    scheduleCloudSync();
+  }
+}
+
+
+function uid(){return 'v_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,7)}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+const PROFILE_KEY='deutschB2BerufProfile_v1';
+function getProfile(){try{return JSON.parse(localStorage.getItem(PROFILE_KEY)||'{"name":"Sachin Laad","photo":""}')}catch(e){return {name:'Sachin Laad',photo:''}}}
+function renderProfile(){const p=getProfile();document.getElementById('creatorName').value=p.name||'Sachin Laad';document.getElementById('headerCreator').textContent=p.name||'Sachin Laad';const imgs=[document.getElementById('headerPhoto'),document.getElementById('photoPreview')];imgs.forEach(img=>{if(p.photo){img.src=p.photo;img.style.display='block'}else{img.removeAttribute('src');img.style.display='none'}})}
+function saveProfile(){const old=getProfile(),name=document.getElementById('creatorName').value.trim()||'Sachin Laad',file=document.getElementById('profilePhoto').files[0];const finish=photo=>{localStorage.setItem(PROFILE_KEY,JSON.stringify({name,photo:photo??old.photo??''}));renderProfile();document.getElementById('profileStatus').textContent='Personalisation saved on this device.';document.getElementById('profilePhoto').value=''};if(!file){finish(old.photo||'');return}if(!file.type.startsWith('image/')){document.getElementById('profileStatus').textContent='Please choose an image file.';return}if(file.size>3*1024*1024){document.getElementById('profileStatus').textContent='Please choose an image smaller than 3 MB.';return}const reader=new FileReader();reader.onload=()=>finish(reader.result);reader.onerror=()=>{document.getElementById('profileStatus').textContent='Could not read that image. Please try another.'};reader.readAsDataURL(file)}
+document.getElementById('copyChatgptPromptBtn').addEventListener('click',()=>{
+ const field=document.getElementById('chatgptPrompt');field.focus();field.select();
+ let copied=false;try{copied=document.execCommand('copy')}catch(e){}
+ document.getElementById('chatgptPasteStatus').textContent=copied?'Prompt copied. Paste it into ChatGPT and replace [TYPE WORD HERE] with your word.':'Select and copy the prompt text manually, then paste it into ChatGPT.';
+});
+document.getElementById('clearChatGPTPasteBtn').addEventListener('click',()=>{document.getElementById('chatgptPaste').value='';document.getElementById('chatgptPasteStatus').textContent='Paste area cleared.'});
+function parseTSV(text){
+ const rows=[];let row=[],cell='',quoted=false;
+ for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];if(c==='"'&&quoted&&n==='"'){cell+='"';i++}else if(c==='"'){quoted=!quoted}else if(c==='\t'&&!quoted){row.push(cell);cell=''}else if((c==='\n'||c==='\r')&&!quoted){if(c==='\r'&&n==='\n')i++;row.push(cell);if(row.some(x=>x.trim()))rows.push(row);row=[];cell=''}else cell+=c}
+ row.push(cell);if(row.some(x=>x.trim()))rows.push(row);return rows;
+}
+function yesValue(v){return /^(yes|y|true|1|ja|x)$/i.test(String(v||'').trim())}
+document.getElementById('addChatGPTWordsBtn').addEventListener('click',()=>{
+ const input=document.getElementById('chatgptPaste').value.trim(),status=document.getElementById('chatgptPasteStatus');
+ if(!input){status.textContent='Paste an approved row from ChatGPT first.';return}
+ try{
+  const rows=parseTSV(input);let added=0,skipped=0;
+  for(let r of rows){
+   if((r[0]||'').trim().toLowerCase()==='german'&&(r[1]||'').trim().toLowerCase()==='english')continue;
+   if(r.length<2||!String(r[0]||'').trim()||!String(r[1]||'').trim())continue;
+   const german=String(r[0]).trim(),english=String(r[1]).trim();
+   if(words.some(w=>w.german.trim().toLowerCase()===german.toLowerCase())){skipped++;continue}
+   const w={id:uid(),german,english,category:String(r[2]||'B2 Beruf').trim(),article:String(r[3]||'').trim(),example:String(r[4]||'').trim(),translation:String(r[5]||'').trim(),grammar:String(r[6]||'').trim(),notes:String(r[7]||'').trim(),pronunciation:String(r[8]||'').trim(),level:/^(essential|important|advanced)$/i.test(String(r[9]||'').trim())?String(r[9]).trim():'Important',bookmarked:false,examBookmark:yesValue(r[10]),azeezSuggestion:yesValue(r[11]),difficult:false,learned:false,createdAt:new Date().toISOString()};
+   words.unshift(w);added++;
+  }
+  if(!added&&!skipped)throw new Error('No valid row found. Use the exact 11-field tab-separated format shown above.');
+  saveWords();document.getElementById('chatgptPaste').value='';status.textContent=`Added ${added} new word(s).`+(skipped?` Skipped ${skipped} duplicate word(s) already in your app.`:'');
+ }catch(err){status.textContent='Could not add the row: '+err.message}
+});
+document.getElementById('saveProfileBtn').addEventListener('click',saveProfile);
+document.getElementById('removePhotoBtn').addEventListener('click',()=>{const p=getProfile();localStorage.setItem(PROFILE_KEY,JSON.stringify({name:document.getElementById('creatorName').value.trim()||p.name||'Sachin Laad',photo:''}));document.getElementById('profilePhoto').value='';renderProfile();document.getElementById('profileStatus').textContent='Photo removed.'});
+document.getElementById('profilePhoto').addEventListener('change',()=>{const f=document.getElementById('profilePhoto').files[0];if(!f)return;if(!f.type.startsWith('image/')||f.size>3*1024*1024){document.getElementById('profileStatus').textContent='Choose an image smaller than 3 MB.';document.getElementById('profilePhoto').value='';return}const r=new FileReader();r.onload=()=>{const im=document.getElementById('photoPreview');im.src=r.result;im.style.display='block';document.getElementById('profileStatus').textContent='Preview ready. Click Save personalisation to keep it.'};r.readAsDataURL(f)});
+function byId(id){return words.find(w=>w.id===id)}
+function renderStats(){document.getElementById('totalStat').textContent=words.length;document.getElementById('learnedStat').textContent=words.filter(w=>w.learned).length;document.getElementById('bookmarkedStat').textContent=words.filter(w=>w.bookmarked).length;document.getElementById('difficultStat').textContent=words.filter(w=>w.difficult).length}
+function renderList() {
+ const q=document.getElementById('search').value.trim().toLowerCase();
+ const f=document.getElementById('filter').value;
+ let filtered=words.filter(w=>{
+  const text=[w.german,w.english,w.category,w.example,w.translation,w.grammar,w.article,w.pronunciation,w.notes].join(' ').toLowerCase();
+  return (!q||text.includes(q))&&(f==='all'||(f==='bookmarked'&&w.bookmarked)||(f==='exam'&&w.examBookmark)||(f==='azeez'&&w.azeezSuggestion)||(f==='difficult'&&w.difficult)||(f==='learned'&&w.learned)||(f==='unlearned'&&!w.learned));
+ });
+ const orderMap=new Map(listOrder.map((id,index)=>[id,index]));
+ filtered.sort((a,b)=>(orderMap.get(a.id)??999999)-(orderMap.get(b.id)??999999));
+ const el=document.getElementById('wordList');
+ if(!filtered.length){el.innerHTML='<div class="empty">No matching words yet. Add a word above or import your CSV.</div>';return;}
+ const decks=[];
+ for(let i=0;i<deckOrder.length;i+=20){const ids=deckOrder.slice(i,i+20);const deck=ids.map(id=>filtered.find(w=>w.id===id)).filter(Boolean);if(deck.length)decks.push({number:Math.floor(i/20)+1,words:deck});}
+ el.innerHTML='<div class="vocab-decks">'+decks.map(({number,words:deck},index)=>{
+  const learned=deck.filter(w=>w.learned).length,total=deck.length;
+  const percent=Math.round(learned/total*100),mastered=total>0&&learned===total;
+  const cards=deck.map(w=>`<article class="word"><div><h3>${esc(w.german)}</h3><p>${esc(w.english)}</p>${w.article?`<div class="small">${esc(w.article)}</div>`:''}${w.example?`<p><strong>Example:</strong> ${esc(w.example)}</p>`:''}${w.translation?`<p><strong>Translation:</strong> ${esc(w.translation)}</p>`:''}${w.grammar?`<p><strong>Grammar:</strong> ${esc(w.grammar).replace(/\n/g,'<br>')}</p>`:''}${w.notes?`<p class="user-notes"><strong>📝 Your notes:</strong> ${esc(w.notes).replace(/\n/g,'<br>')}</p>`:''}<span class="tag">${esc(w.category||'Uncategorised')}</span><span class="tag">${esc(w.level||'Important')}</span>${w.bookmarked?'<span class="tag">★ Bookmarked</span>':''}${w.examBookmark?'<span class="tag">🎯 For exam</span>':''}${w.azeezSuggestion?'<span class="tag">💡 Azeez suggestion</span>':''}${w.difficult?'<span class="tag">Need practice</span>':''}${w.learned?'<span class="tag">✓ Learned</span>':''}</div><div class="wordbuttons"><button data-action="bookmark" data-id="${esc(w.id)}" class="${w.bookmarked?'is-active':''}" title="General bookmark">${w.bookmarked?'★':'☆'}</button><button data-action="exam" data-id="${esc(w.id)}" class="${w.examBookmark?'is-active':''}" title="Mark for exam">${w.examBookmark?'🎯 Exam ✓':'🎯 For exam'}</button><button data-action="azeez" data-id="${esc(w.id)}" class="${w.azeezSuggestion?'is-active':''}" title="Azeez suggestion">${w.azeezSuggestion?'💡 Azeez ✓':'💡 Azeez suggestion'}</button><button data-action="difficult" data-id="${esc(w.id)}" class="${w.difficult?'is-active':''}" title="Need practice">${w.difficult?'Practise ✓':'Difficult'}</button><button data-action="learned" data-id="${esc(w.id)}" class="${w.learned?'is-active':''}" title="Learned">${w.learned?'Learned ✓':'Learned'}</button><button data-action="edit" data-id="${esc(w.id)}">Edit</button><button class="danger" data-action="delete" data-id="${esc(w.id)}">Delete</button></div></article>`).join('');
+  return `<details class="vocab-deck ${mastered?'deck-mastered':''}" ${index===0?'open':''}><summary><span class="deck-heading"><span class="deck-chevron">▶</span><span>Deck ${number}${mastered?' ✓':''}</span></span><span class="deck-meta">${learned}/${total} learned · ${percent}%${mastered?' · Mastered':''}</span></summary><div class="deck-progress"><div style="width:${percent}%"></div></div><div class="deck-words">${cards}</div></details>`;
+ }).join('')+'</div>';
+}
+function renderAll(){renderStats();renderList();renderFlash();updateLearningProgress()}
+function resetForm(){document.getElementById('wordForm').reset();document.getElementById('editId').value='';document.getElementById('formTitle').textContent='Edit vocabulary word';document.getElementById('saveWord').textContent='Save changes';document.getElementById('cancelEdit').classList.add('hidden');document.getElementById('wordEditorPanel').style.display='none'}
+document.getElementById('wordForm').addEventListener('submit',e=>{
+ e.preventDefault();const id=document.getElementById('editId').value;
+ const old=id?byId(id):null;
+ const w={id:id||uid(),german:val('german'),english:val('english'),category:val('category'),article:val('article'),example:val('example'),translation:val('translation'),grammar:val('grammar'),notes:val('notes'),pronunciation:val('pronunciation'),level:val('level'),bookmarked:old?.bookmarked||false,examBookmark:old?.examBookmark||false,azeezSuggestion:old?.azeezSuggestion||false,difficult:old?.difficult||false,learned:old?.learned||false,createdAt:old?.createdAt||new Date().toISOString()};
+ if(old)words=words.map(x=>x.id===id?w:x);else words.unshift(w);saveWords();resetForm();
+});
+function val(id){return document.getElementById(id).value.trim()}
+document.getElementById('cancelEdit').onclick=resetForm;
+document.getElementById('search').addEventListener('input',renderList);document.getElementById('filter').addEventListener('change',renderList);
+document.getElementById('wordList').addEventListener('click',e=>{
+ const b=e.target.closest('button[data-action]');if(!b)return;const w=byId(b.dataset.id);if(!w)return;
+ switch(b.dataset.action){
+ case 'bookmark':w.bookmarked=!w.bookmarked;break;
+ case 'exam':w.examBookmark=!w.examBookmark;break;
+ case 'azeez':w.azeezSuggestion=!w.azeezSuggestion;break;
+ case 'difficult':w.difficult=!w.difficult;break;
+ case 'learned':w.learned=!w.learned;if(w.learned)w.difficult=false;break;
+ case 'edit':document.getElementById('wordEditorPanel').style.display='block';document.getElementById('editId').value=w.id;for(const k of ['german','english','category','article','example','translation','grammar','notes','pronunciation','level'])document.getElementById(k).value=w[k]||'';document.getElementById('formTitle').textContent='Edit vocabulary word';document.getElementById('saveWord').textContent='Save changes';document.getElementById('cancelEdit').classList.remove('hidden');document.getElementById('wordEditorPanel').scrollIntoView({behavior:'smooth',block:'start'});return;
+ case 'delete':if(!confirm(`Delete "${w.german}"?`))return;words=words.filter(x=>x.id!==w.id);break;
+ }saveWords();
+});
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.view').forEach(v=>v.classList.toggle('hidden',v.id!==b.dataset.tab));if(b.dataset.tab==='quiz')startQuiz();if(b.dataset.tab==='flashcards')renderFlash()});
+function getSet(mode){return words.filter(w=>mode==='bookmarked'?w.bookmarked:mode==='exam'?w.examBookmark:mode==='azeez'?w.azeezSuggestion:mode==='difficult'?w.difficult:mode==='unlearned'?!w.learned:true)}
+document.getElementById('flashMode').onchange=()=>{flashDeckIndex=0;flashIndex=0;flashRevealed=false;renderFlash()};
+function getFlashDecks(){
+ const mode=document.getElementById('flashMode').value;
+ const setById=new Map(getSet(mode).map(w=>[w.id,w]));
+ const decks=[];
+ for(let i=0;i<deckOrder.length;i+=10){const deck=deckOrder.slice(i,i+10).map(id=>setById.get(id)).filter(Boolean);if(deck.length)decks.push(deck);}
+ return decks;
+}
+function deckIsMastered(deck){return deck.length>0&&deck.every(w=>!!w.learned)}
+function renderDeckSelect(decks){
+ const select=document.getElementById('deckSelect');
+ const old=Number(select.value)||0;
+ select.innerHTML='';
+ if(!decks.length){select.innerHTML='<option value="0">No decks yet</option>';flashDeckIndex=0;return}
+ decks.forEach((deck,i)=>{
+  const learned=deck.filter(w=>w.learned).length;
+  const opt=document.createElement('option');opt.value=String(i);
+  opt.textContent=`Deck ${i+1} · ${learned}/${deck.length}${deckIsMastered(deck)?' ✓ Mastered':''}`;
+  select.appendChild(opt);
+ });
+ flashDeckIndex=Math.min(old,decks.length-1);
+ // Prefer the first deck not yet mastered when the current deck is mastered.
+ if(deckIsMastered(decks[flashDeckIndex])){
+  const next=decks.findIndex(d=>!deckIsMastered(d));
+  if(next>=0)flashDeckIndex=next;
+ }
+ select.value=String(flashDeckIndex);
+}
+function renderFlash(){
+ reconcileOrders();
+ const decks=getFlashDecks();
+ renderDeckSelect(decks);
+ const deck=decks[flashDeckIndex]||[];
+ if(flashIndex>=deck.length)flashIndex=Math.max(0,deck.length-1);
+ const w=deck[flashIndex];
+ const mastered=deckIsMastered(deck), learned=deck.filter(x=>x.learned).length;
+ document.getElementById('deckStatus').textContent=deck.length
+  ? `${mastered?'✓ Deck mastered!':'Deck in progress'} · ${learned} of ${deck.length} words mastered${mastered?' · You can move to the next deck.':''}`
+  : 'No words in this set yet. Add or import vocabulary first.';
+ document.getElementById('flashCount').textContent=deck.length?`Deck ${flashDeckIndex+1} of ${decks.length} · Card ${flashIndex+1} of ${deck.length}`:'No cards in this set yet';
+ document.getElementById('flashProgress').style.width=deck.length?`${(learned/deck.length)*100}%`:'0%';
+ document.getElementById('flashGerman').textContent=w?w.german:'Add or import words to begin';
+ document.getElementById('flashEnglish').textContent=w?`Meaning: ${w.english}`:'';
+ document.getElementById('flashExample').textContent=w?[w.article,w.example,w.translation,w.grammar?`Grammar: ${w.grammar}`:'',w.notes?`Your notes: ${w.notes}`:''].filter(Boolean).join('\n'):'';
+ ['flashEnglish','flashExample'].forEach(id=>document.getElementById(id).classList.toggle('hidden',!w||!flashRevealed));
+ document.getElementById('revealBtn').disabled=!w;document.getElementById('prevCard').disabled=!deck.length||flashIndex===0;document.getElementById('nextCard').disabled=!deck.length||flashIndex>=deck.length-1;document.getElementById('markDifficult').disabled=!w;document.getElementById('markLearned').disabled=!w||w.learned;
+ document.getElementById('nextDeck').disabled=!decks.length||flashDeckIndex>=decks.length-1;
+ document.getElementById('markLearned').textContent=w&&w.learned?'✓ Already learned':'Mark learned ✓';
+ document.getElementById('revealBtn').textContent=flashRevealed?'Hide answer':'Show answer';
+}
+document.getElementById('revealBtn').onclick=()=>{flashRevealed=!flashRevealed;renderFlash()};
+document.getElementById('prevCard').onclick=()=>{if(flashIndex>0){flashIndex--;flashRevealed=false;renderFlash()}};
+document.getElementById('nextCard').onclick=()=>{const d=getFlashDecks()[flashDeckIndex]||[];if(flashIndex<d.length-1){flashIndex++;flashRevealed=false;renderFlash()}};
+document.getElementById('nextDeck').onclick=()=>{const decks=getFlashDecks();if(flashDeckIndex<decks.length-1){flashDeckIndex++;flashIndex=0;flashRevealed=false;renderFlash()}};
+document.getElementById('deckSelect').onchange=()=>{flashDeckIndex=Number(document.getElementById('deckSelect').value)||0;flashIndex=0;flashRevealed=false;renderFlash()};
+
+document.getElementById('markDifficult').onclick = () => {
+  const deck = getFlashDecks()[flashDeckIndex] || [];
+  const word = deck[flashIndex];
+
+  if (word) {
+    word.difficult = true;
+    word.learned = false;
+    saveWords();
+  }
+};
+
+document.getElementById('markLearned').onclick = () => {
+  const deck = getFlashDecks()[flashDeckIndex] || [];
+  const word = deck[flashIndex];
+
+  if (word) {
+    word.learned = true;
+    word.difficult = false;
+    saveWords();
+  }
+};
+
+function getQuizGroups(){
+ const setById=new Map(getSet(document.getElementById('quizMode').value).map(w=>[w.id,w]));
+ const groups=[];for(let i=0;i<deckOrder.length;i+=10){const g=deckOrder.slice(i,i+10).map(id=>setById.get(id)).filter(Boolean);if(g.length)groups.push(g);}
+ return groups;
+}
+function renderQuizGroups(){
+ const sel=document.getElementById('quizDeck'),groups=getQuizGroups(),previous=Number(sel.value)||0;
+ sel.innerHTML=groups.map((g,i)=>`<option value="${i}">Group ${i+1} (${g.length} words)</option>`).join('');
+ if(groups.length)sel.value=String(Math.min(previous,groups.length-1));
+}
+document.getElementById('quizMode').onchange=()=>{quizGroupKey='';renderQuizGroups();startQuiz()};
+document.getElementById('quizDeck').onchange=()=>{quizGroupKey='';startQuiz()};
+function startQuiz(){
+ renderQuizGroups();
+ quizAnswered=false;
+ const groups=getQuizGroups(),group=groups[Number(document.getElementById('quizDeck').value)||0]||[];
+ const set=group;
+ if(set.length<4){document.getElementById('quizQuestion').textContent=`This group needs at least 4 words. Currently: ${set.length}.`;document.getElementById('quizOptions').innerHTML='';document.getElementById('quizFeedback').textContent='';return}
+ const key=document.getElementById('quizMode').value+':'+document.getElementById('quizDeck').value;
+ if(key!==quizGroupKey||!quizQueue.length||quizQueueIndex>=quizQueue.length){quizGroupKey=key;quizQueue=shuffleArray(set.map(w=>w.id));quizQueueIndex=0;}
+ quizCurrent=set.find(w=>w.id===quizQueue[quizQueueIndex++])||set[0];
+ const wrong=set.filter(w=>w.id!==quizCurrent.id).sort(()=>Math.random()-.5).slice(0,3);
+ const opts=[quizCurrent,...wrong].sort(()=>Math.random()-.5);
+ document.getElementById('quizQuestion').textContent=quizCurrent.german;
+ document.getElementById('quizOptions').innerHTML=opts.map(w=>`<button data-id="${esc(w.id)}">${esc(w.english)}</button>`).join('');
+ document.getElementById('quizFeedback').textContent='';
+ document.getElementById('score').textContent=`${quizCorrect} correct / ${quizAnsweredCount} answered`;
+ document.getElementById('quizOptions').querySelectorAll('button').forEach(b=>b.onclick=()=>answerQuiz(b.dataset.id));
+}
+function answerQuiz(id){if(quizAnswered||!quizCurrent)return;quizAnswered=true;quizAnsweredCount++;const correct=id===quizCurrent.id;if(correct){quizCorrect++;document.getElementById('quizFeedback').style.color='var(--good)';}else{document.getElementById('quizFeedback').style.color='var(--bad)';quizCurrent.difficult=true;}
+ const fb=document.getElementById('quizFeedback');
+ fb.innerHTML=`<div>${correct?'Correct! Gut gemacht!':`Not quite. Correct answer: ${esc(quizCurrent.english)}`}</div>${quizCurrent.example?`<p><strong>Example:</strong> ${esc(quizCurrent.example)}</p>`:''}${quizCurrent.translation?`<p><strong>Translation:</strong> ${esc(quizCurrent.translation)}</p>`:''}${quizCurrent.grammar?`<p><strong>Grammar:</strong> ${esc(quizCurrent.grammar).replace(/\n/g,'<br>')}</p>`:''}`;document.getElementById('quizOptions').querySelectorAll('button').forEach(b=>{b.disabled=true;if(b.dataset.id===quizCurrent.id)b.style.borderColor='var(--good)'});document.getElementById('score').textContent=`${quizCorrect} correct / ${quizAnsweredCount} answered`;saveWords()}
+document.getElementById('nextQuestion').onclick=startQuiz;
+const aliases={id:['id','word_id','word id'],grammar:['grammar','grammar explanation','grammar in example','grammar note','grammatik'],notes:['your notes','notes','my notes','personal notes'],examBookmark:['for exam','exam bookmark','exambookmark'],azeezSuggestion:['azeez suggestion','azeez'],category:['category','thema','topic'],german:['german','deutsch','deutsches wort','word','phrase'],english:['english','englisch','meaning','english meaning','translation english'],example:['example','example sentence','beispiel','beispielsatz','sentence'],translation:['translation','english translation','satzübersetzung','satzuebersetzung'],article:['article','plural','artikel','full form','article plural','article_plural'],pronunciation:['pronunciation','aussprache','notes'],level:['importance','level','priority'],bookmarked:['bookmarked','bookmark','favorit'],difficult:['difficult','need practice','status difficult'],learned:['learned','known','gelernt']};
+function parseCSV(text){const rows=[];let row=[],cell='',quoted=false;for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];if(c==='"'&&quoted&&n==='"'){cell+='"';i++}else if(c==='"'){quoted=!quoted}else if(c===','&&!quoted){row.push(cell);cell=''}else if((c==='\n'||c==='\r')&&!quoted){if(c==='\r'&&n==='\n')i++;row.push(cell);if(row.some(x=>x.trim()))rows.push(row);row=[];cell=''}else cell+=c}row.push(cell);if(row.some(x=>x.trim()))rows.push(row);return rows}
+function headerKey(h){const x=h.trim().toLowerCase().replace(/[_-]/g,' ');for(const [k,arr] of Object.entries(aliases))if(arr.includes(x))return k;return null}
+const GOOGLE_SHEET_CSV_URL='https://docs.google.com/spreadsheets/d/e/2PACX-1vRAFoeXkeHveoTisgQWmcghLRDKDhC9mvTd6t7qMrzNBggKQGGiN2Qveeqnx7tp0tBWdTMyVJcIEgNi/pub?output=csv';
+document.getElementById('syncSheetBtn').onclick=async()=>{
+ const status=document.getElementById('importStatus'),btn=document.getElementById('syncSheetBtn');
+ btn.disabled=true;btn.textContent='Syncing…';status.textContent='Connecting to your published Google Sheet…';
+ try{
+  const response=await fetch(GOOGLE_SHEET_CSV_URL,{cache:'no-store'});
+  if(!response.ok)throw new Error('Google Sheets returned HTTP '+response.status+'. Check that the sheet is still published as CSV.');
+  const raw=await response.text(),rows=parseCSV(raw);
+  if(rows.length<2)throw new Error('The published sheet has no vocabulary rows.');
+  const headers=rows[0].map(headerKey);
+  if(!headers.includes('german')||!headers.includes('english'))throw new Error('Could not find German and English columns in the sheet.');
+  let added=0,updated=0;
+  for(const r of rows.slice(1)){
+   const obj={};headers.forEach((k,i)=>{if(k)obj[k]=(r[i]||'').trim()});
+   if(!obj.german||!obj.english)continue;
+   const existing=words.find(w=>w.german.trim().toLowerCase()===obj.german.trim().toLowerCase());
+   const w={id:obj.id||existing?.id||uid(),german:obj.german,english:obj.english,category:obj.category||'',article:obj.article||'',example:obj.example||'',translation:obj.translation||'',grammar:obj.grammar||existing?.grammar||'',notes:obj.notes||existing?.notes||'',pronunciation:obj.pronunciation||'',level:obj.level||'Important',bookmarked:existing?!!existing.bookmarked:/^(true|yes|1)$/i.test(obj.bookmarked||''),examBookmark:existing?!!existing.examBookmark:/^(true|yes|1)$/i.test(obj.examBookmark||''),azeezSuggestion:existing?!!existing.azeezSuggestion:/^(true|yes|1)$/i.test(obj.azeezSuggestion||''),difficult:existing?!!existing.difficult:/^(true|yes|1)$/i.test(obj.difficult||''),learned:existing?!!existing.learned:/^(true|yes|1)$/i.test(obj.learned||''),createdAt:existing?.createdAt||new Date().toISOString()};
+   if(existing){words=words.map(x=>x.id===existing.id?w:x);updated++;}else{words.push(w);added++;}
+  }
+  saveWords();status.textContent=`Sync complete: ${added} new word(s) added and ${updated} existing word(s) refreshed from Google Sheets. Your local learned/bookmark/practice progress was preserved.`;
+ }catch(err){status.textContent='Sync failed: '+err.message+' If this is a browser security/CORS error, tell me the exact message and I will adjust the app.';}
+ finally{btn.disabled=false;btn.textContent='Sync Google Sheet';}
+};
+document.getElementById('importBtn').onclick=async()=>{
+ const file=document.getElementById('csvFile').files[0],status=document.getElementById('importStatus');if(!file){status.textContent='Choose a CSV file first.';return}
+ try{const raw=await file.text(),rows=parseCSV(raw);if(rows.length<2)throw new Error('The file needs a header row and at least one vocabulary row.');const headers=rows[0].map(headerKey);if(!headers.includes('german')||!headers.includes('english'))throw new Error('Could not identify German and English columns. Please include column headers named German and English.');let count=0;
+ for(const r of rows.slice(1)){const obj={};headers.forEach((k,i)=>{if(k)obj[k]=(r[i]||'').trim()});if(!obj.german||!obj.english)continue;const existing=words.find(w=>w.german.toLowerCase()===obj.german.toLowerCase());const w={id:existing?.id||uid(),german:obj.german,english:obj.english,category:obj.category||'',article:obj.article||'',example:obj.example||'',translation:obj.translation||'',grammar:obj.grammar||existing?.grammar||'',notes:obj.notes||existing?.notes||'',pronunciation:obj.pronunciation||'',level:obj.level||'Important',bookmarked:/^(true|yes|1)$/i.test(obj.bookmarked||''),examBookmark:/^(true|yes|1)$/i.test(obj.examBookmark||''),azeezSuggestion:/^(true|yes|1)$/i.test(obj.azeezSuggestion||''),difficult:/^(true|yes|1)$/i.test(obj.difficult||''),learned:/^(true|yes|1)$/i.test(obj.learned||''),createdAt:existing?.createdAt||new Date().toISOString()};if(existing)words=words.map(x=>x.id===existing.id?w:x);else words.push(w);count++}
+ saveWords();status.textContent=`Imported or updated ${count} word(s). Existing words with the same German term were updated.`;document.getElementById('csvFile').value='';
+ }catch(err){status.textContent='Import failed: '+err.message}
+};
+function csvCell(v){const s=String(v??'');return /[",\r\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s}
+function downloadCSV(filename,rows){const csv=rows.map(r=>r.map(csvCell).join(',')).join('\r\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url)}
+const exportHeaders=['ID','Category','German','English','Example','Translation','Grammar explanation','Article','Pronunciation','Importance','Bookmarked','For exam','Azeez suggestion','Difficult','Learned','Your notes'];
+function exportRows(){return [exportHeaders,...words.map(w=>[w.id,w.category,w.german,w.english,w.example,w.translation,w.grammar||'',w.article,w.pronunciation,w.level,w.bookmarked,w.examBookmark,w.azeezSuggestion,w.difficult,w.learned,w.notes||''])]}
+document.getElementById('exportBtn').onclick=()=>downloadCSV('deutsch-b2-beruf-vocabulary.csv',exportRows());
+document.getElementById('downloadTemplate').onclick=()=>downloadCSV('vocabulary-template.csv',[exportHeaders,['v_001','Workplace','die Herausforderung','the challenge','Diese Aufgabe ist eine große Herausforderung.','This task is a big challenge.','„Diese Aufgabe“ is the subject (nominative). „ist“ is the verb form of sein. „eine große Herausforderung“ is the predicate noun phrase; „große“ has the -e ending after „eine“ in the feminine nominative.','die; plural: die Herausforderungen','','Essential',false,true,false,true,false]]);
+document.getElementById('clearBtn').onclick=()=>{if(confirm('Delete all vocabulary stored in this browser? Export a backup first if needed.')){words=[];saveWords();resetForm();document.getElementById('importStatus').textContent='All local words deleted.'}};
+document.getElementById('demoBtn').onclick=()=>{
+ const sample=[
+ {german:'die Herausforderung',english:'the challenge',category:'Workplace',article:'Plural: die Herausforderungen',example:'Diese Aufgabe ist eine große Herausforderung.',translation:'This task is a big challenge.',grammar:'„Diese Aufgabe“ is the subject (nominative). „ist“ is the verb. „eine große Herausforderung“ is the predicate noun phrase; „große“ has the -e ending in feminine nominative.',level:'Essential'},
+ {german:'Einwände vorbringen',english:'to raise objections',category:'Meetings & Negotiation',example:'Die Teilnehmenden konnten sachliche Einwände vorbringen.',translation:'The participants could raise objective objections.',level:'Important'},
+ {german:'die Dienstleistung',english:'the service',category:'Workplace',article:'Plural: die Dienstleistungen',example:'Unser Unternehmen bietet verschiedene Dienstleistungen an.',translation:'Our company offers various services.',level:'Essential'},
+ {german:'die Arbeitszeiterfassung',english:'time tracking / recording working hours',category:'Workplace',article:'Plural: die Arbeitszeiterfassungen',example:'Die Arbeitszeiterfassung erfolgt digital.',translation:'Working hours are recorded digitally.',level:'Important'},
+ {german:'der Quereinsteiger / die Quereinsteigerin',english:'career changer',category:'Career',article:'Plural: die Quereinsteiger / Quereinsteigerinnen',example:'Als Quereinsteiger muss man oft viel Neues lernen.',translation:'As a career changer, you often have to learn many new things.',level:'Essential'}
+ ];
+ let n=0;for(const s of sample){if(!words.some(w=>w.german.toLowerCase()===s.german.toLowerCase())){words.push({...s,id:uid(),pronunciation:'',bookmarked:false,difficult:false,learned:false,createdAt:new Date().toISOString()});n++}}saveWords();alert(`${n} sample words added.`);
+};
+
+function setAuthStatus(message) {
+  document.getElementById('authStatus').textContent = message;
+}
+
+function updateAuthPanel() {
+  const loggedIn = !!currentUser;
+  document.getElementById('authLoggedOut').classList.toggle('hidden', loggedIn);
+  document.getElementById('authLoggedIn').classList.toggle('hidden', !loggedIn);
+  document.getElementById('authUserEmail').textContent = currentUser?.email || '';
+}
+
+function progressKey(word) {
+  return String(word.german || '').trim().toLocaleLowerCase('de-DE');
+}
+
+function getProgressRow(word) {
+  return {
+    user_id: currentUser.id,
+    word_id: progressKey(word),
+    learned: !!word.learned,
+    bookmarked: !!word.bookmarked,
+    difficult: !!word.difficult,
+    updated_at: new Date().toISOString()
+  };
+}
+
+async function syncProgressNow() {
+  if (!currentUser) {
+    setAuthStatus('Please log in first.');
+    return;
+  }
+
+  if (cloudSyncRunning) {
+    cloudSyncPending = true;
+    return;
+  }
+
+  cloudSyncRunning = true;
+  cloudReady = false;
+
+  try {
+    setAuthStatus('Syncing progress…');
+
+    const { data, error } = await supabaseClient
+      .from('vocabulary_progress')
+      .select('word_id, learned, bookmarked, difficult')
+      .eq('user_id', currentUser.id);
+
+    if (error) throw error;
+
+    const cloudByKey = new Map(
+      (data || []).map(row => [row.word_id, row])
+    );
+
+    for (const word of words) {
+      const cloud = cloudByKey.get(progressKey(word));
+      if (cloud) {
+        word.learned = !!cloud.learned;
+        word.bookmarked = !!cloud.bookmarked;
+        word.difficult = !!cloud.difficult;
+      }
+    }
+
+    const newRows = words
+      .filter(word => !cloudByKey.has(progressKey(word)))
+      .map(getProgressRow);
+
+    if (newRows.length) {
+      const { error: uploadError } = await supabaseClient
+        .from('vocabulary_progress')
+        .upsert(newRows, { onConflict: 'user_id,word_id' });
+
+      if (uploadError) throw uploadError;
+    }
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(words));
+    renderAll();
+    cloudReady = true;
+    setAuthStatus('Progress synced successfully.');
+  } catch (error) {
+    cloudReady = false;
+    setAuthStatus('Sync failed: ' + error.message);
+  } finally {
+    cloudSyncRunning = false;
+
+    if (cloudSyncPending) {
+      cloudSyncPending = false;
+      scheduleCloudSync();
+    }
+  }
+}
+
+// Selective reset: preserve words, bookmarks, deck assignments and all other metadata.
+// Learned flags are shared by vocabulary, flashcards and quizzes, so resetting
+// one deck updates its progress wherever those same words appear.
+function updateResetDeckChoices() {
+  const scope = document.getElementById('resetScope').value;
+  const wrap = document.getElementById('resetDeckWrap');
+  const select = document.getElementById('resetDeckNumber');
+  const needsDeck = scope === 'vocab' || scope === 'flash';
+  wrap.classList.toggle('hidden', !needsDeck);
+  if (!needsDeck) return;
+  const size = scope === 'vocab' ? 20 : 10;
+  const oldValue = select.value;
+  select.innerHTML = '';
+  for (let i = 0; i < deckOrder.length; i += size) {
+    const deckWords = deckOrder.slice(i, i + size).map(byId).filter(Boolean);
+    if (!deckWords.length) continue;
+    const option = document.createElement('option');
+    option.value = String(Math.floor(i / size));
+    option.textContent = `Deck ${Math.floor(i / size) + 1} — ${deckWords.filter(w => w.learned).length}/${deckWords.length} learned`;
+    select.appendChild(option);
+  }
+  if ([...select.options].some(o => o.value === oldValue)) select.value = oldValue;
+}
+document.getElementById('resetScope').addEventListener('change', updateResetDeckChoices);
+async function resetLearningProgressToFresh() {
+  const button = document.getElementById('resetLearningProgressBtn');
+  const status = document.getElementById('resetLearningProgressStatus');
+  if (!words.length) { status.textContent = 'No vocabulary to reset.'; return; }
+  const scope = document.getElementById('resetScope').value;
+  const size = scope === 'vocab' ? 20 : 10;
+  const deckNumber = Number(document.getElementById('resetDeckNumber').value);
+  const ids = (scope === 'vocab' || scope === 'flash')
+    ? new Set(deckOrder.slice(deckNumber * size, (deckNumber + 1) * size))
+    : null;
+  const affected = ids ? words.filter(w => ids.has(w.id)) : words.slice();
+  if (!affected.length) { status.textContent = 'This deck has no words.'; return; }
+  const label = scope === 'all' ? 'ALL learning progress'
+    : scope === 'difficult' ? 'difficult-word flags across ALL vocabulary'
+    : `${scope === 'vocab' ? 'vocabulary' : 'flashcard'} deck ${deckNumber + 1} (${affected.length} words)`;
+  const answer = prompt(`Reset ${label}? This changes your cloud progress too if logged in. Words, bookmarks and fixed decks stay. Type RESET to confirm:`);
+  if (answer !== 'RESET') { status.textContent = 'Reset cancelled. No changes made.'; return; }
+  button.disabled = true;
+  status.textContent = 'Resetting selected progress…';
+  try {
+    clearTimeout(cloudSyncTimer);
+    cloudSyncTimer = null;
+    if (currentUser) {
+      if (!cloudReady || cloudSyncRunning) throw new Error('Cloud sync is not ready. Wait for synchronization, then retry.');
+      const resetRows = affected.map(word => ({
+        ...getProgressRow(word),
+        learned: scope === 'difficult' ? !!word.learned : false,
+        difficult: false
+      }));
+      for (let i = 0; i < resetRows.length; i += 200) {
+        const { error } = await supabaseClient.from('vocabulary_progress')
+          .upsert(resetRows.slice(i, i + 200), { onConflict: 'user_id,word_id' });
+        if (error) throw error;
+      }
+    }
+    affected.forEach(word => {
+      if (scope !== 'difficult') word.learned = false;
+      word.difficult = false;
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(words));
+    flashIndex = 0;
+    quizGroupKey = '';
+    quizQueue = [];
+    renderAll();
+    updateResetDeckChoices();
+    status.textContent = `Reset complete: ${label}. Other words, bookmarks and fixed decks were preserved.`;
+  } catch (error) {
+    status.textContent = 'Reset not completed: ' + error.message + ' If some cloud batches were updated, sync before retrying.';
+  } finally {
+    button.disabled = false;
+  }
+}
+document.getElementById('resetLearningProgressBtn').addEventListener('click', resetLearningProgressToFresh);
+updateResetDeckChoices();
+
+function scheduleCloudSync() {
+  if (!currentUser || !cloudReady) return;
+  clearTimeout(cloudSyncTimer);
+
+  cloudSyncTimer = setTimeout(async () => {
+    try {
+      const rows = words.map(getProgressRow);
+      if (!rows.length) return;
+
+      const { error } = await supabaseClient
+        .from('vocabulary_progress')
+        .upsert(rows, { onConflict: 'user_id,word_id' });
+
+      if (error) throw error;
+      setAuthStatus('Your progress is saved to the cloud.');
+    } catch (error) {
+      setAuthStatus('Cloud save failed: ' + error.message);
+    }
+  }, 800);
+}
+
+async function handleSignedIn(user) {
+  currentUser = user;
+  cloudReady = false;
+  updateAuthPanel();
+  await syncProgressNow();
+}
+
+document.getElementById('signUpBtn').addEventListener('click', async () => {
+  const email = document.getElementById('authEmail').value.trim();
+  const password = document.getElementById('authPassword').value;
+
+  if (!email || !password) {
+    setAuthStatus('Enter your email and password.');
+    return;
+  }
+
+  if (password.length < 6) {
+    setAuthStatus('Password must contain at least 6 characters.');
+    return;
+  }
+
+  setAuthStatus('Creating account…');
+
+  const { data, error } = await supabaseClient.auth.signUp({
+    email,
+    password
+  });
+
+  if (error) {
+    setAuthStatus('Sign-up failed: ' + error.message);
+  } else if (data.session && data.user) {
+    await handleSignedIn(data.user);
+  } else {
+    setAuthStatus('Account created. Check your email for confirmation, then log in.');
+  }
+});
+
+document.getElementById('signInBtn').addEventListener('click', async () => {
+  const email = document.getElementById('authEmail').value.trim();
+  const password = document.getElementById('authPassword').value;
+
+  if (!email || !password) {
+    setAuthStatus('Enter your email and password.');
+    return;
+  }
+
+  setAuthStatus('Logging in…');
+
+  const { data, error } = await supabaseClient.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if (error) {
+    setAuthStatus('Login failed: ' + error.message);
+  } else {
+    await handleSignedIn(data.user);
+  }
+});
+
+document.getElementById('signOutBtn').addEventListener('click', async () => {
+  cloudReady = false;
+  const { error } = await supabaseClient.auth.signOut();
+  currentUser = null;
+  updateAuthPanel();
+  setAuthStatus(error ? 'Logout failed: ' + error.message : 'Logged out.');
+});
+
+document.getElementById('syncProgressBtn').addEventListener('click', syncProgressNow);
+
+supabaseClient.auth.onAuthStateChange((event, session) => {
+  if (event === 'SIGNED_OUT') {
+    currentUser = null;
+    cloudReady = false;
+    updateAuthPanel();
+  } else if (session?.user && !currentUser) {
+    setTimeout(() => handleSignedIn(session.user), 0);
+  }
+});
+
+(async function initialiseCloudAuth() {
+  updateAuthPanel();
+  updateLearningProgress();
+
+  const { data, error } = await supabaseClient.auth.getSession();
+
+  if (error) {
+    setAuthStatus('Could not check login: ' + error.message);
+  } else if (data.session?.user) {
+    await handleSignedIn(data.session.user);
+  } else {
+    setAuthStatus('Log in to sync your progress.');
+  }
+})();
+
+
+const GRAMMAR_TOPICS=['TeKaMoLo','Adjective endings (weak/strong/mixed)','Articles','Verb conjugation','Partizip II','Akkusativ','Dativ','Cases and article changes (N/A/D/G)','Futur I','Modal verbs','Main-clause V2','Subordinate-clause verb-final','Coordinating conjunctions','Wechselpräpositionen','Fixed prepositions and verbs with prepositions','Prepositions and cases','Reflexive verbs','Separable and inseparable verbs','Konjunktiv II','Passive voice','Relative clauses','Genitiv','Negation: nicht / kein','Comparative and superlative','Pronouns','Infinitive mit zu','Partizip I/II adjectives','Indirect questions','Tense selection: Präsens/Perfekt/Präteritum/Plusquamperfekt/Futur I'];
+document.getElementById('grammarTopics').innerHTML=GRAMMAR_TOPICS.map((x,i)=>`<span>${i+1}. ${esc(x)}</span>`).join('');
+let mnemonicVisible=false;
+function localMnemonic(word){if(!word)return '';return word.notes ? 'Your note: '+word.notes : 'Memory tip: Say “'+word.german+'” aloud, connect it to “'+word.english+'”, then make your own short sentence.'}
+document.getElementById('mnemonicBtn').onclick=()=>{mnemonicVisible=!mnemonicVisible;const d=getFlashDecks()[flashDeckIndex]||[];const w=d[flashIndex];document.getElementById('mnemonicText').textContent=localMnemonic(w);document.getElementById('mnemonicText').classList.toggle('hidden',!mnemonicVisible||!w);document.getElementById('mnemonicBtn').textContent=mnemonicVisible?'Hide mnemonic':'Show mnemonic'};
+const oldRenderFlash=renderFlash;
+renderFlash=function(){oldRenderFlash();mnemonicVisible=false;document.getElementById('mnemonicText').classList.add('hidden');document.getElementById('mnemonicBtn').textContent='Show mnemonic'};
+// Offline real-time rule checker: conservative patterns only; no network requests.
+(function setupLiveGermanChecker(){
+ const input=document.getElementById('grammarInput');
+ const mode=document.getElementById('grammarMode');
+ const out=document.getElementById('liveGrammarResults');
+ const status=document.getElementById('liveGrammarStatus');
+ let debounce;
+ const rules=[
+  {re:/\bfür\s+(einer|einem)\s+(Stelle|Arbeit|Ausbildung|Position)\b/gi, replacement:m=>m.replace(/einer|einem/i,'eine'), why:'After “für” use accusative: für eine Stelle.'},
+  {re:/\bmit\s+den\s+(Mann|Kollege|Kunde|Chef|Mitarbeiter|Freund)\b/gi, replacement:m=>m.replace(/\bden\b/i,'dem'),why:'“mit” takes dative: mit dem Kollegen / Mitarbeiter. Check noun endings too.'},
+  {re:/\bIch\s+habe\s+(\d+)\s+Jahre\b/g, replacement:m=>m.replace('habe','bin')+' alt',why:'Use “sein”, not “haben”, to state your age.'},
+  {re:/\bIch\s+interessiere\s+mich\s+an\b/gi,replacement:m=>m.replace(/\ban\b/i,'für'),why:'The fixed preposition is “sich interessieren für” (+ accusative).'},
+  {re:/\bIch\s+warte\s+für\b/gi,replacement:m=>m.replace(/\bfür\b/i,'auf'),why:'The fixed preposition is “warten auf” (+ accusative).'},
+  {re:/\bIch\s+helfe\s+dich\b/gi,replacement:m=>m.replace(/\bdich\b/i,'dir'),why:'“helfen” takes dative: ich helfe dir.'},
+  {re:/\bIch\s+danke\s+dich\b/gi,replacement:m=>m.replace(/\bdich\b/i,'dir'),why:'“danken” takes dative: ich danke dir.'},
+  {re:/\bwegen\s+dem\s+(Wetter|Problem)\b/gi,replacement:m=>m.replace(/\bdem\b/i,'des'),why:'In formal standard German, “wegen” generally takes genitive.'},
+  {re:/\bseit\s+ein\s+(Jahr|Monat)\b/gi,replacement:m=>m.replace(/\bein\b/i,'einem'),why:'“seit” takes dative: seit einem Jahr / Monat.'},
+  {re:/\bIch\s+gehe\s+in\s+Bibliothek\b/gi,replacement:m=>m.replace(/in\s+Bibliothek/i,'in die Bibliothek'),why:'Use the article: “in die Bibliothek” (direction, accusative).'},
+  {re:/\bIch\s+bin\s+in\s+Bibliothek\b/gi,replacement:m=>m.replace(/in\s+Bibliothek/i,'in der Bibliothek'),why:'Use the article: “in der Bibliothek” (location, dative).'},
+  {re:/\bIch\s+lerne\s+Deutsch\s+seit\s+(\d+)\s+Jahre\b/gi,replacement:m=>m.replace(/Jahre$/i,'Jahren'),why:'“seit” takes dative plural: seit zwei Jahren.'}
+ ];
+ function check(){
+  out.replaceChildren();
+  if(mode.value!=='de-en'){status.textContent='Offline live rules currently support German input only. Use Gemini for English → German.';return}
+  const text=input.value;
+  if(!text.trim()){status.textContent='Type German to see instant suggestions. No API calls.';return}
+  const findings=[];
+  for(const rule of rules){rule.re.lastIndex=0;let match;while((match=rule.re.exec(text))!==null){const replacement=rule.replacement(match[0]);if(replacement!==match[0])findings.push({start:match.index,end:match.index+match[0].length,original:match[0],replacement,why:rule.why});if(findings.length>=20)break}}
+  findings.sort((a,b)=>a.start-b.start);
+  const unique=findings.filter((f,i)=>!findings.slice(0,i).some(g=>f.start<g.end));
+  status.textContent=unique.length?`${unique.length} possible issue${unique.length===1?'':'s'} found · rule-based suggestions (not a complete grammar check).`:'Checker active — no matching rule found. This does not guarantee the sentence is correct.';
+  unique.forEach(f=>{
+   const item=document.createElement('div');item.className='live-grammar-item';
+   const line=document.createElement('div');
+   const old=document.createElement('span');old.className='original';old.textContent=f.original;
+   const arrow=document.createTextNode(' → ');
+   const suggested=document.createElement('span');suggested.className='suggested';suggested.textContent=f.replacement;
+   line.append(old,arrow,suggested);
+   const explanation=document.createElement('div');explanation.className='small muted';explanation.textContent=f.why;
+   const apply=document.createElement('button');apply.type='button';apply.textContent='Apply suggestion';
+   apply.addEventListener('click',()=>{if(input.value.slice(f.start,f.end)!==f.original){check();return}input.value=input.value.slice(0,f.start)+f.replacement+input.value.slice(f.end);input.dispatchEvent(new Event('input',{bubbles:true}));input.focus()});
+   item.append(line,explanation,apply);out.append(item);
+  });
+ }
+ input.addEventListener('input',()=>{clearTimeout(debounce);debounce=setTimeout(check,350)});
+ document.getElementById('grammarDemoBtn').addEventListener('click',()=>{mode.value='de-en';input.value='Ich interessiere mich für einer Stelle.';check();input.focus()});
+ mode.addEventListener('change',check);check();
+})();
+
+document.getElementById('grammarCheckBtn').onclick=async()=>{
+ const btn=document.getElementById('grammarCheckBtn'),result=document.getElementById('grammarResult'),sentence=document.getElementById('grammarInput').value.trim();
+ if(!sentence){result.textContent='Enter a sentence first.';return}
+ const {data:{session},error:sessionError}=await supabaseClient.auth.getSession();
+ if(sessionError||!session){result.textContent='Please log in under Account & Cloud Sync first.';return}
+ btn.disabled=true;result.textContent='Checking with Gemini…';
+ try{
+  const response=await fetch(SUPABASE_URL+'/functions/v1/german-sentence-checker',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+session.access_token,'apikey':SUPABASE_PUBLISHABLE_KEY},body:JSON.stringify({sentence,mode:document.getElementById('grammarMode').value})});
+  const data=await response.json();if(!response.ok)throw new Error(data.error||'Request failed ('+response.status+')');result.textContent=data.result||'No result returned.';
+ }catch(e){result.textContent='Could not check sentence: '+e.message+'\nConfirm the Supabase Edge Function is deployed.'}finally{btn.disabled=false}
+};
+
+
+// Theme preferences are stored separately from learning progress.
+(function setupAppearance(){
+  const KEY='deutschB2Appearance_v1';
+  const presets={
+    light:{bg:'#f5f7fb',panel:'#ffffff',ink:'#172033',muted:'#657087',line:'#dfe5ef',accent:'#315ee8',accent2:'#eaf0ff'},
+    dark:{bg:'#121a2a',panel:'#1d293c',ink:'#f1f5fc',muted:'#c0c9d9',line:'#43516a',accent:'#547ff5',accent2:'#30435f'},
+    ocean:{bg:'#e9f5fb',panel:'#ffffff',ink:'#153347',muted:'#526b7c',line:'#c8dfeb',accent:'#0875a5',accent2:'#d9eff9'},
+    forest:{bg:'#edf5ef',panel:'#ffffff',ink:'#183628',muted:'#5c7064',line:'#d2e3d6',accent:'#24794d',accent2:'#e0f3e7'},
+    lavender:{bg:'#f3effb',panel:'#ffffff',ink:'#302447',muted:'#746785',line:'#e2d9f0',accent:'#7650b4',accent2:'#eee5fa'},
+    warm:{bg:'#faf3e7',panel:'#fffdf9',ink:'#392c22',muted:'#796b5f',line:'#eadccc',accent:'#a85b2c',accent2:'#f7e7d5'}
+  };
+  const themeEl=document.getElementById('appearanceTheme');
+  const bgEl=document.getElementById('appearanceBackground');
+  const accentEl=document.getElementById('appearanceAccent');
+  const sizeEl=document.getElementById('appearanceFontSize');
+  const status=document.getElementById('appearanceStatus');
+  let settings={theme:'light',bg:presets.light.bg,accent:presets.light.accent,fontSize:16};
+  try{
+    const stored=JSON.parse(localStorage.getItem(KEY)||'null');
+    if(stored && typeof stored==='object'){
+      if(typeof stored.theme==='string' && (presets[stored.theme] || stored.theme==='custom')) settings.theme=stored.theme;
+      if(/^#[0-9a-fA-F]{6}$/.test(stored.bg||'')) settings.bg=stored.bg;
+      if(/^#[0-9a-fA-F]{6}$/.test(stored.accent||'')) settings.accent=stored.accent;
+      if([14,16,18,20].includes(Number(stored.fontSize))) settings.fontSize=Number(stored.fontSize);
+    }
+  }catch(e){/* invalid saved theme: use defaults */}
+  function apply(){
+    const base=presets[settings.theme]||presets.light;
+    const colors={...base,bg:settings.bg,accent:settings.accent};
+    for(const [key,value] of Object.entries(colors)) document.documentElement.style.setProperty('--'+key,value);
+    document.body.dataset.theme=settings.theme==='dark'?'dark':'light';
+    document.body.style.fontSize=settings.fontSize+'px';
+    themeEl.value=settings.theme;bgEl.value=settings.bg;accentEl.value=settings.accent;sizeEl.value=String(settings.fontSize);
+    try{localStorage.setItem(KEY,JSON.stringify(settings));status.textContent='Appearance saved on this device.';}
+    catch(e){status.textContent='Appearance applied, but browser storage is unavailable.';}
+  }
+  themeEl.addEventListener('change',()=>{
+    settings.theme=themeEl.value;
+    const base=presets[settings.theme]||presets.light;
+    settings.bg=base.bg;settings.accent=base.accent;
+    apply();
+  });
+  bgEl.addEventListener('input',()=>{settings.bg=bgEl.value;settings.theme='custom';apply()});
+  accentEl.addEventListener('input',()=>{settings.accent=accentEl.value;settings.theme='custom';apply()});
+  sizeEl.addEventListener('change',()=>{settings.fontSize=Number(sizeEl.value);apply()});
+  document.getElementById('appearanceReset').addEventListener('click',()=>{
+    settings={theme:'light',bg:presets.light.bg,accent:presets.light.accent,fontSize:16};
+    apply();
+  });
+  apply();
+})();
+
+</script>
+</body>
+</html>
