@@ -61,6 +61,8 @@ body[data-theme="dark"] .wordbuttons button.is-active{color:var(--ink)}
 .today-progress-track{margin-top:18px;height:11px;border-radius:100px;background:var(--line);overflow:hidden}.today-progress-track>div{width:0;height:100%;border-radius:100px;background:var(--good);transition:width .2s}.today-session-row{display:flex;gap:14px;justify-content:space-between;align-items:center;margin-top:13px}.today-session-row span{color:var(--muted);font-size:.91rem}
 .today-card{margin-top:16px;max-width:850px;margin-left:auto;margin-right:auto;text-align:center;padding:32px 24px}.today-pill{display:inline-block;border:1px solid var(--line);background:var(--accent2);color:var(--accent);font-size:.83rem;font-weight:800;padding:6px 13px;border-radius:100px}.today-word{font-size:clamp(1.65rem,4.5vw,2.65rem);font-weight:800;margin:18px 0 13px;overflow-wrap:anywhere}.today-audio{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin:10px 0 17px}.today-audio button{font-size:.91rem;padding:8px 13px}.today-answer{margin:18px auto;max-width:640px;padding:16px;border:1px solid var(--line);border-radius:12px;line-height:1.7;background:var(--accent2);text-align:left;white-space:pre-wrap}.today-answer strong{color:var(--ink)}.today-card>.primary{min-width:200px}.today-rating{margin-top:22px;border-top:1px solid var(--line);padding-top:10px}.rating-buttons{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.rating-buttons button{font-weight:750;min-height:60px}.rating-buttons button span{display:block;font-size:.73rem;font-weight:500;color:var(--muted);margin-top:3px}.rating-buttons button:hover{border-color:var(--accent)}.today-footnote{text-align:center;margin-top:14px}
 @media(max-width:700px){.today-heading{flex-direction:column}.today-target{min-width:0;width:100%;font-size:1.35rem}.today-target span{display:inline;margin-left:7px}.today-stats{gap:7px}.today-stats>div{padding:9px}.today-stats strong{font-size:1.35rem}.today-stats span{font-size:.75rem}.today-session-row{flex-direction:column;align-items:stretch}.today-card{padding:22px 13px}.rating-buttons{grid-template-columns:repeat(2,1fr)}}
+.speech-feedback{position:fixed;z-index:500;bottom:14px;left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100vw - 24px);background:var(--panel);color:var(--ink);border:1px solid var(--accent);box-shadow:0 8px 30px #17203330;border-radius:12px;padding:11px 16px;font-size:.9rem;overflow-wrap:anywhere}
+.speech-feedback[data-error="true"]{border-color:var(--bad);color:var(--bad)}
 </style>
 </head>
 <body>
@@ -98,6 +100,7 @@ body[data-theme="dark"] .wordbuttons button.is-active{color:var(--ink)}
     <button class="tab" data-tab="import">⇅ Import / Export</button>
     <button class="tab" data-tab="settings">⚙️ Settings</button>
   </nav>
+  <div id="speechFeedback" class="speech-feedback hidden" role="status" aria-live="polite" data-error="false"></div>
 
   <section id="today" class="view">
     <div class="panel today-hero">
@@ -464,9 +467,9 @@ function renderToday(){
  document.getElementById('todayAnswer').classList.add('hidden');
  document.getElementById('todaySpeakExample').classList.add('hidden');
  const canSpeak=v3SpeechSupported();
- document.getElementById('todaySpeakWord').disabled=!word||!canSpeak;
- document.getElementById('todaySpeakSlow').disabled=!word||!canSpeak;
- document.getElementById('todaySpeakExample').disabled=!word?.example||!canSpeak;
+ document.getElementById('todaySpeakWord').disabled=!word;
+ document.getElementById('todaySpeakSlow').disabled=!word;
+ document.getElementById('todaySpeakExample').disabled=!word?.example;
  document.getElementById('todayReveal').disabled=!word;
  if(!word){
   document.getElementById('todayWordType').textContent=v3Session.total?'Session complete':'All caught up';
@@ -507,17 +510,33 @@ function v3Rate(rating){
  v3SaveState();saveWords();
 }
 function v3SpeechSupported(){return 'speechSynthesis' in window&&'SpeechSynthesisUtterance' in window;}
+let speechRequestId=0;
+function v3SpeechNotice(message,error=false){
+ const el=document.getElementById('speechFeedback');
+ if(!el)return;
+ el.textContent=message;el.dataset.error=error?'true':'false';el.classList.remove('hidden');
+}
 function speakGerman(text,slow=false){
- if(!text)return;
- if(!v3SpeechSupported()){alert('Your browser does not support spoken pronunciation. Try Chrome or Edge with a German voice installed.');return;}
+ if(!text){v3SpeechNotice('There is no pronunciation text for this word.',true);return;}
+ if(!v3SpeechSupported()){
+  v3SpeechNotice('Audio is not supported in this browser. Try Microsoft Edge or Chrome on Windows.',true);return;
+ }
+ const requestId=++speechRequestId;
  try{
-  window.speechSynthesis.cancel();
-  const utterance=new SpeechSynthesisUtterance(text);utterance.lang='de-DE';utterance.rate=slow?0.72:0.96;utterance.pitch=1;
-  const voices=window.speechSynthesis.getVoices();
-  const german=voices.find(v=>v.lang.toLowerCase()==='de-de')||voices.find(v=>v.lang.toLowerCase().startsWith('de'));
+  const synth=window.speechSynthesis;
+  const utterance=new SpeechSynthesisUtterance(String(text));
+  utterance.lang='de-DE';utterance.rate=slow?0.72:0.95;utterance.pitch=1;utterance.volume=1;
+  const voices=typeof synth.getVoices==='function'?synth.getVoices():[];
+  const german=voices.find(v=>v.lang?.toLowerCase()==='de-de')||voices.find(v=>v.lang?.toLowerCase().startsWith('de'));
   if(german)utterance.voice=german;
-  window.speechSynthesis.speak(utterance);
- }catch(e){console.warn('Speech not available',e);alert('German pronunciation could not start. Check the German voice in your browser or device settings.');}
+  v3SpeechNotice(german?`🔊 Playing German: ${text}`:`🔊 Audio requested: ${text}. If you hear nothing, install a German voice in Windows Settings → Time & language → Speech.`);
+  utterance.onstart=()=>{if(requestId===speechRequestId)v3SpeechNotice(`🔊 Speaking: ${text}`);};
+  utterance.onerror=e=>{if(requestId===speechRequestId)v3SpeechNotice(`Audio failed (${e.error||'voice unavailable'}). Check device volume and install a German text-to-speech voice in Windows Settings → Time & language → Speech.`,true);};
+  utterance.onend=()=>{if(requestId===speechRequestId)v3SpeechNotice(`✓ Pronunciation finished: ${text}`);};
+  if(synth.speaking||synth.pending||synth.paused)synth.cancel();
+  synth.speak(utterance);
+  if(synth.paused)synth.resume();
+ }catch(e){console.warn('Speech not available',e);v3SpeechNotice('Audio could not start. Try Edge or Chrome and check the German voice in Windows Speech settings.',true);}
 }
 document.getElementById('todayReveal').addEventListener('click',()=>{if(!v3Current())return;v3Session.revealed=!v3Session.revealed;renderToday();});
 document.getElementById('todayRefresh').addEventListener('click',()=>{v3BuildSession();renderToday();});
@@ -602,7 +621,7 @@ function renderList() {
   return `<details class="vocab-deck ${mastered?'deck-mastered':''}" ${index===0?'open':''}><summary><span class="deck-heading"><span class="deck-chevron">▶</span><span>Deck ${number}${mastered?' ✓':''}</span></span><span class="deck-meta">${learned}/${total} learned · ${percent}%${mastered?' · Mastered':''}</span></summary><div class="deck-progress"><div style="width:${percent}%"></div></div><div class="deck-words">${cards}</div></details>`;
  }).join('')+'</div>';
 }
-function renderAll(){renderStats();renderList();renderFlash();updateLearningProgress();renderToday()}
+function renderAll(){reconcileOrders();renderStats();renderList();renderFlash();updateLearningProgress();renderToday()}
 function resetForm(){document.getElementById('wordForm').reset();document.getElementById('editId').value='';document.getElementById('formTitle').textContent='Edit vocabulary word';document.getElementById('saveWord').textContent='Save changes';document.getElementById('cancelEdit').classList.add('hidden');document.getElementById('wordEditorPanel').style.display='none'}
 document.getElementById('wordForm').addEventListener('submit',e=>{
  e.preventDefault();const id=document.getElementById('editId').value;
@@ -638,9 +657,9 @@ function getFlashDecks(){
  return decks;
 }
 function deckIsMastered(deck){return deck.length>0&&deck.every(w=>!!w.learned)}
+let flashDeckInitialized=false;
 function renderDeckSelect(decks){
  const select=document.getElementById('deckSelect');
- const old=Number(select.value)||0;
  select.innerHTML='';
  if(!decks.length){select.innerHTML='<option value="0">No decks yet</option>';flashDeckIndex=0;return}
  decks.forEach((deck,i)=>{
@@ -649,12 +668,9 @@ function renderDeckSelect(decks){
   opt.textContent=`Deck ${i+1} · ${learned}/${deck.length}${deckIsMastered(deck)?' ✓ Mastered':''}`;
   select.appendChild(opt);
  });
- flashDeckIndex=Math.min(old,decks.length-1);
- // Prefer the first deck not yet mastered when the current deck is mastered.
- if(deckIsMastered(decks[flashDeckIndex])){
-  const next=decks.findIndex(d=>!deckIsMastered(d));
-  if(next>=0)flashDeckIndex=next;
- }
+ // Keep the deck the user chose. The previous code reset it to the old select value on every redraw.
+ if(!flashDeckInitialized){const firstUnmastered=decks.findIndex(d=>!deckIsMastered(d));flashDeckIndex=firstUnmastered>=0?firstUnmastered:0;flashDeckInitialized=true;}
+ flashDeckIndex=Math.min(Math.max(0,flashDeckIndex),decks.length-1);
  select.value=String(flashDeckIndex);
 }
 function renderFlash(){
@@ -674,16 +690,16 @@ function renderFlash(){
  document.getElementById('flashEnglish').textContent=w?`Meaning: ${w.english}`:'';
  document.getElementById('flashExample').textContent=w?[w.article,w.example,w.translation,w.grammar?`Grammar: ${w.grammar}`:'',w.notes?`Your notes: ${w.notes}`:''].filter(Boolean).join('\n'):'';
  ['flashEnglish','flashExample'].forEach(id=>document.getElementById(id).classList.toggle('hidden',!w||!flashRevealed));
- document.getElementById('flashSpeakWord').disabled=!w||!v3SpeechSupported();document.getElementById('flashSpeakSlow').disabled=!w||!v3SpeechSupported();document.getElementById('flashSpeakExample').disabled=!w?.example||!v3SpeechSupported();
+ document.getElementById('flashSpeakWord').disabled=!w;document.getElementById('flashSpeakSlow').disabled=!w;document.getElementById('flashSpeakExample').disabled=!w?.example;
  document.getElementById('revealBtn').disabled=!w;document.getElementById('prevCard').disabled=!deck.length||flashIndex===0;document.getElementById('nextCard').disabled=!deck.length||flashIndex>=deck.length-1;document.getElementById('markDifficult').disabled=!w;document.getElementById('markLearned').disabled=!w||w.learned;
- document.getElementById('nextDeck').disabled=!decks.length||flashDeckIndex>=decks.length-1;
+ document.getElementById('nextDeck').disabled=decks.length<2;document.getElementById('nextDeck').textContent=flashDeckIndex===decks.length-1?'↻ First deck':'Next deck →';
  document.getElementById('markLearned').textContent=w&&w.learned?'✓ Already learned':'Mark learned ✓';
  document.getElementById('revealBtn').textContent=flashRevealed?'Hide answer':'Show answer';
 }
 document.getElementById('revealBtn').onclick=()=>{flashRevealed=!flashRevealed;renderFlash()};
 document.getElementById('prevCard').onclick=()=>{if(flashIndex>0){flashIndex--;flashRevealed=false;renderFlash()}};
 document.getElementById('nextCard').onclick=()=>{const d=getFlashDecks()[flashDeckIndex]||[];if(flashIndex<d.length-1){flashIndex++;flashRevealed=false;renderFlash()}};
-document.getElementById('nextDeck').onclick=()=>{const decks=getFlashDecks();if(flashDeckIndex<decks.length-1){flashDeckIndex++;flashIndex=0;flashRevealed=false;renderFlash()}};
+document.getElementById('nextDeck').onclick=()=>{const decks=getFlashDecks();if(decks.length>1){flashDeckIndex=(flashDeckIndex+1)%decks.length;flashIndex=0;flashRevealed=false;renderFlash()}};
 document.getElementById('deckSelect').onchange=()=>{flashDeckIndex=Number(document.getElementById('deckSelect').value)||0;flashIndex=0;flashRevealed=false;renderFlash()};
 
 document.getElementById('markDifficult').onclick = () => {
