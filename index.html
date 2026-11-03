@@ -544,6 +544,7 @@ function v3PreferredGermanVoice(){
  const voices=v3GermanVoices();
  let saved='';
  try{saved=localStorage.getItem(V3_VOICE_KEY)||'';}catch(e){}
+ if(saved==='__system__')return null;
  const chosen=voices.find(v=>v.voiceURI===saved)||null;
  // Prefer local voices and de-DE. Safari can be silent if voice is unset.
  return chosen||voices.find(v=>v.localService&&(v.lang||'').toLowerCase()==='de-de')||
@@ -557,6 +558,7 @@ function v3PopulateSpeechVoices(){
  select.replaceChildren();
  const auto=new Option('Automatic German voice','');
  select.add(auto);
+ select.add(new Option('Safari system default (try if interrupted)','__system__'));
  if(!v3SpeechSupported()){
   select.disabled=true;
   status.textContent='This browser does not support its built-in speech synthesis.';
@@ -568,7 +570,7 @@ function v3PopulateSpeechVoices(){
   v.voiceURI
  )));
  let saved='';try{saved=localStorage.getItem(V3_VOICE_KEY)||'';}catch(e){}
- select.value=voices.some(v=>v.voiceURI===saved)?saved:'';
+ select.value=saved==='__system__'||voices.some(v=>v.voiceURI===saved)?saved:'';
  status.textContent=voices.length
   ?voices.length+' German voice'+(voices.length===1?'':'s')+' detected. Try a different voice if iPhone Safari stays silent.'
   :'No German voices reported yet. Tap Refresh voices, or install a German voice in iPhone Settings → Accessibility → Spoken Content → Voices.';
@@ -588,14 +590,17 @@ function v3PrepareAudioSession(){
  try{
   const audioSession=navigator.audioSession;
   if(!audioSession || !('type' in audioSession))return 'unavailable';
-  // Work around a Safari state where setting playback to playback does nothing.
-  if(audioSession.type==='playback')audioSession.type='ambient';
-  audioSession.type='playback';
+  // Avoid reconfiguring an already active iPhone audio session on every tap.
+  // Switching playback → ambient → playback can interrupt active sound.
+  if(audioSession.type!=='playback')audioSession.type='playback';
   return audioSession.type;
  }catch(e){console.warn('iOS audio-session selection unavailable',e);return 'unavailable';}
 }
 let v3TestAudio=null;
 function v3TestSound(){
+ if(v3SpeechSupported()&&(window.speechSynthesis.speaking||window.speechSynthesis.pending)){
+  v3SpeechNotice('German speech is still active. Let it finish or tap Reset speaker before running the sound test.',true);return;
+ }
  v3PrepareAudioSession();
  try{
   // Use an HTML <audio> element, not Web Audio. iOS routes media playback
@@ -644,6 +649,10 @@ function speakGerman(text,slow=false){
   v3SpeechNotice('Speech is unavailable. Try Safari on iPhone or Chrome/Edge on Windows.',true);return;
  }
  const synth=window.speechSynthesis;
+ // Do not start speech while the short media test is playing.
+ if(v3TestAudio&&!v3TestAudio.paused&&!v3TestAudio.ended){
+  v3SpeechNotice('Wait a moment for the sound test to finish, then tap Hear again.',true);return;
+ }
  // A stuck mobile speech queue requires an explicit reset, not silent queuing.
  if(v3AppleMobile&&(synth.speaking||synth.pending||synth.paused)){
   v3SpeechNotice('Safari says speech is already active. Go to Settings → German Pronunciation → Reset speaker, then tap Hear again.',true);
@@ -671,8 +680,13 @@ function speakGerman(text,slow=false){
   utterance.onerror=e=>{
    finished=true;
    if(activeSpeechUtterance===utterance)activeSpeechUtterance=null;
-   if(requestId===speechRequestId)
-    v3SpeechNotice('Voice failed ('+(e.error||'unknown error')+'). Open Settings → German Pronunciation → Reset speaker or select another voice.',true);
+   if(requestId!==speechRequestId)return;
+   const reason=e.error||'unknown error';
+   if(reason==='interrupted'||reason==='canceled'){
+    v3SpeechNotice('Safari interrupted the pronunciation. Avoid playing the sound test at the same time. Tap Settings → German Pronunciation → Reset speaker, select “Safari system default”, then Test German voice. If it persists, reload Safari.',true);
+   }else{
+    v3SpeechNotice('Voice failed ('+reason+'). In Settings → German Pronunciation, try another voice or Reset speaker.',true);
+   }
   };
   utterance.onend=()=>{
    finished=true;
