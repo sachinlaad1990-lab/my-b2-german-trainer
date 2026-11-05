@@ -521,11 +521,11 @@ function v4RecordRating(word,rating){
  const key=v3WordKey(word),prior=v3State.records[key]||{},now=Date.now(),today=v3LocalDay();
  const days=Array.isArray(prior.successDays)?prior.successDays.filter(x=>typeof x==='string'):[];
  const previousInterval=Number(prior.intervalDays)||0;let intervalDays=0,delayMs=600000,repetitions=Number(prior.repetitions)||0;
- if(rating==='again'){word.learned=false;word.difficult=true;repetitions=0;}
+ if(rating==='again'){word.learned=false;word.difficult=true;repetitions=0;days.length=0;}
  else if(rating==='hard'){word.learned=false;word.difficult=true;intervalDays=1;delayMs=86400000;}
  else if(rating==='good'||rating==='easy'){
   if(!days.includes(today))days.push(today);
-  repetitions++;word.learned=days.length>=3;word.difficult=false;
+  repetitions++;word.learned=Boolean(word.learned)||days.length>=3;word.difficult=false;
   intervalDays=rating==='easy'?(previousInterval?Math.max(7,Math.round(previousInterval*2.8)):7):(previousInterval?Math.max(3,Math.round(previousInterval*2.3)):3);
   delayMs=intervalDays*86400000;
  }else return;
@@ -534,7 +534,7 @@ function v4RecordRating(word,rating){
 }
 function v4WordForms(w){
  const type=String(w.wordType||'').toLowerCase();
- const noun=type==='noun'||(!type&&/^(der|die|das)\s/i.test(w.german||''));
+ const noun=type==='noun'||(!type&&(/^(der|die|das)\s/i.test(w.german||'')||/^(der|die|das)(\b|\s|;)/i.test(w.article||'')));
  const verb=type==='verb'||(!type&&!w.article&&/^(sich\s+)?[a-zäöüß]+(en|ern|eln)$/i.test(w.german||''));
  const out=[];
  if(noun&&w.plural)out.push('Plural: '+w.plural);
