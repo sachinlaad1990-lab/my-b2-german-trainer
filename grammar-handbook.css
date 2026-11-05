@@ -1,0 +1,66 @@
+
+/* Comprehensive grammar handbook UI, v4.1 */
+#grammarGuide .bh-layout{display:grid;grid-template-columns:minmax(235px,300px) minmax(0,1fr);gap:18px;align-items:start}
+#grammarGuide .bh-sidebar,#grammarGuide .bh-workspace{min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}
+#grammarGuide .bh-sidebar{position:sticky;top:85px;max-height:calc(100vh - 95px);display:flex;flex-direction:column;gap:9px}
+#grammarGuide .bh-sidebar label{font-weight:750}
+#grammarGuide .bh-sidebar input{width:100%;min-width:0}
+#grammarGuide .bh-section-list{display:grid;gap:5px;max-height:190px;overflow:auto;border-bottom:1px solid var(--line);padding:5px 3px 11px}
+#grammarGuide .bh-lesson-list{overflow:auto;min-height:80px;padding:3px;flex:1}
+#grammarGuide .bh-filter-row{display:flex;gap:8px}
+#grammarGuide .bh-filter-row button{flex:1;min-width:0;font-size:.85rem}
+#grammarGuide .bh-filter-row button.active,#grammarGuide .bh-section.active,#grammarGuide .bh-topic.active{border:1px solid var(--accent);background:var(--accent2);color:var(--ink);font-weight:800}
+#grammarGuide .bh-section{font-size:.87rem;padding:10px 11px;text-align:left;min-height:40px;border:1px solid transparent;border-radius:10px;background:transparent;color:var(--ink)}
+#grammarGuide .bh-topic{display:block;text-align:left;width:100%;margin:0 0 5px;padding:11px;border:1px solid transparent;border-radius:10px;background:transparent;color:var(--ink);line-height:1.35}
+#grammarGuide .bh-topic span{display:block;font-weight:650}
+#grammarGuide .bh-topic small{display:block;margin-top:4px;color:var(--muted);font-size:.75rem}
+#grammarGuide .bh-lesson-meta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:.8rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+#grammarGuide .bh-workspace>h2{font-size:clamp(1.5rem,3vw,2.05rem);margin:11px 0 18px;line-height:1.25}
+#grammarGuide .bh-workspace h3{font-size:1.02rem;margin:0 0 9px}
+#grammarGuide .bh-workspace p{margin:5px 0 10px;line-height:1.65}
+#grammarGuide .bh-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+#grammarGuide .bh-panel{border:1px solid var(--line);background:var(--bg);padding:14px;border-radius:12px}
+#grammarGuide .bh-pattern{background:#eaf0ff;color:#182f58;border-radius:12px;padding:16px;border:1px solid #d2dfff;margin:13px 0}
+#grammarGuide .bh-pattern p{font-weight:780;overflow-wrap:anywhere}
+#grammarGuide .bh-pattern button{font-size:.8rem;padding:6px 11px;background:#fff;color:#1e3c75}
+#grammarGuide .bh-memory{background:#fff5df;border:1px solid #f2d9a8;color:#62430d;border-radius:12px;padding:16px;margin:12px 0}
+#grammarGuide .bh-memory p{font-size:1.02rem;font-weight:650}
+#grammarGuide .bh-reference{margin:16px 0;padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+#grammarGuide .bh-table-scroll{max-width:100%;overflow-x:auto;border:1px solid var(--line);border-radius:9px}
+#grammarGuide .bh-table{border-collapse:collapse;width:100%;min-width:510px;font-size:.9rem}
+#grammarGuide .bh-table th,#grammarGuide .bh-table td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.5}
+#grammarGuide .bh-table thead th{background:#eaf0ff;color:#18375c;font-weight:800}
+#grammarGuide .bh-table tbody th{font-weight:750;white-space:nowrap;background:var(--bg)}
+#grammarGuide .bh-table tbody tr:last-child th,#grammarGuide .bh-table tbody tr:last-child td{border-bottom:0}
+#grammarGuide .bh-table-tip{margin:12px 0 0!important;padding:12px;border-radius:9px;background:var(--accent2);font-size:.9rem}
+#grammarGuide .bh-example{border-left:4px solid var(--accent);border-radius:8px;padding:11px 14px;margin:8px 0;background:var(--bg)}
+#grammarGuide .bh-example b,#grammarGuide .bh-example span{display:block}
+#grammarGuide .bh-example b{font-size:1.04rem}
+#grammarGuide .bh-example span{font-size:.9rem;color:var(--muted);margin-top:5px}
+#grammarGuide .bh-warning{padding:14px 16px;border:1px solid #eabbba;background:#fff0ee;border-radius:12px;color:#7d2d23;margin:14px 0}
+#grammarGuide .bh-practice{margin:16px 0;padding:17px;border:1px solid #c5d4ec;border-radius:14px;background:var(--bg)}
+#grammarGuide .bh-question{font-size:1.1rem;font-weight:750}
+#grammarGuide .bh-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+#grammarGuide .bh-choices button{text-align:left;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:12px;border-radius:10px;white-space:normal}
+#grammarGuide .bh-choices button.right{background:#dff7e9;border:1px solid #7ac39a;color:#185b39}
+#grammarGuide .bh-choices button.wrong{background:#fff0ee;border:1px solid #df9b90;color:#822e25}
+#grammarGuide #bhFeedback{min-height:30px;font-size:.92rem}
+#grammarGuide .bh-footer{display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between;border-top:1px solid var(--line);padding-top:15px;margin-top:18px}
+#grammarGuide .bh-footer button{flex:1;min-width:120px}
+#grammarGuide .bh-footer #bhNext{background:var(--accent);color:white}
+#grammarGuide .bh-builder-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+#grammarGuide .bh-builder-grid label{display:block;font-weight:650;font-size:.83rem}
+#grammarGuide .bh-builder-grid select{width:100%;min-width:0;margin-top:4px}
+#grammarGuide .bh-builder-result{display:flex;gap:14px;align-items:center;flex-wrap:wrap;border-radius:12px;padding:18px;margin:11px 0;background:var(--accent2)}
+#grammarGuide .bh-builder-result span{font-weight:750;color:var(--muted)}
+#grammarGuide .bh-builder-result strong{font-size:1.3rem;color:var(--ink)}
+#grammarGuide .bh-case-row{display:flex;flex-wrap:wrap;gap:7px}
+#grammarGuide .bh-case-row button{flex:1;font-size:.82rem;min-width:100px}
+#grammarGuide .bh-case-row button.active{background:var(--accent);color:white}
+#grammarGuide .bh-stats{display:flex;flex-wrap:wrap;gap:10px;margin-top:17px}
+#grammarGuide .bh-stats span{padding:9px 12px;border:1px solid rgba(255,255,255,.27);background:rgba(255,255,255,.12);border-radius:11px;font-size:.88rem}
+#grammarGuide .bh-stats b{font-size:1.2rem}
+#grammarGuide .b2-muted{font-size:.86rem;color:var(--muted)}
+#grammarGuide .bh-workspace button:focus-visible,#grammarGuide .bh-sidebar button:focus-visible{outline:3px solid #70a5f3;outline-offset:3px}
+@media(max-width:900px){#grammarGuide .bh-layout{grid-template-columns:220px minmax(0,1fr)}#grammarGuide .bh-sidebar,#grammarGuide .bh-workspace{padding:12px}#grammarGuide .bh-builder-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){#grammarGuide .bh-layout{display:block}#grammarGuide .bh-sidebar{position:static;max-height:none;margin-bottom:12px}#grammarGuide .bh-section-list{display:flex;overflow-x:auto;max-height:none;gap:5px}#grammarGuide .bh-section{flex:0 0 auto;white-space:nowrap}#grammarGuide .bh-lesson-list{max-height:180px;overflow-y:auto}#grammarGuide .bh-two{grid-template-columns:1fr}#grammarGuide .bh-choices{grid-template-columns:1fr}#grammarGuide .bh-builder-grid{grid-template-columns:1fr}#grammarGuide .bh-footer button{min-width:80px;font-size:.85rem}#grammarGuide .bh-reference{padding:12px}}
