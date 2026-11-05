@@ -98,5 +98,51 @@ function init(){
  document.getElementById('v4PhraseSearch').oninput=e=>{pQuery=e.target.value;pReview=false;pIndex=0;pReveal=false;phraseLesson()};
  document.getElementById('v4PhraseReview').onclick=()=>{pReview=!pReview;pIndex=0;pReveal=false;document.getElementById('v4PhraseReview').textContent=pReview?'← All phrases':'★ Saved / difficult';phraseLesson()};phraseLesson();
 }
-init();
+
+function initTypedRecall(){
+ const quiz=document.getElementById('quiz');if(!quiz)return;
+ const panel=document.createElement('div');panel.className='panel';panel.style.marginTop='15px';panel.innerHTML=
+ '<h2>✍️ Type the German word</h2><p class="small muted">Active recall: see English, type German and check your answer. Wrong answers join Need Practice; correct answers count toward mastery only on separate days. Your original decks never move.</p>'+
+ '<div class="v4-controls"><label>Deck <select id="v4RecallDeck"></select></label><button id="v4RecallRefresh" class="secondary">Start / restart</button></div>'+
+ '<div class="v4-card"><p class="v4-kicker" id="v4RecallCount">Choose a deck</p><h3 id="v4RecallQuestion">Ready to practise?</h3><label for="v4RecallInput">Your German answer</label><input id="v4RecallInput" style="width:100%;margin:10px 0" spellcheck="false" autocomplete="off" placeholder="Type German including the article for nouns"><div class="v4-phrase-actions"><button class="primary" id="v4RecallCheck">Check answer</button><button id="v4RecallNext" class="secondary">Next word →</button></div><p id="v4RecallFeedback" role="status" aria-live="polite"></p></div>';
+ quiz.append(panel);
+ let queue=[],at=0,checked=false;
+ function deckOptions(){
+  const selector=document.getElementById('v4RecallDeck'),groups=typeof getQuizGroups==='function'?getQuizGroups():[];
+  const value=selector.value;selector.innerHTML=groups.map((g,i)=>'<option value="'+i+'">Deck '+(i+1)+' ('+g.length+' words)</option>').join('');
+  if(groups.length)selector.value=groups.some((g,i)=>String(i)===value)?value:'0';
+ }
+ function show(){
+  const word=queue[at]||null;checked=false;
+  document.getElementById('v4RecallCount').textContent=word?'Word '+(at+1)+' of '+queue.length:'No words in this deck';
+  document.getElementById('v4RecallQuestion').textContent=word?word.english:'Choose another deck or import vocabulary.';
+  document.getElementById('v4RecallInput').value='';document.getElementById('v4RecallFeedback').textContent='';
+  document.getElementById('v4RecallCheck').disabled=!word;document.getElementById('v4RecallNext').disabled=!word||at>=queue.length-1;
+ }
+ function reset(){
+  deckOptions();const groups=typeof getQuizGroups==='function'?getQuizGroups():[],index=Number(document.getElementById('v4RecallDeck').value)||0;
+  const deck=groups[index]||[];queue=deck.slice().sort((a,b)=>String(a.id).localeCompare(String(b.id)));at=0;show();
+ }
+ function check(){
+  if(checked)return;
+  const word=queue[at];if(!word)return;
+  const typed=document.getElementById('v4RecallInput').value.trim();
+  if(!typed){document.getElementById('v4RecallFeedback').textContent='Type your answer first.';return;}
+  checked=true;const norm=x=>String(x).toLocaleLowerCase('de-DE').normalize('NFC').replace(/[.!?]+$/g,'').replace(/\s+/g,' ').trim();
+  const expected=norm(word.german);
+  const accepted=[expected,...expected.split(/\s*[/;]\s*/)];
+  const correct=accepted.some(x=>x&&x===norm(typed));
+  v4RecordRating(word,correct?'good':'again');
+  saveWords();
+  document.getElementById('v4RecallFeedback').innerHTML=(correct?'<div class="v4-success"><strong>✓ Correct!</strong>':'<div class="v4-error"><strong>↩ Need practice</strong>')+'<p>Answer: '+esc(word.german)+'</p>'+(word.example?'<p>Example: '+esc(word.example)+'</p>':'')+'</div>';
+  document.getElementById('v4RecallCheck').disabled=true;
+ }
+ document.getElementById('v4RecallRefresh').onclick=reset;
+ document.getElementById('v4RecallDeck').onchange=reset;
+ document.getElementById('v4RecallCheck').onclick=check;
+ document.getElementById('v4RecallNext').onclick=()=>{if(at<queue.length-1){at++;show()}};
+ document.getElementById('v4RecallInput').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();if(!checked)check();else if(at<queue.length-1){at++;show()}}});
+ reset();
+}
+init();initTypedRecall();
 })();
