@@ -1,0 +1,81 @@
+
+/* Version 4 — Study-first visual design. Compatible with existing themes. */
+:root{--v4-ink:#172840;--v4-soft:#f1f6fd;--v4-blue:#315ee8;--v4-teal:#1d947f}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
+main{max-width:1180px}
+header{border-bottom:1px solid var(--line);box-shadow:0 2px 12px rgba(20,40,70,.03)}
+.panel,.card,.stat{box-shadow:0 3px 16px rgba(21,50,90,.04)}
+nav[aria-label="Main navigation"]{display:flex;flex-wrap:wrap;gap:9px;padding:12px 0 16px;background:var(--bg);position:sticky;top:0;z-index:15}
+nav[aria-label="Main navigation"] .tab{flex:0 0 auto;border-radius:11px;font-size:.94rem;padding:10px 14px;font-weight:650;min-height:44px}
+nav[aria-label="Main navigation"] .tab.active{box-shadow:0 5px 12px rgba(49,94,232,.2)}
+button:focus-visible,select:focus-visible,input:focus-visible,.vocab-deck summary:focus-visible{outline:3px solid #53a4ed;outline-offset:2px}
+button{transition:filter .18s,transform .14s}button:not(:disabled):active{transform:scale(.985)}
+.v4-hero{background:linear-gradient(125deg,#173e73,#315ee8);color:white;border-radius:18px;padding:22px;margin-bottom:16px;box-shadow:0 8px 22px rgba(19,61,118,.14)}
+.v4-hero h2{font-size:clamp(1.35rem,2.5vw,2rem);margin:0 0 7px}.v4-hero p{margin:0;opacity:.9}
+.v4-shell{display:grid;grid-template-columns:minmax(220px,290px) minmax(0,1fr);gap:17px;align-items:start}
+.v4-sidebar,.v4-workspace{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:17px;min-width:0}
+.v4-sidebar{position:sticky;top:90px}
+.v4-controls{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin:12px 0}
+.v4-controls>input,.v4-controls>select,.v4-sidebar select,.v4-sidebar input{max-width:100%;min-width:0}
+.v4-nav{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin:14px 0}
+.v4-nav button{min-height:42px}.v4-nav select{min-width:130px;max-width:260px}
+.v4-nav-status{font-size:.88rem;color:var(--muted)}
+.v4-kicker{font-size:.76rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--accent)}
+.v4-chips{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}
+.v4-chip{font-size:.76rem;border:1px solid var(--line);padding:4px 9px;border-radius:999px;background:var(--bg)}
+.v4-topic{width:100%;text-align:left;padding:11px 12px;border-radius:10px;border:1px solid transparent;display:block;margin:4px 0;background:transparent;line-height:1.35;color:var(--ink)}
+.v4-topic.active{background:var(--accent2);border-color:var(--accent);font-weight:750}
+.v4-topic small{display:block;color:var(--muted);font-weight:450;margin-top:3px}
+.v4-topic-list{max-height:58vh;overflow-y:auto;padding-right:3px}
+.v4-card{background:var(--panel);border:1px solid var(--line);padding:16px;border-radius:14px;margin:10px 0}
+.v4-card h3{margin:0 0 7px;font-size:1.13rem}
+.v4-rule{display:flex;align-items:center;flex-wrap:wrap;gap:7px;padding:14px;border-radius:11px;background:var(--v4-soft);color:#18344f;font-weight:720;margin:11px 0}
+.v4-rule-label{font-size:.73rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:14px}
+.v4-example{padding:11px 14px;border-left:4px solid var(--accent);background:var(--bg);border-radius:4px 9px 9px 4px;margin:8px 0}
+.v4-example strong{display:block;font-size:1.03rem}
+.v4-example span{display:block;color:var(--muted);font-size:.92rem;margin-top:4px}
+.v4-tip{background:#fff7e8;border:1px solid #f0d9a9;border-radius:12px;padding:12px 14px;color:#603f0a}
+.v4-error{background:#fff0f0;border:1px solid #eeb4b4;border-radius:10px;padding:12px 14px}
+.v4-success{background:#e9f8f0;border:1px solid #afd9c1;border-radius:10px;padding:12px 14px}
+.v4-quiz-options{display:grid;gap:7px;margin:12px 0}
+.v4-quiz-options button{text-align:left;background:var(--panel);font-weight:550}
+.v4-quiz-options button.v4-correct{background:#dff5e9;border-color:#52a878;color:#145f3f}
+.v4-quiz-options button.v4-incorrect{background:#ffebeb;border-color:#d56868;color:#a32d2d}
+.v4-grammar-note{color:var(--muted);font-size:.87rem}
+.v4-phrase-list{display:grid;gap:9px}
+.v4-phrase{padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.v4-phrase strong{font-size:1.04rem}
+.v4-phrase p{margin:5px 0}
+.v4-phrase small{color:var(--muted)}
+.v4-phrase-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.v4-score{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.v4-score span{padding:7px 11px;border-radius:10px;background:var(--bg);font-weight:650}
+.v4-form-list{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px;font-size:.88rem}
+.v4-form-list span{background:var(--accent2);padding:5px 10px;border-radius:8px}
+.v4-status-learning{color:#9a6318;font-weight:750}
+.v4-status-mastered{color:#147d54;font-weight:750}
+.v4-status-practice{color:#b42318;font-weight:750}
+.v4-word-progress{height:7px;background:var(--line);border-radius:99px;overflow:hidden;margin:8px 0}
+.v4-word-progress div{height:100%;background:linear-gradient(90deg,#e5ad48,#26966b);border-radius:inherit}
+.v4-vocab-toolbar{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px;margin:12px 0}
+.v4-vocab-toolbar .v4-nav{margin:0}
+.v4-empty{padding:24px;color:var(--muted);text-align:center;border:1px dashed var(--line);border-radius:12px}
+.v4-phrase-card{text-align:center;min-height:190px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px}
+.v4-phrase-card h3{font-size:clamp(1.3rem,3vw,1.8rem);margin:0}
+.v4-phrase-card .meaning{font-size:1.12rem;color:var(--accent);font-weight:750}
+.v4-pill{border:1px solid var(--line);border-radius:99px;padding:4px 9px;font-size:.77rem;color:var(--muted)}
+.v4-daily-tip{padding:12px 16px;background:var(--accent2);border:1px solid var(--line);border-radius:12px;margin:12px 0}
+#grammarGuide .v4-workspace h3,#everyday .v4-workspace h3{line-height:1.3}
+@media(max-width:750px){
+ nav[aria-label="Main navigation"]{position:static;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+ nav[aria-label="Main navigation"] .tab{min-width:0;padding:10px 5px;font-size:.76rem;white-space:normal;line-height:1.25;min-height:49px}
+ .v4-shell{display:block}
+ .v4-sidebar{position:static;margin-bottom:12px}
+ .v4-topic-list{max-height:185px}
+ .v4-hero{padding:17px}
+ .v4-card{padding:13px}
+ .v4-nav button{flex:1}
+ .v4-nav select{max-width:100%;flex:1}
+ .v4-controls>*{flex:1 1 160px}
+}
+@media(prefers-reduced-motion:reduce){button{transition:none}}
