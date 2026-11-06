@@ -8,8 +8,8 @@
 
   const rules = [
     { surface: '#wordList', prev: '#v4VocabPrev', next: '#v4VocabNext' },
-    { surface: '#flashcards .panel.flash', prev: '#prevCard', next: '#nextCard' },
-    { surface: '#verbTrainer .vt-card:not(.vt-mcq)', prev: '#vtPrev', next: '#vtNext' },
+    { surface: '#flashcards .panel.flash', prev: '#prevCard', next: '#nextCard', rate: { left: '#markDifficult', right: '#markLearned' } },
+    { surface: '#verbTrainer .vt-card:not(.vt-mcq)', prev: '#vtPrev', next: '#vtNext', rate: { left: '#vtNeedPractice', right: '#vtSwipeLearned' } },
     { surface: '#bhWorkspace', prev: '#bhPrev', next: '#bhNext' },
     { surface: '#v4PhraseCard', prev: '#v4PhrasePrev', next: '#v4PhraseNext' },
     { surface: '#browse', prev: '#articlePrevDeck', next: '#articleNextDeck',
@@ -73,15 +73,24 @@
         Date.now() - gesture.time > 1300 || !visible(gesture.surface)) return;
     if (gesture.rule.enabled && !gesture.rule.enabled()) return;
 
-    const button = usableButton(dx < 0 ? gesture.rule.next : gesture.rule.prev);
+    const rating = gesture.rule.rate;
+    const direction = dx < 0 ? 'left' : 'right';
+    const button = usableButton(rating ? rating[direction] : (dx < 0 ? gesture.rule.next : gesture.rule.prev));
     if (!button) return;
-    // Give the next card a light directional entrance, without animating scroll.
-    document.documentElement.dataset.studySwipe = dx < 0 ? 'next' : 'previous';
+    // Both rating directions advance to the next card; other lessons retain navigation.
+    document.documentElement.dataset.studySwipe = direction;
+    const previousNext = rating ? usableButton(gesture.rule.next) : null;
     button.click();
+    if (rating && gesture.rule.surface.includes('flashcards') && previousNext) {
+      // Flashcard rating buttons record progress but do not advance by themselves.
+      // Use the normal next-card action when available. Do not wrap into another deck.
+      previousNext.click();
+    }
     window.setTimeout(() => { delete document.documentElement.dataset.studySwipe; }, 310);
-    // Nonintrusive spoken feedback for screen-reader users.
     const live = document.getElementById('swipeNavigationStatus');
-    if (live) live.textContent = dx < 0 ? 'Next item' : 'Previous item';
+    if (live) live.textContent = rating
+      ? (direction === 'left' ? 'Needs practice. Next card.' : 'Good recall. Next card.')
+      : (direction === 'left' ? 'Next item' : 'Previous item');
   }, { passive: true });
 
   // Avoid adding duplicate screen-reader announcers if this script is reloaded.
