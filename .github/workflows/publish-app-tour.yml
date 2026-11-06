@@ -6,6 +6,8 @@ on:
     paths:
       - 'qa/record-app-tour.mjs'
       - 'qa/build-tour-audio.py'
+      - 'qa/record-app-tour-v2.mjs'
+      - 'qa/build-tour-audio-v2.py'
       - '.github/workflows/publish-app-tour.yml'
   workflow_dispatch:
 
@@ -30,17 +32,21 @@ jobs:
           npm install --no-save playwright@1.56.1
           npx playwright install chromium
           sudo apt-get update -qq
-          sudo apt-get install -y -qq espeak-ng ffmpeg
+          sudo apt-get install -y -qq ffmpeg
+          python3 -m pip install --break-system-packages piper-tts
+          mkdir -p media/_tour_build
+          curl -fL --retry 3 'https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/ljspeech/medium/en_US-ljspeech-medium.onnx?download=true' -o media/_tour_build/en_US-ljspeech-medium.onnx
+          curl -fL --retry 3 'https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/ljspeech/medium/en_US-ljspeech-medium.onnx.json?download=true' -o media/_tour_build/en_US-ljspeech-medium.onnx.json
       - name: Record real app interface on mobile-sized Chromium
-        run: node qa/record-app-tour.mjs
+        run: node qa/record-app-tour-v2.mjs
       - name: Generate spoken narration
-        run: python3 qa/build-tour-audio.py
+        run: python3 qa/build-tour-audio-v2.py
       - name: Combine video and voice explanation
         run: |
           WEBM=$(find media/_tour_build -maxdepth 1 -name '*.webm' -type f | head -n 1)
           test -s "$WEBM"
           test -s media/_tour_build/narration.wav
-          ffmpeg -hide_banner -loglevel error -y -i "$WEBM" -i media/_tour_build/narration.wav -c:v libx264 -preset faster -crf 26 -pix_fmt yuv420p -c:a aac -b:a 112k -t 32 -movflags +faststart media/Deutsch_B2_Beruf_App_Tour.mp4
+          ffmpeg -hide_banner -loglevel error -y -i "$WEBM" -i media/_tour_build/narration.wav -c:v libx264 -preset faster -crf 26 -pix_fmt yuv420p -c:a aac -b:a 112k -t 62 -movflags +faststart media/Deutsch_B2_Beruf_App_Tour.mp4
           test -s media/Deutsch_B2_Beruf_App_Tour.mp4
           ffprobe -v error -show_entries format=duration,size -of default=noprint_wrappers=1 media/Deutsch_B2_Beruf_App_Tour.mp4
       - name: Publish MP4 to repository
@@ -48,5 +54,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add media/Deutsch_B2_Beruf_App_Tour.mp4
-          git commit -m "Publish spoken real-app tour video" || exit 0
+          git commit -m "Improve app tour with slower natural voice and pauses" || exit 0
           git push origin HEAD:main
