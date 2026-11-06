@@ -1,0 +1,85 @@
+/* Article Trainer Pro Visual System v5.0
+   The grammar rule is the hero, examples support it, exceptions stand apart. */
+:root{
+ --ink:#152a48;--muted:#64748b;--bg:#f4f6fa;--panel:#fff;
+ --line:#dbe3ed;--blue:#2456d3;--accent:#2456d3;
+ --accentSoft:#edf3ff;--green:#087d61;--rose:#ae344f;
+}
+body{line-height:1.56}
+.wrap{max-width:1130px;padding-top:14px}
+.hero{background:linear-gradient(120deg,#132e61 0%,#244d95 100%);color:#fff;border:0;border-radius:19px;box-shadow:0 10px 25px rgba(25,49,99,.12);padding:24px 27px;margin-bottom:13px}
+.hero .eyebrow{color:#bed6ff;letter-spacing:.11em;font-weight:800;font-size:.7rem}
+.hero h1{letter-spacing:-.035em;color:#fff;font-weight:850;font-size:clamp(1.45rem,3vw,2rem)}
+.hero p{color:#e4ecfc;max-width:780px;font-size:.94rem}
+.hero .tag{background:#ffffff1d;color:#f2f7ff;border:1px solid #ffffff38;font-weight:680}
+.tabs{padding:5px;background:#fff;border:1px solid var(--line);border-radius:13px;gap:5px;margin-bottom:15px;box-shadow:0 2px 9px rgba(26,46,82,.03)}
+.tabs .tab{border:1px solid transparent;background:transparent;color:#52647f;font-weight:740;letter-spacing:-.01em}
+.tabs .tab.active{background:#e9f0ff;color:#1949aa;border:1px solid #cdddff;box-shadow:none;font-weight:820}
+.tabs .tab:hover{background:#f1f5fc}
+.rule-first-intro{background:#fff;border:1px solid #dae4f1;border-left:5px solid #2456d3;border-radius:13px;padding:16px 20px}
+.rule-first-intro>strong{display:block;font-size:1.1rem;letter-spacing:-.015em;color:#163a78}
+.rule-first-intro p{margin-top:7px}
+.rule-first-meta{display:inline-flex;align-items:center;background:#eef5ff;border:1px solid #d6e5fe;border-radius:8px;padding:6px 10px;color:#2354b1;font-size:.8rem;font-weight:780}
+.rule-first-layout{grid-template-columns:minmax(185px,.8fr) minmax(0,2.4fr);gap:16px}
+.rule-first-topics{gap:7px}
+.rule-topic{border:1px solid #e2e9f2;background:#fff;color:#455b77;border-radius:12px;box-shadow:none;padding:12px 13px}
+.rule-topic strong{font-size:.86rem;color:#36516e;font-weight:720;line-height:1.35}
+.rule-topic span{color:#77879b;font-size:.75rem}
+.rule-topic.chosen{background:#eaf1ff;border:1.5px solid #7198ea;box-shadow:inset 3px 0 0 #2456d3}
+.rule-topic.chosen strong{color:#1645a5}
+.rule-unit{border:1px solid #dce5f2;background:#fff;border-radius:18px;box-shadow:0 10px 28px rgba(25,48,87,.055);padding:26px}
+.rule-kicker{font-size:.73rem;letter-spacing:.11em;color:#3565ca;font-weight:850}
+.rule-unit h2{font-size:clamp(1.3rem,2.5vw,1.75rem);line-height:1.25;letter-spacing:-.03em;color:#17325b;margin:10px 0 18px}
+.rule-core{padding:19px 21px;border:1px solid #b9cef8;border-left:5px solid #2456d3;background:linear-gradient(105deg,#eaf2ff 0%,#f6f9ff 100%);border-radius:13px;margin:17px 0}
+.rule-core strong{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:#2359bb;font-weight:850}
+.rule-core p{font-size:clamp(1.05rem,2.5vw,1.24rem);font-weight:780;line-height:1.5;color:#13386f;margin:9px 0 0}
+.rule-two{margin:21px 0;gap:16px}
+.rule-two>div{border:1px solid #e1e8f1;border-radius:12px;padding:14px 16px}
+.rule-two>div:first-child{background:#f8fbff;border-color:#d8e6fb}
+.rule-two>div:nth-child(2){background:#fffaf5;border-color:#f2dec7}
+.rule-two h3{font-size:.83rem;color:#36557a;margin-bottom:8px;font-weight:790}
+.rule-two>div:nth-child(2) h3{color:#9a5719}
+.rule-example{gap:8px;font-size:.9rem;padding:10px 2px;border-color:#e7ebf1}
+.rule-example strong{font-weight:780;color:#203d67}
+.rule-two>div:nth-child(2) .rule-example strong{color:#8c521e}
+.rule-example span{font-size:.78rem}
+.rule-why{border-radius:10px;padding:10px 12px;background:#f7f8fa;border-left:3px solid #9baac0;font-size:.86rem;color:#596c84;margin:15px 0}
+#ruleStart{width:100%;max-width:480px;padding:14px 20px;font-size:1.01rem;font-weight:800;box-shadow:0 6px 18px rgba(36,86,211,.15)}
+.rule-prompt{text-align:center;color:#60728a;font-size:.95rem}
+.rule-target{font-size:clamp(2rem,5vw,3.25rem)!important;line-height:1.12;letter-spacing:-.04em;margin:24px 0 7px!important;color:#102d5d;font-weight:850}
+.rule-meaning{font-size:1.03rem;font-weight:580;color:#64748b;margin-bottom:24px}
+.rule-answers{gap:12px;margin:20px 0}
+.rule-answers button{font-size:1.2rem;font-weight:850;min-height:60px;border:1.5px solid #c8d5e8;background:#f8fbff;color:#213d66;border-radius:12px}
+.rule-answers button:hover:not(:disabled){border-color:#2456d3;background:#eaf1ff}
+.rule-answers button.correct{border-color:#0b8a64!important;background:#e1f6eb!important;color:#09664d!important}
+.rule-answers button.wrong{border-color:#bb4a57!important;background:#fdebf0!important;color:#9e273a!important}
+.rule-feedback{background:#e5f5ee;border:1px solid #b3dfcf;border-radius:9px;color:#0e6b52;font-weight:800;padding:11px 14px;margin:18px 0 10px}
+#ruleAnswerFeedback .small{line-height:1.58}
+.rule-result{font-size:2.65rem;color:#2456d3;letter-spacing:-.04em}
+.rule-errors{background:#fff3ec;border:1px solid #f4d6c4;color:#7e431b}
+.rule-actions{margin-top:20px}
+.rule-actions button{min-height:47px}
+.article-focus-stats{border-color:#dfe6f0}
+.article-focus-stats>summary{color:#516783;font-weight:680}
+.article-deck-details{border-color:#e2e8f0}
+.article-deck-details>summary{font-size:.86rem}
+button.primary,.primary{background:#2456d3;border-color:#2456d3;color:#fff;font-weight:760}
+button.primary:hover,.primary:hover{background:#1749c1}
+button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #5c93ee;outline-offset:2px}
+@media(max-width:760px){
+ .wrap{padding:10px 11px 30px}
+ .hero{padding:19px 17px;border-radius:14px}
+ .hero .tag{margin-top:10px}
+ .tabs{display:flex;overflow-x:auto;scroll-snap-type:x proximity}
+ .tabs .tab{flex:0 0 auto;min-width:145px;scroll-snap-align:start;white-space:nowrap}
+ .rule-first-intro{padding:12px 14px}
+ .rule-first-layout{grid-template-columns:1fr}
+ .rule-first-topics{display:flex;overflow-x:auto;gap:7px}
+ .rule-topic{min-width:190px;flex:0 0 auto}
+ .rule-unit{padding:18px 15px;border-radius:12px}
+ .rule-core{padding:15px}
+ .rule-two{grid-template-columns:1fr;gap:9px}
+ .rule-answers button{min-height:58px}
+ .rule-target{font-size:2.45rem!important}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important}}
