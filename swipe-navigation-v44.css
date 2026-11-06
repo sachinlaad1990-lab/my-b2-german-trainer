@@ -32,3 +32,41 @@ html[data-study-swipe="right"] #verbTrainer .vt-card,html[data-study-swipe="righ
 @keyframes studyCardFromRight{from{opacity:.65;transform:translateX(18px)}to{opacity:1;transform:translateX(0)}}
 @keyframes studyCardFromLeft{from{opacity:.65;transform:translateX(-18px)}to{opacity:1;transform:translateX(0)}}
 @media(prefers-reduced-motion:reduce){html[data-study-swipe] #verbTrainer .vt-card,html[data-study-swipe] #flashcards .flash{animation:none!important}}
+
+/* v6.5 — true swipe-away. Move, tilt and fall BEFORE the next card replaces it. */
+#flashcards .panel.flash,#verbTrainer .vt-card:not(.vt-mcq){
+  transform-origin:50% 85%;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+}
+#flashcards .panel.flash.swipe-card-dragging,#verbTrainer .vt-card.swipe-card-dragging{
+  transition:none!important;
+  will-change:transform,opacity;
+}
+#flashcards .panel.flash.swipe-card-fall-left,#verbTrainer .vt-card.swipe-card-fall-left{
+  animation:swipeCardFallLeft .32s cubic-bezier(.34,.04,.76,.47) both!important;
+  pointer-events:none;
+  will-change:transform,opacity;
+}
+#flashcards .panel.flash.swipe-card-fall-right,#verbTrainer .vt-card.swipe-card-fall-right{
+  animation:swipeCardFallRight .32s cubic-bezier(.34,.04,.76,.47) both!important;
+  pointer-events:none;
+  will-change:transform,opacity;
+}
+@keyframes swipeCardFallLeft{
+  0%{transform:translate3d(0,0,0) rotate(0deg) scale(1);opacity:1}
+  35%{transform:translate3d(-21%,0,0) rotate(-8deg) scale(.99);opacity:1}
+  100%{transform:translate3d(-125%,108px,0) rotate(-28deg) scale(.9);opacity:0}
+}
+@keyframes swipeCardFallRight{
+  0%{transform:translate3d(0,0,0) rotate(0deg) scale(1);opacity:1}
+  35%{transform:translate3d(21%,0,0) rotate(8deg) scale(.99);opacity:1}
+  100%{transform:translate3d(125%,108px,0) rotate(28deg) scale(.9);opacity:0}
+}
+@media(prefers-reduced-motion:reduce){
+  #flashcards .panel.flash.swipe-card-fall-left,#verbTrainer .vt-card.swipe-card-fall-left,
+  #flashcards .panel.flash.swipe-card-fall-right,#verbTrainer .vt-card.swipe-card-fall-right{
+    animation:none!important;
+    will-change:auto!important;
+  }
+}
