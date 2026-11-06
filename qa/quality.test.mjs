@@ -47,7 +47,7 @@ test('regression test tricky German conjugations',()=>{
     const actual=nameMap.get(name);
     if(name==='anfangen'&&!actual)continue;
     assert.ok(actual,'has '+name);
-    assert.deepEqual(actual.forms,forms,name);
+    assert.deepEqual(Array.from(actual.forms),forms,name);
   }
   assert.equal(nameMap.get('ausziehen').aux,'sein','moving out uses sein');
   assert.equal(nameMap.get('sich ausziehen').aux,'haben','getting undressed uses haben');
