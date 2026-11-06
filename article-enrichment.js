@@ -63,7 +63,7 @@ function explanation(w){
  for(const [article,suffix,description] of endings)if(a===article&&n.toLocaleLowerCase('de-DE').endsWith(suffix.replace(/^-/,''))&&n.length>suffix.length+2)return description+' This word: '+a+' '+n+'.';
  if(w.cluster===1&&(w.id<=23))return 'Category rule: named weekdays, months and seasons are masculine → DER. Learn '+a+' '+n+'.';
  if(w.cluster===3&&w.id<=54)return 'Category rule: cardinal directions are masculine: der Norden, Süden, Osten, Westen. This word: '+a+' '+n+'.';
- if(w.cluster===9&&/in$/.test(n))return 'Female profession suffix -in gives DIE. Example: der Mitarbeiter → die Mitarbeiterin.';
+ if(a==='die'&&(/(erin|entin|istin|antin)$/.test(n)||['Kollegin','Chefin','Kundin','Ärztin','Anwältin','Partnerin','Freundin','Studentin','Nachbarin','Dozentin','Projektleiterin','Mieterin'].includes(n)||w.cluster===9))return 'Feminine person or job title: the suffix -in (often -erin, -entin, -istin) forms DIE. Pair it with the male form when available: der Mitarbeiter → die Mitarbeiterin. This one is DIE '+n+'.';
  if(w.cluster===8&&/(ant|ent|ist|er)$/.test(n))return 'Male profession/person noun: usually DER in this group. Learn '+a+' '+n+'; be careful with objects ending -er.';
  if(a==='das'&&w.cluster===10&&/en$/.test(n)&&w.id>=245)return 'A verb used as a noun (nominalised infinitive) takes DAS: das Lernen, das Arbeiten. Capitalise it.';
  const candidates=compoundBases.filter(base=>base.id!==w.id&&base.article===a&&n.endsWith(base.noun)&&n.length-base.noun.length>=3&&base.noun.length>=4).sort((x,y)=>y.noun.length-x.noun.length);
