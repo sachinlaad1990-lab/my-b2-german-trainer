@@ -68,7 +68,7 @@ body[data-theme="dark"] .wordbuttons button.is-active{color:var(--ink)}
 </style>
 </head>
 <body>
-<header><div class="brandhead"><img id="headerPhoto" class="profile-pic" alt="Your profile photo"><div class="brandcopy"><h1>Deutsch B2 Beruf <span style="font-size:.52em;vertical-align:middle;color:var(--accent);font-weight:700" aria-label="Version 4.2">v4.2</span></h1><p>Vocabulary · Flashcards · Grammar Made Easy · Everyday German</p><div class="credit">Created by <strong id="headerCreator">Sachin Laad</strong></div></div></div></header>
+<header><div class="brandhead"><img id="headerPhoto" class="profile-pic" alt="Your profile photo"><div class="brandcopy"><h1>Deutsch B2 Beruf <span style="font-size:.52em;vertical-align:middle;color:var(--accent);font-weight:700" aria-label="Version 4.3">v4.3</span></h1><p>Vocabulary · Flashcards · Grammar Made Easy · Everyday German</p><div class="credit">Created by <strong id="headerCreator">Sachin Laad</strong></div></div></div></header>
 <main>
 
 
@@ -192,9 +192,9 @@ body[data-theme="dark"] .wordbuttons button.is-active{color:var(--ink)}
   <section id="grammarGuide" class="view hidden" aria-label="Grammar Made Easy"></section>
   <section id="articleTrainer" class="view hidden" aria-label="Article Trainer">
     <div class="panel" style="padding:0;overflow:hidden;border-radius:16px">
-      <iframe id="articleTrainerFrame" title="Article Trainer — 1,000 German nouns from 40 clusters" src="article-trainer.html?v=4.2.0" loading="lazy" style="display:block;width:100%;height:1300px;min-height:600px;border:0;background:#f5f7fb" referrerpolicy="same-origin"></iframe>
+      <iframe id="articleTrainerFrame" title="Article Trainer — 1,000 German nouns from 40 clusters" src="article-trainer.html?v=4.3.1" loading="lazy" style="display:block;width:100%;height:1300px;min-height:600px;border:0;background:#f5f7fb" referrerpolicy="same-origin"></iframe>
     </div>
-    <p class="small muted" style="margin:12px 0">Article practice uses its own saved progress and does not change vocabulary or flashcard decks. <a href="article-trainer.html?v=4.2.0" target="_blank" rel="noopener noreferrer">Open Article Trainer in a full page</a> if preferred.</p>
+    <p class="small muted" style="margin:12px 0">Article practice uses its own saved progress and does not change vocabulary or flashcard decks. <a href="article-trainer.html?v=4.3.1" target="_blank" rel="noopener noreferrer">Open Article Trainer in a full page</a> if preferred.</p>
   </section>
   <section id="everyday" class="view hidden" aria-label="Everyday German"></section>
   <section id="quiz" class="view hidden">
@@ -1134,7 +1134,7 @@ async function syncProgressNow() {
       const cloudTime=cloud?(Date.parse(cloud.updated_at||'')||0):0;
       // Preserve newer offline study, otherwise trust the actual cloud state.
       if(cloud){
-        if(localTime>cloudTime+1000){pendingUpload.push(word);}
+        if(localTime>cloudTime){pendingUpload.push(word);}
         else{
           word.learned=!!cloud.learned;
           word.bookmarked=!!cloud.bookmarked;
