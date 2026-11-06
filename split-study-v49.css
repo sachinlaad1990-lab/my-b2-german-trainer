@@ -1,0 +1,32 @@
+/* Split Study v4.9 — two independent, uncluttered study panels */
+.split-study-toolbar{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:11px 14px;margin:0 0 14px}
+.split-study-toolbar .split-study-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.split-study-toolbar button[aria-pressed="true"]{background:var(--accent2);border-color:var(--accent);color:var(--ink);font-weight:750}
+.split-study-toolbar .split-study-select{display:flex;gap:6px;align-items:center;font-size:.9rem;font-weight:650}
+.split-study-toolbar select{padding:8px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);font:inherit;max-width:230px}
+#splitStudyHint{color:var(--muted);font-size:.83rem;line-height:1.35;flex:1 1 230px}
+main.split-study{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;gap:14px}
+main.split-study>:not(.view){grid-column:1/-1;min-width:0}
+main.split-study>.view{min-width:0}
+main.split-study>#today,main.split-study>#library,main.split-study>#flashcards,main.split-study>#grammarGuide,main.split-study>#everyday{grid-column:1;grid-row:auto}
+main.split-study>#articleTrainer{grid-column:2;grid-row:auto}
+main.split-study>.view:not(.hidden){height:min(78vh,900px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:10px}
+main.split-study #articleTrainer>.panel{border:0;padding:0;margin:0}
+main.split-study #articleTrainer iframe{max-width:100%}
+main.split-study #library>.panel{margin-bottom:12px}
+main.split-study #flashcards .panel.flash{max-width:none}
+main.split-study .word{grid-template-columns:minmax(0,1fr)}
+main.split-study .wordbuttons{justify-content:flex-start}
+main.split-study .focus-nav{margin-bottom:0}
+@media (max-width:850px){
+ main.split-study{grid-template-columns:minmax(0,1fr);gap:10px}
+ main.split-study>:not(.view){grid-column:1}
+ main.split-study>#articleTrainer{grid-column:1}
+ main.split-study>.view:not(.hidden){height:min(55vh,570px);padding:7px}
+ main.split-study #articleTrainer{min-height:340px}
+ .split-study-toolbar{padding:10px}
+ .split-study-toolbar .split-study-tools{width:100%;justify-content:space-between}
+ .split-study-toolbar button{font-size:.9rem}
+ #splitStudyHint{flex-basis:100%}
+}
+@media (prefers-reduced-motion:reduce){main.split-study>.view{scroll-behavior:auto}}
