@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Deutsch B2 Beruf">
+<rect width="512" height="512" rx="120" fill="#243D8F"/>
+<path d="M0 372L512 90V392Q512 512 392 512H120Q0 512 0 392Z" fill="#425FE6"/>
+<circle cx="380" cy="128" r="62" fill="#7958F4" opacity=".65"/>
+<path d="M115 138h282v235H115z" rx="40" fill="#fff" opacity=".10"/>
+<text x="256" y="295" text-anchor="middle" font-family="system-ui,-apple-system,Arial,sans-serif" font-weight="800" font-size="176" letter-spacing="-11" fill="#fff">B2</text>
+<path d="M155 343h202" stroke="#F5CA59" stroke-width="21" stroke-linecap="round"/>
+</svg>
