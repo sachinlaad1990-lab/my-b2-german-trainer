@@ -5,7 +5,9 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Deutsch B2 Beruf – Vocabulary Trainer</title>
+<title>Deutsch Lernen · B2 Beruf | Vocabulary, Verbs & Grammar</title>
+<meta name="description" content="Learn practical German with vocabulary, real-life example sentences, verb conjugations, grammar and spaced-repetition practice.">
+<meta name="theme-color" content="#315ee8">
 <link rel="stylesheet" href="v4.css?v=4.1.1">
 <link rel="stylesheet" href="focus-ui-v54.css?v=5.4.1">
 <link rel="stylesheet" href="grammar-handbook.css?v=4.1.1">
@@ -126,9 +128,10 @@ main{max-width:1120px}
 </style>
 <link rel="stylesheet" href="focus-layout-v54.css?v=5.4.1">
 <link rel="stylesheet" href="design-system-v55.css?v=5.5.0">
+<link rel="stylesheet" href="home-shortcuts-v56.css?v=6.0.0">
 </head>
 <body>
-<header><div class="brandhead"><img id="headerPhoto" class="profile-pic" alt="Your profile photo"><div class="brandcopy"><h1>Deutsch B2 Beruf <span style="font-size:.52em;vertical-align:middle;color:var(--accent);font-weight:700" aria-label="Version 5.5">v5.5</span></h1><p>Vocabulary · Flashcards · Grammar Made Easy · Everyday German</p><div class="credit">Created by <strong id="headerCreator">Sachin Laad</strong></div></div></div></header>
+<header><div class="brandhead"><img id="headerPhoto" class="profile-pic" alt="Your profile photo"><div class="brandcopy"><h1>Deutsch B2 Beruf <span style="font-size:.52em;vertical-align:middle;color:var(--accent);font-weight:700" aria-label="Version 6.0">v6.0</span></h1><p>Vocabulary · Flashcards · Grammar Made Easy · Everyday German</p><div class="credit">Created by <strong id="headerCreator">Sachin Laad</strong></div></div></div></header>
 <main>
 
 
@@ -203,7 +206,7 @@ main{max-width:1120px}
 
   <section id="today" class="view">
     <div class="panel today-hero">
-      <div class="today-heading"><div><span class="eyebrow">TODAY’S STUDY</span><h2>One word at a time.</h2><p class="muted">Reveal, recall, then continue. Review your progress whenever you want.</p></div><div class="today-target">30 <span>max words/session</span></div></div>
+      <div class="today-heading"><div><span class="eyebrow">TODAY’S STUDY</span><h2>Continue learning</h2><p class="muted">Reveal, recall, then continue. Review your progress whenever you want.</p></div><div class="today-target">30 <span>max words/session</span></div></div>
       <details class="focus-session-details"><summary>Session details · due, new & practised</summary>
       <div class="today-stats" aria-live="polite">
         <button type="button" data-vocab-stat="due" aria-label="Show words due for review"><strong id="todayDue">0</strong><span>Due for review</span></button>
@@ -235,6 +238,15 @@ main{max-width:1120px}
       </div>
       <p id="todayHelp" class="small muted" aria-live="polite">Reveal the answer, then rate your recall to schedule the next review.</p>
     </div>
+    <section class="home-paths" aria-labelledby="homePathsHeading">
+      <h3 id="homePathsHeading">Explore your learning</h3>
+      <div class="home-path-grid">
+        <button type="button" class="home-path" data-destination="library"><span class="home-icon" aria-hidden="true">📚</span><strong>Vocabulary</strong><span class="home-desc">Learn useful words</span><span class="home-arrow" aria-hidden="true">→</span></button>
+        <button type="button" class="home-path" data-destination="verbTrainer"><span class="home-icon" aria-hidden="true">🔤</span><strong>Verbs</strong><span class="home-desc">Examples & forms</span><span class="home-arrow" aria-hidden="true">→</span></button>
+        <button type="button" class="home-path" data-destination="grammarGuide"><span class="home-icon" aria-hidden="true">📖</span><strong>Grammar</strong><span class="home-desc">Clear explanations</span><span class="home-arrow" aria-hidden="true">→</span></button>
+        <button type="button" class="home-path" data-destination="quiz"><span class="home-icon" aria-hidden="true">🎯</span><strong>Practice</strong><span class="home-desc">Test what you know</span><span class="home-arrow" aria-hidden="true">→</span></button>
+      </div>
+    </section>
     <p class="small muted today-footnote">Review dates, session counts and voice preferences are stored in this browser. Existing word progress still uses your current Supabase sync. Grammar Made Easy and Everyday German are separate from vocabulary learning.</p>
   </section>
 
@@ -365,7 +377,7 @@ main{max-width:1120px}
     <div class="panel" style="margin-top:14px">
       <h2>Export / backup</h2><p>Export all words and your progress as a CSV backup. Keep a copy somewhere safe.</p>
       <div class="actions"><button class="primary" id="exportBtn">Export all words (CSV)</button><button class="danger" id="clearBtn">Delete all local words</button></div>
-      <p class="small muted">This app does not send your data anywhere. Clearing browser data can erase locally saved entries, so keep backups.</p>
+      <p class="small muted">Words and practice data may be saved in your browser and, if you sign in, synchronized with the connected cloud service. Published vocabulary updates come from Google Sheets. Export a backup before deleting data.</p>
     </div>
     <div class="panel" style="margin-top:14px"><h2>Suggested spreadsheet columns</h2><p class="small">ID, Category, German, English, Example, Translation, Article, Pronunciation, Importance, Bookmarked, Difficult, Learned</p></div>
   </section>
@@ -462,6 +474,13 @@ main{max-width:1120px}
   </div>
 
   <p id="authStatus" class="small" aria-live="polite"></p>
+</section>
+<section class="panel" id="releaseDataPanel" aria-labelledby="releaseDataHeading">
+  <h2 id="releaseDataHeading">Your data & privacy</h2>
+  <p class="muted small">Your words, settings and study history are stored in your browser. When you use an account, vocabulary progress may also be synchronized with the connected cloud service (Supabase). Shared vocabulary updates load from a published Google Sheet. This is a learning app, not an official telc or BAMF exam product.</p>
+  <p class="muted small">You can export a copy of your vocabulary and learning progress. Deleting browser data can remove information stored only on this device. Before changing devices, export a backup and verify cloud synchronization if you use it.</p>
+  <div class="actions"><button type="button" id="releaseExportBtn" class="primary">Download my vocabulary backup</button><button type="button" id="releaseOpenImportBtn">Open Import / Export</button></div>
+  <p id="releaseBackupStatus" class="small muted" role="status" aria-live="polite"></p>
 </section>
 <section class="panel" id="resetSettingsPanel"><h2>Reset learning progress</h2>
   <div class="formgrid" style="margin-top:14px">
@@ -1651,5 +1670,6 @@ renderAll();
 <script src="verb-examples-v53.js?v=5.4.0"></script>
 <script src="verb-trainer-v51.js?v=5.4.0"></script>
 <script src="ui-enhancements-v55.js?v=5.5.0"></script>
+<script src="release-v60.js?v=6.0.0"></script>
 </body>
 </html>
