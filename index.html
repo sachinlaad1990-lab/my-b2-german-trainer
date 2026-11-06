@@ -1082,6 +1082,12 @@ function progressKey(word) {
   return String(word.german || '').trim().toLocaleLowerCase('de-DE');
 }
 
+// Track the cloud version of each word so a redraw or sheet refresh never
+// marks it learned or uploads unrelated progress.
+const V4_CLOUD_ACK_KEY='deutschB2CloudAcknowledged_v43';
+let v4CloudAck={};try{v4CloudAck=JSON.parse(localStorage.getItem(V4_CLOUD_ACK_KEY)||'{}')||{}}catch(e){}
+const v4AckKey=word=>String(currentUser?.id||'')+'::'+progressKey(word);
+const v4SaveAck=()=>{try{localStorage.setItem(V4_CLOUD_ACK_KEY,JSON.stringify(v4CloudAck))}catch(e){}};
 function getProgressRow(word) {
   return {
     user_id: currentUser.id,
@@ -1089,7 +1095,7 @@ function getProgressRow(word) {
     learned: !!word.learned,
     bookmarked: !!word.bookmarked,
     difficult: !!word.difficult,
-    updated_at: new Date().toISOString()
+    updated_at: new Date(Number(word.progressUpdatedAt)||Date.now()).toISOString()
   };
 }
 
@@ -1112,7 +1118,7 @@ async function syncProgressNow() {
 
     const { data, error } = await supabaseClient
       .from('vocabulary_progress')
-      .select('word_id, learned, bookmarked, difficult')
+      .select('word_id, learned, bookmarked, difficult, updated_at')
       .eq('user_id', currentUser.id);
 
     if (error) throw error;
@@ -1121,26 +1127,35 @@ async function syncProgressNow() {
       (data || []).map(row => [row.word_id, row])
     );
 
-    for (const word of words) {
-      const cloud = cloudByKey.get(progressKey(word));
-      if (cloud) {
-        word.learned = !!cloud.learned;
-        word.bookmarked = !!cloud.bookmarked;
-        word.difficult = !!cloud.difficult;
+    const pendingUpload=[];
+    for(const word of words){
+      const key=progressKey(word),cloud=cloudByKey.get(key);
+      const localTime=Number(word.progressUpdatedAt)||0;
+      const cloudTime=cloud?(Date.parse(cloud.updated_at||'')||0):0;
+      // Preserve newer offline study, otherwise trust the actual cloud state.
+      if(cloud){
+        if(localTime>cloudTime+1000){pendingUpload.push(word);}
+        else{
+          word.learned=!!cloud.learned;
+          word.bookmarked=!!cloud.bookmarked;
+          word.difficult=!!cloud.difficult;
+          word.progressUpdatedAt=cloudTime;
+          v4CloudAck[v4AckKey(word)]=cloudTime;
+        }
+      }else{
+        pendingUpload.push(word);
       }
     }
-
-    const newRows = words
-      .filter(word => !cloudByKey.has(progressKey(word)))
-      .map(getProgressRow);
-
+    const newRows=pendingUpload.map(getProgressRow);
     if (newRows.length) {
       const { error: uploadError } = await supabaseClient
         .from('vocabulary_progress')
         .upsert(newRows, { onConflict: 'user_id,word_id' });
 
       if (uploadError) throw uploadError;
+      for(const w of pendingUpload){if(!w.progressUpdatedAt)w.progressUpdatedAt=Date.now();v4CloudAck[v4AckKey(w)]=Number(w.progressUpdatedAt)}
     }
+    v4SaveAck();
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(words));
     renderAll();
@@ -1240,24 +1255,21 @@ document.getElementById('resetLearningProgressBtn').addEventListener('click', re
 updateResetDeckChoices();
 
 function scheduleCloudSync() {
-  if (!currentUser || !cloudReady) return;
-  clearTimeout(cloudSyncTimer);
-
-  cloudSyncTimer = setTimeout(async () => {
-    try {
-      const rows = words.map(getProgressRow);
-      if (!rows.length) return;
-
-      const { error } = await supabaseClient
-        .from('vocabulary_progress')
-        .upsert(rows, { onConflict: 'user_id,word_id' });
-
-      if (error) throw error;
-      setAuthStatus('Your progress is saved to the cloud.');
-    } catch (error) {
-      setAuthStatus('Cloud save failed: ' + error.message);
-    }
-  }, 800);
+ if(!currentUser||!cloudReady)return;
+ clearTimeout(cloudSyncTimer);
+ cloudSyncTimer=setTimeout(async()=>{
+  const pending=words.filter(w=>Number(w.progressUpdatedAt)>Number(v4CloudAck[v4AckKey(w)]||0));
+  if(!pending.length)return;
+  try{
+   const userAtStart=currentUser.id;
+   const rows=pending.map(getProgressRow);
+   const {error}=await supabaseClient.from('vocabulary_progress').upsert(rows,{onConflict:'user_id,word_id'});
+   if(error)throw error;
+   if(currentUser?.id!==userAtStart)return;
+   for(const w of pending)v4CloudAck[v4AckKey(w)]=Number(w.progressUpdatedAt)||Date.now();
+   v4SaveAck();setAuthStatus('Your changed vocabulary progress is saved to the cloud.');
+  }catch(error){setAuthStatus('Cloud save failed: '+error.message)}
+ },800);
 }
 
 async function handleSignedIn(user) {
