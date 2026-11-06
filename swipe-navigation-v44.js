@@ -19,6 +19,26 @@
   ];
   const excluded = 'input,textarea,select,button,a,summary,label,[contenteditable="true"],[role="button"],[role="slider"],[role="tab"],[data-no-swipe],.bh-table-scroll,.b2-table-scroll,.bh-table,.b2-reference-table,table,.article-memory,.lookup-results,pre,code';
   let start = null;
+  let animating = false;
+  const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function snapBack(gesture) {
+    const surface = gesture?.surface;
+    if (!gesture?.rule.rate || !surface?.isConnected) return;
+    surface.classList.remove('swipe-card-dragging');
+    if (prefersReducedMotion()) {
+      surface.style.removeProperty('transform');
+      surface.style.removeProperty('opacity');
+      return;
+    }
+    surface.style.transition = 'transform 190ms cubic-bezier(.2,.8,.3,1), opacity 190ms ease';
+    surface.style.removeProperty('transform');
+    surface.style.removeProperty('opacity');
+    window.setTimeout(() => {
+      if (surface.isConnected) surface.style.removeProperty('transition');
+    }, 200);
+  }
+
 
   function usableButton(selector) {
     if (!selector) return null;
@@ -47,7 +67,7 @@
 
   document.addEventListener('touchstart', event => {
     start = null;
-    if (event.touches.length !== 1) return;
+    if (animating || event.touches.length !== 1) return;
     const touch = event.touches[0];
     // Respect iOS / Android system edge-navigation gestures.
     if (touch.clientX < 26 || touch.clientX > window.innerWidth - 26) return;
@@ -57,7 +77,25 @@
     start = { x: touch.clientX, y: touch.clientY, time: Date.now(), ...matched };
   }, { passive: true });
 
-  document.addEventListener('touchcancel', () => { start = null; }, { passive: true });
+  document.addEventListener('touchmove', event => {
+    if (!start?.rule.rate || event.touches.length !== 1 || prefersReducedMotion()) return;
+    const touch = event.touches[0];
+    const dx = touch.clientX - start.x;
+    const dy = touch.clientY - start.y;
+    if (Math.abs(dx) < 10 || Math.abs(dx) < Math.abs(dy) * 1.35) return;
+    const card = start.surface;
+    if (!card.isConnected) return;
+    card.classList.add('swipe-card-dragging');
+    const distance = Math.max(-210, Math.min(210, dx * .78));
+    const rotation = Math.max(-10, Math.min(10, dx * .042));
+    card.style.transform = 'translate3d(' + distance + 'px,' + Math.min(35,Math.abs(dx)*.10) + 'px,0) rotate(' + rotation + 'deg)';
+    card.style.opacity = String(Math.max(.75,1-Math.abs(dx)/850));
+  }, { passive: true });
+
+  document.addEventListener('touchcancel', () => {
+    snapBack(start);
+    start = null;
+  }, { passive: true });
 
   document.addEventListener('touchend', event => {
     const gesture = start;
@@ -70,28 +108,67 @@
     // A swipe must be intentional, primarily horizontal, and quick.
     // Never cancel touch/scroll events; simply trigger existing navigation.
     if (Math.abs(dx) < 65 || Math.abs(dx) < Math.abs(dy) * 1.5 ||
-        Date.now() - gesture.time > 1300 || !visible(gesture.surface)) return;
-    if (gesture.rule.enabled && !gesture.rule.enabled()) return;
+        Date.now() - gesture.time > 1300 || !visible(gesture.surface)) {
+      snapBack(gesture);
+      return;
+    }
+    if (gesture.rule.enabled && !gesture.rule.enabled()) {
+      snapBack(gesture);
+      return;
+    }
 
     const rating = gesture.rule.rate;
     const direction = dx < 0 ? 'left' : 'right';
-    let button = usableButton(rating ? rating[direction] : (dx < 0 ? gesture.rule.next : gesture.rule.prev));
-    // A mastered flashcard may disable Good recall. Still allow right swipe to move on.
-    const alreadyMastered = Boolean(rating && direction === 'right' && gesture.rule.surface.includes('flashcards') && !button);
-    if (!button && !alreadyMastered) return;
-    // Both rating directions advance to the next card; other lessons retain navigation.
-    document.documentElement.dataset.studySwipe = direction;
-    if (button) button.click();
-    if (rating && gesture.rule.surface.includes('flashcards')) {
-      // Rating is a separate action; move to the next card after saving it.
-      const next = usableButton(gesture.rule.next) || usableButton('#nextDeck');
-      if (next) next.click();
+    const button = usableButton(rating ? rating[direction] : (dx < 0 ? gesture.rule.next : gesture.rule.prev));
+    // A mastered flashcard can still move on using right swipe.
+    const masteredFlash = Boolean(rating && direction === 'right' && gesture.rule.surface.includes('flashcards') && !button);
+    if (!button && !masteredFlash) { snapBack(gesture); return; }
+
+    const announce = () => {
+      const live = document.getElementById('swipeNavigationStatus');
+      if (live) live.textContent = rating
+        ? (direction === 'left' ? 'Needs practice. Next card.' : 'Good recall. Next card.')
+        : (direction === 'left' ? 'Next item' : 'Previous item');
+    };
+    const navigate = () => {
+      // Changing the card happens only after the old one flies away.
+      document.documentElement.dataset.studySwipe = direction;
+      if (button) button.click();
+      if (rating && gesture.rule.surface.includes('flashcards')) {
+        const next = usableButton(gesture.rule.next) || usableButton('#nextDeck');
+        if (next) next.click();
+      }
+      announce();
+      window.setTimeout(() => { delete document.documentElement.dataset.studySwipe; }, 330);
+    };
+
+    if (!rating || prefersReducedMotion()) {
+      snapBack(gesture);
+      navigate();
+      return;
     }
-    window.setTimeout(() => { delete document.documentElement.dataset.studySwipe; }, 310);
-    const live = document.getElementById('swipeNavigationStatus');
-    if (live) live.textContent = rating
-      ? (direction === 'left' ? 'Needs practice. Next card.' : 'Good recall. Next card.')
-      : (direction === 'left' ? 'Next item' : 'Previous item');
+
+    animating = true;
+    const card = gesture.surface;
+    card.classList.remove('swipe-card-dragging');
+    card.style.removeProperty('transform');
+    card.style.removeProperty('opacity');
+    card.style.removeProperty('transition');
+    const exitClass = direction === 'left' ? 'swipe-card-fall-left' : 'swipe-card-fall-right';
+    card.classList.add(exitClass);
+    let finished = false;
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      card.classList.remove(exitClass);
+      navigate();
+      animating = false;
+    };
+    card.addEventListener('animationend', event => {
+      if (event.target === card) finish();
+    }, { once: true });
+    // Ensure learning never gets stuck if a browser suppresses animationend.
+    window.setTimeout(finish, 390);
   }, { passive: true });
 
   // Avoid adding duplicate screen-reader announcers if this script is reloaded.
