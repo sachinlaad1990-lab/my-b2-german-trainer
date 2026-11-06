@@ -77,6 +77,21 @@ try{
   data=await page.evaluate(()=>JSON.parse(localStorage.getItem("b2VerbTrainerSeparate_v1")||"{}"));
   assert.equal(data.mastered?.length,1,profile.name+": swipe right marks learned");
   assert.equal(data.difficult?.length,0,profile.name+": swipe right clears Needs practice");
+  // Motion-enabled mode: falling animation must occur BEFORE progress changes.
+  await page.emulateMedia({reducedMotion:"no-preference"});
+  await simulateSwipe("left");
+  const animation=await page.locator("#verbTrainer .vt-card").evaluate(card=>({
+    falling:card.classList.contains("swipe-card-fall-left"),
+    name:getComputedStyle(card).animationName
+  }));
+  assert.ok(animation.falling,profile.name+": outgoing card has fall-left class");
+  assert.match(animation.name,/swipeCardFallLeft/,profile.name+": outgoing card actually animates");
+  let beforeFinish=await page.evaluate(()=>JSON.parse(localStorage.getItem("b2VerbTrainerSeparate_v1")||"{}"));
+  assert.equal(beforeFinish.difficult?.length,0,profile.name+": rating waits for fall animation");
+  await page.waitForTimeout(480);
+  data=await page.evaluate(()=>JSON.parse(localStorage.getItem("b2VerbTrainerSeparate_v1")||"{}"));
+  assert.equal(data.difficult?.length,1,profile.name+": rating commits after the card falls");
+  await page.emulateMedia({reducedMotion:"reduce"});
   await page.locator(".focus-nav .tab[data-tab='today']").first().click();
   await page.locator(".home-path[data-destination='library']").click();
   assert.ok(await page.locator("#library:not(.hidden)").count(),profile.name+": vocabulary shortcut");
