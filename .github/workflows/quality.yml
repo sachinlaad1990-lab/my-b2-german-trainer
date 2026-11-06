@@ -28,3 +28,9 @@ jobs:
           node-version: '22'
       - name: Node QA suite
         run: node --test qa/quality.test.mjs
+      - name: Install headless browser test tools
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install chromium
+      - name: Browser smoke tests — mobile and desktop
+        run: node qa/browser-smoke.mjs
