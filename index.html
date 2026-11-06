@@ -66,10 +66,24 @@ body[data-theme="dark"] .wordbuttons button.is-active{color:var(--ink)}
 @media(max-width:700px){.today-heading{flex-direction:column}.today-target{min-width:0;width:100%;font-size:1.35rem}.today-target span{display:inline;margin-left:7px}.today-stats{gap:7px}.today-stats>div{padding:9px}.today-stats strong{font-size:1.35rem}.today-stats span{font-size:.75rem}.today-session-row{flex-direction:column;align-items:stretch}.today-card{padding:22px 13px}.rating-buttons{grid-template-columns:repeat(2,1fr)}}
 .speech-feedback{position:fixed;z-index:500;bottom:14px;left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100vw - 24px);background:var(--panel);color:var(--ink);border:1px solid var(--accent);box-shadow:0 8px 30px #17203330;border-radius:12px;padding:11px 16px;font-size:.9rem;overflow-wrap:anywhere}
 .speech-feedback[data-error="true"]{border-color:var(--bad);color:var(--bad)}
+
+/* v4.7 clickable stats and accessible filtered vocabulary results */
+.stats button.stat{width:100%;text-align:left;min-width:0;display:block;font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);padding:16px;border-radius:var(--radius)}
+.stats button.stat strong{display:block;font-size:1.6rem;font-weight:750}
+.stats button.stat span{display:block;color:var(--muted);font-size:.9rem}
+.stats button.stat:hover,.today-stats button:hover,.v4-progress-actions button:hover{border-color:var(--accent);background:var(--accent2)}
+.stats button.stat:focus-visible,.today-stats button:focus-visible,.v4-progress-actions button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.today-stats>button{display:block;min-width:0;text-align:left;border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--panel);color:var(--ink);font:inherit}
+.today-stats>button strong{display:block;font-size:1.65rem}
+.today-stats>button span{font-size:.85rem;color:var(--muted)}
+.v4-progress-actions button{border:1px solid var(--line);border-radius:10px;padding:9px 12px;background:var(--panel);font:inherit;cursor:pointer;color:var(--ink);font-weight:650}
+.v4-stat-results{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:12px 0;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--accent2)}
+#v4StatResultsLabel{font-weight:700;color:var(--ink)}
+@media(max-width:600px){.v4-progress-actions button{font-size:.87rem}.stats button.stat{padding:10px}.stats button.stat strong{font-size:1.35rem}}
 </style>
 </head>
 <body>
-<header><div class="brandhead"><img id="headerPhoto" class="profile-pic" alt="Your profile photo"><div class="brandcopy"><h1>Deutsch B2 Beruf <span style="font-size:.52em;vertical-align:middle;color:var(--accent);font-weight:700" aria-label="Version 4.6">v4.6</span></h1><p>Vocabulary · Flashcards · Grammar Made Easy · Everyday German</p><div class="credit">Created by <strong id="headerCreator">Sachin Laad</strong></div></div></div></header>
+<header><div class="brandhead"><img id="headerPhoto" class="profile-pic" alt="Your profile photo"><div class="brandcopy"><h1>Deutsch B2 Beruf <span style="font-size:.52em;vertical-align:middle;color:var(--accent);font-weight:700" aria-label="Version 4.7">v4.7</span></h1><p>Vocabulary · Flashcards · Grammar Made Easy · Everyday German</p><div class="credit">Created by <strong id="headerCreator">Sachin Laad</strong></div></div></div></header>
 <main>
 
 
@@ -112,9 +126,9 @@ body[data-theme="dark"] .wordbuttons button.is-active{color:var(--ink)}
     <div class="panel today-hero">
       <div class="today-heading"><div><span class="eyebrow">YOUR DAILY GERMAN PRACTICE</span><h2>Learn a little, remember a lot.</h2><p class="muted">Up to 20 scheduled reviews and 10 new words in each session. No API calls or AI tokens.</p></div><div class="today-target">30 <span>max words/session</span></div></div>
       <div class="today-stats" aria-live="polite">
-        <div><strong id="todayDue">0</strong><span>Due for review</span></div>
-        <div><strong id="todayNew">0</strong><span>New words waiting</span></div>
-        <div><strong id="todayDone">0</strong><span>Practised today</span></div>
+        <button type="button" data-vocab-stat="due" aria-label="Show words due for review"><strong id="todayDue">0</strong><span>Due for review</span></button>
+        <button type="button" data-vocab-stat="newDue" aria-label="Show new words waiting"><strong id="todayNew">0</strong><span>New words waiting</span></button>
+        <button type="button" data-vocab-stat="reviewedToday" aria-label="Show unique vocabulary words practised today"><strong id="todayDone">0</strong><span>Practised today (attempts)</span></button>
       </div>
       <div class="today-progress-track" role="progressbar" aria-label="Daily session progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="todayProgressTrack"><div id="todayProgressBar"></div></div>
       <div class="today-session-row"><span id="todaySessionStatus" aria-live="polite">Preparing your daily practice…</span><button type="button" id="todayRefresh" class="secondary">Start another set</button></div>
@@ -842,10 +856,11 @@ const v4StatPredicates={
  practice:w=>!w.learned&&!!w.difficult,
  learning:w=>!w.learned&&!w.difficult&&!!v3State.records[v3WordKey(w)]?.successDays?.length,
  new:w=>!w.learned&&!w.difficult&&!v3State.records[v3WordKey(w)]?.successDays?.length,
- due:w=>v3GetDue().some(item=>item.id===w.id),
- newDue:w=>v3GetNew().some(item=>item.id===w.id)
+ due:w=>{const record=v3State.records[v3WordKey(w)];return record?Number(record.dueAt)<=Date.now():!!w.learned},
+ newDue:w=>!w.learned&&!v3State.records[v3WordKey(w)],
+ reviewedToday:w=>{const ms=Number(v3State.records[v3WordKey(w)]?.lastReviewedAt)||0;return ms>0&&v3LocalDay(new Date(ms))===v3LocalDay()}
 };
-const v4StatLabels={all:'All vocabulary',learned:'Learned words',bookmarked:'Bookmarked words',difficult:'Need practice',practice:'Need practice (not yet mastered)',learning:'Learning / improving',new:'Not learned yet',due:'Due for review',newDue:'New words waiting'};
+const v4StatLabels={all:'All vocabulary',learned:'Learned words',bookmarked:'Bookmarked words',difficult:'Need practice',practice:'Need practice (not yet mastered)',learning:'Learning / improving',new:'Not learned yet',due:'Due for review',newDue:'New words waiting',reviewedToday:'Unique words practised today (attempt count may be higher if a word was repeated)'};
 function v4OpenStatList(kind){
  if(!v4StatPredicates[kind])return;
  v4StatsView=kind;
