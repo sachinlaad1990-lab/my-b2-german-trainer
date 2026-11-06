@@ -1,0 +1,22 @@
+/* Selective home inspiration: compact learning destinations; no decorative clutter. */
+#today .today-heading h2{font-size:clamp(1.2rem,2.2vw,1.65rem);margin:3px 0 6px}
+#today .today-hero{margin-bottom:12px}
+#today .today-card{margin-bottom:14px}
+#today .home-paths{margin:16px 0 12px}
+#today .home-paths h3{font-size:1.03rem;margin:0 0 10px;color:var(--ink)}
+#today .home-path-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+#today .home-path{position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;text-align:left;gap:12px;padding:16px;border:1px solid var(--line);border-radius:16px;background:var(--panel);color:var(--ink);min-height:118px;box-shadow:none;cursor:pointer;font:inherit}
+#today .home-path:hover{border-color:var(--accent);background:var(--accent2)}
+#today .home-path strong{font-size:1rem;letter-spacing:-.02em}
+#today .home-path .home-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;font-size:1.4rem;background:var(--accent2)}
+#today .home-path .home-arrow{position:absolute;right:15px;bottom:15px;font-size:1.1rem;color:var(--accent)}
+#today .home-path .home-desc{font-size:.78rem;color:var(--muted);padding-right:12px}
+#today .home-path[data-destination="library"] .home-icon{background:#e4efff}
+#today .home-path[data-destination="verbTrainer"] .home-icon{background:#ffede0}
+#today .home-path[data-destination="grammarGuide"] .home-icon{background:#e9f7ee}
+#today .home-path[data-destination="quiz"] .home-icon{background:#f1eaff}
+body[data-theme="dark"] #today .home-path .home-icon{background:var(--accent2)}
+#today .today-footnote{margin-top:14px}
+@media(max-width:760px){#today .home-path-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}#today .home-path{min-height:104px;padding:13px;gap:7px}}
+@media(max-width:400px){#today .home-path{min-height:95px}#today .home-path .home-icon{width:35px;height:35px;font-size:1.15rem}}
+@media(prefers-reduced-motion:reduce){#today .home-path{transition:none}}
