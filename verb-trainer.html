@@ -1,0 +1,160 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>German B2 · Verb Conjugation Trainer v5.1</title>
+<style>
+:root{--ink:#182b49;--blue:#2456d3;--bg:#f5f7fb;--muted:#62738c;--line:#dce5f0;--panel:#fff;--green:#10765e;--red:#b53a4c}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+main{max-width:1160px;margin:auto;padding:18px 14px 45px}.hero{background:linear-gradient(110deg,#143365,#2b56a0);border-radius:17px;padding:24px 27px;color:white;margin-bottom:18px}
+.hero h1{font-size:clamp(1.4rem,3vw,2rem);letter-spacing:-.035em;margin:2px 0 5px}.hero p{color:#e0eaff;margin:0;max-width:750px}.eyebrow{font-size:.75rem;text-transform:uppercase;letter-spacing:.13em;font-weight:800;color:#bdd6ff}
+.tabs{display:flex;gap:7px;overflow-x:auto;scroll-snap-type:x proximity;padding:6px;border:1px solid var(--line);border-radius:12px;background:white;margin-bottom:16px}
+button,input,select{font:inherit}button{cursor:pointer;padding:11px 16px;border-radius:10px;border:1px solid var(--line);background:white;color:var(--ink)}
+button:disabled{opacity:.45;cursor:not-allowed}.tabs button{white-space:nowrap;border:0;background:transparent;font-weight:750;scroll-snap-align:start}
+.tabs button[aria-selected="true"]{background:#eaf1ff;color:#1b4db6}
+.primary{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:800}.primary:hover:not(:disabled){background:#1644af}
+label{font-size:.85rem;font-weight:740;display:block;color:#455b79}
+input,select{padding:11px 12px;border:1px solid #cbd8e8;border-radius:10px;background:white;color:var(--ink);max-width:100%}
+input:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid #90b3ff;outline-offset:2px}
+.panel{background:white;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 5px 24px rgba(24,44,80,.035)}
+.view{display:none}.view.active{display:block}
+.controls{display:flex;gap:12px;flex-wrap:wrap;align-items:end;margin-bottom:14px}.controls>label{flex:1 1 210px}.controls select,.controls input{display:block;width:100%;margin-top:6px}
+.lesson{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(225px,.85fr);gap:15px}
+.verb-title{font-size:clamp(2rem,4vw,2.9rem);font-weight:850;letter-spacing:-.04em;color:#1b4489;margin:10px 0 0}
+.meaning{color:var(--muted);font-size:1rem;margin:0 0 20px}
+.pills{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}.pill{font-size:.8rem;background:#edf3ff;color:#2352a5;padding:5px 9px;border-radius:7px;font-weight:750}
+.keyforms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:16px 0}
+.keyform{background:#f1f5fb;border-radius:11px;padding:12px;min-width:0;overflow-wrap:anywhere}
+.keyform small{display:block;font-size:.76rem;color:var(--muted);font-weight:750;margin-bottom:5px}.keyform strong{font-size:1.03rem;color:#143b7e}
+h2{font-size:1.13rem;margin:6px 0 13px;letter-spacing:-.015em}
+table{border-collapse:collapse;width:100%}th,td{text-align:left;border-bottom:1px solid #e5ebf3;padding:10px 8px;font-size:.93rem}th{color:#506683;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em}
+td:nth-child(2){font-weight:770;color:#1a4386}
+.tip{background:#f1f6ff;border-left:4px solid #4275d6;border-radius:10px;padding:15px;margin:15px 0;color:#26456d}
+.note{font-size:.83rem;color:var(--muted)}
+.pager{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+.side .panel{margin-bottom:13px}.side h3{margin:0 0 10px;font-size:1rem}
+.progress-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--line)}.progress-row b{color:#1a4a9d}
+.quizcard{max-width:690px;margin:auto}
+.quizword{text-align:center;font-size:clamp(1.8rem,5vw,3.2rem);font-weight:850;color:#183b7b;letter-spacing:-.035em;margin:16px 0 3px}
+.quizline{text-align:center;color:#586982;font-size:1.05rem;margin-bottom:23px}
+.quizcard form{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.quizcard input{flex:1 1 200px;font-size:1.15rem}
+.feedback{border-radius:11px;margin:15px 0;padding:14px;line-height:1.55}
+.feedback.good{background:#e5f6ef;color:#07583d;border:1px solid #b9e0d0}
+.feedback.bad{background:#fff0f1;color:#963047;border:1px solid #efc2cd}
+.feedback strong{font-size:1.1rem}
+.quiznav{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-top:18px}
+.counter{font-size:.79rem;color:var(--muted);font-weight:750}
+.review-list{display:grid;gap:8px}.review-item{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:white}
+.review-item strong{font-size:.98rem}.review-item small{color:var(--muted)}.review-item button{padding:7px 12px;font-size:.85rem}
+.muted{color:var(--muted)}.empty{background:#f6f8fc;padding:23px;border-radius:10px;color:var(--muted);text-align:center}
+@media(max-width:800px){.lesson{grid-template-columns:1fr}.keyforms{grid-template-columns:1fr}.hero{padding:19px}.panel{padding:15px}.quizcard form button{flex:1}.quiznav button{flex:1}}
+</style></head><body><main>
+<header class="hero"><div class="eyebrow">B2 BERUF · VERB TRAINER</div><h1>Verb conjugation that you can use</h1><p>Learn the important verb forms, practise producing them, and review only the mistakes. Your existing vocabulary progress stays separate.</p></header>
+<nav class="tabs" aria-label="Verb trainer sections"><button type="button" data-tab="learn" aria-selected="true">📘 Learn forms</button><button type="button" data-tab="practice" aria-selected="false">✍️ Conjugation quiz</button><button type="button" data-tab="mistakes" aria-selected="false">🎯 Review mistakes</button></nav>
+<section class="view active" id="learn" aria-label="Learn verb conjugation"><div class="controls"><label>Find a verb<input id="search" type="search" placeholder="e.g. teilnehmen, bewerben"></label><label>Verb family<select id="family"><option value="all">All verbs</option><option value="regular">Regular</option><option value="irregular">Strong / irregular</option><option value="separable">Separable</option><option value="modal">Modal verbs</option></select></label><label>Choose verb<select id="verbChoice"></select></label></div>
+<div class="lesson"><div class="panel"><div class="pills"><span class="pill" id="type"></span><span class="pill" id="index"></span></div><div class="verb-title" id="word"></div><p class="meaning" id="meaning"></p>
+<div class="keyforms"><div class="keyform"><small>Präteritum (ich)</small><strong id="simplePast"></strong></div><div class="keyform"><small>Partizip II</small><strong id="participle"></strong></div><div class="keyform"><small>Perfekt (ich)</small><strong id="perfect"></strong></div></div>
+<div class="controls"><label>Conjugation table<select id="tableTense"><option value="present">Präsens</option><option value="past">Präteritum</option><option value="perfect">Perfekt</option><option value="k2">Konjunktiv II</option></select></label></div><table><thead><tr><th>Pronoun</th><th>Conjugation</th></tr></thead><tbody id="forms"></tbody></table>
+<div class="tip" id="tip"></div><div class="pager"><button id="prev" type="button">← Previous verb</button><button id="next" type="button" class="primary">Next verb →</button><button id="quizThis" type="button">Practise this verb</button></div></div>
+<div class="side"><div class="panel"><h3>Learning strategy</h3><p>First recognise the verb family. Then type the form without looking. Verbs answered incorrectly return in the mistake review.</p><p class="note">Some modal verbs use a double infinitive in Perfekt when another verb follows. The displayed Perfekt forms are for the standalone verb.</p></div><div class="panel"><h3>My progress</h3><div class="progress-row"><span>Verbs available</span><b id="total">0</b></div><div class="progress-row"><span>Practised verbs</span><b id="practiced">0</b></div><div class="progress-row"><span>Needs review</span><b id="needsReview">0</b></div></div></div></div></section>
+<section class="view" id="practice"><div class="panel quizcard"><h2>Practice without hints</h2><div class="controls"><label>Question set<select id="quizScope"><option value="all">All important verbs</option><option value="regular">Regular verbs</option><option value="irregular">Irregular / strong verbs</option><option value="separable">Separable verbs</option><option value="modal">Modal verbs</option><option value="mistakes">My mistakes</option></select></label><label>Tense<select id="quizTense"><option value="mixed">Mixed tenses</option><option value="present">Präsens</option><option value="past">Präteritum</option><option value="perfect">Perfekt</option><option value="k2">Konjunktiv II</option></select></label></div>
+<div class="counter" id="quizProgress">Ready when you are</div><div class="quizword" id="quizWord"></div><p class="quizline" id="quizPrompt"></p><form id="answerForm"><input id="answer" autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="Type the conjugated verb" placeholder="Type the verb form"><button class="primary" id="check" type="submit">Check answer</button></form><div id="feedback" role="status" aria-live="polite"></div><div class="quiznav"><button id="startQuiz" type="button">New round</button><button id="skip" type="button">Skip</button><button id="nextQuestion" class="primary" type="button" disabled>Next question →</button></div><p class="note">Each round contains up to 10 varied questions. Wrong answers are saved in your browser for targeted review; your original word status is not changed.</p></div></section>
+<section class="view" id="mistakes"><div class="panel"><h2>🎯 My verb mistakes</h2><p class="muted">Review verbs you answered incorrectly. A correct answer removes the verb from this list.</p><div class="review-list" id="mistakeList"></div></div></section>
+<p class="note">The conjugation set is curated for B2 Beruf. It is not an automatic import of your Google Sheet, and offline browser progress does not sync across devices.</p></main><script src="verb-data-v51.js?v=5.1.0"></script><script>
+(()=>{
+"use strict";
+const data=window.B2_VERBS||[],pronouns=["ich","du","er/sie/es","wir","ihr","sie/Sie"],storeKey="b2VerbTrainerV51";
+let state={seen:{},wrong:{},right:0,total:0},current=0,round=[],position=0,locked=false;
+try{const saved=JSON.parse(localStorage.getItem(storeKey)||"null");if(saved?.seen&&saved?.wrong)state={...state,...saved}}catch(e){}
+const $=id=>document.getElementById(id);
+const escape=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+const normalized=s=>String(s||"").trim().normalize("NFC").toLocaleLowerCase("de-DE").replace(/\s+/g," ");
+const save=()=>{try{localStorage.setItem(storeKey,JSON.stringify(state))}catch(e){}};
+function form(v,tense,index){
+ if(tense==="present")return v[3][index];
+ if(tense==="perfect"){
+  const aux=(v[6]==="sein"?["bin","bist","ist","sind","seid","sind"]:["habe","hast","hat","haben","habt","haben"])[index];
+  return aux+" "+v[5];
+ }
+ const original=tense==="past"?v[4]:v[7];
+ let base=original,particle="";
+ // Keep separable prefix particle at the end: nahm teil -> nahmst teil.
+ if(v[2]==="separable"&&original.includes(" ")){const x=original.split(" ");particle=" "+x.slice(1).join(" ");base=x[0]}
+ const regular=base.endsWith("te")&&(v[2]==="regular"||v[2]==="modal"||tense==="k2"&&v[7]===v[4]||["wurde","hatte","wollte","sollte"].includes(base));
+ let result;
+ if(regular){const stem=base.slice(0,-2);const ends=["te","test","te","ten","tet","ten"];result=stem+ends[index]}
+ else if(base.endsWith("e")){const stem=base.slice(0,-1);const ends=["e","est","e","en","et","en"];result=stem+ends[index]}
+ else {const ends=["","st","","en","t","en"];result=base+ends[index]; if(index===1&&/(s|ß|z|x)$/.test(base))result=base+"t"}
+ return result+particle;
+}
+const names={present:"Präsens",past:"Präteritum",perfect:"Perfekt",k2:"Konjunktiv II"};
+function selectTab(tab){document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",String(b.dataset.tab===tab)));document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===tab));if(tab==="mistakes")renderMistakes()}
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>selectTab(b.dataset.tab));
+const shown=()=>{
+ const search=normalized($("search").value),family=$("family").value;
+ return data.map((v,i)=>({v,i})).filter(({v})=>(family==="all"||v[2]===family)&&(normalized(v[0]).includes(search)||normalized(v[1]).includes(search)));
+};
+function fillSelector(){
+ const matched=shown();
+ const sel=$("verbChoice");
+ sel.innerHTML=matched.length?matched.map(({v,i})=>'<option value="'+i+'">'+escape(v[0])+" — "+escape(v[1])+"</option>").join(""):'<option>No matches</option>';
+ if(!matched.some(({i})=>i===current))current=matched[0]?.i??0;
+ sel.value=String(current);
+ renderLearn();
+}
+function renderLearn(){
+ const v=data[current];if(!v)return;
+ $("word").textContent=v[0];$("meaning").textContent=v[1];$("type").textContent=v[2];$("index").textContent=(current+1)+" / "+data.length;
+ $("simplePast").textContent=v[4];$("participle").textContent=v[5];$("perfect").textContent=form(v,"perfect",0);
+ $("tip").textContent="Remember: "+v[8];
+ $("forms").innerHTML=pronouns.map((p,i)=>'<tr><td>'+p+"</td><td>"+escape(form(v,$("tableTense").value,i))+"</td></tr>").join("");
+ $("prev").disabled=current===0;$("next").disabled=current===data.length-1;
+ $("total").textContent=data.length;$("practiced").textContent=Object.keys(state.seen).length;$("needsReview").textContent=Object.keys(state.wrong).length;
+}
+$("search").oninput=fillSelector;$("family").onchange=fillSelector;$("verbChoice").onchange=e=>{current=Number(e.target.value)||0;renderLearn()};
+$("tableTense").onchange=renderLearn;
+$("prev").onclick=()=>{current=Math.max(0,current-1);$("search").value="";$("family").value="all";fillSelector()};
+$("next").onclick=()=>{current=Math.min(data.length-1,current+1);$("search").value="";$("family").value="all";fillSelector()};
+$("quizThis").onclick=()=>{$("quizScope").value="all";selectTab("practice");startQuiz([current])};
+function eligible(){
+ const scope=$("quizScope").value;
+ return data.map((v,i)=>i).filter(i=>scope==="all"||scope==="mistakes"&&state.wrong[data[i][0]]||data[i][2]===scope);
+}
+const tenses=["present","past","perfect","k2"];
+function startQuiz(override){
+ const ids=override||eligible();round=[];position=0;locked=false;
+ if(!ids.length){$("quizWord").textContent="No verbs in this set";$("quizPrompt").textContent="Try a different question set.";return}
+ // Round-robin verb coverage; shuffle words using browser random without modifying decks.
+ const pool=ids.slice();for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]]}
+ const picked=override?Array.from({length:Math.min(10,ids.length*4)},(_,i)=>ids[i%ids.length]):pool.slice(0,10);
+ round=picked.map((id,i)=>({id,tense:$("quizTense").value==="mixed"?tenses[(i+Math.floor(Math.random()*4))%4]:$("quizTense").value,pronoun:Math.floor(Math.random()*6)}));
+ renderQuestion();
+}
+function renderQuestion(){
+ const q=round[position];locked=false;$("feedback").innerHTML="";
+ $("nextQuestion").disabled=true;$("check").disabled=!q;$("answer").disabled=!q;
+ if(!q){$("quizWord").textContent="Round complete";$("quizPrompt").textContent="Choose New round to continue.";return}
+ const v=data[q.id];$("quizProgress").textContent="Question "+(position+1)+" / "+round.length;
+ $("quizWord").textContent=v[0];$("quizPrompt").textContent=v[1]+" · "+names[q.tense]+" · "+pronouns[q.pronoun];
+ $("answer").value="";$("answer").focus();
+}
+$("answerForm").onsubmit=e=>{
+ e.preventDefault();if(locked||!round[position])return;
+ const q=round[position],v=data[q.id],expected=form(v,q.tense,q.pronoun);
+ const right=normalized($("answer").value)===normalized(expected);
+ locked=true;state.seen[v[0]]=(state.seen[v[0]]||0)+1;state.total++;
+ if(right){state.right++;delete state.wrong[v[0]]}else state.wrong[v[0]]=(state.wrong[v[0]]||0)+1;
+ save();renderLearn();
+ $("feedback").innerHTML='<div class="feedback '+(right?"good":"bad")+'"><strong>'+(right?"✓ Correct!":"↩ Not quite")+'</strong><p>Correct answer: <strong>'+escape(expected)+'</strong></p><p>'+escape(v[8])+"</p></div>";
+ $("check").disabled=true;$("nextQuestion").disabled=false;
+};
+$("nextQuestion").onclick=()=>{if(position<round.length-1){position++;renderQuestion()}else{round=[];renderQuestion()}};
+$("skip").onclick=()=>{if(!round.length)return;if(position<round.length-1){position++;renderQuestion()}else{round=[];renderQuestion()}};
+$("startQuiz").onclick=()=>startQuiz();
+function renderMistakes(){
+ const ids=data.map((v,i)=>i).filter(i=>state.wrong[data[i][0]]);
+ $("mistakeList").innerHTML=ids.length?ids.map(i=>{const v=data[i];return '<div class="review-item"><div><strong>'+escape(v[0])+'</strong><div><small>'+escape(v[1])+' · '+state.wrong[v[0]]+' incorrect answer(s)</small></div></div><button type="button" data-i="'+i+'">Practise →</button></div>'}).join(""):'<div class="empty">No saved mistakes. Start a conjugation quiz to build your targeted review list.</div>';
+ document.querySelectorAll("#mistakeList button").forEach(b=>b.onclick=()=>{selectTab("practice");startQuiz([Number(b.dataset.i)])});
+}
+fillSelector();selectTab("learn");
+})();
+</script>
+<script>(function(){const f=()=>{if(window.parent===window)return;window.parent.postMessage({type:"b2-verb-height",height:Math.max(document.documentElement.scrollHeight,document.body.scrollHeight)},"*")};if(typeof ResizeObserver!=="undefined")new ResizeObserver(f).observe(document.body);window.addEventListener("load",f)})();</script>
+</body></html>
