@@ -1,0 +1,57 @@
+
+/* v5.4 Focus audit: phone-first layout without removing core tools. */
+#verbTrainer .vt-shell{max-width:780px;margin:0 auto;color:var(--ink,#172238)}
+#verbTrainer .vt-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 9px;flex-wrap:wrap}
+#verbTrainer .vt-top strong{font-size:1.17rem}
+#verbTrainer .vt-small{font-size:.82rem;color:var(--muted,#69768c)}
+#verbTrainer .vt-button{border:1px solid var(--line,#cbd4e1);border-radius:11px;background:var(--panel,#fff);color:var(--ink,#172238);padding:10px 12px;font:inherit;font-weight:650;cursor:pointer}
+#verbTrainer .vt-primary{background:var(--accent,#3158ba);color:#fff;border-color:var(--accent,#3158ba)}
+#verbTrainer .vt-modes{display:flex;gap:8px;margin-bottom:10px}
+#verbTrainer .vt-modes button{flex:1}
+#verbTrainer .vt-options{border:1px solid var(--line,#ddd);border-radius:12px;padding:12px;display:grid;gap:10px;margin-bottom:12px;background:var(--panel,#fff)}
+#verbTrainer .vt-options label{display:block}
+#verbTrainer .vt-options input:not([type=checkbox]),#verbTrainer .vt-options select,#verbTrainer #vtAnswer{width:100%;box-sizing:border-box;font:inherit;padding:11px;border:1px solid var(--line,#ccc);border-radius:10px;margin-top:5px}
+#verbTrainer .vt-card{padding:20px;border:1px solid var(--line,#d9e0ec);border-radius:16px;background:var(--panel,#fff);margin:0}
+#verbTrainer .vt-card h2{font-size:1.7rem;line-height:1.25;margin:8px 0 4px}
+#verbTrainer .vt-meaning{font-size:1.05rem;color:var(--muted,#68778b);margin:0 0 12px}
+#verbTrainer .vt-example{border-radius:13px;background:var(--accent2,#eef4ff);color:var(--ink,#18243d);padding:16px;margin:13px 0}
+#verbTrainer .vt-example strong{font-size:1.08rem;line-height:1.5;display:block}
+#verbTrainer .vt-example p{margin:6px 0 0;opacity:.8;line-height:1.4}
+#verbTrainer .vt-forms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:13px 0}
+#verbTrainer .vt-forms div{border:1px solid var(--line,#ddd);border-radius:10px;padding:10px;overflow-wrap:anywhere}
+#verbTrainer .vt-forms small{display:block;color:var(--muted,#64748b);font-size:.78rem;margin-bottom:5px}
+#verbTrainer .vt-actions{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:7px;margin:14px 0 8px}
+#verbTrainer .vt-actions button{min-width:0}
+#verbTrainer .vt-extras{display:flex;gap:8px}
+#verbTrainer .vt-extras button{flex:1}
+#verbTrainer .vt-more{border-top:1px solid var(--line,#ddd);margin-top:16px;padding-top:11px}
+#verbTrainer .vt-more summary{cursor:pointer;font-weight:650}
+#verbTrainer .vt-more table{width:100%;border-collapse:collapse;margin-top:12px}
+#verbTrainer .vt-more th,#verbTrainer .vt-more td{padding:8px;text-align:left;border-bottom:1px solid var(--line,#ddd)}
+#verbTrainer #vtAnswerForm button{width:100%;margin-top:8px}
+#verbTrainer #vtFeedback{font-weight:650}
+@media(max-width:800px){
+  /* Side-by-side is for larger screens: no toolbar above every phone lesson. */
+  #splitStudyToolbar{display:none!important}
+  .focus-nav{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px!important;overflow:visible!important;align-items:stretch!important;padding:6px 0 9px!important}
+  .focus-nav>.tab{font-size:.84rem;min-width:0;padding:10px 3px!important;white-space:normal!important;line-height:1.25}
+  .focus-nav>.focus-more{position:relative;right:auto;min-width:0;grid-column:span 1;background:transparent}
+  .focus-nav>.focus-more>summary{padding:10px 4px;font-size:.87rem}
+  .focus-more-items{position:absolute!important;right:0!important;left:auto!important;top:100%!important;width:min(275px,85vw)!important}
+  .focus-progress>summary{padding:10px 13px;font-size:.95rem}
+  .focus-summary-help{display:none!important}
+  main:has(.view:not(.hidden):not(#today))>.focus-progress{display:none}
+  main:has(.view:not(.hidden):not(#today))>.speech-feedback.hidden{display:none}
+  #verbTrainer .vt-shell{padding:0}
+  #verbTrainer .vt-card{padding:13px}
+  #verbTrainer .vt-card h2{font-size:1.5rem}
+  #verbTrainer .vt-forms{gap:5px}
+  #verbTrainer .vt-forms div{padding:8px 5px;font-size:.86rem}
+  #verbTrainer .vt-button{padding:10px 6px;font-size:.89rem}
+  #verbTrainer .vt-example{padding:13px}
+  #flashcards .flash .muted{font-size:.85rem}
+  #flashcards .flash .row{gap:7px}
+  #quiz .panel>p.muted{font-size:.85rem}
+  #settings .panel{margin-top:10px}
+  #articleTrainerFrame{min-height:500px}
+}
