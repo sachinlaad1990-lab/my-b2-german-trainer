@@ -75,16 +75,17 @@
 
     const rating = gesture.rule.rate;
     const direction = dx < 0 ? 'left' : 'right';
-    const button = usableButton(rating ? rating[direction] : (dx < 0 ? gesture.rule.next : gesture.rule.prev));
-    if (!button) return;
+    let button = usableButton(rating ? rating[direction] : (dx < 0 ? gesture.rule.next : gesture.rule.prev));
+    // A mastered flashcard may disable Good recall. Still allow right swipe to move on.
+    const alreadyMastered = Boolean(rating && direction === 'right' && gesture.rule.surface.includes('flashcards') && !button);
+    if (!button && !alreadyMastered) return;
     // Both rating directions advance to the next card; other lessons retain navigation.
     document.documentElement.dataset.studySwipe = direction;
-    const previousNext = rating ? usableButton(gesture.rule.next) : null;
-    button.click();
-    if (rating && gesture.rule.surface.includes('flashcards') && previousNext) {
-      // Flashcard rating buttons record progress but do not advance by themselves.
-      // Use the normal next-card action when available. Do not wrap into another deck.
-      previousNext.click();
+    if (button) button.click();
+    if (rating && gesture.rule.surface.includes('flashcards')) {
+      // Rating is a separate action; move to the next card after saving it.
+      const next = usableButton(gesture.rule.next) || usableButton('#nextDeck');
+      if (next) next.click();
     }
     window.setTimeout(() => { delete document.documentElement.dataset.studySwipe; }, 310);
     const live = document.getElementById('swipeNavigationStatus');
