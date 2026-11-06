@@ -116,3 +116,12 @@ body[data-theme="dark"] #verbTrainer .vt-primary,body[data-theme="dark"] #flashc
  #flashcards .today-audio button{font-size:.86rem}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* v6 release contrast and dropdown refinements */
+@media(min-width:801px){.focus-nav{overflow:visible!important;flex-wrap:wrap!important}}
+body[data-theme="dark"] button.primary,
+body[data-theme="dark"] button.vt-primary,
+body[data-theme="dark"] #flashcards #revealBtn,
+body[data-theme="dark"] #flashcards #nextCard,
+body[data-theme="dark"] #verbTrainer .vt-button.vt-primary{background:#365ac9!important;border-color:#365ac9!important;color:#fff!important}
+body[data-theme="dark"] .focus-nav>.tab.active{background:var(--accent2);color:#e8eeff;border-color:var(--line)}
