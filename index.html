@@ -1008,7 +1008,7 @@ document.getElementById('wordList').addEventListener('click',e=>{
  }if(['bookmark','learned','difficult'].includes(b.dataset.action))w.progressUpdatedAt=Date.now();
  saveWords();
 });
-document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.view').forEach(v=>v.classList.toggle('hidden',v.id!==b.dataset.tab));if(b.dataset.tab==='quiz')startQuiz();if(b.dataset.tab==='flashcards')renderFlash();if(b.dataset.tab==='today')renderToday()});
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.view').forEach(v=>v.classList.toggle('hidden',v.id!==b.dataset.tab));const more=document.getElementById('focusMoreMenu');if(more)more.open=false;if(b.dataset.tab==='quiz')startQuiz();if(b.dataset.tab==='flashcards')renderFlash();if(b.dataset.tab==='today')renderToday()});
 function getSet(mode){return words.filter(w=>mode==='bookmarked'?w.bookmarked:mode==='exam'?w.examBookmark:mode==='azeez'?w.azeezSuggestion:mode==='difficult'?w.difficult:mode==='unlearned'?!w.learned:true)}
 document.getElementById('flashMode').onchange=()=>{flashDeckIndex=0;flashIndex=0;flashRevealed=false;renderFlash()};
 function getFlashDecks(){
