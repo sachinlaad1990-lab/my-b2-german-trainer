@@ -1,0 +1,65 @@
+/* Mobile-first focus audit — v5.4.0. No saved user data changed. */
+#verbTrainer .vt-shell{max-width:780px;margin:0 auto}
+#verbTrainer .vt-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+#verbTrainer .vt-top strong{font-size:1.07rem}
+#verbTrainer .vt-top .vt-small{margin-left:auto}
+#verbTrainer .vt-small{color:var(--muted,#65748b);font-size:.82rem}
+#verbTrainer .vt-button{font:inherit;font-weight:600;border:1px solid var(--line,#cad3e0);background:var(--panel,#fff);border-radius:10px;padding:10px 12px;color:var(--ink,#172238);cursor:pointer}
+#verbTrainer .vt-primary{background:var(--accent,#2852ac);color:white;border-color:transparent}
+#verbTrainer .vt-modes{display:flex;gap:8px;margin:8px 0 12px}
+#verbTrainer .vt-modes .vt-button{flex:1}
+#verbTrainer .vt-card{background:var(--panel,#fff);border:1px solid var(--line,#d4dbe6);border-radius:17px;padding:20px;margin:0}
+#verbTrainer .vt-card h2{font-size:1.7rem;margin:8px 0 3px;line-height:1.25}
+#verbTrainer .vt-meaning{color:var(--muted,#66758c);margin:0 0 12px}
+#verbTrainer .vt-example{background:var(--accent2,#eef3ff);color:var(--ink,#172238);border-radius:12px;padding:15px;line-height:1.5;margin:14px 0}
+#verbTrainer .vt-example strong{display:block;font-size:1.13rem}
+#verbTrainer .vt-example p{margin:5px 0 0;opacity:.78}
+#verbTrainer .vt-forms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:14px 0}
+#verbTrainer .vt-forms>div{border:1px solid var(--line,#d4dbe6);border-radius:9px;padding:10px;min-width:0;overflow-wrap:anywhere}
+#verbTrainer .vt-forms small{display:block;font-size:.78rem;color:var(--muted,#65748b);margin-bottom:5px}
+#verbTrainer .vt-actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:12px 0}
+#verbTrainer .vt-actions .vt-button{min-width:0}
+#verbTrainer .vt-extras{display:flex;gap:8px;flex-wrap:wrap}
+#verbTrainer .vt-extras .vt-button{flex:1}
+#verbTrainer .vt-more{border-top:1px solid var(--line,#ddd);margin-top:14px;padding-top:8px}
+#verbTrainer .vt-more summary{padding:8px 0;cursor:pointer;font-weight:650}
+#verbTrainer table{width:100%;border-collapse:collapse}
+#verbTrainer td,#verbTrainer th{border-bottom:1px solid var(--line,#ddd);text-align:left;padding:8px}
+#verbTrainer .vt-options{border:1px solid var(--line,#ddd);border-radius:12px;padding:12px;margin:10px 0;background:var(--panel,#fff)}
+#verbTrainer .vt-options label{display:block;margin:5px 0}
+#verbTrainer .vt-options select,#verbTrainer .vt-options input[type=search],#verbTrainer #vtAnswer{width:100%;padding:11px;font:inherit;border:1px solid var(--line,#ddd);border-radius:9px;box-sizing:border-box;margin:5px 0}
+#verbTrainer .vt-options input[type=checkbox]{width:auto;margin-right:8px}
+#verbTrainer #vtAnswerForm{display:grid;gap:9px}
+@media(max-width:800px){
+/* Navigation must not consume three rows before the lesson. */
+.focus-nav{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto!important;overflow-y:hidden!important;gap:5px!important;scroll-snap-type:x proximity;scrollbar-width:thin}
+.focus-nav>.tab{flex:0 0 auto!important;white-space:nowrap!important;padding:9px 11px!important;font-size:.86rem!important}
+.focus-nav>.focus-more{flex:0 0 auto!important;position:relative!important;right:auto!important;min-width:auto!important}
+.focus-more>summary{padding:9px 10px!important;font-size:.86rem!important}
+.split-study-toolbar{display:none!important}
+.focus-progress{display:none}
+body:has(#today:not(.hidden)) .focus-progress{display:block}
+#verbTrainer .vt-card{padding:14px}
+#verbTrainer .vt-card h2{font-size:1.43rem}
+#verbTrainer .vt-top .vt-button{padding:8px 10px}
+#verbTrainer .vt-forms{gap:5px}
+#verbTrainer .vt-forms>div{padding:7px;font-size:.86rem}
+#verbTrainer .vt-actions .vt-button{padding:10px 5px;font-size:.88rem}
+}
+/* All learning tabs: one active content pane, less peripheral interface. */
+body:has(#flashcards:not(.hidden)) .focus-progress,
+body:has(#library:not(.hidden)) .focus-progress,
+body:has(#grammarGuide:not(.hidden)) .focus-progress,
+body:has(#articleTrainer:not(.hidden)) .focus-progress,
+body:has(#quiz:not(.hidden)) .focus-progress,
+body:has(#everyday:not(.hidden)) .focus-progress,
+body:has(#verbTrainer:not(.hidden)) .focus-progress{display:none}
+body:has(#verbTrainer:not(.hidden)) #speechFeedback.hidden{display:none}
+@media(max-width:600px){
+#flashcards .flash>.row{gap:8px}
+#flashcards .flash-actions{gap:7px}
+#flashcards .flash-actions button{padding:9px 8px;font-size:.88rem}
+#flashcards .flash>p.small.muted{display:none}
+#quiz .panel>p.muted{display:none}
+#today .today-hero .today-heading p.muted{display:none}
+}
