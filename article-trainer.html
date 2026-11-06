@@ -14,7 +14,7 @@
 .article-memory summary{cursor:pointer;font-weight:700}
 .article-memory p{margin:7px 0;line-height:1.5}
 @media(max-width:680px){.article-deck-bar select{min-width:100%}.article-deck-bar button{flex:1}}
-</style><link rel="stylesheet" href="swipe-navigation-v44.css?v=4.4.0"><style>
+</style><link rel="stylesheet" href="swipe-navigation-v44.css?v=4.4.0"><link rel="stylesheet" href="article-pro-visual-v50.css?v=5.0.0"><style>
 .article-focus-stats{margin:10px 0 15px;border:1px solid #dce4ef;border-radius:14px;background:var(--panel)}
 .article-focus-stats>summary{list-style:none;cursor:pointer;font-weight:750;padding:13px 15px;user-select:none}
 .article-focus-stats>summary::-webkit-details-marker{display:none}
@@ -64,7 +64,7 @@
 .rule-errors{padding:12px;background:var(--accentSoft);border-radius:10px;margin:12px 0}
 .rule-errors div{margin-top:7px}
 @media(max-width:760px){.rule-first-layout{grid-template-columns:1fr}.rule-first-topics{display:flex;overflow-x:auto;scroll-snap-type:x mandatory}.rule-topic{min-width:195px;scroll-snap-align:start}.rule-two{grid-template-columns:1fr}.rule-unit{padding:14px}.rule-first-intro{padding:12px}.rule-first-meta{font-size:.78rem}}
-</style></head><body>
+</style><style>.rule-article-mark{background:#c8dcff;border:1px solid #a7c4fa;color:#153f95;border-radius:7px;padding:2px 8px;font-weight:900;white-space:nowrap}.rule-article-token{display:inline-block;border-radius:6px;padding:1px 7px;font-weight:900;font-size:.83rem;border:1px solid transparent}.rule-article-token.der{background:#dfebff;border-color:#b6cfff;color:#1750ad}.rule-article-token.die{background:#ffe3ef;border-color:#f5c0d8;color:#ad276a}.rule-article-token.das{background:#e3f6e9;border-color:#b5ddc7;color:#166d4e}</style></head><body>
 <main class="wrap"><header class="hero"><div><div class="eyebrow">Learn patterns, then exceptions</div><h1>📗 Artikel Trainer</h1><p>Learn a gender rule once, test new words, then practise exceptions and mistakes. The 1,000 nouns stay available as a reference.</p></div><div class="tag">1,000 nouns · 40 clusters · Offline</div></header>
 <details class="article-focus-stats"><summary>📊 Progress & saved noun lists <span>Open to choose a category</span></summary><div class="stat-grid" aria-label="Article trainer statistics"><button class="stat" id="sAllBtn"><b id="sAll">1,000</b><span>All nouns</span></button><button class="stat" id="sLearnedBtn"><b id="sLearned">0</b><span>Learned (3 days)</span></button><button class="stat" id="sPracticeBtn"><b id="sPractice">0</b><span>Need practice</span></button><button class="stat" id="sSavedBtn"><b id="sSaved">0</b><span>Bookmarked</span></button></div></details>
 <nav class="tabs" aria-label="Article trainer modes">
@@ -176,7 +176,7 @@ const ruleCatalog=[
  {id:'tionen',title:'-tion and -ität',pattern:'Nouns formed with -tion or -ität are feminine: DIE.',examples:['Information','Produktion','Qualität'],contrasts:['Projekt','Dokument'],test:['Kommunikation','Organisation','Mobilität','Projekt','Dokument'],why:'Similar-looking borrowed words such as Projekt and Dokument have their own gender.'},
  {id:'diminutive',title:'Diminutives: -chen / -lein',pattern:'Diminutives ending in -chen or -lein are DAS.',examples:['Mädchen','Brötchen','Häuschen'],contrasts:['Brot','Haus'],test:['Kätzchen','Büchlein','Mädchen','Brot','Haus'],why:'The grammatical article follows the diminutive ending, not the person or original base noun.'},
  {id:'profession',title:'Female job titles: -in',pattern:'German female person and profession nouns formed with -in are DIE.',examples:['Mitarbeiterin','Lehrerin','Bewerberin'],contrasts:['Mitarbeiter','Bewerber'],test:['Geschäftsführerin','Kundin','Verkäuferin','Mitarbeiter','Bewerber'],why:'Contrast der Mitarbeiter with die Mitarbeiterin. Do not apply -in blindly to unrelated final letters.'},
- {id:'compound',title:'Compound nouns: the last noun wins',pattern:'A compound noun takes the gender of its FINAL noun: das Gespräch → das Vorstellungsgespräch; der Vertrag → der Arbeitsvertrag.',examples:['Vorstellungsgespräch','Arbeitsvertrag','Arbeitszeit'],contrasts:['Gespräch','Vertrag','Zeit'],test:['Mietvertrag','Bewerbungsgespräch','Dienstreise','Arbeitszeit','Vorstellungsgespräch'],why:'Split the compound and identify the final noun; its article controls the whole word.'},
+ {id:'compound',title:'Compound nouns: the last noun wins',pattern:'A compound noun takes the gender of its FINAL noun: das Gespräch → das Vorstellungsgespräch; der Vertrag → der Arbeitsvertrag.',examples:['Vorstellungsgespräch','Arbeitsvertrag','Arbeitszeit'],contrasts:['Gespräch','Vertrag','Probezeit'],test:['Mietvertrag','Projektplan','Dienstreise','Arbeitszeit','Vorstellungsgespräch'],why:'Split the compound and identify the final noun; its article controls the whole word.'},
  {id:'exceptions',title:'Exceptions & misleading endings',pattern:'Do not guess the article from -e or -nis alone. Learn useful contrasting pairs: der Kunde, das Ende; das Ergebnis, die Erlaubnis.',examples:['Kunde','Ende','Ergebnis'],contrasts:['Kollege','Erlaubnis','Kenntnis'],test:['Kunde','Auge','Zeugnis','Erlaubnis','Ergebnis'],why:'This category has no single gender rule. Practise the exceptions, rather than inventing an incorrect rule.'}
 ];
 let activeRule=ruleCatalog.find(x=>{const r=ruleState[x.id];return !r||!r.next||r.next<=Date.now()})?.id||ruleCatalog[0].id;
@@ -211,8 +211,8 @@ function presentRuleLesson(rule){
  area.innerHTML='<div class="rule-unit">'+
  '<p class="rule-kicker">RULE '+(ruleCatalog.indexOf(rule)+1)+' / '+ruleCatalog.length+'</p>'+
  '<h2>'+esc(rule.title)+'</h2>'+
- '<div class="rule-core"><strong>The pattern</strong><p>'+esc(rule.pattern)+'</p></div>'+
- '<div class="rule-two"><div><h3>Learn a few examples</h3>'+sample.map(w=>'<div class="rule-example"><strong>'+esc(w.article+' '+w.noun)+'</strong><span>'+esc(w.english)+'</span></div>').join('')+'</div>'+
+ '<div class="rule-core"><strong>The pattern</strong><p>'+esc(rule.pattern).replace(/\b(DER|DIE|DAS)\b/g,'<mark class="rule-article-mark">$1</mark>')+'</p></div>'+
+ '<div class="rule-two"><div><h3>Learn a few examples</h3>'+sample.map(w=>'<div class="rule-example"><strong><span class="rule-article-token '+esc(w.article)+'">'+esc(w.article)+'</span> '+esc(w.noun)+'</strong><span>'+esc(w.english)+'</span></div>').join('')+'</div>'+
  '<div><h3>Contrast these words</h3>'+contrast.map(w=>'<div class="rule-example"><strong>'+esc(w.article+' '+w.noun)+'</strong><span>'+esc(w.english)+'</span></div>').join('')+'</div></div>'+
  '<p class="rule-why">'+esc(rule.why)+'</p>'+
  '<button type="button" class="primary" id="ruleStart">Test the rule · 5 mixed examples</button>'+
