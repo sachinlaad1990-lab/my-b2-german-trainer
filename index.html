@@ -88,11 +88,11 @@ body[data-theme="dark"] .wordbuttons button.is-active{color:var(--ink)}
 
   
 
-  <section class="stats">
-    <div class="stat"><strong id="totalStat">0</strong><span>Vocabulary words</span></div>
-    <div class="stat"><strong id="learnedStat">0</strong><span>Marked learned</span></div>
-    <div class="stat"><strong id="bookmarkedStat">0</strong><span>Bookmarked</span></div>
-    <div class="stat"><strong id="difficultStat">0</strong><span>Need practice</span></div>
+  <section class="stats" aria-label="Open vocabulary lists by progress">
+    <button type="button" class="stat v4-stat-button" data-vocab-stat="all" aria-label="Show all vocabulary words"><strong id="totalStat">0</strong><span>Vocabulary words</span></button>
+    <button type="button" class="stat v4-stat-button" data-vocab-stat="learned" aria-label="Show all learned words"><strong id="learnedStat">0</strong><span>Marked learned</span></button>
+    <button type="button" class="stat v4-stat-button" data-vocab-stat="bookmarked" aria-label="Show all bookmarked words"><strong id="bookmarkedStat">0</strong><span>Bookmarked</span></button>
+    <button type="button" class="stat v4-stat-button" data-vocab-stat="difficult" aria-label="Show words needing practice"><strong id="difficultStat">0</strong><span>Need practice</span></button>
   </section>
   <nav aria-label="Main navigation">
     <button class="tab active" data-tab="today">🏠 Today</button>
@@ -119,7 +119,12 @@ body[data-theme="dark"] .wordbuttons button.is-active{color:var(--ink)}
       <div class="today-progress-track" role="progressbar" aria-label="Daily session progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="todayProgressTrack"><div id="todayProgressBar"></div></div>
       <div class="today-session-row"><span id="todaySessionStatus" aria-live="polite">Preparing your daily practice…</span><button type="button" id="todayRefresh" class="secondary">Start another set</button></div>
     </div>
-    <div class="panel" id="v4MasteryPanel"><h2>📈 Your learning progress</h2><p class="small muted">Mastery is earned across three separate successful study days. Your existing saved results are preserved.</p><div class="v4-score"><span id="v4MasteredCount">0 mastered</span><span id="v4LearningCount">0 learning</span><span id="v4PracticeCount">0 need practice</span><span id="v4NewCount">0 not learned</span></div><div class="v4-word-progress" style="height:13px"><div id="v4MasteryBar" style="width:0%"></div></div><p id="v4MasteryPercent" class="v4-grammar-note">0% mastered</p></div>
+    <div class="panel" id="v4MasteryPanel"><h2>📈 Your learning progress</h2><p class="small muted">Mastery is earned across three separate successful study days. Your existing saved results are preserved.</p><div class="v4-score v4-progress-actions">
+<button type="button" data-vocab-stat="learned" id="v4MasteredCount">0 mastered</button>
+<button type="button" data-vocab-stat="learning" id="v4LearningCount">0 learning</button>
+<button type="button" data-vocab-stat="practice" id="v4PracticeCount">0 need practice</button>
+<button type="button" data-vocab-stat="new" id="v4NewCount">0 not learned</button>
+</div><div class="v4-word-progress" style="height:13px"><div id="v4MasteryBar" style="width:0%"></div></div><p id="v4MasteryPercent" class="v4-grammar-note">0% mastered</p></div>
     <div class="panel today-card" id="todayCard">
       <div id="todayWordType" class="today-pill">Daily practice</div>
       <div id="todayWord" class="today-word">Your next German word appears here</div>
@@ -168,7 +173,7 @@ body[data-theme="dark"] .wordbuttons button.is-active{color:var(--ink)}
     </div>
     <div class="panel" style="margin-top:14px">
       <div class="row"><div><h2 style="margin:0">Your vocabulary</h2><p class="muted small" style="margin:4px 0 0">Stable 20-word decks. Word positions stay fixed even when you filter or reopen the app.</p></div><div><label for="search">Search</label><input id="search" placeholder="Search German, English, category…"></div><div><label for="filter">Show</label><select id="filter"><option value="all">All words</option><option value="bookmarked">All bookmarks</option><option value="exam">For exam</option><option value="azeez">Azeez suggestion</option><option value="difficult">Need practice</option><option value="learned">Learned</option><option value="unlearned">Not learned yet</option></select></div></div>
-      <div class="v4-vocab-toolbar"><div class="v4-nav"><button id="v4VocabPrev" type="button">← Previous deck</button><label for="v4VocabSelect">Vocabulary deck <select id="v4VocabSelect"></select></label><button id="v4VocabNext" class="primary" type="button">Next deck →</button><span id="v4VocabStatus" class="v4-nav-status"></span></div></div><div id="wordList" class="wordlist"></div>
+      <div class="v4-vocab-toolbar"><div class="v4-nav"><button id="v4VocabPrev" type="button">← Previous deck</button><label for="v4VocabSelect">Vocabulary deck <select id="v4VocabSelect"></select></label><button id="v4VocabNext" class="primary" type="button">Next deck →</button><span id="v4VocabStatus" class="v4-nav-status"></span></div></div><div id="v4StatResultsBar" class="v4-stat-results hidden" role="status" aria-live="polite"><span id="v4StatResultsLabel"></span><button type="button" id="v4StatClear" class="secondary">← Back to fixed decks</button></div><div id="wordList" class="wordlist"></div>
     </div>
   </section>
 
@@ -828,31 +833,72 @@ document.getElementById('removePhotoBtn').addEventListener('click',()=>{const p=
 document.getElementById('profilePhoto').addEventListener('change',()=>{const f=document.getElementById('profilePhoto').files[0];if(!f)return;if(!f.type.startsWith('image/')||f.size>3*1024*1024){document.getElementById('profileStatus').textContent='Choose an image smaller than 3 MB.';document.getElementById('profilePhoto').value='';return}const r=new FileReader();r.onload=()=>{const im=document.getElementById('photoPreview');im.src=r.result;im.style.display='block';document.getElementById('profileStatus').textContent='Preview ready. Click Save personalisation to keep it.'};r.readAsDataURL(f)});
 function byId(id){return words.find(w=>w.id===id)}
 function renderStats(){document.getElementById('totalStat').textContent=words.length;document.getElementById('learnedStat').textContent=words.filter(w=>w.learned).length;document.getElementById('bookmarkedStat').textContent=words.filter(w=>w.bookmarked).length;document.getElementById('difficultStat').textContent=words.filter(w=>w.difficult).length}
+let v4StatsView=null;
+const v4StatPredicates={
+ all:()=>true,
+ learned:w=>!!w.learned,
+ bookmarked:w=>!!w.bookmarked,
+ difficult:w=>!!w.difficult,
+ practice:w=>!w.learned&&!!w.difficult,
+ learning:w=>!w.learned&&!w.difficult&&!!v3State.records[v3WordKey(w)]?.successDays?.length,
+ new:w=>!w.learned&&!w.difficult&&!v3State.records[v3WordKey(w)]?.successDays?.length,
+ due:w=>v3GetDue().some(item=>item.id===w.id),
+ newDue:w=>v3GetNew().some(item=>item.id===w.id)
+};
+const v4StatLabels={all:'All vocabulary',learned:'Learned words',bookmarked:'Bookmarked words',difficult:'Need practice',practice:'Need practice (not yet mastered)',learning:'Learning / improving',new:'Not learned yet',due:'Due for review',newDue:'New words waiting'};
+function v4OpenStatList(kind){
+ if(!v4StatPredicates[kind])return;
+ v4StatsView=kind;
+ document.getElementById('search').value='';
+ document.getElementById('filter').value='all';
+ document.querySelector('button.tab[data-tab="library"]')?.click();
+ renderList();
+ document.getElementById('v4StatResultsBar')?.scrollIntoView({block:'start',behavior:'smooth'});
+}
 function renderList() {
  const q=document.getElementById('search').value.trim().toLowerCase();
  const f=document.getElementById('filter').value;
  let filtered=words.filter(w=>{
   const text=[w.german,w.english,w.category,w.example,w.translation,w.grammar,w.article,w.pronunciation,w.notes].join(' ').toLowerCase();
-  return (!q||text.includes(q))&&(f==='all'||(f==='bookmarked'&&w.bookmarked)||(f==='exam'&&w.examBookmark)||(f==='azeez'&&w.azeezSuggestion)||(f==='difficult'&&w.difficult)||(f==='learned'&&w.learned)||(f==='unlearned'&&!w.learned));
+  return (!q||text.includes(q))&&(!v4StatsView||v4StatPredicates[v4StatsView](w))&&(f==='all'||(f==='bookmarked'&&w.bookmarked)||(f==='exam'&&w.examBookmark)||(f==='azeez'&&w.azeezSuggestion)||(f==='difficult'&&w.difficult)||(f==='learned'&&w.learned)||(f==='unlearned'&&!w.learned));
  });
  const orderMap=new Map(listOrder.map((id,index)=>[id,index]));
  filtered.sort((a,b)=>(orderMap.get(a.id)??999999)-(orderMap.get(b.id)??999999));
  const el=document.getElementById('wordList');
  
  const decks=[];
- for(let i=0;i<deckOrder.length;i+=20){const ids=deckOrder.slice(i,i+20);const deck=ids.map(id=>filtered.find(w=>w.id===id)).filter(Boolean);decks.push({number:Math.floor(i/20)+1,words:deck});}
+ // Keep numbered deck assignments untouched even when filtering by a statistic.
+ for(let i=0;i<deckOrder.length;i+=20){
+  const ids=deckOrder.slice(i,i+20);
+  const deck=ids.map(id=>filtered.find(w=>w.id===id)).filter(Boolean);
+  decks.push({number:Math.floor(i/20)+1,words:deck});
+ }
+ const statsBar=document.getElementById('v4StatResultsBar');
+ statsBar.classList.toggle('hidden',!v4StatsView);
+ if(v4StatsView){
+  document.getElementById('v4StatResultsLabel').textContent=(v4StatLabels[v4StatsView]||'Matching words')+' · '+filtered.length+' word'+(filtered.length===1?'':'s')+' across all decks';
+ }
  v4VocabDeckIndex=Math.min(Math.max(0,v4VocabDeckIndex),Math.max(0,decks.length-1));
- const selector=document.getElementById('v4VocabSelect');selector.innerHTML=decks.map((d,i)=>'<option value="'+i+'">Deck '+(i+1)+'</option>').join('');selector.value=String(v4VocabDeckIndex);
- document.getElementById('v4VocabPrev').disabled=v4VocabDeckIndex===0;document.getElementById('v4VocabNext').disabled=v4VocabDeckIndex>=decks.length-1;
- document.getElementById('v4VocabStatus').textContent=decks.length?'Deck '+(v4VocabDeckIndex+1)+' of '+decks.length:'No decks yet';
+ const selector=document.getElementById('v4VocabSelect');
+ selector.innerHTML=decks.map((d,i)=>'<option value="'+i+'">Deck '+(i+1)+'</option>').join('');
+ selector.value=String(v4VocabDeckIndex);
+ selector.disabled=!!v4StatsView;
+ document.getElementById('v4VocabPrev').disabled=!!v4StatsView||v4VocabDeckIndex===0;
+ document.getElementById('v4VocabNext').disabled=!!v4StatsView||v4VocabDeckIndex>=decks.length-1;
+ document.getElementById('v4VocabStatus').textContent=v4StatsView?'Filtered results from all fixed decks':decks.length?'Deck '+(v4VocabDeckIndex+1)+' of '+decks.length:'No decks yet';
  if(!decks.length){el.innerHTML='<div class="v4-empty">Add or import your first vocabulary word.</div>';return;}
- el.innerHTML='<div class="vocab-decks">'+decks.filter(d=>d.number===v4VocabDeckIndex+1).map(({number,words:deck},index)=>{
-  const learned=deck.filter(w=>w.learned).length,total=deck.length;
+ const visibleDecks=v4StatsView?decks.filter(d=>d.words.length):decks.filter(d=>d.number===v4VocabDeckIndex+1);
+ if(!visibleDecks.length){
+  el.innerHTML='<div class="v4-empty">There are no words in this category yet. Choose another statistic or return to your fixed decks.</div>';
+  return;
+ }
+ el.innerHTML='<div class="vocab-decks">'+visibleDecks.map(({number,words:deck},index)=>{
+ const learned=deck.filter(w=>w.learned).length,total=deck.length;
   const percent=total?Math.round(learned/total*100):0,mastered=total>0&&learned===total;
   const cards=deck.map(w=>`<article class="word"><div><h3>${esc(w.german)}</h3><p>${esc(w.english)}</p>${w.article?`<div class="small">${esc(w.article)}</div>`:''}${v4WordForms(w).length?`<div class="v4-form-list">${v4WordForms(w).map(v=>`<span>${esc(v)}</span>`).join('')}</div>`:''}<div class="small">${esc(v4MasteryLabel(w))}</div>${w.example?`<p><strong>Example:</strong> ${esc(w.example)}</p>`:''}${w.translation?`<p><strong>Translation:</strong> ${esc(w.translation)}</p>`:''}<details class="v4-mnemonic-note"><summary>🧠 Memory clue</summary><p>${esc(window.B2MnemonicEngine?.describe(w)||'Create your own image for this word.')}</p></details>${w.grammar?`<details class="v4-grammar-note"><summary>Optional grammar note</summary><p>${esc(w.grammar).replace(/\n/g,'<br>')}</p></details>`:''}${w.notes?`<p class="user-notes"><strong>📝 Your notes:</strong> ${esc(w.notes).replace(/\n/g,'<br>')}</p>`:''}<span class="tag">${esc(w.category||'Uncategorised')}</span><span class="tag">${esc(w.level||'Important')}</span>${w.bookmarked?'<span class="tag">★ Bookmarked</span>':''}${w.examBookmark?'<span class="tag">🎯 For exam</span>':''}${w.azeezSuggestion?'<span class="tag">💡 Azeez suggestion</span>':''}${w.difficult?'<span class="tag">Need practice</span>':''}${w.learned?'<span class="tag">✓ Learned</span>':''}</div><div class="wordbuttons"><button data-action="speak-word" data-id="${esc(w.id)}" title="Hear German pronunciation" aria-label="Hear German word">🔊 Word</button>${w.example?`<button data-action="speak-example" data-id="${esc(w.id)}" title="Hear the German example sentence">🔊 Sentence</button>`:''}<button data-action="bookmark" data-id="${esc(w.id)}" class="${w.bookmarked?'is-active':''}" title="General bookmark">${w.bookmarked?'★':'☆'}</button><button data-action="exam" data-id="${esc(w.id)}" class="${w.examBookmark?'is-active':''}" title="Mark for exam">${w.examBookmark?'🎯 Exam ✓':'🎯 For exam'}</button><button data-action="azeez" data-id="${esc(w.id)}" class="${w.azeezSuggestion?'is-active':''}" title="Azeez suggestion">${w.azeezSuggestion?'💡 Azeez ✓':'💡 Azeez suggestion'}</button><button data-action="difficult" data-id="${esc(w.id)}" class="${w.difficult?'is-active':''}" title="Need practice">${w.difficult?'Practise ✓':'Difficult'}</button><button data-action="learned" data-id="${esc(w.id)}" class="${w.learned?'is-active':''}" title="Learned">${w.learned?'Learned ✓':'Learned'}</button><button data-action="edit" data-id="${esc(w.id)}">Edit</button><button class="danger" data-action="delete" data-id="${esc(w.id)}">Delete</button></div></article>`).join('');
   return `<details class="vocab-deck ${mastered?'deck-mastered':''}" open><summary><span class="deck-heading"><span class="deck-chevron">▶</span><span>Deck ${number}${mastered?' ✓':''}</span></span><span class="deck-meta">${learned}/${total} learned · ${percent}%${mastered?' · Mastered':''}</span></summary><div class="deck-progress"><div style="width:${percent}%"></div></div><div class="deck-words">${cards}</div></details>`;
  }).join('')+'</div>';
- if(!decks[v4VocabDeckIndex]?.words.length)el.innerHTML='<div class="v4-empty">No matching words in Deck '+(v4VocabDeckIndex+1)+'. Clear the search/filter or select another deck.</div>';
+ if(!v4StatsView&&!decks[v4VocabDeckIndex]?.words.length)el.innerHTML='<div class="v4-empty">No matching words in Deck '+(v4VocabDeckIndex+1)+'. Clear the search/filter or select another deck.</div>';
 }
 function v4RenderProgress(){
  const summary={mastered:0,learning:0,practice:0,new:0};
@@ -874,6 +920,8 @@ document.getElementById('cancelEdit').onclick=resetForm;
 document.getElementById('v4VocabPrev').onclick=()=>{v4VocabDeckIndex=Math.max(0,v4VocabDeckIndex-1);v4KeepIndex(V4_VOCAB_DECK_KEY,v4VocabDeckIndex);renderList()};
 document.getElementById('v4VocabNext').onclick=()=>{v4VocabDeckIndex=Math.min(Math.max(0,Math.ceil(deckOrder.length/20)-1),v4VocabDeckIndex+1);v4KeepIndex(V4_VOCAB_DECK_KEY,v4VocabDeckIndex);renderList()};
 document.getElementById('v4VocabSelect').onchange=e=>{v4VocabDeckIndex=Number(e.target.value)||0;v4KeepIndex(V4_VOCAB_DECK_KEY,v4VocabDeckIndex);renderList()};
+document.querySelectorAll('[data-vocab-stat]').forEach(button=>button.addEventListener('click',()=>v4OpenStatList(button.dataset.vocabStat)));
+document.getElementById('v4StatClear').onclick=()=>{v4StatsView=null;document.getElementById('search').value='';document.getElementById('filter').value='all';renderList()};
 document.getElementById('search').addEventListener('input',renderList);document.getElementById('filter').addEventListener('change',renderList);
 document.getElementById('wordList').addEventListener('click',e=>{
  const b=e.target.closest('button[data-action]');if(!b)return;const w=byId(b.dataset.id);if(!w)return;
