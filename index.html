@@ -242,8 +242,8 @@ body[data-theme="dark"] .wordbuttons button.is-active{color:var(--ink)}
       </div>
     </div>
     <div class="panel" style="margin-top:14px">
-      <h2>Sync your Google Sheet</h2>
-      <p>Load the latest vocabulary from your published Google Sheet. When you add words to the sheet, open this app and click “Sync Google Sheet” again. This imports words into this browser; progress you mark in the app stays local.</p>
+      <h2>Automatic Google Sheet updates</h2>
+      <p>Your published Google Sheet is checked automatically when you open this app and when your connection returns. You can still press the button below to refresh manually. Saved learning progress, notes, and existing deck positions are retained.</p>
       <div class="actions"><button class="primary" id="syncSheetBtn">Sync Google Sheet</button></div>
       <p class="small muted">Your sheet is published to the web, so anyone with its published link may be able to read the vocabulary. This connection is read-only: changes made in the app do not write back to the sheet.</p>
       <hr style="border:0;border-top:1px solid var(--line);margin:18px 0">
@@ -415,13 +415,15 @@ let v4VocabDeckIndex=v4Index(V4_VOCAB_DECK_KEY);
 flashDeckIndex=v4Index(V4_FLASH_DECK_KEY);flashIndex=v4Index(V4_FLASH_CARD_KEY);
 let quizQueue=[], quizQueueIndex=0, quizGroupKey='';
 function shuffleArray(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function loadDeckOrder(){try{return JSON.parse(localStorage.getItem(DECK_ORDER_KEY)||'[]')}catch(e){return []}}
+function loadDeckOrder(){try{const d=JSON.parse(localStorage.getItem(DECK_ORDER_KEY)||'[]');return Array.isArray(d)?d:[]}catch(e){return []}}
 function saveDeckOrder(){localStorage.setItem(DECK_ORDER_KEY,JSON.stringify(deckOrder))}
 function reconcileOrders(){
  const ids=words.map(w=>w.id), idSet=new Set(ids);
  deckOrder=deckOrder.filter(id=>idSet.has(id));
- const missing=ids.filter(id=>!deckOrder.includes(id));
- deckOrder.push(...missing.sort((a,b)=>{const wa=words.find(w=>w.id===a),wb=words.find(w=>w.id===b);return String(wa?.createdAt||"").localeCompare(String(wb?.createdAt||""))||String(a).localeCompare(String(b))}));saveDeckOrder();
+ const existing=new Set(deckOrder);
+ const missing=ids.filter(id=>!existing.has(id));
+ // Existing deck IDs never move; append new sheet words in source row order.
+ deckOrder.push(...missing);saveDeckOrder();
  listOrder=listOrder.filter(id=>idSet.has(id));
  const newListIds=ids.filter(id=>!listOrder.includes(id));
  listOrder.push(...newListIds);
@@ -538,6 +540,7 @@ function v4RecordRating(word,rating){
   delayMs=intervalDays*86400000;
  }else return;
  v3State.records[key]={...prior,dueAt:now+delayMs,intervalDays,repetitions,successDays:days,lastRating:rating,lastReviewedAt:now};
+ word.progressUpdatedAt=now;
  v3SaveState();
 }
 function v4WordForms(w){
@@ -882,7 +885,8 @@ document.getElementById('wordList').addEventListener('click',e=>{
  case 'edit':document.getElementById('wordEditorPanel').style.display='block';document.getElementById('editId').value=w.id;for(const k of ['german','english','category','article','example','translation','grammar','notes','pronunciation','level'])document.getElementById(k).value=w[k]||'';
  for(const [key,id] of [['wordType','v4WordType'],['plural','v4Plural'],['prateritum','v4Prateritum'],['partizip','v4Partizip'],['auxiliary','v4Aux']])document.getElementById(id).value=w[key]||'';document.getElementById('formTitle').textContent='Edit vocabulary word';document.getElementById('saveWord').textContent='Save changes';document.getElementById('cancelEdit').classList.remove('hidden');document.getElementById('wordEditorPanel').scrollIntoView({behavior:'smooth',block:'start'});return;
  case 'delete':if(!confirm(`Delete "${w.german}"?`))return;delete v3State.records[v3WordKey(w)];v3SaveState();words=words.filter(x=>x.id!==w.id);break;
- }saveWords();
+ }if(['bookmark','learned','difficult'].includes(b.dataset.action))w.progressUpdatedAt=Date.now();
+ saveWords();
 });
 document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.view').forEach(v=>v.classList.toggle('hidden',v.id!==b.dataset.tab));if(b.dataset.tab==='quiz')startQuiz();if(b.dataset.tab==='flashcards')renderFlash();if(b.dataset.tab==='today')renderToday()});
 function getSet(mode){return words.filter(w=>mode==='bookmarked'?w.bookmarked:mode==='exam'?w.examBookmark:mode==='azeez'?w.azeezSuggestion:mode==='difficult'?w.difficult:mode==='unlearned'?!w.learned:true)}
@@ -1014,7 +1018,7 @@ document.getElementById('syncSheetBtn').onclick=async()=>{
    const obj={};headers.forEach((k,i)=>{if(k)obj[k]=(r[i]||'').trim()});
    if(!obj.german||!obj.english)continue;
    const existing=words.find(w=>w.german.trim().toLowerCase()===obj.german.trim().toLowerCase());
-   const w={id:obj.id||existing?.id||uid(),german:obj.german,english:obj.english,category:obj.category||'',article:obj.article||'',example:obj.example||'',translation:obj.translation||'',grammar:obj.grammar||existing?.grammar||'',notes:obj.notes||existing?.notes||'',pronunciation:obj.pronunciation||'',level:obj.level||'Important',bookmarked:existing?!!existing.bookmarked:/^(true|yes|1)$/i.test(obj.bookmarked||''),examBookmark:existing?!!existing.examBookmark:/^(true|yes|1)$/i.test(obj.examBookmark||''),azeezSuggestion:existing?!!existing.azeezSuggestion:/^(true|yes|1)$/i.test(obj.azeezSuggestion||''),difficult:existing?!!existing.difficult:/^(true|yes|1)$/i.test(obj.difficult||''),learned:existing?!!existing.learned:/^(true|yes|1)$/i.test(obj.learned||''),createdAt:existing?.createdAt||new Date().toISOString()};
+   const w={...(existing||{}),id:existing?.id||obj.id||uid(),german:obj.german,english:obj.english,category:obj.category||existing?.category||'',article:obj.article||existing?.article||'',example:obj.example||existing?.example||'',translation:obj.translation||existing?.translation||'',grammar:obj.grammar||existing?.grammar||'',notes:existing?.notes||obj.notes||'',pronunciation:obj.pronunciation||existing?.pronunciation||'',level:obj.level||existing?.level||'Important',bookmarked:existing?!!existing.bookmarked:/^(true|yes|1)$/i.test(obj.bookmarked||''),examBookmark:existing?!!existing.examBookmark:/^(true|yes|1)$/i.test(obj.examBookmark||''),azeezSuggestion:existing?!!existing.azeezSuggestion:/^(true|yes|1)$/i.test(obj.azeezSuggestion||''),difficult:existing?!!existing.difficult:/^(true|yes|1)$/i.test(obj.difficult||''),learned:existing?!!existing.learned:/^(true|yes|1)$/i.test(obj.learned||''),createdAt:existing?.createdAt||new Date().toISOString()};
    if(existing){words=words.map(x=>x.id===existing.id?w:x);updated++;}else{words.push(w);added++;}
   }
   saveWords();status.textContent=`Sync complete: ${added} new word(s) added and ${updated} existing word(s) refreshed from Google Sheets. Your local learned/bookmark/practice progress was preserved.`;
