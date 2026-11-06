@@ -9,6 +9,7 @@
   const rules = [
     { surface: '#wordList', prev: '#v4VocabPrev', next: '#v4VocabNext' },
     { surface: '#flashcards .panel.flash', prev: '#prevCard', next: '#nextCard' },
+    { surface: '#verbTrainer .vt-card:not(.vt-mcq)', prev: '#vtPrev', next: '#vtNext' },
     { surface: '#bhWorkspace', prev: '#bhPrev', next: '#bhNext' },
     { surface: '#v4PhraseCard', prev: '#v4PhrasePrev', next: '#v4PhraseNext' },
     { surface: '#browse', prev: '#articlePrevDeck', next: '#articleNextDeck',
@@ -74,7 +75,10 @@
 
     const button = usableButton(dx < 0 ? gesture.rule.next : gesture.rule.prev);
     if (!button) return;
+    // Give the next card a light directional entrance, without animating scroll.
+    document.documentElement.dataset.studySwipe = dx < 0 ? 'next' : 'previous';
     button.click();
+    window.setTimeout(() => { delete document.documentElement.dataset.studySwipe; }, 310);
     // Nonintrusive spoken feedback for screen-reader users.
     const live = document.getElementById('swipeNavigationStatus');
     if (live) live.textContent = dx < 0 ? 'Next item' : 'Previous item';
