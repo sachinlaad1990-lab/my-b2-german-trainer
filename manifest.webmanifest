@@ -1,0 +1,21 @@
+{
+  "id": "./",
+  "name": "Deutsch Lernen — B2 Beruf",
+  "short_name": "Deutsch B2",
+  "description": "German vocabulary, verbs, grammar and spaced-repetition practice.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f5f7fb",
+  "theme_color": "#315ee8",
+  "lang": "de",
+  "icons": [
+    {
+      "src": "app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
