@@ -1003,13 +1003,24 @@ const aliases={id:['id','word_id','word id'],grammar:['grammar','grammar explana
 function parseCSV(text){const rows=[];let row=[],cell='',quoted=false;for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];if(c==='"'&&quoted&&n==='"'){cell+='"';i++}else if(c==='"'){quoted=!quoted}else if(c===','&&!quoted){row.push(cell);cell=''}else if((c==='\n'||c==='\r')&&!quoted){if(c==='\r'&&n==='\n')i++;row.push(cell);if(row.some(x=>x.trim()))rows.push(row);row=[];cell=''}else cell+=c}row.push(cell);if(row.some(x=>x.trim()))rows.push(row);return rows}
 function headerKey(h){const x=h.trim().toLowerCase().replace(/[_-]/g,' ');for(const [k,arr] of Object.entries(aliases))if(arr.includes(x))return k;return null}
 const GOOGLE_SHEET_CSV_URL='https://docs.google.com/spreadsheets/d/e/2PACX-1vRAFoeXkeHveoTisgQWmcghLRDKDhC9mvTd6t7qMrzNBggKQGGiN2Qveeqnx7tp0tBWdTMyVJcIEgNi/pub?output=csv';
-document.getElementById('syncSheetBtn').onclick=async()=>{
+const SHEET_FINGERPRINT_KEY='deutschB2SourceSheetFingerprint_v43';
+const SHEET_COUNT_KEY='deutschB2SourceSheetCount_v43';
+let sheetRefreshInFlight=false,lastSheetRefresh=0;
+async function refreshSheet({silent=false}={}){
+ if(sheetRefreshInFlight)return;
+ sheetRefreshInFlight=true;
+ lastSheetRefresh=Date.now();
  const status=document.getElementById('importStatus'),btn=document.getElementById('syncSheetBtn');
  btn.disabled=true;btn.textContent='Syncing…';status.textContent='Connecting to your published Google Sheet…';
  try{
   const response=await fetch(GOOGLE_SHEET_CSV_URL,{cache:'no-store'});
   if(!response.ok)throw new Error('Google Sheets returned HTTP '+response.status+'. Check that the sheet is still published as CSV.');
-  const raw=await response.text(),rows=parseCSV(raw);
+  const raw=await response.text();
+  let hash=2166136261;for(let n=0;n<raw.length;n++){hash^=raw.charCodeAt(n);hash=Math.imul(hash,16777619)}
+  const fingerprint=String(raw.length)+':'+(hash>>>0).toString(16);
+  const oldFingerprint=localStorage.getItem(SHEET_FINGERPRINT_KEY),oldCount=Number(localStorage.getItem(SHEET_COUNT_KEY))||0;
+  if(fingerprint===oldFingerprint&&words.length>=oldCount){status.textContent='Vocabulary source already up to date. Your saved decks and progress are unchanged.';return;}
+  const rows=parseCSV(raw);
   if(rows.length<2)throw new Error('The published sheet has no vocabulary rows.');
   const headers=rows[0].map(headerKey);
   if(!headers.includes('german')||!headers.includes('english'))throw new Error('Could not find German and English columns in the sheet.');
@@ -1021,10 +1032,16 @@ document.getElementById('syncSheetBtn').onclick=async()=>{
    const w={...(existing||{}),id:existing?.id||obj.id||uid(),german:obj.german,english:obj.english,category:obj.category||existing?.category||'',article:obj.article||existing?.article||'',example:obj.example||existing?.example||'',translation:obj.translation||existing?.translation||'',grammar:obj.grammar||existing?.grammar||'',notes:existing?.notes||obj.notes||'',pronunciation:obj.pronunciation||existing?.pronunciation||'',level:obj.level||existing?.level||'Important',bookmarked:existing?!!existing.bookmarked:/^(true|yes|1)$/i.test(obj.bookmarked||''),examBookmark:existing?!!existing.examBookmark:/^(true|yes|1)$/i.test(obj.examBookmark||''),azeezSuggestion:existing?!!existing.azeezSuggestion:/^(true|yes|1)$/i.test(obj.azeezSuggestion||''),difficult:existing?!!existing.difficult:/^(true|yes|1)$/i.test(obj.difficult||''),learned:existing?!!existing.learned:/^(true|yes|1)$/i.test(obj.learned||''),createdAt:existing?.createdAt||new Date().toISOString()};
    if(existing){words=words.map(x=>x.id===existing.id?w:x);updated++;}else{words.push(w);added++;}
   }
-  saveWords();status.textContent=`Sync complete: ${added} new word(s) added and ${updated} existing word(s) refreshed from Google Sheets. Your local learned/bookmark/practice progress was preserved.`;
+  saveWords();localStorage.setItem(SHEET_FINGERPRINT_KEY,fingerprint);localStorage.setItem(SHEET_COUNT_KEY,String(words.length));status.textContent=`Google Sheet updated: ${added} new word(s), ${updated} refreshed. Existing decks and learning progress kept.`;
  }catch(err){status.textContent='Sync failed: '+err.message+' If this is a browser security/CORS error, tell me the exact message and I will adjust the app.';}
- finally{btn.disabled=false;btn.textContent='Sync Google Sheet';}
-};
+ finally{sheetRefreshInFlight=false;btn.disabled=false;btn.textContent='Sync Google Sheet';}
+}
+document.getElementById('syncSheetBtn').onclick=()=>refreshSheet();
+// Refresh published vocabulary on page open and when the browser comes back online.
+// No new words are inserted when the CSV has not changed.
+setTimeout(()=>refreshSheet({silent:true}),1000);
+window.addEventListener('online',()=>{if(Date.now()-lastSheetRefresh>120000)refreshSheet({silent:true})});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&Date.now()-lastSheetRefresh>900000)refreshSheet({silent:true})});
 document.getElementById('importBtn').onclick=async()=>{
  const file=document.getElementById('csvFile').files[0],status=document.getElementById('importStatus');if(!file){status.textContent='Choose a CSV file first.';return}
  try{const raw=await file.text(),rows=parseCSV(raw);if(rows.length<2)throw new Error('The file needs a header row and at least one vocabulary row.');const headers=rows[0].map(headerKey);if(!headers.includes('german')||!headers.includes('english'))throw new Error('Could not identify German and English columns. Please include column headers named German and English.');let count=0;
