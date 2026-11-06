@@ -1,17 +1,18 @@
 /* Version 4.4 touch navigation affordances */
 .swipe-sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 @media (pointer:coarse){
-  #wordList,#flashcards .panel.flash,#bhWorkspace,#v4PhraseCard,#browse,#quizCard{touch-action:pan-y}
+  #wordList,#flashcards .panel.flash,#verbTrainer .vt-card:not(.vt-mcq),#bhWorkspace,#v4PhraseCard,#browse,#quizCard{touch-action:pan-y}
   #wordList::before,#bhWorkspace::before,#v4PhraseCard::before,#browse .panel::before{
     content:"↔ Swipe left or right to navigate";
     display:block;font-size:.79rem;line-height:1.35;color:var(--muted,#657087);
     font-weight:600;letter-spacing:.005em;margin:0 0 12px;
   }
   #flashcards .panel.flash::before{
-    content:"↔ Swipe the card to change words";
+    content:"← Need practice     ·     Learned →";
     display:block;font-size:.79rem;line-height:1.35;color:var(--muted,#657087);
     font-weight:600;margin:0 0 12px;
   }
+  #verbTrainer .vt-swipe-hint{display:block;text-align:center;font-size:.83rem;color:var(--muted,#657087);margin:7px 0 1px;font-weight:650}
   #quizCard::before{
     content:"← Swipe left after answering to continue";
     display:block;font-size:.79rem;line-height:1.35;color:var(--muted,#657087);
@@ -20,3 +21,14 @@
   #wordList .word button,#bhWorkspace button,#v4PhraseCard button{touch-action:manipulation}
   #bhWorkspace .bh-table-scroll,#bhWorkspace table,#browse .article-memory{touch-action:auto}
 }
+
+/* Rated swipe cards: subtle directional motion, with accessible button alternatives. */
+#verbTrainer .vt-swipe-hint{display:none}
+#verbTrainer .vt-swipe-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:11px 0}
+#verbTrainer #vtNeedPractice{border-color:color-mix(in srgb,var(--bad,#b42318) 38%,var(--line,#dce5ef));color:var(--bad,#b42318)}
+#verbTrainer #vtSwipeLearned{background:var(--good,#147d54)!important;border-color:var(--good,#147d54)!important;color:#fff!important}
+html[data-study-swipe="left"] #verbTrainer .vt-card,html[data-study-swipe="left"] #flashcards .flash{animation:studyCardFromRight .26s ease both}
+html[data-study-swipe="right"] #verbTrainer .vt-card,html[data-study-swipe="right"] #flashcards .flash{animation:studyCardFromLeft .26s ease both}
+@keyframes studyCardFromRight{from{opacity:.65;transform:translateX(18px)}to{opacity:1;transform:translateX(0)}}
+@keyframes studyCardFromLeft{from{opacity:.65;transform:translateX(-18px)}to{opacity:1;transform:translateX(0)}}
+@media(prefers-reduced-motion:reduce){html[data-study-swipe] #verbTrainer .vt-card,html[data-study-swipe] #flashcards .flash{animation:none!important}}
