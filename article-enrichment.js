@@ -60,7 +60,7 @@ function explanation(w){
  const n=w.noun,a=w.article;
  if(special[n])return special[n]+' Memory phrase: '+a+' '+n+'.';
  for(const [word,root] of fixedCompounds)if(n===word)return 'Compound rule: the LAST noun decides the gender. '+root.toUpperCase()+' → '+a.toUpperCase()+' '+n+'. Say the last part aloud to remember the article.';
- for(const [article,suffix,description] of endings)if(a===article&&n.toLocaleLowerCase('de-DE').endsWith(suffix)&&n.length>suffix.length+2)return description+' This word: '+a+' '+n+'.';
+ for(const [article,suffix,description] of endings)if(a===article&&n.toLocaleLowerCase('de-DE').endsWith(suffix.replace(/^-/,''))&&n.length>suffix.length+2)return description+' This word: '+a+' '+n+'.';
  if(w.cluster===1&&(w.id<=23))return 'Category rule: named weekdays, months and seasons are masculine → DER. Learn '+a+' '+n+'.';
  if(w.cluster===3&&w.id<=54)return 'Category rule: cardinal directions are masculine: der Norden, Süden, Osten, Westen. This word: '+a+' '+n+'.';
  if(w.cluster===9&&/in$/.test(n))return 'Female profession suffix -in gives DIE. Example: der Mitarbeiter → die Mitarbeiterin.';
