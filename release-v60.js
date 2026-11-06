@@ -41,6 +41,12 @@ function setup(){
   updateThemeMeta();
   const themeSelect=one("#appearanceTheme");
   if(themeSelect)themeSelect.addEventListener("change",updateThemeMeta);
+  // A closed guide must never keep speaking during study.
+  const appTour=one("#appTour"),tourVideo=one("#appTourVideo");
+  if(appTour&&tourVideo){
+    appTour.addEventListener("toggle",()=>{if(!appTour.open)tourVideo.pause()});
+    document.querySelectorAll(".focus-nav .tab[data-tab]").forEach(b=>b.addEventListener("click",()=>{if(b.dataset.tab!=="today")tourVideo.pause()}));
+  }
   // Do not keep hidden focus inside inactive tabs.
   all(".focus-nav button.tab[data-tab]").forEach(button=>{
     button.addEventListener("click",()=>{
