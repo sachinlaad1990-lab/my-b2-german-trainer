@@ -213,8 +213,7 @@ function describe(w){
    const match=endingsExact.find(([suffix,gender])=>a===gender&&nameLower.endsWith(suffix)&&german.length>suffix.length+2);
    if(match){
      let base=wordFamilyPairs[german];
-     const stem=german.slice(0,-match[0].length);
-     const stemMeaning=base?" Word family: "+base+".":" Find the base "+stem+"- within related words.";
+     const stemMeaning=base?" Word family: "+base+".":"";
      return "🧠 Ending rule: "+german+" ("+english+") ends in -"+match[0]+". "+match[2]+", so it is "+display+"."+stemMeaning;
    }
    if(a==="die"&&/in$/.test(nameLower)&&german.length>5&&/([aeiouäöü]rin|tin|stin|antin)$/.test(nameLower)){
@@ -229,7 +228,7 @@ function describe(w){
    const source=clean(w.memoryTip);
    if(helpfulSourceTip(source))return "🧠 Article clue: "+source;
    // Do not manufacture a fake mnemonic for an opaque noun.
-   return "📌 No dependable gender rule or individual mnemonic verified for "+display+" ("+english+"). Learn it as a complete article+noun pair. Try saying: “Ich kenne das Wort: "+display+".” Add your own memorable scene if one comes to mind.";
+   return "📌 No verified word-specific mnemonic yet for "+display+" ("+english+"). The article is correct, but no dependable gender shortcut was identified. Practise the whole article+noun pair or add your own association.";
  }
  const x=normalized(german);
  if(prep[x])return "🧠 Fixed expression: "+prep[x];
@@ -237,12 +236,12 @@ function describe(w){
    const prefix=[["zurück","back"],["auf","up/open"],["aus","out"],["ein","in"],["mit","along/with"],["vor","before/in front"],["ab","away/off"],["an","on/contact"]].find(([p])=>x.startsWith(p));
    const words=prefix?" Prefix: "+prefix[0]+" can evoke '"+prefix[1]+"', but check the full verb meaning; this is not a universal translation.":"";
    const forms=[w.prateritum,w.partizip].filter(Boolean);
-   return "🧠 Verb practice: "+german+" = "+english+". Use the exact expression in a work sentence."+words+(forms.length?" Past forms: "+forms.join(", ")+".":"");
+   return "🔎 Verb pattern: "+german+" = "+english+"."+words+(forms.length?" Past forms: "+forms.join(", ")+".":"")+" No unique mnemonic verified yet; practise it in a complete sentence.";
  }
  if(w.grammar&&/Akkusativ|Dativ|Genitiv|verb.position|reflexiv/i.test(w.grammar)){
    return "🧠 Grammar clue for "+german+": "+clean(w.grammar).slice(0,190)+". Create a sentence about "+english+".";
  }
- return "📌 No individual mnemonic verified for "+german+" ("+english+"). Practise recalling it from the English meaning and a real sentence; a made-up generic story would not help.";
+ return "📌 No verified individual mnemonic yet for "+german+" ("+english+"). Practise recall from English to German or add a meaningful personal association.";
 }
 
 window.B2MnemonicEngine={describe,curatedCount:Object.keys(curated).length,version:"4.6"};
