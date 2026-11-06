@@ -55,6 +55,9 @@ try{
   await page.locator("#vtAnswerForm button").click();
   assert.match(await page.locator("#vtFeedback").innerText(),/Correct:|✅/,profile.name+": quiz feedback");
   await page.locator("#vtLearn").click();
+  await page.locator("#vtFilters").click();
+  await page.locator("#vtSearch").fill("sich freuen");
+  await page.locator("#vtFilters").click();
   const simulateSwipe=async(direction)=>{
     await page.evaluate(dir=>{
       const target=document.querySelector("#verbTrainer .vt-card h2");
