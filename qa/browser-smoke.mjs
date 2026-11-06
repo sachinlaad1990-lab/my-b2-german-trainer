@@ -54,11 +54,31 @@ try{
   await page.locator("#vtAnswer").fill("incorrecttest");
   await page.locator("#vtAnswerForm button").click();
   assert.match(await page.locator("#vtFeedback").innerText(),/Correct:|✅/,profile.name+": quiz feedback");
+  await page.locator("#vtLearn").click();
+  const simulateSwipe=async(direction)=>{
+    await page.evaluate(dir=>{
+      const target=document.querySelector("#verbTrainer .vt-card h2");
+      if(!target)throw new Error("Study card missing");
+      const x0=dir==="left"?220:100, x1=dir==="left"?100:220, y=340;
+      const makeTouch=x=>new Touch({identifier:1,target,clientX:x,clientY:y,pageX:x,pageY:y,screenX:x,screenY:y});
+      const beginning=makeTouch(x0),ending=makeTouch(x1);
+      target.dispatchEvent(new TouchEvent("touchstart",{bubbles:true,touches:[beginning],targetTouches:[beginning],changedTouches:[beginning]}));
+      target.dispatchEvent(new TouchEvent("touchend",{bubbles:true,touches:[],targetTouches:[],changedTouches:[ending]}));
+    },direction);
+  };
+  await simulateSwipe("left");
+  let data=await page.evaluate(()=>JSON.parse(localStorage.getItem("b2VerbTrainerSeparate_v1")||"{}"));
+  assert.equal(data.difficult?.length,1,profile.name+": swipe left adds Needs practice");
+  assert.equal(data.mastered?.length,0,profile.name+": swipe left removes learned flag");
+  await simulateSwipe("right");
+  data=await page.evaluate(()=>JSON.parse(localStorage.getItem("b2VerbTrainerSeparate_v1")||"{}"));
+  assert.equal(data.mastered?.length,1,profile.name+": swipe right marks learned");
+  assert.equal(data.difficult?.length,0,profile.name+": swipe right clears Needs practice");
   await page.locator(".focus-nav .tab[data-tab='today']").first().click();
   await page.locator(".home-path[data-destination='library']").click();
   assert.ok(await page.locator("#library:not(.hidden)").count(),profile.name+": vocabulary shortcut");
   assert.ok(!jsErrors.length,profile.name+": browser JS errors: "+jsErrors.join("; "));
-  console.log("PASS "+profile.name+": home shortcuts, verbs, example, next, search, progress, reload, quiz, vocabulary");
+  console.log("PASS "+profile.name+": home shortcuts, verbs, example, next, search, progress, reload, quiz, left/right review swipes, vocabulary");
   await context.close();
  }
 } catch(e){console.error(e.stack||String(e));process.exitCode=1}
