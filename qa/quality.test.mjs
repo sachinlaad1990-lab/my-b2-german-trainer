@@ -11,7 +11,7 @@ const exampleSource=source('verb-examples-v53.js');
 const ctx={window:{}};
 vm.runInNewContext(exampleSource,ctx,{timeout:1500});
 const examples=ctx.window.B2_VERB_EXAMPLES;
-const dataPrefix=trainer.slice(0,trainer.indexOf('const section=document.getElementById("verbTrainer");'));
+const dataPrefix=trainer.slice(trainer.indexOf('const records='),trainer.indexOf('const section=document.getElementById("verbTrainer");'));
 assert.ok(dataPrefix.length>2000,'Verb source is available');
 const words=vm.runInNewContext(dataPrefix+'\nrecords.map(v=>JSON.parse(JSON.stringify(v)))', {window:{B2_VERB_EXAMPLES:examples}},{timeout:3000});
 const nameMap=new Map(words.map(v=>[v.name,v]));
