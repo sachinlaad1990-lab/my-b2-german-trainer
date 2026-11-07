@@ -4,3 +4,21 @@
 .front-account-dialog .passkey-entry .passkey-action[hidden]{display:none!important}
 .front-account-dialog .passkey-entry p{font-size:.78rem;line-height:1.5;margin:8px 0 0;color:var(--muted)}
 .front-account-dialog .passkey-entry .passkey-action:disabled{opacity:.65;cursor:wait}
+
+/* Always-visible registration result, positioned beside the tapped control */
+.front-account-dialog .passkey-entry .passkey-inline-feedback{
+ display:block;margin:10px 0 0;padding:10px 12px;
+ border:1px solid var(--line);border-radius:10px;
+ background:var(--accent2);color:var(--ink);
+ font-size:.85rem;line-height:1.5;overflow-wrap:anywhere;
+}
+.front-account-dialog .passkey-entry .passkey-inline-feedback[data-kind="error"]{
+ border-color:color-mix(in srgb,var(--bad,#b42318) 35%,var(--line));
+ background:color-mix(in srgb,var(--bad,#b42318) 9%,var(--panel));
+ color:var(--ink);
+}
+.front-account-dialog .passkey-entry .passkey-inline-feedback[data-kind="success"]{
+ border-color:color-mix(in srgb,var(--good,#147d54) 35%,var(--line));
+ background:color-mix(in srgb,var(--good,#147d54) 10%,var(--panel));
+ color:var(--ink);
+}
