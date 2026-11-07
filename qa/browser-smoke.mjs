@@ -147,6 +147,35 @@ try{
   await page.locator("#deckTransferUndo").click();
   order=await page.evaluate(()=>JSON.parse(localStorage.getItem("deutschB2BerufDeckOrder_v2")||"[]"));
   assert.deepEqual(order,original.order,profile.name+": undo restores old deck order");
+
+  // Account-level cloud layout: the same user pulls server order despite differing IDs.
+  const cloudState=await page.evaluate(async()=>{
+    currentUser={id:"qa_same_account",email:"tester@example.com"};
+    const server={id:"qa_same_account",user_metadata:{b2_deck_layout_v1:{v:1,terms:["aufstehen","die herausforderung"]}}};
+    window.__qaCloudAccount=server;
+    supabaseClient.auth.getUser=async()=>({data:{user:server},error:null});
+    supabaseClient.auth.updateUser=async({data})=>{Object.assign(server.user_metadata,data);return {data:{user:server},error:null}};
+    await window.b2DeckCloudSync({preferCloud:true});
+    return {
+      order:JSON.parse(localStorage.getItem("deutschB2BerufDeckOrder_v2")),
+      words:localStorage.getItem("deutschB2BerufWords_v1")
+    };
+  });
+  assert.deepEqual(cloudState.order.slice(0,2),["demo_2","demo_1"],profile.name+": account cloud deck order applies automatically");
+  assert.equal(cloudState.words,original.words,profile.name+": cloud deck sync preserves vocabulary and progress");
+
+  // Both independent split selectors must remain visible on mobile and desktop.
+  await page.locator("#splitStudyToggle").click();
+  assert.equal(await page.locator("#splitStudyLeft:visible").count(),1,profile.name+": left lesson selector visible");
+  assert.equal(await page.locator("#splitStudyRight:visible").count(),1,profile.name+": right lesson selector visible");
+  await page.locator("#splitStudyLeft").selectOption("verbTrainer");
+  await page.locator("#splitStudyRight").selectOption("spokenGerman");
+  assert.equal(await page.locator("#verbTrainer:not(.hidden)").count(),1,profile.name+": chosen left verb lesson displayed");
+  assert.equal(await page.locator("#spokenGerman:not(.hidden)").count(),1,profile.name+": chosen right spoken lesson displayed");
+  const sides=await page.evaluate(()=>[document.querySelector("#verbTrainer").dataset.splitSide,document.querySelector("#spokenGerman").dataset.splitSide]);
+  assert.deepEqual(sides,["left","right"],profile.name+": independent pane order maintained");
+  await page.locator("#splitStudyToggle").click();
+  assert.equal(await page.locator("main.split-study").count(),0,profile.name+": split mode exits cleanly");
   assert.ok(!jsErrors.length,profile.name+": browser JS errors: "+jsErrors.join("; "));
   console.log("PASS "+profile.name+": home shortcuts, verbs, example, next, search, progress, reload, quiz, left/right review swipes, vocabulary, spoken German, deck transfer & undo");
   await context.close();
