@@ -503,6 +503,20 @@ main{max-width:1120px}
     <a href="https://github.com/sachinlaad1990-lab/my-b2-german-trainer/actions/runs/42265679645" target="_blank" rel="noopener noreferrer">See public test results ↗</a>
   </div>
 </section>
+<section class="panel" id="deckTransferPanel" aria-labelledby="deckTransferHeading">
+  <h2 id="deckTransferHeading">📚 Same deck order on phone and computer</h2>
+  <p class="muted small">Your flashcard deck order is currently stored on each device, not synced with your account. A different word order is normal when the devices imported vocabulary at different times.</p>
+  <p class="small"><strong>On the device with the correct decks:</strong> download the layout file. <strong>On the other device:</strong> choose that file, preview the match count, and apply it. Both devices can then use the same deck arrangement.</p>
+  <div class="actions"><button type="button" id="deckTransferExport" class="primary">Download deck layout</button></div>
+  <label for="deckTransferFile" style="display:block;margin-top:14px;font-weight:650">Import layout from another device</label>
+  <input type="file" accept=".json,application/json" id="deckTransferFile" style="display:block;max-width:100%;margin:8px 0 12px">
+  <div class="actions">
+    <button type="button" id="deckTransferApply" disabled>Apply matching deck order</button>
+    <button type="button" id="deckTransferUndo" disabled>Undo last deck import</button>
+  </div>
+  <p class="small muted">Changes deck arrangement only. Learned words, bookmarks, review progress, and vocabulary stay intact. Unmatched words remain available at the end. No automatic or hidden reordering.</p>
+  <p id="deckTransferStatus" class="small" role="status" aria-live="polite"></p>
+</section>
 <section class="panel" id="releaseDataPanel" aria-labelledby="releaseDataHeading">
   <h2 id="releaseDataHeading">Your data & privacy</h2>
   <p class="muted small">Your words, settings and study history are stored in your browser. When you use an account, vocabulary progress may also be synchronized with the connected cloud service (Supabase). Shared vocabulary updates load from a published Google Sheet. This is a learning app, not an official telc or BAMF exam product.</p>
@@ -1700,5 +1714,6 @@ renderAll();
 <script src="ui-enhancements-v55.js?v=5.5.0"></script>
 <script src="spoken-german-v67.js?v=6.7.0"></script>
 <script src="release-v60.js?v=6.0.0"></script>
+<script src="deck-transfer-v71.js?v=7.1.0"></script>
 </body>
 </html>
