@@ -131,3 +131,16 @@ test('spoken German is separate, complete, and appropriately labeled',()=>{
  assert.match(source('spoken-german-v67.css'),/prefers-reduced-motion/);
  assert.doesNotThrow(()=>new vm.Script(module));
 });
+
+test('device passkey login is optional and does not store biometrics',()=>{
+ const js=source('passkey-login-v74.js');
+ assert.match(index,/experimental: \{ passkey: true \}/);
+ assert.match(index,/id="signInPasskeyBtn"/);
+ assert.match(index,/id="registerPasskeyBtn"/);
+ assert.match(index,/passkey-login-v74\.js/);
+ assert.match(js,/signInWithPasskey\(\)/);
+ assert.match(js,/registerPasskey\(\)/);
+ assert.match(js,/window\.isSecureContext/);
+ assert.doesNotThrow(()=>new vm.Script(js));
+ assert.ok(!js.includes('localStorage.setItem'),'Biometrics are never saved in local storage');
+});
