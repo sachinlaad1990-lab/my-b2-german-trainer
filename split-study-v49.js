@@ -12,6 +12,8 @@ const menu=document.getElementById("focusMoreMenu");
 const supported=["today","library","verbTrainer","flashcards","grammarGuide","articleTrainer","spokenGerman","everyday","quiz"];
 const allowed=new Set(supported);
 if(!main||!toolbar||!toggle||!leftSelect||!rightSelect)return;
+toolbar.style.setProperty("display","flex","important"); // Older mobile focus CSS hid this entire feature.
+
 const stored=(key,fallback)=>{try{const v=localStorage.getItem(key);return allowed.has(v)?v:fallback}catch{return fallback}};
 let left=stored("b2SplitStudyLeft_v49","library");
 let right=stored("b2SplitStudyRight_v72","articleTrainer");
