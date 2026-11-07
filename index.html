@@ -498,6 +498,10 @@ main{max-width:1120px}
       <button class="primary" type="button" id="signInBtn">Log in</button>
       <button type="button" id="signUpBtn">Create account</button>
     </div>
+    <div class="passkey-entry">
+      <button type="button" id="signInPasskeyBtn" class="passkey-action" hidden>◉ Sign in with fingerprint / Face ID</button>
+      <p class="small muted">Passkeys can use your device fingerprint, face recognition, PIN, or security key. Your biometric data is never collected by this app.</p>
+    </div>
   </div>
 
   <div id="authLoggedIn" class="hidden">
@@ -507,6 +511,10 @@ main{max-width:1120px}
         Sync progress now
       </button>
       <button type="button" id="signOutBtn">Log out</button>
+    </div>
+    <div class="passkey-entry">
+      <button type="button" id="registerPasskeyBtn" class="passkey-action" hidden>◉ Set up fingerprint / Face ID login</button>
+      <p class="small muted">Set up once while signed in; use your device's passkey to log in next time. Regular email login remains available.</p>
     </div>
   </div>
 
@@ -574,7 +582,8 @@ const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_eqNdYvhQhyLI8rqKNM-msQ_ew39cLe7
 
 const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
-  SUPABASE_PUBLISHABLE_KEY
+  SUPABASE_PUBLISHABLE_KEY,
+  { auth: { experimental: { passkey: true } } }
 );
 
 let currentUser = null;
@@ -1737,5 +1746,6 @@ renderAll();
 <script src="deck-transfer-v71.js?v=7.1.0"></script>
 <script src="deck-cloud-sync-v72.js?v=7.2.0"></script>
 <script src="front-account-v73.js?v=7.3.0"></script>
+<script src="passkey-login-v74.js?v=7.4.0"></script>
 </body>
 </html>
