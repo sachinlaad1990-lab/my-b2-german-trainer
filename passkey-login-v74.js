@@ -24,7 +24,8 @@ function ready(){
    }
    local.textContent=message;
    local.dataset.kind=type;
-   status.textContent=message;
+   // Feedback is already shown beside the button; avoid showing it twice.
+   if(status.textContent===message || /passkey registration did not start|authenticator was previously registered/i.test(status.textContent)) status.textContent="";
    if(type==="error")local.scrollIntoView({block:"nearest",behavior:"auto"});
  }
  function formatError(err){
@@ -32,7 +33,7 @@ function ready(){
    if(code==="passkey_disabled"||/passkey.+disabled/i.test(err?.message||""))
       return "Fingerprint/Face ID login is disabled in the app's Supabase project. Enable Authentication → Passkeys in Supabase, then try again.";
    if(code==="too_many_passkeys")return "This account has reached its passkey limit. Remove an unused passkey from your account settings.";
-   if(code==="webauthn_credential_exists")return "This device already has a passkey for your account. Use it on the next login.";
+   if(code==="webauthn_credential_exists"||err?.name==="InvalidStateError"||/authenticator was previously registered|credential already (exists|registered)|already registered/i.test(err?.message||"")) return "A passkey may already exist on this device for this site. You do not need to set it up again. Try signing in with your passkey next time. Email login remains available.";
    if(err?.name==="NotAllowedError"||/cancel|abort/i.test(code))return "The device prompt was cancelled or unavailable. Try again or use email login.";
    if(err?.name==="SecurityError")return "The passkey cannot be registered from this website origin. Check the Relying Party settings in Supabase.";
    if(err?.name==="NotSupportedError")return "This browser does not support the requested passkey. Try an updated Chrome, Safari or Edge.";
@@ -77,7 +78,10 @@ function ready(){
      if(error)throw error;
      if(!data?.id)throw new Error("The server didn't confirm registration");
      feedback(register,"Passkey registered successfully. You can use it for your next sign-in.","success");
-   }catch(err){feedback(register,formatError(err),"error")}
+   }catch(err){
+     const alreadyExists=err?.code==="webauthn_credential_exists"||err?.name==="InvalidStateError"||/authenticator was previously registered|credential already (exists|registered)|already registered/i.test(err?.message||"");
+     feedback(register,formatError(err),alreadyExists?"info":"error");
+   }
    finally{register.disabled=false}
  });
 }
