@@ -1,0 +1,6 @@
+/* Passkeys are opt-in and use only device OS biometric prompts. */
+.front-account-dialog .passkey-entry{border-top:1px solid var(--line);padding-top:13px;margin-top:12px}
+.front-account-dialog .passkey-entry .passkey-action{width:100%;padding:12px 13px;min-height:46px;border-radius:12px;border:1px solid var(--accent);background:var(--accent2);color:var(--ink);font:inherit;font-weight:740;cursor:pointer}
+.front-account-dialog .passkey-entry .passkey-action[hidden]{display:none!important}
+.front-account-dialog .passkey-entry p{font-size:.78rem;line-height:1.5;margin:8px 0 0;color:var(--muted)}
+.front-account-dialog .passkey-entry .passkey-action:disabled{opacity:.65;cursor:wait}
