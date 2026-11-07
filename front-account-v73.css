@@ -1,0 +1,63 @@
+/* Front-account entry v7.3: visible at first glance, compact in lessons. */
+header .brandhead{display:flex;align-items:center;gap:12px}
+header .front-account-button{
+  margin-left:auto;flex:none;align-self:center;cursor:pointer;
+  min-height:42px;padding:10px 16px;border-radius:13px;
+  color:white;background:var(--accent);border:1px solid var(--accent);
+  font:inherit;font-size:.9rem;font-weight:750;
+  box-shadow:0 5px 15px color-mix(in srgb,var(--accent) 17%,transparent);
+  transition:background .16s ease,box-shadow .16s ease,transform .16s ease
+}
+header .front-account-button:hover{transform:translateY(-1px);box-shadow:0 7px 18px color-mix(in srgb,var(--accent) 22%,transparent)}
+header .front-account-button.signed-in{
+  background:var(--panel);border-color:var(--line);color:var(--ink);
+  box-shadow:none
+}
+#today .front-account-hint{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 12px;border-radius:12px;gap:12px;
+  background:var(--accent2);color:var(--ink);font-size:.88rem;
+  margin:10px 0 13px
+}
+#today .front-account-hint[hidden]{display:none!important}
+#today .front-account-hint button{
+  flex:none;min-height:36px;padding:7px 12px;border-radius:10px;
+  color:#fff;background:var(--accent);border:1px solid var(--accent);
+  font:inherit;font-weight:730;cursor:pointer
+}
+.front-account-dialog{
+  width:min(92vw,500px);max-height:min(88dvh,770px);padding:0;
+  background:var(--panel);color:var(--ink);border:1px solid var(--line);
+  border-radius:20px;box-shadow:0 18px 80px rgba(8,23,52,.25);
+  overflow-y:auto
+}
+.front-account-dialog:not([open]){display:none}
+.front-account-dialog::backdrop{background:rgba(9,20,40,.6);backdrop-filter:blur(3px)}
+.front-account-dialog-top{
+  display:flex;justify-content:space-between;align-items:center;
+  border-bottom:1px solid var(--line);padding:15px 20px;
+  position:sticky;top:0;background:var(--panel);z-index:1;gap:10px
+}
+.front-account-dialog-top h2{font-size:1.08rem;margin:0;letter-spacing:-.02em}
+.front-account-dialog .front-account-close{
+  width:36px;height:36px;flex:none;border-radius:10px;border:1px solid var(--line);
+  background:var(--panel);color:var(--ink);font-size:24px;line-height:1;cursor:pointer
+}
+.front-account-dialog #authPanel{margin:0!important;box-shadow:none!important;border:0!important;border-radius:0!important;padding:18px 20px 22px!important;background:transparent!important}
+.front-account-dialog #authPanel>h2{display:none}
+.front-account-dialog #authPanel .formgrid{gap:10px}
+.front-account-dialog #authPanel input{font-size:16px;max-width:100%}
+.front-account-dialog #authPanel .actions{display:flex;gap:9px;flex-wrap:wrap}
+.front-account-dialog #authPanel .actions button{min-height:44px}
+.front-account-dialog #authStatus{margin-top:12px;line-height:1.5}
+@media(max-width:540px){
+ header .brandhead{gap:9px;flex-wrap:wrap}
+ header .front-account-button{padding:8px 12px;font-size:.82rem;min-height:39px}
+ #today .front-account-hint{font-size:.81rem}
+ .front-account-dialog-top{padding:12px 14px}
+ .front-account-dialog #authPanel{padding:14px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ header .front-account-button{transition:none;transform:none!important}
+ .front-account-dialog::backdrop{backdrop-filter:none}
+}
