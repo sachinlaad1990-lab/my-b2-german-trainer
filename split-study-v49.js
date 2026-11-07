@@ -1,76 +1,113 @@
-/* Split Study v4.9: keep the original study views and the original
- * Article Trainer iframe mounted, so their progress and session are preserved.
- * Uses CSS grid; no iframes are duplicated or reparented.
+/* Split study v7.2: choose BOTH panes, keep one instance of each real lesson.
+ * No iframes cloned; no vocabulary or progress changed.
  */
-(function(){
-'use strict';
-const main=document.querySelector('main');
-const toolbar=document.getElementById('splitStudyToolbar');
-const toggle=document.getElementById('splitStudyToggle');
-const choice=document.getElementById('splitStudyLeft');
-const hint=document.getElementById('splitStudyHint');
-const menu=document.getElementById('focusMoreMenu');
-const valid=new Set(['today','library','flashcards','grammarGuide','everyday']);
-if(!main||!toolbar||!toggle||!choice)return;
-const remembered=(()=>{try{return localStorage.getItem('b2SplitStudyLeft_v49')}catch(e){return null}})();
-if(valid.has(remembered))choice.value=remembered;
+(()=>{"use strict";
+const main=document.querySelector("main");
+const toolbar=document.getElementById("splitStudyToolbar");
+const toggle=document.getElementById("splitStudyToggle");
+const leftSelect=document.getElementById("splitStudyLeft");
+const rightSelect=document.getElementById("splitStudyRight");
+const hint=document.getElementById("splitStudyHint");
+const menu=document.getElementById("focusMoreMenu");
+const supported=["today","library","verbTrainer","flashcards","grammarGuide","articleTrainer","spokenGerman","everyday","quiz"];
+const allowed=new Set(supported);
+if(!main||!toolbar||!toggle||!leftSelect||!rightSelect)return;
+const stored=(key,fallback)=>{try{const v=localStorage.getItem(key);return allowed.has(v)?v:fallback}catch{return fallback}};
+let left=stored("b2SplitStudyLeft_v49","library");
+let right=stored("b2SplitStudyRight_v72","articleTrainer");
+if(left===right)right=left==="articleTrainer"?"library":"articleTrainer";
 let active=false;
-let left='library';
-function setTabVisible(id){
- document.querySelectorAll('main .view').forEach(v=>v.classList.toggle('hidden',v.id!==id));
- document.querySelectorAll('button.tab[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));
-}
-function getActiveStudy(){
- const selected=document.querySelector('button.tab.active[data-tab]');
- const candidate=selected?.dataset.tab;
- return valid.has(candidate)?candidate:(valid.has(choice.value)?choice.value:'library');
-}
+leftSelect.value=left;rightSelect.value=right;
+function allViews(){return [...main.querySelectorAll(":scope > .view")]}
 function updateControls(){
- toggle.setAttribute('aria-pressed',String(active));
- toggle.textContent=active?'⤢ Exit split study':'◫ Study side by side';
- choice.disabled=!active;
- choice.closest('.split-study-select')?.classList.toggle('hidden',!active);
- hint.textContent=active?'Independent panels: scroll Vocabulary/Flashcards/Grammar on the left and search Articles on the right.':'Keep your current lesson open and check German noun articles without switching tabs.';
+ toggle.setAttribute("aria-pressed",String(active));
+ toggle.textContent=active?"⤢ Exit split study":"◫ Split study";
+ for(const input of [leftSelect,rightSelect]){
+   input.disabled=!active;
+   input.closest(".split-study-select")?.classList.toggle("hidden",!active);
+ }
+ hint.textContent=active
+  ? "Choose any two different lessons. Each pane scrolls independently."
+  : "Study two lessons together; choose both panels after tapping Split study.";
 }
-function openSplit(id){
- if(!valid.has(id))id='library';
- const article=document.getElementById('articleTrainer');
- const source=document.getElementById(id);
- if(!source||!article)return;
- left=id;active=true;
- choice.value=left;
- try{localStorage.setItem('b2SplitStudyLeft_v49',left)}catch(e){}
- setTabVisible(left);
- article.classList.remove('hidden');
- main.classList.add('split-study');
- if(menu)menu.open=false;
+function remember(){
+ try{
+  localStorage.setItem("b2SplitStudyLeft_v49",left);
+  localStorage.setItem("b2SplitStudyRight_v72",right);
+ }catch{}
+}
+function updateViewContent(id){
+ // Normal lesson renderers are already present; refresh only what needs a session.
+ try{
+  if(id==="flashcards"&&typeof renderFlash==="function")renderFlash();
+  if(id==="quiz"&&typeof startQuiz==="function")startQuiz();
+  if(id==="today"&&typeof renderToday==="function")renderToday();
+ }catch(err){console.warn("Split study lesson refresh:",err)}
+}
+function paint(){
+ if(!active)return;
+ const selected=new Set([left,right]);
+ allViews().forEach(view=>{
+   const show=selected.has(view.id);
+   view.classList.toggle("hidden",!show);
+   if(show)view.dataset.splitSide=view.id===left?"left":"right";
+   else delete view.dataset.splitSide;
+ });
+ document.querySelectorAll(".focus-nav button.tab[data-tab]").forEach(b=>{
+   const show=selected.has(b.dataset.tab);
+   b.classList.toggle("active",show);
+   b.setAttribute("aria-pressed",String(show));
+ });
+ leftSelect.value=left;rightSelect.value=right;
+ main.classList.add("split-study");
  updateControls();
+}
+function choose(side,id){
+ if(!allowed.has(id))return;
+ if(side==="left")left=id;else right=id;
+ if(left===right){
+   // A lesson has one real DOM instance, so it cannot occupy both panes.
+   if(side==="left")right=(id==="articleTrainer"?"library":"articleTrainer");
+   else left=(id==="library"?"articleTrainer":"library");
+ }
+ remember();
+ updateViewContent(id);
+ paint();
+}
+function openSplit(){
+ active=true;
+ updateViewContent(left);updateViewContent(right);
+ if(menu)menu.open=false;
+ paint();
 }
 function closeSplit(){
  if(!active)return;
  active=false;
- main.classList.remove('split-study');
- setTabVisible(left);
+ main.classList.remove("split-study");
+ allViews().forEach(view=>delete view.dataset.splitSide);
+ // Return to the left-side lesson; the original tab's navigation stays intact.
+ allViews().forEach(view=>view.classList.toggle("hidden",view.id!==left));
+ document.querySelectorAll(".focus-nav button.tab[data-tab]").forEach(b=>{
+   b.classList.toggle("active",b.dataset.tab===left);
+   b.setAttribute("aria-pressed",String(b.dataset.tab===left));
+ });
  updateControls();
 }
-toggle.addEventListener('click',()=>{
- if(active){closeSplit();return;}
- openSplit(getActiveStudy());
+toggle.addEventListener("click",()=>{
+ if(active)closeSplit();else openSplit();
 });
-choice.addEventListener('change',()=>{
- if(!valid.has(choice.value))return;
- openSplit(choice.value);
-});
-// A normal main-tab selection exits split mode and resumes the existing
-// app's original tab handler (which continues to work unchanged).
-document.addEventListener('click',e=>{
+leftSelect.addEventListener("change",()=>choose("left",leftSelect.value));
+rightSelect.addEventListener("change",()=>choose("right",rightSelect.value));
+// Existing tab links deliberately exit split mode and run their normal handlers.
+document.addEventListener("click",event=>{
  if(!active)return;
- const target=e.target instanceof Element?e.target:e.target?.parentElement;
- const tab=target?.closest('button.tab[data-tab]');
- if(tab)closeSplit();
+ const target=event.target instanceof Element?event.target:event.target?.parentElement;
+ if(target?.closest(".focus-nav button.tab[data-tab]"))closeSplit();
 },true);
-document.addEventListener('keydown',e=>{
- if(active&&e.key==='Escape'&&!(e.target instanceof HTMLInputElement)&&!(e.target instanceof HTMLTextAreaElement)){closeSplit();toggle.focus();}
+document.addEventListener("keydown",event=>{
+ if(active&&event.key==="Escape"&&!(event.target instanceof HTMLInputElement)&&!(event.target instanceof HTMLTextAreaElement)){
+  closeSplit();toggle.focus();
+ }
 });
 updateControls();
 })();
