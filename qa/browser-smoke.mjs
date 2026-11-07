@@ -32,6 +32,14 @@ try{
   await page.goto(address+"/?qa=1",{waitUntil:"domcontentloaded",timeout:30000});
   await page.waitForSelector(".home-path[data-destination='verbTrainer']",{timeout:15000});
   assert.equal(await page.locator(".home-path").count(),4,profile.name+": home cards");
+  assert.equal(await page.locator("#frontAccountButton:visible").count(),1,profile.name+": account login visible in header");
+  await page.locator("#frontAccountButton").click();
+  assert.equal(await page.locator("#frontAccountDialog[open] #authEmail:visible").count(),1,profile.name+": real email field accessible at front");
+  assert.equal(await page.locator("#frontAccountDialog[open] #signInBtn:visible").count(),1,profile.name+": existing sign-in action accessible");
+  await page.locator("#frontAccountDialog .front-account-close").click();
+  assert.equal(await page.locator("#frontAccountDialog[open]").count(),0,profile.name+": account popup closes");
+  assert.equal(await page.locator("#frontAccountHint:visible").count(),1,profile.name+": home displays cloud login prompt");
+
   await page.locator(".home-path[data-destination='verbTrainer']").click();
   await page.waitForSelector("#verbTrainer:not(.hidden) .vt-card h2",{timeout:10000});
   assert.ok((await page.locator("#verbTrainer .vt-example").innerText()).trim().length>10,profile.name+": example appears");
