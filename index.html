@@ -1252,7 +1252,7 @@ async function refreshSheet({silent=false}={}){
    const w={...(existing||{}),id:existing?.id||obj.id||uid(),german:obj.german,english:obj.english,category:obj.category||existing?.category||'',article:obj.article||existing?.article||'',example:obj.example||existing?.example||'',translation:obj.translation||existing?.translation||'',grammar:obj.grammar||existing?.grammar||'',notes:existing?.notes||obj.notes||'',pronunciation:obj.pronunciation||existing?.pronunciation||'',level:obj.level||existing?.level||'Important',bookmarked:existing?!!existing.bookmarked:/^(true|yes|1)$/i.test(obj.bookmarked||''),examBookmark:existing?!!existing.examBookmark:/^(true|yes|1)$/i.test(obj.examBookmark||''),azeezSuggestion:existing?!!existing.azeezSuggestion:/^(true|yes|1)$/i.test(obj.azeezSuggestion||''),difficult:existing?!!existing.difficult:/^(true|yes|1)$/i.test(obj.difficult||''),learned:existing?!!existing.learned:/^(true|yes|1)$/i.test(obj.learned||''),createdAt:existing?.createdAt||new Date().toISOString()};
    if(existing){words=words.map(x=>x.id===existing.id?w:x);updated++;}else{words.push(w);added++;}
   }
-  saveWords();localStorage.setItem(SHEET_FINGERPRINT_KEY,fingerprint);localStorage.setItem(SHEET_COUNT_KEY,String(words.length));status.textContent=`Google Sheet updated: ${added} new word(s), ${updated} refreshed. Existing decks and learning progress kept.`;
+  saveWords();localStorage.setItem(SHEET_FINGERPRINT_KEY,fingerprint);localStorage.setItem(SHEET_COUNT_KEY,String(words.length));window.b2DeckCloudSync?.({preferCloud:true});status.textContent=`Google Sheet updated: ${added} new word(s), ${updated} refreshed. Existing decks and learning progress kept.`;
  }catch(err){status.textContent='Sync failed: '+err.message+' If this is a browser security/CORS error, tell me the exact message and I will adjust the app.';}
  finally{sheetRefreshInFlight=false;btn.disabled=false;btn.textContent='Sync Google Sheet';}
 }
@@ -1497,6 +1497,7 @@ async function handleSignedIn(user) {
   cloudReady = false;
   updateAuthPanel();
   await syncProgressNow();
+  await window.b2DeckCloudSync?.({preferCloud:true});
 }
 
 document.getElementById('signUpBtn').addEventListener('click', async () => {
@@ -1732,5 +1733,6 @@ renderAll();
 <script src="spoken-german-v67.js?v=6.7.0"></script>
 <script src="release-v60.js?v=6.0.0"></script>
 <script src="deck-transfer-v71.js?v=7.1.0"></script>
+<script src="deck-cloud-sync-v72.js?v=7.2.0"></script>
 </body>
 </html>
