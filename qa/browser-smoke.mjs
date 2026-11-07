@@ -117,7 +117,16 @@ try{
   await page.reload({waitUntil:"domcontentloaded"});
   spoken=await page.evaluate(()=>JSON.parse(localStorage.getItem("b2SpokenGerman_v1")||"{}"));
   assert.ok(spoken.learned?.includes(0),profile.name+": spoken progress retained after reload");
-  // Deck transfer: different device IDs must match by German word, without touching progress.
+  // Deck transfer: seed a representative two-word library in this isolated test browser.
+  await page.evaluate(()=>{
+    const demo=[
+      {id:"demo_1",german:"die Herausforderung",english:"the challenge",learned:false,bookmarked:true,difficult:false},
+      {id:"demo_2",german:"aufstehen",english:"to get up",learned:true,bookmarked:false,difficult:false}
+    ];
+    localStorage.setItem("deutschB2BerufWords_v1",JSON.stringify(demo));
+    localStorage.removeItem("deutschB2BerufDeckOrder_v2");
+  });
+  await page.reload({waitUntil:"domcontentloaded"});
   await page.locator("#focusMoreMenu summary").click();
   await page.locator('.focus-nav .tab[data-tab="settings"]').click();
   const original=await page.evaluate(()=>({
