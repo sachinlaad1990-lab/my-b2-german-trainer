@@ -1,0 +1,52 @@
+/* Spoken German v6.7: compact, accessible, theme-aware practice */
+#spokenGerman .sg-shell{max-width:780px;margin:0 auto}
+#spokenGerman .sg-header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 12px;background:transparent;padding:0;border:0;box-shadow:none}
+#spokenGerman .sg-header h2{font-size:1.3rem;margin:0 0 3px}
+#spokenGerman .sg-header p{color:var(--muted);font-size:.85rem;margin:0}
+#spokenGerman .sg-progress{font-size:.8rem;font-weight:720;color:var(--accent);background:var(--accent2);padding:7px 10px;border-radius:999px;white-space:nowrap}
+#spokenGerman .sg-toolbar{display:grid;grid-template-columns:1fr 1fr auto;gap:7px;margin-bottom:13px}
+#spokenGerman button{font:inherit;cursor:pointer;min-height:42px}
+#spokenGerman .sg-toolbar button,#spokenGerman .sg-actions button,#spokenGerman .sg-speak,#spokenGerman #sgAnother{border:1px solid var(--line);border-radius:11px;background:var(--panel);color:var(--ink);padding:10px 12px;font-weight:650}
+#spokenGerman .sg-toolbar button.active,#spokenGerman #sgAnother:not(:disabled){background:var(--accent);border-color:var(--accent);color:#fff}
+#spokenGerman .sg-card{background:var(--panel);border:1px solid var(--line);box-shadow:var(--lux-elevation,0 5px 18px rgba(0,0,0,.04));border-radius:18px;padding:clamp(15px,3vw,23px)}
+#spokenGerman .sg-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:.82rem;font-weight:650}
+#spokenGerman .sg-label{border-radius:9px;padding:4px 9px;font-size:.74rem;font-weight:740;border:1px solid var(--line)}
+#spokenGerman .sg-safe{color:var(--good,#147d54);background:color-mix(in srgb,var(--good,#147d54) 8%,var(--panel))}
+#spokenGerman .sg-informal{color:var(--accent);background:var(--accent2)}
+#spokenGerman .sg-strong{color:var(--bad,#b42318);background:color-mix(in srgb,var(--bad,#b42318) 8%,var(--panel))}
+#spokenGerman .sg-card h3{font-size:clamp(1.52rem,4vw,2.2rem);letter-spacing:-.035em;line-height:1.25;margin:15px 0 7px;color:var(--ink)}
+#spokenGerman .sg-meaning{color:var(--muted);font-size:1rem;margin:0 0 16px}
+#spokenGerman .sg-example{background:var(--accent2);color:var(--ink);border:1px solid color-mix(in srgb,var(--accent) 18%,var(--line));border-radius:13px;padding:15px;margin:12px 0;line-height:1.6}
+#spokenGerman .sg-example strong{display:block;font-size:1.08rem}
+#spokenGerman .sg-example p{margin:5px 0 0;color:var(--muted)}
+#spokenGerman .sg-register{border:0;margin:8px 0}
+#spokenGerman .sg-register summary{cursor:pointer;padding:9px 0;font-size:.9rem;font-weight:700;color:var(--accent)}
+#spokenGerman .sg-register p{margin:3px 0 8px;color:var(--muted);line-height:1.6}
+#spokenGerman .sg-swipe-hint{text-align:center;font-size:.82rem;font-weight:650;color:var(--muted);margin:14px 0 8px}
+#spokenGerman .sg-actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+#spokenGerman .sg-actions button{min-width:0;padding:10px 5px;font-size:.85rem}
+#spokenGerman #sgPractice{color:var(--bad,#b42318);border-color:color-mix(in srgb,var(--bad,#b42318) 35%,var(--line))}
+#spokenGerman #sgLearned{background:var(--good,#147d54);border-color:var(--good,#147d54);color:#fff}
+#spokenGerman .sg-speak{width:100%;margin-top:11px}
+#spokenGerman .sg-filters{border:1px solid var(--line);background:var(--panel);padding:13px;border-radius:13px;margin:10px 0}
+#spokenGerman .sg-filters label{display:block;font-size:.88rem;font-weight:650;margin:6px 0}
+#spokenGerman .sg-filters select,#spokenGerman .sg-filters input[type=search]{width:100%;padding:10px;font:inherit;border-radius:10px;margin:5px 0;background:var(--panel);color:var(--ink);border:1px solid var(--line)}
+#spokenGerman .sg-filters .sg-inline{display:flex;gap:8px;align-items:center}
+#spokenGerman .sg-note{color:var(--muted);font-size:.79rem;line-height:1.5;margin:11px 2px}
+#spokenGerman .sg-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:15px 0}
+#spokenGerman .sg-choices button{display:flex;align-items:center;gap:10px;text-align:left;padding:12px;border-radius:12px;background:var(--panel);border:1px solid var(--line);color:var(--ink);min-height:65px;font-weight:620;line-height:1.4}
+#spokenGerman .sg-choices button:hover:not(:disabled){background:var(--accent2);border-color:var(--accent)}
+#spokenGerman .sg-choices .sg-letter{display:grid;place-items:center;width:29px;height:29px;flex:none;background:var(--accent2);color:var(--accent);border-radius:8px;font-size:.8rem;font-weight:800}
+#spokenGerman .sg-choices button.correct{border-color:var(--good,#147d54);background:color-mix(in srgb,var(--good,#147d54) 11%,var(--panel));opacity:1}
+#spokenGerman .sg-choices button.wrong{border-color:var(--bad,#b42318);background:color-mix(in srgb,var(--bad,#b42318) 11%,var(--panel));opacity:1}
+#spokenGerman .sg-feedback{padding:10px 12px;border-radius:10px;font-weight:750}
+#spokenGerman .sg-feedback:empty{display:none}
+#spokenGerman .sg-feedback.good{color:var(--good,#147d54);background:color-mix(in srgb,var(--good,#147d54) 10%,var(--panel))}
+#spokenGerman .sg-feedback.bad{color:var(--bad,#b42318);background:color-mix(in srgb,var(--bad,#b42318) 10%,var(--panel))}
+#spokenGerman .sg-explain{border:1px solid var(--line);background:var(--accent2);border-radius:12px;padding:13px;margin-bottom:12px}
+#spokenGerman .sg-explain[hidden]{display:none}
+#spokenGerman .sg-explain p{color:var(--muted);margin:6px 0 0}
+#spokenGerman #sgAnother{width:100%}
+#spokenGerman button:disabled{opacity:.58;cursor:not-allowed}
+@media(max-width:600px){#spokenGerman .sg-card{padding:14px}#spokenGerman .sg-choices{grid-template-columns:1fr}#spokenGerman .sg-choices button{min-height:52px}#spokenGerman .sg-actions{grid-template-columns:repeat(2,minmax(0,1fr))}#spokenGerman .sg-header h2{font-size:1.13rem}}
+@media(prefers-reduced-motion:reduce){#spokenGerman *{animation:none!important;transition:none!important}}
