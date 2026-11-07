@@ -134,10 +134,10 @@ main{max-width:1120px}
 <link rel="stylesheet" href="focus-layout-v54.css?v=5.4.1">
 <link rel="stylesheet" href="design-system-v55.css?v=6.0.0">
 <link rel="stylesheet" href="home-shortcuts-v56.css?v=6.1.0">
-<link rel="stylesheet" href="visual-polish-v63.css?v=6.3.0">
+<link rel="stylesheet" href="visual-polish-v63.css?v=6.6.0">
 </head>
 <body>
-<header><div class="brandhead"><img id="headerPhoto" class="profile-pic" alt="Your profile photo"><div class="brandcopy"><h1>Deutsch B2 Beruf <span style="font-size:.52em;vertical-align:middle;color:var(--accent);font-weight:700" aria-label="Version 6.0">v6.0</span></h1><p>Vocabulary · Flashcards · Grammar Made Easy · Everyday German</p><div class="credit">Created by <strong id="headerCreator">Sachin Laad</strong></div></div></div></header>
+<header><div class="brandhead"><a class="author-photo-link" href="https://www.linkedin.com/in/sachinlaad/" target="_blank" rel="noopener noreferrer" aria-label="Sachin Laad — LinkedIn profile"><img id="headerPhoto" class="profile-pic" src="assets/author-sachin.webp" alt="Sachin Laad, creator of Deutsch B2 Beruf" width="64" height="64"></a><div class="brandcopy"><h1>Deutsch B2 Beruf <span style="font-size:.52em;vertical-align:middle;color:var(--accent);font-weight:700" aria-label="Version 6.0">v6.0</span></h1><p>Vocabulary · Flashcards · Grammar Made Easy · Everyday German</p><div class="credit">Created by <a class="author-link" href="https://www.linkedin.com/in/sachinlaad/" target="_blank" rel="noopener noreferrer"><strong id="headerCreator">Sachin Laad</strong><span class="author-link-mark" aria-hidden="true">↗</span></a></div></div></div></header>
 <main>
 
 
@@ -359,7 +359,7 @@ main{max-width:1120px}
           <input id="creatorName" value="Sachin Laad" maxlength="60" placeholder="Your name">
           <label for="profilePhoto" style="margin-top:12px">Upload a photo (optional)</label>
           <input id="profilePhoto" type="file" accept="image/*">
-          <p class="small muted">Choose a JPG, PNG, or other image from your device. It will appear beside the app title.</p>
+          <p class="small muted">The author portrait is shown by default. You can replace it locally with your own JPG or PNG; removing a custom image restores the author portrait.</p>
           <div class="actions"><button class="primary" type="button" id="saveProfileBtn">Save personalisation</button><button type="button" id="removePhotoBtn">Remove photo</button></div>
           <p id="profileStatus" class="small" aria-live="polite"></p>
         </div>
@@ -931,7 +931,7 @@ function uid(){return 'v_'+Date.now().toString(36)+'_'+Math.random().toString(36
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 const PROFILE_KEY='deutschB2BerufProfile_v1';
 function getProfile(){try{return JSON.parse(localStorage.getItem(PROFILE_KEY)||'{"name":"Sachin Laad","photo":""}')}catch(e){return {name:'Sachin Laad',photo:''}}}
-function renderProfile(){const p=getProfile();document.getElementById('creatorName').value=p.name||'Sachin Laad';document.getElementById('headerCreator').textContent=p.name||'Sachin Laad';const imgs=[document.getElementById('headerPhoto'),document.getElementById('photoPreview')];imgs.forEach(img=>{if(p.photo){img.src=p.photo;img.style.display='block'}else{img.removeAttribute('src');img.style.display='none'}})}
+function renderProfile(){const p=getProfile();document.getElementById('creatorName').value=p.name||'Sachin Laad';document.getElementById('headerCreator').textContent=p.name||'Sachin Laad';const photo=p.photo||'assets/author-sachin.webp';const imgs=[document.getElementById('headerPhoto'),document.getElementById('photoPreview')];imgs.forEach(img=>{img.src=photo;img.style.display='block'});document.getElementById('headerPhoto').alt=p.photo?'Creator photo':'Sachin Laad, creator of Deutsch B2 Beruf'}
 function saveProfile(){const old=getProfile(),name=document.getElementById('creatorName').value.trim()||'Sachin Laad',file=document.getElementById('profilePhoto').files[0];const finish=photo=>{localStorage.setItem(PROFILE_KEY,JSON.stringify({name,photo:photo??old.photo??''}));renderProfile();document.getElementById('profileStatus').textContent='Personalisation saved on this device.';document.getElementById('profilePhoto').value=''};if(!file){finish(old.photo||'');return}if(!file.type.startsWith('image/')){document.getElementById('profileStatus').textContent='Please choose an image file.';return}if(file.size>3*1024*1024){document.getElementById('profileStatus').textContent='Please choose an image smaller than 3 MB.';return}const reader=new FileReader();reader.onload=()=>finish(reader.result);reader.onerror=()=>{document.getElementById('profileStatus').textContent='Could not read that image. Please try another.'};reader.readAsDataURL(file)}
 document.getElementById('copyChatgptPromptBtn').addEventListener('click',()=>{
  const field=document.getElementById('chatgptPrompt');field.focus();field.select();
@@ -963,7 +963,7 @@ document.getElementById('addChatGPTWordsBtn').addEventListener('click',()=>{
  }catch(err){status.textContent='Could not add the row: '+err.message}
 });
 document.getElementById('saveProfileBtn').addEventListener('click',saveProfile);
-document.getElementById('removePhotoBtn').addEventListener('click',()=>{const p=getProfile();localStorage.setItem(PROFILE_KEY,JSON.stringify({name:document.getElementById('creatorName').value.trim()||p.name||'Sachin Laad',photo:''}));document.getElementById('profilePhoto').value='';renderProfile();document.getElementById('profileStatus').textContent='Photo removed.'});
+document.getElementById('removePhotoBtn').addEventListener('click',()=>{const p=getProfile();localStorage.setItem(PROFILE_KEY,JSON.stringify({name:document.getElementById('creatorName').value.trim()||p.name||'Sachin Laad',photo:''}));document.getElementById('profilePhoto').value='';renderProfile();document.getElementById('profileStatus').textContent='Custom photo cleared. The default author portrait is showing.'});
 document.getElementById('profilePhoto').addEventListener('change',()=>{const f=document.getElementById('profilePhoto').files[0];if(!f)return;if(!f.type.startsWith('image/')||f.size>3*1024*1024){document.getElementById('profileStatus').textContent='Choose an image smaller than 3 MB.';document.getElementById('profilePhoto').value='';return}const r=new FileReader();r.onload=()=>{const im=document.getElementById('photoPreview');im.src=r.result;im.style.display='block';document.getElementById('profileStatus').textContent='Preview ready. Click Save personalisation to keep it.'};r.readAsDataURL(f)});
 function byId(id){return words.find(w=>w.id===id)}
 function renderStats(){document.getElementById('totalStat').textContent=words.length;document.getElementById('learnedStat').textContent=words.filter(w=>w.learned).length;document.getElementById('bookmarkedStat').textContent=words.filter(w=>w.bookmarked).length;document.getElementById('difficultStat').textContent=words.filter(w=>w.difficult).length}
