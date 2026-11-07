@@ -95,8 +95,30 @@ try{
   await page.locator(".focus-nav .tab[data-tab='today']").first().click();
   await page.locator(".home-path[data-destination='library']").click();
   assert.ok(await page.locator("#library:not(.hidden)").count(),profile.name+": vocabulary shortcut");
+  await page.locator("#focusMoreMenu summary").click();
+  await page.locator('.focus-nav .tab[data-tab="spokenGerman"]').click();
+  await page.waitForSelector("#spokenGerman:not(.hidden) .sg-card h3");
+  assert.equal(await page.locator("#spokenGerman .sg-card .sg-example").count(),1,profile.name+": bilingual spoken German example");
+  await page.locator("#sgPractice").click();
+  let spoken=await page.evaluate(()=>JSON.parse(localStorage.getItem("b2SpokenGerman_v1")||"{}"));
+  assert.equal(spoken.practice?.length,1,profile.name+": spoken practice saved");
+  await page.locator("#sgFilters").click();
+  await page.locator("#sgSearch").fill("Quasi");
+  assert.match(await page.locator("#spokenGerman .sg-card h3").innerText(),/Quasi/);
+  await page.locator("#sgFilters").click();
+  await page.locator("#sgLearned").click();
+  spoken=await page.evaluate(()=>JSON.parse(localStorage.getItem("b2SpokenGerman_v1")||"{}"));
+  assert.ok(spoken.learned?.includes(0),profile.name+": spoken learned stored");
+  await page.locator("#sgQuiz").click();
+  const choice=page.locator(".sg-choices button");
+  assert.equal(await choice.count(),4,profile.name+": four MCQ options");
+  await choice.first().click();
+  assert.ok((await page.locator(".sg-feedback").innerText()).length>3,profile.name+": instant MCQ feedback");
+  await page.reload({waitUntil:"domcontentloaded"});
+  spoken=await page.evaluate(()=>JSON.parse(localStorage.getItem("b2SpokenGerman_v1")||"{}"));
+  assert.ok(spoken.learned?.includes(0),profile.name+": spoken progress retained after reload");
   assert.ok(!jsErrors.length,profile.name+": browser JS errors: "+jsErrors.join("; "));
-  console.log("PASS "+profile.name+": home shortcuts, verbs, example, next, search, progress, reload, quiz, left/right review swipes, vocabulary");
+  console.log("PASS "+profile.name+": home shortcuts, verbs, example, next, search, progress, reload, quiz, left/right review swipes, vocabulary, spoken German");
   await context.close();
  }
 } catch(e){console.error(e.stack||String(e));process.exitCode=1}
