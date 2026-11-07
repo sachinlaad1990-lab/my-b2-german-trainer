@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="focus-ui-v54.css?v=5.4.1">
 <link rel="stylesheet" href="grammar-handbook.css?v=4.1.1">
 <link rel="stylesheet" href="swipe-navigation-v44.css?v=6.5.0">
-<link rel="stylesheet" href="split-study-v49.css?v=4.9.0">
+<link rel="stylesheet" href="split-study-v49.css?v=7.2.0">
 <link rel="stylesheet" href="pro-visual-v50.css?v=5.0.0">
 <style>
 :root{--bg:#f5f7fb;--panel:#fff;--ink:#172033;--muted:#657087;--line:#dfe5ef;--accent:#315ee8;--accent2:#eaf0ff;--good:#147d54;--bad:#b42318;--radius:16px}
@@ -151,13 +151,30 @@ main{max-width:1120px}
         <select id="splitStudyLeft" disabled>
           <option value="today">🏠 Today</option>
           <option value="library" selected>📚 Vocabulary</option>
+          <option value="verbTrainer">🔤 Verbs</option>
           <option value="flashcards">🗂️ Flashcards</option>
           <option value="grammarGuide">📘 Grammar</option>
+          <option value="articleTrainer">🅰️ Articles</option>
+          <option value="spokenGerman">🗣️ Spoken German</option>
           <option value="everyday">💬 Everyday German</option>
+          <option value="quiz">🧠 Quiz</option>
+        </select>
+      </label>
+      <label class="split-study-select hidden" for="splitStudyRight">Right panel
+        <select id="splitStudyRight" disabled>
+          <option value="today">🏠 Today</option>
+          <option value="library">📚 Vocabulary</option>
+          <option value="verbTrainer">🔤 Verbs</option>
+          <option value="flashcards">🗂️ Flashcards</option>
+          <option value="grammarGuide">📘 Grammar</option>
+          <option value="articleTrainer" selected>🅰️ Articles</option>
+          <option value="spokenGerman">🗣️ Spoken German</option>
+          <option value="everyday">💬 Everyday German</option>
+          <option value="quiz">🧠 Quiz</option>
         </select>
       </label>
     </div>
-    <span id="splitStudyHint">Keep your current lesson open and check German noun articles without switching tabs.</span>
+    <span id="splitStudyHint">Choose any two different lessons to study side by side.</span>
   </div>
   <nav aria-label="Main navigation" class="focus-nav">
     <button class="tab active" data-tab="today">🏠 Today</button>
@@ -1708,7 +1725,7 @@ renderAll();
 <script src="grammar-data-v4.js?v=4.1.1"></script>
 <script src="grammar-handbook-ui.js?v=4.1.1"></script>
 <script src="swipe-navigation-v44.js?v=6.5.0"></script>
-<script src="split-study-v49.js?v=4.9.0"></script>
+<script src="split-study-v49.js?v=7.2.0"></script>
 <script src="verb-examples-v53.js?v=6.0.0"></script>
 <script src="verb-trainer-v51.js?v=6.4.0"></script>
 <script src="ui-enhancements-v55.js?v=5.5.0"></script>
