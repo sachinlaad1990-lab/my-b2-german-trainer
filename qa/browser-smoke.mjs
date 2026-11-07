@@ -117,8 +117,29 @@ try{
   await page.reload({waitUntil:"domcontentloaded"});
   spoken=await page.evaluate(()=>JSON.parse(localStorage.getItem("b2SpokenGerman_v1")||"{}"));
   assert.ok(spoken.learned?.includes(0),profile.name+": spoken progress retained after reload");
+  // Deck transfer: different device IDs must match by German word, without touching progress.
+  await page.locator("#focusMoreMenu summary").click();
+  await page.locator('.focus-nav .tab[data-tab="settings"]').click();
+  const original=await page.evaluate(()=>({
+    order:JSON.parse(localStorage.getItem("deutschB2BerufDeckOrder_v2")||"[]"),
+    words:localStorage.getItem("deutschB2BerufWords_v1")
+  }));
+  const fakeOtherDevice={format:"deutsch-b2-deck-layout",version:1,rows:[
+    {german:"aufstehen",id:"phone_23"},
+    {german:"die Herausforderung",id:"phone_24"}
+  ]};
+  await page.locator("#deckTransferFile").setInputFiles({name:"deck-layout.json",mimeType:"application/json",buffer:Buffer.from(JSON.stringify(fakeOtherDevice))});
+  await page.locator("#deckTransferApply:enabled").waitFor();
+  assert.match(await page.locator("#deckTransferStatus").innerText(),/2 words matched/,profile.name+": cross-device IDs matched by German text");
+  await page.locator("#deckTransferApply").click();
+  let order=await page.evaluate(()=>JSON.parse(localStorage.getItem("deutschB2BerufDeckOrder_v2")||"[]"));
+  assert.deepEqual(order.slice(0,2),["demo_2","demo_1"],profile.name+": order applied from remote device despite different IDs");
+  assert.equal(await page.evaluate(()=>localStorage.getItem("deutschB2BerufWords_v1")),original.words,profile.name+": learning records unchanged");
+  await page.locator("#deckTransferUndo").click();
+  order=await page.evaluate(()=>JSON.parse(localStorage.getItem("deutschB2BerufDeckOrder_v2")||"[]"));
+  assert.deepEqual(order,original.order,profile.name+": undo restores old deck order");
   assert.ok(!jsErrors.length,profile.name+": browser JS errors: "+jsErrors.join("; "));
-  console.log("PASS "+profile.name+": home shortcuts, verbs, example, next, search, progress, reload, quiz, left/right review swipes, vocabulary, spoken German");
+  console.log("PASS "+profile.name+": home shortcuts, verbs, example, next, search, progress, reload, quiz, left/right review swipes, vocabulary, spoken German, deck transfer & undo");
   await context.close();
  }
 } catch(e){console.error(e.stack||String(e));process.exitCode=1}
