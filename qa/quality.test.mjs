@@ -110,3 +110,24 @@ test('web app install assets valid and no fake paid state',()=>{
  assert.ok(!index.includes('Premium activated successfully'));
  assert.ok(!index.includes('68% progress'));
 });
+
+test('spoken German is separate, complete, and appropriately labeled',()=>{
+ const module=source('spoken-german-v67.js');
+ const match=module.match(/const entries=("(?:\\.|[^"\\])*")\.trim\(\)\.split\("\\n"\)/);
+ assert.ok(match,'spoken entries are encoded as data');
+ const rows=JSON.parse(match[1]).trim().split('\n').map(line=>line.split('|'));
+ assert.equal(rows.length,115,'100 expressions and 15 ready-to-use phrases');
+ assert.equal(new Set(rows.map(r=>r[0])).size,115,'no repeated German expressions');
+ assert.equal(rows.filter(r=>r[5]==='Useful phrases').length,15,'15 ready-to-use phrases');
+ assert.ok(rows.every(r=>r.length===6&&r[0]&&r[1]&&r[2].length>8&&r[3].length>8),'all entries include meaning and bilingual example');
+ assert.ok(rows.every(r=>['safe','informal','strong'].includes(r[4])),'register labels valid');
+ assert.equal(rows.filter(r=>r[4]==='strong').length,2,'rude expressions are labeled');
+ assert.ok(rows.some(r=>r[0]==='Jemandem einen Korb geben'),'formatting typo corrected');
+ assert.match(index,/id="spokenGerman" class="view hidden"/);
+ assert.match(index,/data-tab="spokenGerman"/);
+ assert.match(index,/spoken-german-v67\.css/);
+ assert.match(index,/spoken-german-v67\.js/);
+ assert.match(module,/b2SpokenGerman_v1/);
+ assert.match(source('spoken-german-v67.css'),/prefers-reduced-motion/);
+ assert.doesNotThrow(()=>new vm.Script(module));
+});
