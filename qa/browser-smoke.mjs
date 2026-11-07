@@ -137,6 +137,7 @@ try{
     {german:"aufstehen",id:"phone_23"},
     {german:"die Herausforderung",id:"phone_24"}
   ]};
+  await page.locator("#deckTransferPanel .deck-manual-fallback summary").click();
   await page.locator("#deckTransferFile").setInputFiles({name:"deck-layout.json",mimeType:"application/json",buffer:Buffer.from(JSON.stringify(fakeOtherDevice))});
   await page.locator("#deckTransferApply:enabled").waitFor();
   assert.match(await page.locator("#deckTransferStatus").innerText(),/2 words matched/,profile.name+": cross-device IDs matched by German text");
