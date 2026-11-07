@@ -198,3 +198,13 @@ body[data-theme="dark"] #library .word .v4-mnemonic-note p{color:var(--ink)!impo
  #today .home-path,#today .home-path .home-arrow,#library .word,
  #verbTrainer .vt-button,#verbTrainer .vt-mcq .vt-choice{transition:none!important;transform:none!important}
 }
+
+/* Compact creator identity: official portrait and LinkedIn attribution. */
+header .author-photo-link{display:inline-flex;flex:0 0 auto;width:64px;height:64px;align-items:center;justify-content:center;border-radius:50%;border:2px solid var(--panel);box-shadow:0 0 0 1px var(--line),0 4px 14px rgba(21,38,70,.12);overflow:hidden;transition:box-shadow .18s ease,transform .18s ease}
+header .author-photo-link:hover{box-shadow:0 0 0 3px var(--lux-ring),0 5px 18px rgba(21,38,70,.15);transform:translateY(-1px)}
+header .author-photo-link .profile-pic{width:100%!important;height:100%!important;object-fit:cover;object-position:center 20%;border:0!important;border-radius:50%;display:block!important}
+header .author-link{display:inline-flex;align-items:center;gap:4px;color:var(--ink);text-decoration:none;font-weight:700}
+header .author-link:hover{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+header .author-link-mark{color:var(--accent);font-size:.85em}
+@media(max-width:540px){header .author-photo-link{width:48px;height:48px}header .brandhead{gap:10px}header .brandcopy p{font-size:.75rem}}
+@media(prefers-reduced-motion:reduce){header .author-photo-link{transition:none;transform:none!important}}
