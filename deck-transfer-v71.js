@@ -75,6 +75,7 @@ function applyOrder(newOrder){
  }catch(_){}
  reconcileOrders();
  renderAll();
+ window.b2DeckCloudChanged?.();
 }
 function init(){
  if(!available())return;
