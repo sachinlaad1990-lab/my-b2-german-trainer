@@ -1213,7 +1213,7 @@ function renderQuizGroups(){
  if(groups.length)sel.value=String(Math.min(previous,groups.length-1));
 }
 document.getElementById('quizMode').onchange=()=>{quizGroupKey='';renderQuizGroups();startQuiz()};
-document.getElementById('quizDeck').onchange=()=>{quizGroupKey='';startQuiz()};
+document.getElementById('quizDeck').onchange=()=>{quizGroupKey='';if(document.getElementById('quizMode').value==='topnouns')document.getElementById('quizDeck').dataset.nounDeck=document.getElementById('quizDeck').value;startQuiz()};
 let smartGrammarCurrent=null;
 function startGrammarQuiz(){
  const g=window.B2SmartGrammar;if(!g)return;
