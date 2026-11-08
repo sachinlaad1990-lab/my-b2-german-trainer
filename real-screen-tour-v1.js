@@ -52,6 +52,12 @@ function init(){
  }
  function stopAuto(){if(auto){clearInterval(auto);auto=null}}
  iframe.addEventListener('load',()=>{loaded=true;navigate()});
+ wrap.querySelector('.rst-cta').addEventListener('click',event=>{
+  event.preventDefault();stopAuto();
+  const tab=document.querySelector('.focus-nav .tab[data-tab="library"]');
+  if(tab){tab.click();window.scrollTo({top:0,behavior:'smooth'});}
+  else{const view=document.getElementById('library');if(view){document.querySelectorAll('section.view').forEach(el=>el.classList.add('hidden'));view.classList.remove('hidden');view.scrollIntoView({behavior:'smooth',block:'start'});}}
+ });
  wrap.querySelector('.rst-prev').addEventListener('click',()=>show(current-1,true));
  wrap.querySelector('.rst-next').addEventListener('click',()=>show(current+1,true));
  wrap.addEventListener('mouseenter',stopAuto);wrap.addEventListener('focusin',stopAuto);
