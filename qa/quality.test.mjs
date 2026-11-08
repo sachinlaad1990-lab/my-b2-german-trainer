@@ -230,5 +230,6 @@ test('Genitiv reference tables and weak noun exceptions stay consistent',()=>{
    assert.ok(joined.includes(word),word+" documented");
  assert.match(source('grammar-handbook-ui.js'),/n:\['Team','Team','Team','Teams'\]/);
  assert.match(source('grammar-handbook-ui.js'),/printed=caseNoun\(gender,caseIndex\)/);
- assert.ok(!source('index.html').includes("m.replace(/\\bdem\\b/i,'des')"),"no article-only Genitiv correction");
+ assert.match(source('index.html'),/Problem:'Problems',Termin:'Termins',Chef:'Chefs',Team:'Teams',Buch:'Buches'/,"Genitiv checker includes noun-endings dictionary");
+ assert.match(source('index.html'),/wegen\\s\\+dem\\s\\+\\(Kollegen\\|Kunden\\|Vorgesetzten\\)/,"weak masculine Genitiv exception remains supported");
 });
