@@ -138,6 +138,7 @@ main{max-width:1120px}
 <link rel="stylesheet" href="spoken-german-v67.css?v=6.7.0">
 <link rel="stylesheet" href="front-account-v73.css?v=7.3.0">
 <link rel="stylesheet" href="passkey-login-v74.css?v=7.5.0">
+<link rel="stylesheet" href="smart-grammar-v80.css?v=8.0.0">
 </head>
 <body>
 <header><div class="brandhead"><a class="author-photo-link" href="https://www.linkedin.com/in/sachinlaad/" target="_blank" rel="noopener noreferrer" aria-label="Sachin Laad — LinkedIn profile"><img id="headerPhoto" class="profile-pic" src="assets/author-sachin.webp" alt="Sachin Laad, creator of Deutsch B2 Beruf" width="64" height="64"></a><div class="brandcopy"><h1>Deutsch B2 Beruf <span style="font-size:.52em;vertical-align:middle;color:var(--accent);font-weight:700" aria-label="Version 6.0">v6.0</span></h1><p>Vocabulary · Flashcards · Grammar Made Easy · Everyday German</p><div class="credit">Created by <a class="author-link" href="https://www.linkedin.com/in/sachinlaad/" target="_blank" rel="noopener noreferrer"><strong id="headerCreator">Sachin Laad</strong><span class="author-link-mark" aria-hidden="true">↗</span></a></div></div></div></header>
@@ -346,7 +347,7 @@ main{max-width:1120px}
   <section id="quiz" class="view hidden">
     <div class="panel" style="text-align:center">
       <h2>German → English quiz</h2><p class="muted">Choose the correct English meaning. Your score is kept for this session.</p>
-      <div class="row" style="max-width:650px;margin:0 auto"><div><label for="quizMode">Question set</label><select id="quizMode"><option value="all">All vocabulary</option><option value="bookmarked">All bookmarks</option><option value="exam">For exam</option><option value="azeez">Azeez suggestion</option><option value="difficult">Need practice</option></select></div><div><label for="quizDeck">Word group (10 words)</label><select id="quizDeck"><option value="0">Group 1</option></select></div><div><label>Score</label><div style="padding:10px;font-weight:700" id="score">0 correct / 0 answered</div></div></div>
+      <div class="row" style="max-width:650px;margin:0 auto"><div><label for="quizMode">Question set</label><select id="quizMode"><option value="all">All vocabulary</option><option value="bookmarked">All bookmarks</option><option value="exam">For exam</option><option value="azeez">Azeez suggestion</option><option value="difficult">Need practice</option><option value="grammar">Grammar in context</option></select></div><div><label for="quizDeck">Word group (10 words)</label><select id="quizDeck"><option value="0">Group 1</option></select></div><div><label>Score</label><div style="padding:10px;font-weight:700" id="score">0 correct / 0 answered</div></div></div>
       <div style="font-size:1.7rem;font-weight:750;margin:25px 0 10px" id="quizQuestion">Add or import at least 4 words to start a quiz.</div>
       <div id="quizOptions" class="quiz-options"></div><div id="quizFeedback" class="feedback" aria-live="polite"></div>
       <button class="primary" id="nextQuestion">Next question</button>
@@ -572,6 +573,7 @@ main{max-width:1120px}
 </section>
 </section>
 </main>
+<script src="smart-grammar-v80.js?v=8.0.0"></script>
 <script src="mnemonic-engine-v45.js?v=4.6.0"></script>
 <script>
 
@@ -1075,7 +1077,7 @@ function renderList() {
  el.innerHTML='<div class="vocab-decks">'+visibleDecks.map(({number,words:deck},index)=>{
  const learned=deck.filter(w=>w.learned).length,total=deck.length;
   const percent=total?Math.round(learned/total*100):0,mastered=total>0&&learned===total;
-  const cards=deck.map(w=>`<article class="word"><div><h3>${esc(w.german)}</h3><p>${esc(w.english)}</p>${w.article?`<div class="small">${esc(w.article)}</div>`:''}${v4WordForms(w).length?`<div class="v4-form-list">${v4WordForms(w).map(v=>`<span>${esc(v)}</span>`).join('')}</div>`:''}<div class="small">${esc(v4MasteryLabel(w))}</div>${w.example?`<p><strong>Example:</strong> ${esc(w.example)}</p>`:''}${w.translation?`<p><strong>Translation:</strong> ${esc(w.translation)}</p>`:''}<details class="v4-mnemonic-note"><summary>💡 Memory tip</summary><p>${esc(window.B2MnemonicEngine?.describe(w)||'Create your own image for this word.')}</p></details>${w.grammar?`<details class="v4-grammar-note"><summary>Optional grammar note</summary><p>${esc(w.grammar).replace(/\n/g,'<br>')}</p></details>`:''}${w.notes?`<p class="user-notes"><strong>📝 Your notes:</strong> ${esc(w.notes).replace(/\n/g,'<br>')}</p>`:''}<span class="tag">${esc(w.category||'Uncategorised')}</span><span class="tag">${esc(w.level||'Important')}</span>${w.bookmarked?'<span class="tag">★ Bookmarked</span>':''}${w.examBookmark?'<span class="tag">🎯 For exam</span>':''}${w.azeezSuggestion?'<span class="tag">💡 Azeez suggestion</span>':''}${w.difficult?'<span class="tag">Need practice</span>':''}${w.learned?'<span class="tag">✓ Learned</span>':''}</div><div class="wordbuttons"><button data-action="speak-word" data-id="${esc(w.id)}" title="Hear German pronunciation" aria-label="Hear German word">🔊 Word</button>${w.example?`<button data-action="speak-example" data-id="${esc(w.id)}" title="Hear the German example sentence">🔊 Sentence</button>`:''}<button data-action="bookmark" data-id="${esc(w.id)}" class="${w.bookmarked?'is-active':''}" title="General bookmark">${w.bookmarked?'★':'☆'}</button><button data-action="exam" data-id="${esc(w.id)}" class="${w.examBookmark?'is-active':''}" title="Mark for exam">${w.examBookmark?'🎯 Exam ✓':'🎯 For exam'}</button><button data-action="azeez" data-id="${esc(w.id)}" class="${w.azeezSuggestion?'is-active':''}" title="Azeez suggestion">${w.azeezSuggestion?'💡 Azeez ✓':'💡 Azeez suggestion'}</button><button data-action="difficult" data-id="${esc(w.id)}" class="${w.difficult?'is-active':''}" title="Need practice">${w.difficult?'Practise ✓':'Difficult'}</button><button data-action="learned" data-id="${esc(w.id)}" class="${w.learned?'is-active':''}" title="Learned">${w.learned?'Learned ✓':'Learned'}</button><button data-action="edit" data-id="${esc(w.id)}">Edit</button><button class="danger" data-action="delete" data-id="${esc(w.id)}">Delete</button></div></article>`).join('');
+  const cards=deck.map(w=>`<article class="word"><div><h3>${esc(w.german)}</h3><p>${esc(w.english)}</p>${w.article?`<div class="small">${esc(w.article)}</div>`:''}${v4WordForms(w).length?`<div class="v4-form-list">${v4WordForms(w).map(v=>`<span>${esc(v)}</span>`).join('')}</div>`:''}<div class="small">${esc(v4MasteryLabel(w))}</div>${window.B2SmartGrammar?.forWord(w)?`<span class="smart-case-tag">${esc(window.B2SmartGrammar.forWord(w).label)} · ${esc(window.B2SmartGrammar.forWord(w).pattern)}</span>`:''}${w.example?`<p><strong>Example:</strong> ${esc(w.example)}</p>`:''}${w.translation?`<p><strong>Translation:</strong> ${esc(w.translation)}</p>`:''}<details class="v4-mnemonic-note"><summary>💡 Memory tip</summary><p>${esc(window.B2MnemonicEngine?.describe(w)||'Create your own image for this word.')}</p></details>${w.grammar?`<details class="v4-grammar-note"><summary>Optional grammar note</summary><p>${esc(w.grammar).replace(/\n/g,'<br>')}</p></details>`:''}${w.notes?`<p class="user-notes"><strong>📝 Your notes:</strong> ${esc(w.notes).replace(/\n/g,'<br>')}</p>`:''}<span class="tag">${esc(w.category||'Uncategorised')}</span><span class="tag">${esc(w.level||'Important')}</span>${w.bookmarked?'<span class="tag">★ Bookmarked</span>':''}${w.examBookmark?'<span class="tag">🎯 For exam</span>':''}${w.azeezSuggestion?'<span class="tag">💡 Azeez suggestion</span>':''}${w.difficult?'<span class="tag">Need practice</span>':''}${w.learned?'<span class="tag">✓ Learned</span>':''}</div><div class="wordbuttons"><button data-action="speak-word" data-id="${esc(w.id)}" title="Hear German pronunciation" aria-label="Hear German word">🔊 Word</button>${w.example?`<button data-action="speak-example" data-id="${esc(w.id)}" title="Hear the German example sentence">🔊 Sentence</button>`:''}<button data-action="bookmark" data-id="${esc(w.id)}" class="${w.bookmarked?'is-active':''}" title="General bookmark">${w.bookmarked?'★':'☆'}</button><button data-action="exam" data-id="${esc(w.id)}" class="${w.examBookmark?'is-active':''}" title="Mark for exam">${w.examBookmark?'🎯 Exam ✓':'🎯 For exam'}</button><button data-action="azeez" data-id="${esc(w.id)}" class="${w.azeezSuggestion?'is-active':''}" title="Azeez suggestion">${w.azeezSuggestion?'💡 Azeez ✓':'💡 Azeez suggestion'}</button><button data-action="difficult" data-id="${esc(w.id)}" class="${w.difficult?'is-active':''}" title="Need practice">${w.difficult?'Practise ✓':'Difficult'}</button><button data-action="learned" data-id="${esc(w.id)}" class="${w.learned?'is-active':''}" title="Learned">${w.learned?'Learned ✓':'Learned'}</button><button data-action="edit" data-id="${esc(w.id)}">Edit</button><button class="danger" data-action="delete" data-id="${esc(w.id)}">Delete</button></div></article>`).join('');
   return `<details class="vocab-deck ${mastered?'deck-mastered':''}" open><summary><span class="deck-heading"><span class="deck-chevron">▶</span><span>Deck ${number}${mastered?' ✓':''}</span></span><span class="deck-meta">${learned}/${total} learned · ${percent}%${mastered?' · Mastered':''}</span></summary><div class="deck-progress"><div style="width:${percent}%"></div></div><div class="deck-words">${cards}</div></details>`;
  }).join('')+'</div>';
  if(!v4StatsView&&!decks[v4VocabDeckIndex]?.words.length)el.innerHTML='<div class="v4-empty">No matching words in Deck '+(v4VocabDeckIndex+1)+'. Clear the search/filter or select another deck.</div>';
@@ -1209,7 +1211,43 @@ function renderQuizGroups(){
 }
 document.getElementById('quizMode').onchange=()=>{quizGroupKey='';renderQuizGroups();startQuiz()};
 document.getElementById('quizDeck').onchange=()=>{quizGroupKey='';startQuiz()};
+let smartGrammarCurrent=null;
+function startGrammarQuiz(){
+ const g=window.B2SmartGrammar;if(!g)return;
+ quizAnswered=false;
+ const available=g.rules.filter(r=>r.options.length===4&&r.options.filter(c=>c===r.correct).length===1);
+ smartGrammarCurrent=g.choose(available);
+ const rule=smartGrammarCurrent,choices=g.shuffledOptions(rule);
+ document.getElementById('quizQuestion').textContent=rule.prompt;
+ document.getElementById('quizOptions').innerHTML=choices.map((choice,i)=>'<button type="button" data-grammar-choice="'+i+'">'+String.fromCharCode(65+i)+') '+g.escapeHTML(choice)+'</button>').join('');
+ document.getElementById('quizFeedback').textContent='';
+ document.getElementById('quizDeck').disabled=true;
+ document.getElementById('quizDeck').parentElement.hidden=true;
+ document.getElementById('score').textContent=quizCorrect+' correct / '+quizAnsweredCount+' answered';
+ document.getElementById('quizOptions').querySelectorAll('button').forEach((b,i)=>b.onclick=()=>answerGrammarQuiz(choices[i]));
+}
+function answerGrammarQuiz(choice){
+ if(quizAnswered||!smartGrammarCurrent)return;
+ quizAnswered=true;
+ const rule=smartGrammarCurrent,correct=choice===rule.correct;
+ quizAnsweredCount++;if(correct)quizCorrect++;
+ window.B2SmartGrammar.record(rule.id,correct);
+ const fb=document.getElementById('quizFeedback');
+ fb.style.color=correct?'var(--good)':'var(--bad)';
+ fb.innerHTML='<strong>'+(correct?'✓ Correct!':'✗ Not quite. Correct: '+window.B2SmartGrammar.escapeHTML(rule.correct))+'</strong>'+window.B2SmartGrammar.whyHTML(rule,choice);
+ document.getElementById('quizOptions').querySelectorAll('button').forEach(b=>{
+  b.disabled=true;
+  const value=b.textContent.slice(3);
+  if(value===rule.correct)b.classList.add('smart-correct');
+  if(value===choice&&!correct)b.classList.add('smart-incorrect');
+ });
+ document.getElementById('score').textContent=quizCorrect+' correct / '+quizAnsweredCount+' answered';
+}
 function startQuiz(){
+ if(document.getElementById('quizMode').value==='grammar'){startGrammarQuiz();return}
+ smartGrammarCurrent=null;
+ document.getElementById('quizDeck').disabled=false;
+ document.getElementById('quizDeck').parentElement.hidden=false;
  renderQuizGroups();
  quizAnswered=false;
  const groups=getQuizGroups(),group=groups[Number(document.getElementById('quizDeck').value)||0]||[];
@@ -1228,7 +1266,7 @@ function startQuiz(){
 }
 function answerQuiz(id){if(quizAnswered||!quizCurrent)return;quizAnswered=true;quizAnsweredCount++;const correct=id===quizCurrent.id;if(correct){quizCorrect++;v4RecordRating(quizCurrent,'good');document.getElementById('quizFeedback').style.color='var(--good)';}else{v4RecordRating(quizCurrent,'again');document.getElementById('quizFeedback').style.color='var(--bad)';}
  const fb=document.getElementById('quizFeedback');
- fb.innerHTML=`<div>${correct?'Correct! Gut gemacht!':`Not quite. Correct answer: ${esc(quizCurrent.english)}`}</div>${quizCurrent.example?`<p><strong>Example:</strong> ${esc(quizCurrent.example)}</p>`:''}${quizCurrent.translation?`<p><strong>Translation:</strong> ${esc(quizCurrent.translation)}</p>`:''}${quizCurrent.grammar?`<p><strong>Grammar:</strong> ${esc(quizCurrent.grammar).replace(/\n/g,'<br>')}</p>`:''}`;document.getElementById('quizOptions').querySelectorAll('button').forEach(b=>{b.disabled=true;if(b.dataset.id===quizCurrent.id)b.style.borderColor='var(--good)'});document.getElementById('score').textContent=`${quizCorrect} correct / ${quizAnsweredCount} answered`;saveWords()}
+ fb.innerHTML=`<div>${correct?'Correct! Gut gemacht!':`Not quite. Correct answer: ${esc(quizCurrent.english)}`}</div>${quizCurrent.example?`<p><strong>Example:</strong> ${esc(quizCurrent.example)}</p>`:''}${quizCurrent.translation?`<p><strong>Translation:</strong> ${esc(quizCurrent.translation)}</p>`:''}${quizCurrent.grammar?`<p><strong>Grammar:</strong> ${esc(quizCurrent.grammar).replace(/\n/g,'<br>')}</p>`:''}${window.B2SmartGrammar?.forWord(quizCurrent)?window.B2SmartGrammar.whyHTML(window.B2SmartGrammar.forWord(quizCurrent)):''}`;document.getElementById('quizOptions').querySelectorAll('button').forEach(b=>{b.disabled=true;if(b.dataset.id===quizCurrent.id)b.style.borderColor='var(--good)'});document.getElementById('score').textContent=`${quizCorrect} correct / ${quizAnsweredCount} answered`;saveWords()}
 document.getElementById('nextQuestion').onclick=startQuiz;
 const aliases={id:['id','word_id','word id'],grammar:['grammar','grammar explanation','grammar in example','grammar note','grammatik'],notes:['your notes','notes','my notes','personal notes'],examBookmark:['for exam','exam bookmark','exambookmark'],azeezSuggestion:['azeez suggestion','azeez'],category:['category','thema','topic'],german:['german','deutsch','deutsches wort','word','phrase'],english:['english','englisch','meaning','english meaning','translation english'],example:['example','example sentence','beispiel','beispielsatz','sentence'],translation:['translation','english translation','satzübersetzung','satzuebersetzung'],article:['article','plural','artikel','full form','article plural','article_plural'],pronunciation:['pronunciation','aussprache','notes'],level:['importance','level','priority'],bookmarked:['bookmarked','bookmark','favorit'],difficult:['difficult','need practice','status difficult'],learned:['learned','known','gelernt']};
 function parseCSV(text){const rows=[];let row=[],cell='',quoted=false;for(let i=0;i<text.length;i++){const c=text[i],n=text[i+1];if(c==='"'&&quoted&&n==='"'){cell+='"';i++}else if(c==='"'){quoted=!quoted}else if(c===','&&!quoted){row.push(cell);cell=''}else if((c==='\n'||c==='\r')&&!quoted){if(c==='\r'&&n==='\n')i++;row.push(cell);if(row.some(x=>x.trim()))rows.push(row);row=[];cell=''}else cell+=c}row.push(cell);if(row.some(x=>x.trim()))rows.push(row);return rows}
@@ -1747,6 +1785,7 @@ renderAll();
 <script src="deck-transfer-v71.js?v=7.1.0"></script>
 <script src="deck-cloud-sync-v72.js?v=7.2.0"></script>
 <script src="front-account-v73.js?v=7.3.0"></script>
+<script src="smart-grammar-v80-ui.js?v=8.0.0"></script>
 <script src="passkey-login-v74.js?v=7.5.1"></script>
 </body>
 </html>
