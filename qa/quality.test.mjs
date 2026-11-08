@@ -287,6 +287,8 @@ test('top 300 noun library has unique reviewed articles plurals and forms',()=>{
  assert.match(index,/top-nouns-v90-ui\.js/);
  assert.match(index,/top-nouns-v90-data\.js/);
  assert.match(index,/top-nouns-v90\.css/);
+ assert.match(index,/elegant-ui-v92\.css/,'polish styles loaded');
+ assert.match(source('top-nouns-v90-ui.js'),/art-masculine|art-/, 'article visual cues available');
 });
 
 test('personal pronoun conversions: case, gender, and exact-answer explanations',()=>{
