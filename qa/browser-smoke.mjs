@@ -200,7 +200,11 @@ try{
     return {id:rule.id,correct:rule.correct,wrong:rule.options.find(x=>x!==rule.correct)};
   });
   const clickChoice=async(choice)=>{
-    await page.locator("#quizOptions button").filter({hasText:choice}).first().click();
+    await page.evaluate(expected=>{
+      const btn=[...document.querySelectorAll("#quizOptions button")].find(b=>b.textContent.slice(3).trim()===expected);
+      if(!btn)throw new Error("No exact answer choice: "+expected);
+      btn.click();
+    },choice);
   };
   await clickChoice(current.wrong);
   assert.match(await page.locator("#quizFeedback").innerText(),/Not quite/,profile.name+": wrong grammar answer is rejected");
@@ -249,6 +253,48 @@ try{
   await page.locator("#grammarInput").fill("Ich spreche mit den Kollege.");
   await page.waitForTimeout(430);
   assert.match(await page.locator("#liveGrammarResults").innerText(),/mit dem Kollegen/i,profile.name+": offline checker fixes weak-noun Dativ ending");
+  // Top nouns stay inside existing Vocabulary / Flashcards / Quiz, with separate saved progress.
+  await page.evaluate(()=>document.querySelector('.tab[data-tab="library"]').click());
+  await page.locator("#filter").selectOption("topnouns");
+  assert.equal(await page.locator(".tn-noun").count(),10,profile.name+": noun deck displays ten nouns");
+  assert.match(await page.locator(".tn-noun").first().innerText(),/der Chef[\s\S]*Chefs/,profile.name+": correct article plural and Genitiv");
+  await page.locator("#v4VocabNext").click();
+  assert.match(await page.locator(".tn-header").innerText(),/Deck 2 \/ 30/,profile.name+": noun deck next");
+  await page.locator("#v4VocabSelect").selectOption("0");
+  assert.match(await page.locator(".tn-header").innerText(),/Deck 1 \/ 30/,profile.name+": noun deck select");
+  await page.locator("#tnFlash").click();
+  assert.ok(await page.locator("#tnFlashPanel:visible").count(),profile.name+": noun flashcards appear");
+  assert.match(await page.locator("#tnFlashPanel h2").innerText(),/^___ /,profile.name+": initial noun article hidden");
+  await page.locator("#tnReveal").click();
+  assert.match(await page.locator("#tnFlashPanel h2").innerText(),/^(der|die|das) /,profile.name+": article revealed");
+  await page.locator("#tnGood").click();
+  assert.equal(await page.evaluate(()=>Object.values(window.B2TopNounsUI.progress()).filter(x=>x.correct>0).length),1,profile.name+": noun progress tracked separately");
+  await page.evaluate(()=>document.querySelector('.tab[data-tab="quiz"]').click());
+  await page.locator("#quizMode").selectOption("topnouns");
+  assert.ok(await page.locator("#quizOptions button").count()>=3,profile.name+": noun article/case options visible");
+  let currentNoun=await page.evaluate(()=>window.B2TopNounsUI.question());
+  assert.ok(currentNoun?.right,profile.name+": noun quiz exact answer set");
+  await page.evaluate(answer=>{
+    const q=window.B2TopNounsUI.question();
+    const btn=[...document.querySelectorAll("#quizOptions button")].find(b=>b.textContent.slice(3).trim()===answer);
+    if(!btn)throw new Error("Noun quiz answer absent");
+    btn.click();
+  },currentNoun.right);
+  assert.match(await page.locator("#quizFeedback").innerText(),/Correct/,profile.name+": noun MCQ exact correct answer");
+  await page.locator("#nextQuestion").click();
+  assert.ok(await page.locator("#quizOptions button").count()>=3,profile.name+": next noun question");
+  await page.evaluate(()=>{
+    const q=window.B2TopNounsUI.question();
+    const wrong=q.opts.find(x=>x!==q.right);
+    const btn=[...document.querySelectorAll("#quizOptions button")].find(b=>b.textContent.slice(3).trim()===wrong);
+    if(!btn)throw new Error("Noun quiz distractor absent");
+    btn.click();
+  });
+  assert.match(await page.locator("#quizFeedback").innerText(),/Not quite/,profile.name+": wrong noun case rejected");
+  assert.ok(await page.locator("#quizFeedback .smart-why").count(),profile.name+": noun grammar why explanation");
+  await page.reload({waitUntil:"domcontentloaded"});
+  const savedNouns=await page.evaluate(()=>JSON.parse(localStorage.getItem("b2TopNounsProgress_v90")||"{}"));
+  assert.ok(Object.keys(savedNouns).length>0,profile.name+": noun progress survives reload");
   assert.ok(!jsErrors.length,profile.name+": browser JS errors: "+jsErrors.join("; "));
   console.log("PASS "+profile.name+": home shortcuts, verbs, example, next, search, progress, reload, quiz, left/right review swipes, vocabulary, spoken German, deck transfer & undo");
   await context.close();
