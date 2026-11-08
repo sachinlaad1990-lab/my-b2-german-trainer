@@ -238,3 +238,52 @@ test('Genitiv reference tables and weak noun exceptions stay consistent',()=>{
  assert.match(source('index.html'),/Problem:'Problems',Termin:'Termins',Chef:'Chefs',Team:'Teams',Buch:'Buches'/,"Genitiv checker includes noun-endings dictionary");
  assert.ok(source('index.html').includes('Kollegen|Kunden|Vorgesetzten'),"weak masculine Genitiv exceptions are supported");
 });
+
+test('top 300 noun library has unique reviewed articles plurals and forms',()=>{
+ const env={window:{}};
+ vm.runInNewContext(source('top-nouns-v90-data.js'),env,{timeout:5000});
+ const model=env.window.B2TopNouns;
+ assert.equal(model.words.length,300);
+ assert.equal(model.groups.length,30);
+ assert.ok(model.groups.every(g=>g.words.length===10),"each group has exactly 10 nouns");
+ assert.equal(new Set(model.words.map(w=>w.id)).size,300);
+ assert.equal(new Set(model.words.map(w=>w.article+' '+w.noun)).size,300);
+ for(const w of model.words){
+  assert.ok(['der','die','das'].includes(w.article),w.noun+' valid singular article');
+  assert.ok(w.plural&&w.english&&w.genitive,w.noun+' has plural, translation, Genitiv');
+  for(let i=0;i<4;i++)assert.ok(model.caseForm(w,i)?.includes(w.noun.slice(0,3)),w.noun+' has 4 nonempty case forms');
+ }
+ const sample={
+  Chef:['der Chef','den Chef','dem Chef','des Chefs'],
+  Team:['das Team','das Team','dem Team','des Teams'],
+  Büro:['das Büro','das Büro','dem Büro','des Büros'],
+  Firma:['die Firma','die Firma','der Firma','der Firma'],
+  Unternehmen:['das Unternehmen','das Unternehmen','dem Unternehmen','des Unternehmens'],
+  Arbeitsplatz:['der Arbeitsplatz','den Arbeitsplatz','dem Arbeitsplatz','des Arbeitsplatzes'],
+  Fenster:['das Fenster','das Fenster','dem Fenster','des Fensters'],
+  Kollege:['der Kollege','den Kollegen','dem Kollegen','des Kollegen'],
+  Vorgesetzte:['der Vorgesetzte','den Vorgesetzten','dem Vorgesetzten','des Vorgesetzten'],
+  Angestellte:['der Angestellte','den Angestellten','dem Angestellten','des Angestellten'],
+  Arbeitslose:['der Arbeitslose','den Arbeitslosen','dem Arbeitslosen','des Arbeitslosen'],
+  Buch:[]
+ };
+ for(const [noun,forms] of Object.entries(sample)){
+  if(!forms.length)continue;
+  const w=model.words.find(x=>x.noun===noun&&x.article===forms[0].split(' ')[0]);
+  assert.ok(w,noun+' found in reviewed catalogue');
+  assert.deepEqual([0,1,2,3].map(i=>model.caseForm(w,i)),forms,noun+' exact four cases');
+ }
+ const fem=model.words.find(w=>w.article==='die'&&w.noun==='Angestellte');
+ assert.equal(model.caseForm(fem,2),'der Angestellten');
+ assert.equal(model.caseForm(fem,3),'der Angestellten');
+ const plural=model.words.find(w=>w.noun==='Kosten');
+ assert.equal(model.caseForm(plural,3),'der Kosten');
+ assert.ok(!source('top-nouns-v90-ui.js').includes('deutschB2BerufWords_v1'),"new catalogue never mutates original vocabulary storage key");
+ for(const path of ['top-nouns-v90-ui.js','top-nouns-v90-data.js'])
+  assert.doesNotThrow(()=>new vm.Script(source(path),{filename:path}));
+ assert.match(index,/value="topnouns">Top 300 Nouns/);
+ assert.match(index,/value="topnouns">Top Nouns: Articles & Cases/);
+ assert.match(index,/top-nouns-v90-ui\.js/);
+ assert.match(index,/top-nouns-v90-data\.js/);
+ assert.match(index,/top-nouns-v90\.css/);
+});
