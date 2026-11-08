@@ -30,7 +30,7 @@ const root=section.querySelector("#vtBody");
 if(!list.length){root.innerHTML='<div class="vt-card">No matches. Try changing your filters.</div>';return}
 if(mode==="quiz"){quiz(root,list);return}
 const v=list.find(x=>x.id===chosen)||list[0],i=list.indexOf(v),ex=sentenceFor(v);
-root.innerHTML='<article class="vt-card"><div class="vt-small">'+(i+1)+' of '+list.length+' · '+safe(v.category)+'</div><h2>'+safe(v.name)+'</h2><p class="vt-meaning">'+safe(v.english)+'</p><div class="vt-example"><strong>'+safe(ex.de||v.forms[0])+'</strong><p>'+safe(ex.en||v.english)+'</p></div><div class="vt-forms"><div><small>Präteritum</small><b>'+safe(v.past)+'</b></div><div><small>Partizip II</small><b>'+safe(v.partizip)+'</b></div><div><small>Perfekt</small><b>'+safe(perfect(v))+'</b></div></div><p class="vt-swipe-hint">← Need practice <span aria-hidden="true">·</span> Learned →</p><div class="vt-actions"><button class="vt-button" id="vtPrev">← Back</button><button class="vt-button" id="vtMaster">'+(saved.mastered.includes(v.id)?'✓ Learned':'Mark learned')+'</button><button class="vt-button vt-primary" id="vtNext">Next →</button></div><div class="vt-swipe-actions"><button class="vt-button" id="vtNeedPractice" type="button">← Need practice</button><button class="vt-button vt-primary" id="vtSwipeLearned" type="button">✓ Learned →</button></div><div class="vt-extras"><button class="vt-button" id="vtAudio">🔊 Listen</button><button class="vt-button" id="vtTest">Test this verb</button></div><details class="vt-more"><summary>More: conjugations & grammar</summary><p>'+safe(v.grammar)+'</p><table><tr><th>Person</th><th>Präsens</th></tr>'+["ich","du","er/sie/es","wir","ihr","sie/Sie"].map((p,n)=>'<tr><td>'+p+'</td><td>'+safe(v.forms[n])+'</td></tr>').join("")+'</table></details></article>';
+root.innerHTML='<article class="vt-card"><div class="vt-small">'+(i+1)+' of '+list.length+' · '+safe(v.category)+'</div><h2>'+safe(v.name)+'</h2><p class="vt-meaning">'+safe(v.english)+'</p>'+(window.B2SmartGrammar?.forWord(v.name)?'<span class="smart-case-tag">'+safe(window.B2SmartGrammar.forWord(v.name).label)+' · '+safe(window.B2SmartGrammar.forWord(v.name).pattern)+'</span>':(/Dativ|Akkusativ/i.test(v.grammar)?'<span class="smart-case-tag">'+safe(v.grammar)+'</span>':''))+'<div class="vt-example"><strong>'+safe(ex.de||v.forms[0])+'</strong><p>'+safe(ex.en||v.english)+'</p></div><div class="vt-forms"><div><small>Präteritum</small><b>'+safe(v.past)+'</b></div><div><small>Partizip II</small><b>'+safe(v.partizip)+'</b></div><div><small>Perfekt</small><b>'+safe(perfect(v))+'</b></div></div><p class="vt-swipe-hint">← Need practice <span aria-hidden="true">·</span> Learned →</p><div class="vt-actions"><button class="vt-button" id="vtPrev">← Back</button><button class="vt-button" id="vtMaster">'+(saved.mastered.includes(v.id)?'✓ Learned':'Mark learned')+'</button><button class="vt-button vt-primary" id="vtNext">Next →</button></div><div class="vt-swipe-actions"><button class="vt-button" id="vtNeedPractice" type="button">← Need practice</button><button class="vt-button vt-primary" id="vtSwipeLearned" type="button">✓ Learned →</button></div><div class="vt-extras"><button class="vt-button" id="vtAudio">🔊 Listen</button><button class="vt-button" id="vtTest">Test this verb</button></div><details class="vt-more"><summary>More: conjugations & grammar</summary><p>'+safe(v.grammar)+'</p><table><tr><th>Person</th><th>Präsens</th></tr>'+["ich","du","er/sie/es","wir","ihr","sie/Sie"].map((p,n)=>'<tr><td>'+p+'</td><td>'+safe(v.forms[n])+'</td></tr>').join("")+'</table></details></article>';
 root.querySelector("#vtPrev").onclick=()=>{chosen=list[(i-1+list.length)%list.length].id;draw()};
 root.querySelector("#vtNext").onclick=()=>{chosen=list[(i+1)%list.length].id;draw()};
 root.querySelector("#vtMaster").onclick=()=>{saved.mastered=saved.mastered.includes(v.id)?saved.mastered.filter(id=>id!==v.id):[...saved.mastered,v.id];if(saved.mastered.includes(v.id))saved.difficult=saved.difficult.filter(id=>id!==v.id);persist();draw()};
@@ -49,12 +49,60 @@ root.querySelector("#vtTest").onclick=()=>{mode="quiz";question={v,n:Math.floor(
 root.querySelector("#vtAudio").onclick=()=>{if("speechSynthesis" in window){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(ex.de||v.name);u.lang="de-DE";u.rate=.85;speechSynthesis.speak(u)}};
 }
 function quiz(root,list){
-if(!question||!list.some(x=>x.id===question.v.id)){question={v:list[Math.floor(Math.random()*list.length)],n:Math.floor(Math.random()*9)};answered=false}
-const {v,n}=question,labels=["ich · Präsens","du · Präsens","er/sie/es · Präsens","wir · Präsens","ihr · Präsens","sie/Sie · Präsens","Präteritum","Partizip II","Perfekt auxiliary"];
-const answer=n<6?v.forms[n]:n===6?v.past:n===7?v.partizip:v.aux;
-root.innerHTML='<div class="vt-card"><div class="vt-small">Quiz · '+saved.correct+' / '+saved.attempts+' correct</div><h2>'+safe(v.name)+'</h2><p class="vt-meaning">'+safe(v.english)+'</p><p>Write: <strong>'+labels[n]+'</strong></p><form id="vtAnswerForm"><input required id="vtAnswer" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Type the correct form"><button class="vt-button vt-primary">Check</button></form><p id="vtFeedback" aria-live="polite"></p><button class="vt-button" id="vtAnother">Next question →</button></div>';
-root.querySelector("#vtAnswerForm").onsubmit=e=>{e.preventDefault();if(answered)return;answered=true;const inp=root.querySelector("#vtAnswer");const good=inp.value.trim().toLocaleLowerCase("de-DE").replace(/\s+/g," ")===answer.toLocaleLowerCase("de-DE");saved.attempts++;if(good)saved.correct++;persist();root.querySelector("#vtFeedback").textContent=good?"✅ Correct!":"Correct: "+answer;inp.disabled=true;root.querySelector("#vtAnswerForm button").disabled=true};
-root.querySelector("#vtAnother").onclick=()=>{question=null;draw()};
+if(!question||!list.some(x=>x.id===question.v.id)){
+ const v=list[Math.floor(Math.random()*list.length)];
+ question={v,n:Math.floor(Math.random()*8)};answered=false;
 }
+const {v}=question,n=question.n%8;
+const labels=["ich · Präsens","du · Präsens","er/sie/es · Präsens","wir · Präsens","ihr · Präsens","sie/Sie · Präsens","ich · Präteritum","Partizip II"];
+const answer=n<6?v.forms[n]:n===6?v.past:v.partizip;
+const choices=[answer],sources=new Map([[answer,"Correct form of "+v.name+"."]]);
+const offer=(value,reason)=>{
+ if(typeof value==="string"&&value.trim()&&!choices.includes(value)){
+  choices.push(value);sources.set(value,reason);
+ }
+};
+// More plausible distractors: other conjugations from the SAME verb.
+if(n<6){
+ for(let k of [0,1,2,3,4,5])if(k!==n)offer(v.forms[k],labels[k]+" of "+v.name);
+}else{
+ offer(v.forms[0],"ich · Präsens, not the requested tense.");
+ offer(v.forms[2],"er/sie/es · Präsens, not the requested tense.");
+ offer(n===6?v.partizip:v.past,n===6?"Partizip II, not Präteritum.":"Präteritum, not Partizip II.");
+}
+// Fill to exactly four unique choices using real forms from other verbs.
+for(let j=0;j<records.length&&choices.length<4;j++){
+ const other=records[(v.id+j+1)%records.length];
+ offer(n<6?other.forms[n]:n===6?other.past:other.partizip,"This is a form of "+other.name+", not "+v.name+".");
+}
+if(choices.length!==4)throw Error("Insufficient verb alternatives for MCQ");
+for(let i=choices.length-1;i>0;i--){
+ const k=Math.floor(Math.random()*(i+1));[choices[i],choices[k]]=[choices[k],choices[i]];
+}
+const example=sentenceFor(v),smart=window.B2SmartGrammar?.forWord(v.name);
+root.innerHTML='<div class="vt-card"><div class="vt-small">Practice · '+saved.correct+' / '+saved.attempts+' correct</div><h2>'+safe(v.name)+'</h2><p class="vt-meaning">'+safe(v.english)+'</p><p>Choose: <strong>'+safe(labels[n])+'</strong></p><div class="smart-verb-choices" role="group" aria-label="Choose correct verb form">'+choices.map((option,i)=>'<button type="button" data-index="'+i+'">'+String.fromCharCode(65+i)+') '+safe(option)+'</button>').join("")+'</div><p id="vtFeedback" class="smart-verb-feedback" aria-live="polite"></p><div id="vtWhy"></div><button class="vt-button vt-primary" id="vtAnother" disabled>Next question →</button></div>';
+const btns=[...root.querySelectorAll(".smart-verb-choices button")],next=root.querySelector("#vtAnother");
+btns.forEach((btn,i)=>btn.onclick=()=>{
+ if(answered)return;answered=true;
+ const selected=choices[i],good=selected===answer;
+ saved.attempts++;if(good)saved.correct++;persist();
+ const reason=sources.get(selected);
+ btns.forEach((b,j)=>{b.disabled=true;if(choices[j]===answer)b.classList.add("correct");if(j===i&&!good)b.classList.add("wrong")});
+ const fb=root.querySelector("#vtFeedback");
+ fb.classList.add(good?"good":"bad");
+ fb.textContent=good?"✓ Correct!":"✗ Not quite. Correct answer: "+answer;
+ const rule=smart?smart.rule:(v.grammar||"Use the requested verb form.");
+ const details='<details class="smart-why"><summary>Why?</summary><div class="smart-why-body"><p><strong>Rule:</strong> '+safe(rule)+'</p>'+(good?'':'<p><strong>Your choice:</strong> '+safe(reason)+'</p>')+'<p><strong>Requested form:</strong> '+safe(labels[n])+' → '+safe(answer)+'</p><p><strong>Example:</strong> '+safe(example.de||v.forms[0])+'</p>'+(example.en?'<p>'+safe(example.en)+'</p>':'')+'</div></details>';
+ root.querySelector("#vtWhy").innerHTML=details;
+ root.querySelector(".vt-small").textContent="Practice · "+saved.correct+" / "+saved.attempts+" correct";
+ next.disabled=false;
+});
+next.onclick=()=>{
+ const others=list.filter(x=>x.id!==v.id);
+ question={v:(others.length?others:list)[Math.floor(Math.random()*(others.length||list.length))],n:Math.floor(Math.random()*8)};
+ answered=false;draw();
+};
+}
+
 draw();
 })();
