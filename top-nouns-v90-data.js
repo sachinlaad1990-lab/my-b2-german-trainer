@@ -59,7 +59,7 @@ function exampleFor(w){
  const selected=templates[index%templates.length];
  const usesDative=[4,9].includes(index%templates.length);
  const full=usesDative?dative:accusative;
- return {de:selected[0]+full+".",en:selected[1]+w.english+"."};
+ return {de:selected[0]+full+".",en:selected[1]+"the "+w.english+"."};
 }
 global.B2TopNouns=Object.freeze({groups,words,caseForm,find,exampleFor});
 })(typeof window!=="undefined"?window:globalThis);
