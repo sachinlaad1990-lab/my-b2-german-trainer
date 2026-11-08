@@ -188,6 +188,7 @@ try{
   await page.locator("#splitStudyToggle").click();
   assert.equal(await page.locator("main.split-study").count(),0,profile.name+": split mode exits cleanly");
   // Smart grammar mode is an option inside the EXISTING quiz, not a new screen.
+  await page.locator("#focusMoreMenu summary").click();
   await page.locator(".focus-nav .tab[data-tab='quiz']").click();
   await page.locator("#quizMode").selectOption("grammar");
   assert.ok(await page.locator("#quizQuestion").innerText(),profile.name+": grammar question visible");
