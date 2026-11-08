@@ -14,13 +14,14 @@ const slides=[
  {tab:'flashcards',title:'Remember with flashcards',desc:'Flip through your actual study cards and review difficult words.',icon:'icon-layers'},
  {tab:'grammarGuide',title:'Grammar made clearer',desc:'Build confidence with Akkusativ, Dativ and Genitiv.',icon:'icon-book-text'},
  {tab:'quiz',title:'Put your knowledge to work',desc:'Practice with quizzes and immediate feedback.',icon:'icon-target'},
- {tab:'progress',title:'See how far you have come',desc:'Follow your learning and keep improving every day.',icon:'icon-chart'}
+ {tab:'progress',title:'See how far you have come',desc:'Follow your learning and keep improving every day.',icon:'icon-chart'},
+ {tab:'settings',title:'Log in & sync your progress',desc:'You can try the app without logging in. To save your learning progress online and sync across devices, log in to your account.',icon:'icon-settings',anchor:'authPanel'}
 ];
 function init(){
  const old=document.getElementById('appTour');if(!old||document.getElementById('realScreenTour'))return;
  const wrap=document.createElement('section');wrap.id='realScreenTour';wrap.className='real-screen-tour';
  wrap.setAttribute('aria-label','Interactive app slideshow with real screen previews');
- wrap.innerHTML=`<div class="rst-head"><div><span class="rst-eyebrow">EXPLORE THE APP</span><h2>See how Deutsch B2 Beruf works</h2><p>Actual interactive app screens, not stock images.</p></div><span class="rst-count" aria-live="polite">01 / 07</span></div>
+ wrap.innerHTML=`<div class="rst-head"><div><span class="rst-eyebrow">EXPLORE THE APP</span><h2>See how Deutsch B2 Beruf works</h2><p>Actual interactive app screens, not stock images.</p></div><span class="rst-count" aria-live="polite">01 / 08</span></div>
  <div class="rst-layout"><div class="rst-phone"><div class="rst-phone-top" aria-hidden="true"><span></span></div><iframe title="Live preview of the German B2 learning app" loading="lazy" tabindex="-1" src="index.html?tourPreview=1"></iframe><div class="rst-phone-bottom" aria-hidden="true"></div></div>
  <div class="rst-info"><span class="rst-step">STEP 01</span><div class="rst-icon" aria-hidden="true"></div><h3 class="rst-title"></h3><p class="rst-desc"></p><div class="rst-actions"><button type="button" class="rst-prev" aria-label="Previous screen">← Previous</button><button type="button" class="rst-next" aria-label="Next screen">Next →</button></div><div class="rst-dots" role="group" aria-label="Choose a preview"></div><a class="rst-cta" href="#library">Try it free — Start learning <span aria-hidden="true">→</span></a><p class="rst-note">These are live views of this website. Preview content may reflect your saved learning data.</p></div></div>`;
  old.replaceWith(wrap);
@@ -36,7 +37,7 @@ function init(){
   try{const doc=iframe.contentDocument;const target=doc.querySelector('.tab[data-tab="'+slides[current].tab+'"]');
    if(target)target.click();
    else {const view=doc.getElementById(slides[current].tab);if(view){doc.querySelectorAll('section.view').forEach(el=>el.classList.add('hidden'));view.classList.remove('hidden')}}
-   const view=doc.getElementById(slides[current].tab);
+   const view=doc.getElementById(slides[current].anchor||slides[current].tab);
    if(view)view.scrollIntoView({block:'start',behavior:'instant'});
    else iframe.contentWindow.scrollTo(0,0);
   }catch(e){wrap.querySelector('.rst-note').textContent='Open the full app to explore this section.'}
