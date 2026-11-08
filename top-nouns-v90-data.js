@@ -22,5 +22,44 @@ const caseForm=(w,grammaticalCase)=>{
  return a[grammaticalCase]+" "+w.noun;
 };
 const find=(noun)=>words.find(w=>w.noun.toLocaleLowerCase("de-DE")===String(noun||"").toLocaleLowerCase("de-DE"));
-global.B2TopNouns=Object.freeze({groups,words,caseForm,find});
+const handpicked={
+ Chef:["Der Chef leitet heute die Besprechung.","The boss is leading the meeting today."],
+ Team:["Unser Team arbeitet an einem neuen Projekt.","Our team is working on a new project."],
+ Büro:["Das Büro ist heute geschlossen.","The office is closed today."],
+ Firma:["Die Firma sucht neue Mitarbeiter.","The company is looking for new employees."],
+ Unternehmen:["Das Unternehmen entwickelt neue Produkte.","The company develops new products."],
+ Arbeitsplatz:["Mein Arbeitsplatz ist gut ausgestattet.","My workplace is well equipped."],
+ Betrieb:["Der Betrieb hat moderne Maschinen.","The business has modern machines."],
+ Abteilung:["Die Abteilung trifft sich um zehn Uhr.","The department meets at ten o'clock."],
+ Besprechung:["Die Besprechung beginnt um neun Uhr.","The meeting starts at nine o'clock."],
+ Termin:["Ich habe morgen einen Termin mit meinem Chef.","I have an appointment with my boss tomorrow."],
+ Meeting:["Das Meeting beginnt in zehn Minuten.","The meeting begins in ten minutes."],
+ Fenster:["Kannst du bitte das Fenster öffnen?","Could you please open the window?"],
+ Vorgesetzte:["Mein Vorgesetzter hilft mir bei der Planung.","My supervisor helps me with planning."],
+ Kollege:["Ich helfe meinem Kollegen bei der Aufgabe.","I help my colleague with the task."],
+ Kosten:["Die Kosten des Projekts sind gestiegen.","The project's costs have increased."]
+};
+function exampleFor(w){
+ if(!w)return null;
+ if(handpicked[w.noun])return {de:handpicked[w.noun][0],en:handpicked[w.noun][1]};
+ const accusative=caseForm(w,1),dative=caseForm(w,2);
+ const index=Math.floor((w.rank-1)/10);
+ const templates=[
+  ["Heute sprechen wir über ","Today we're discussing "],
+  ["Im Team sprechen wir über ","In our team we're discussing "],
+  ["In der Besprechung sprechen wir über ","In the meeting we're discussing "],
+  ["Wir möchten mehr über ","We'd like to learn more about "],
+  ["Ich habe eine Frage zu ","I have a question about "],
+  ["Im Bericht stehen Informationen über ","The report contains information about "],
+  ["Wir sprechen heute über ","Today we're discussing "],
+  ["Wir benötigen Informationen über ","We need information about "],
+  ["Im Kurs sprechen wir über ","In the course we're discussing "],
+  ["Wir planen eine Verbesserung bei ","We're planning an improvement concerning "]
+ ];
+ const selected=templates[index%templates.length];
+ const usesDative=[4,9].includes(index%templates.length);
+ const full=usesDative?dative:accusative;
+ return {de:selected[0]+full+".",en:selected[1]+w.english+"."};
+}
+global.B2TopNouns=Object.freeze({groups,words,caseForm,find,exampleFor});
 })(typeof window!=="undefined"?window:globalThis);
