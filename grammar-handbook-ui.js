@@ -11,6 +11,15 @@ const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const scores=read(KEY,{}),bookmarks=read(BK,[]);
 const articles={definite:{m:['der','den','dem','des'],f:['die','die','der','der'],n:['das','das','dem','des'],p:['die','die','den','der']},indefinite:{m:['ein','einen','einem','eines'],f:['eine','eine','einer','einer'],n:['ein','ein','einem','eines'],p:['—','—','—','—']},negative:{m:['kein','keinen','keinem','keines'],f:['keine','keine','keiner','keiner'],n:['kein','kein','keinem','keines'],p:['keine','keine','keinen','keiner']},possessive:{m:['mein','meinen','meinem','meines'],f:['meine','meine','meiner','meiner'],n:['mein','mein','meinem','meines'],p:['meine','meine','meinen','meiner']}};
 const noun={m:'Chef',f:'Firma',n:'Team',p:'Kollegen'},cases=['Nominativ','Akkusativ','Dativ','Genitiv'];
+// Genitiv M/N normally adds -(e)s to the noun; feminine and plural nouns do not.
+// Store actual noun forms rather than guessing endings from the article alone.
+const nounForms={
+ m:['Chef','Chef','Chef','Chefs'],
+ f:['Firma','Firma','Firma','Firma'],
+ n:['Team','Team','Team','Teams'],
+ p:['Kollegen','Kollegen','Kollegen','Kollegen']
+};
+const caseNoun=(gender,index)=>nounForms[gender]?.[index]||noun[gender];
 let section='all',search='',savedOnly=false,active=read(LAST,lessons[0].id),locked=false,choice='definite',gender='m',caseIndex=0;
 if(!lessons.some(l=>l.id===active))active=lessons[0].id;
 const current=()=>lessons.find(l=>l.id===active)||lessons[0];
@@ -82,12 +91,12 @@ function quiz(){
 }
 function builder(){
  const area=document.getElementById('bhBuilder');
- area.innerHTML='<div class="bh-builder-grid"><label>Article family<select id="bhFamily"><option value="definite">der / die / das</option><option value="indefinite">ein / eine / ein</option><option value="negative">kein / keine</option><option value="possessive">mein / meine</option></select></label><label>Gender or number<select id="bhGender"><option value="m">Masculine · Chef</option><option value="f">Feminine · Firma</option><option value="n">Neuter · Team</option><option value="p">Plural · Kollegen</option></select></label><label>Case<select id="bhCase"><option value="0">Nominativ</option><option value="1">Akkusativ</option><option value="2">Dativ</option><option value="3">Genitiv</option></select></label></div><div class="bh-builder-result" id="bhBuildResult"></div><div class="bh-case-row" id="bhCaseRow"></div><p class="b2-muted">This demonstrates article forms. Noun endings and natural sentence context also matter (e.g. des Chefs).</p>';
+ area.innerHTML='<div class="bh-builder-grid"><label>Article family<select id="bhFamily"><option value="definite">der / die / das</option><option value="indefinite">ein / eine / ein</option><option value="negative">kein / keine</option><option value="possessive">mein / meine</option></select></label><label>Gender or number<select id="bhGender"><option value="m">Masculine · Chef</option><option value="f">Feminine · Firma</option><option value="n">Neuter · Team</option><option value="p">Plural · Kollegen</option></select></label><label>Case<select id="bhCase"><option value="0">Nominativ</option><option value="1">Akkusativ</option><option value="2">Dativ</option><option value="3">Genitiv</option></select></label></div><div class="bh-builder-result" id="bhBuildResult"></div><div class="bh-case-row" id="bhCaseRow"></div><p class="b2-muted">Genitiv: masculine/neuter nouns usually add -(e)s: <b>des Chefs</b>, <b>des Teams</b>, <b>des Buches</b>. Feminine/plural nouns do not: <b>der Firma</b>, <b>der Kollegen</b>. Weak masculine nouns differ: <b>des Kollegen</b>, <b>des Vorgesetzten</b>.</p>';
  const f=document.getElementById('bhFamily'),g=document.getElementById('bhGender'),c=document.getElementById('bhCase');
  f.value=choice;g.value=gender;c.value=String(caseIndex);
  const update=()=>{
   choice=f.value;gender=g.value;caseIndex=Number(c.value);
-  const article=articles[choice][gender][caseIndex],word=noun[gender],printed=gender==='m'&&caseIndex===3?word+'s':word;
+  const article=articles[choice][gender][caseIndex],printed=caseNoun(gender,caseIndex);
   document.getElementById('bhBuildResult').innerHTML='<span>'+esc(cases[caseIndex])+'</span><strong>'+esc(article==='—'?'(no ein-plural)':article+' '+printed)+'</strong>';
   const row=document.getElementById('bhCaseRow');row.replaceChildren();
   for(let i=0;i<4;i++){const b=make('button',cases[i].slice(0,3)+' · '+articles[choice][gender][i],caseIndex===i?'active':'');b.onclick=()=>{c.value=i;update()};row.append(b)}
