@@ -1,0 +1,32 @@
+/* Smart grammar v8.0 — quiet, expandable contextual hints only */
+#library .word .smart-case-tag,#verbTrainer .smart-case-tag,.smart-flash-tag{
+ display:inline-flex;align-items:center;max-width:100%;
+ color:var(--accent);background:var(--accent2);
+ border:1px solid color-mix(in srgb,var(--accent) 20%,var(--line));
+ font-size:.79rem;line-height:1.4;font-weight:680;border-radius:9px;
+ padding:5px 9px;margin:6px 0 8px;overflow-wrap:anywhere;
+}
+.smart-case-tag[hidden],.smart-flash-tag[hidden],.smart-why[hidden]{display:none!important}
+#flashcards .smart-flash-tag{margin:8px auto 12px;max-width:100%;justify-content:center}
+.smart-why{display:block;border:1px solid var(--line);background:var(--panel);
+ border-radius:11px;padding:0;margin:11px 0;text-align:left;max-width:100%;color:var(--ink)}
+.smart-why>summary{list-style:none;padding:10px 12px;cursor:pointer;color:var(--accent);font-weight:750;font-size:.87rem}
+.smart-why>summary::-webkit-details-marker{display:none}
+.smart-why>summary::after{content:" +";float:right}
+.smart-why[open]>summary::after{content:" −"}
+.smart-why-body{border-top:1px solid var(--line);padding:8px 12px 11px;color:var(--ink);
+ font-size:.87rem;line-height:1.58;background:var(--accent2);border-radius:0 0 10px 10px}
+.smart-why-body p{margin:6px 0}
+#quizOptions button.smart-correct{border:2px solid var(--good)!important;background:color-mix(in srgb,var(--good) 10%,var(--panel));color:var(--ink)!important;opacity:1}
+#quizOptions button.smart-incorrect{border:2px solid var(--bad)!important;background:color-mix(in srgb,var(--bad) 9%,var(--panel));color:var(--ink)!important;opacity:1}
+#quizFeedback .smart-why{color:var(--ink)}
+#verbTrainer .smart-verb-feedback{padding:10px 12px;border-radius:10px;min-height:0;line-height:1.55}
+#verbTrainer .smart-verb-feedback.good{background:color-mix(in srgb,var(--good) 10%,var(--panel));color:var(--good)}
+#verbTrainer .smart-verb-feedback.bad{background:color-mix(in srgb,var(--bad) 10%,var(--panel));color:var(--bad)}
+#verbTrainer .smart-verb-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:15px 0}
+#verbTrainer .smart-verb-choices button{text-align:left;border:1px solid var(--line);padding:12px;border-radius:12px;background:var(--panel);color:var(--ink);min-height:53px}
+#verbTrainer .smart-verb-choices button.correct{background:color-mix(in srgb,var(--good) 11%,var(--panel));border:2px solid var(--good);opacity:1}
+#verbTrainer .smart-verb-choices button.wrong{background:color-mix(in srgb,var(--bad) 10%,var(--panel));border:2px solid var(--bad);opacity:1}
+#verbTrainer .smart-verb-choices button:disabled{cursor:default}
+@media(max-width:640px){#verbTrainer .smart-verb-choices{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.smart-why,#quizOptions button,#verbTrainer .smart-verb-choices button{animation:none!important;transition:none!important}}
