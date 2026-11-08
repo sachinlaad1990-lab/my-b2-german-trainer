@@ -1118,7 +1118,7 @@ document.getElementById('wordList').addEventListener('click',e=>{
  case 'exam':w.examBookmark=!w.examBookmark;break;
  case 'azeez':w.azeezSuggestion=!w.azeezSuggestion;break;
  case 'difficult':if(w.difficult)w.difficult=false;else v4RecordRating(w,'again');break;
- case 'learned':if(w.learned)w.learned=false;else v4RecordRating(w,'good');break;
+ case 'learned':w.learned=!w.learned;break;
  case 'edit':document.getElementById('wordEditorPanel').style.display='block';document.getElementById('editId').value=w.id;for(const k of ['german','english','category','article','example','translation','grammar','mnemonic','notes','pronunciation','level'])document.getElementById(k).value=w[k]||'';
  for(const [key,id] of [['wordType','v4WordType'],['plural','v4Plural'],['prateritum','v4Prateritum'],['partizip','v4Partizip'],['auxiliary','v4Aux']])document.getElementById(id).value=w[key]||'';document.getElementById('formTitle').textContent='Edit vocabulary word';document.getElementById('saveWord').textContent='Save changes';document.getElementById('cancelEdit').classList.remove('hidden');document.getElementById('wordEditorPanel').scrollIntoView({behavior:'smooth',block:'start'});return;
  case 'delete':if(!confirm(`Delete "${w.german}"?`))return;delete v3State.records[v3WordKey(w)];v3SaveState();words=words.filter(x=>x.id!==w.id);break;
