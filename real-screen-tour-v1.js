@@ -61,6 +61,22 @@ function init(){
  });
  wrap.querySelector('.rst-prev').addEventListener('click',()=>show(current-1,true));
  wrap.querySelector('.rst-next').addEventListener('click',()=>show(current+1,true));
+ // Horizontal swipe gestures for mobile: left = next, right = previous.
+ // Ignore predominantly vertical movement so normal page scrolling keeps working.
+ let swipeStart=null;
+ const swipeArea=wrap.querySelector('.rst-layout');
+ swipeArea.addEventListener('touchstart',event=>{
+  if(event.touches.length!==1||event.target.closest('button,a'))return;
+  const t=event.touches[0];swipeStart={x:t.clientX,y:t.clientY};
+ },{passive:true});
+ swipeArea.addEventListener('touchend',event=>{
+  if(!swipeStart||event.changedTouches.length!==1)return;
+  const t=event.changedTouches[0];
+  const dx=t.clientX-swipeStart.x,dy=t.clientY-swipeStart.y;
+  swipeStart=null;
+  if(Math.abs(dx)>=45&&Math.abs(dx)>Math.abs(dy)*1.3){show(current+(dx<0?1:-1),true)}
+ },{passive:true});
+ swipeArea.addEventListener('touchcancel',()=>{swipeStart=null},{passive:true});
  wrap.addEventListener('mouseenter',stopAuto);wrap.addEventListener('focusin',stopAuto);
  show(0);
  if(!matchMedia('(prefers-reduced-motion: reduce)').matches)auto=setInterval(()=>show(current+1),6500);
