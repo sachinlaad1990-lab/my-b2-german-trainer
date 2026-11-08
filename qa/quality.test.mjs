@@ -226,7 +226,7 @@ test('Genitiv reference tables and weak noun exceptions stay consistent',()=>{
  const indef=lookup('ein');
  const negative=lookup('kein');
  const possessive=lookup('poss');
- assert.deepEqual(Array.from(defs.slice(1)),['des (+s noun)','der','des (+s noun)','der']);
+ assert.deepEqual(Array.from(defs.slice(1)),['des + noun ending*','der','des + noun ending*','der']);
  assert.deepEqual(Array.from(indef.slice(1)),['eines','einer','eines','—']);
  assert.deepEqual(Array.from(negative.slice(1)),['keines','keiner','keines','keiner']);
  assert.deepEqual(Array.from(possessive.slice(1)),['meines','meiner','meines','meiner']);
