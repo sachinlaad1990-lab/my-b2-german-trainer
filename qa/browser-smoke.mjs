@@ -56,9 +56,13 @@ try{
   assert.match(await page.locator("#verbTrainer .vt-top").innerText(),/1 \/ 211 learned/,profile.name+": progress saved");
   await page.reload({waitUntil:"domcontentloaded"});
   await page.locator(".focus-nav .tab[data-tab='verbTrainer']").first().click();
+  await page.waitForSelector("#verbTrainer:not(.hidden) .vt-top",{timeout:10000});
   assert.match(await page.locator("#verbTrainer .vt-top").innerText(),/1 \/ 211 learned/,profile.name+": mastery persists");
   await page.locator("#vtQuiz").click();
-  await page.waitForSelector("#verbTrainer .smart-verb-choices button");
+  await page.waitForSelector("#verbTrainer:not(.hidden) .smart-verb-choices button",{timeout:12000}).catch(async error=>{
+    const details=await page.evaluate(()=>({active:document.querySelector('#verbTrainer')?.className,body:document.querySelector('#vtBody')?.textContent?.slice(0,350),quiz:document.querySelector('#vtQuiz')?.outerHTML}));
+    throw new Error(profile.name+" verb quiz unavailable: "+JSON.stringify({details,jsErrors})+"; "+error.message);
+  });
   assert.equal(await page.locator("#verbTrainer .smart-verb-choices button").count(),4,profile.name+": verb four-answer MCQ");
   await page.locator("#verbTrainer .smart-verb-choices button").first().click();
   assert.match(await page.locator("#vtFeedback").innerText(),/Correct|Not quite/,profile.name+": verb quiz feedback");
