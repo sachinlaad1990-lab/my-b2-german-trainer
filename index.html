@@ -139,6 +139,12 @@ main{max-width:1120px}
 .focus-more-items .tab{justify-content:flex-start;text-align:left;width:100%}
 @media(max-width:650px){.focus-nav .tab{gap:7px}.focus-nav .tab .ui-icon{width:18px;height:18px}}
 @media(prefers-reduced-motion:reduce){.focus-nav .tab{transition:none}.focus-nav .tab:hover:not(:disabled){transform:none}}
+
+/* Consistent premium SVG symbols across home, progress and learning controls */
+.home-icon .ui-icon{width:27px;height:27px;vertical-align:middle;stroke:currentColor;fill:none}
+.home-path .home-icon{display:inline-flex;align-items:center;justify-content:center}
+button>.ui-icon,h2>.ui-icon,summary>.ui-icon{width:18px;height:18px;vertical-align:-.2em;margin-right:6px;stroke:currentColor;fill:none}
+.focus-progress summary>.ui-icon{width:18px;height:18px}
 </style>
 <link rel="stylesheet" href="focus-layout-v54.css?v=5.4.1">
 <link rel="stylesheet" href="design-system-v55.css?v=6.0.0">
@@ -153,7 +159,7 @@ main{max-width:1120px}
 </head>
 <body>
 <header><div class="brandhead"><a class="author-photo-link" href="https://www.linkedin.com/in/sachinlaad/" target="_blank" rel="noopener noreferrer" aria-label="Sachin Laad — LinkedIn profile"><img id="headerPhoto" class="profile-pic" src="assets/author-sachin.webp" alt="Sachin Laad, creator of Deutsch B2 Beruf" width="64" height="64"></a><div class="brandcopy"><h1>Deutsch B2 Beruf <span style="font-size:.52em;vertical-align:middle;color:var(--accent);font-weight:700" aria-label="Version 9.2">v9.2</span></h1><p>Vocabulary · Flashcards · Grammar Made Easy · Everyday German</p><div class="credit">Created by <a class="author-link" href="https://www.linkedin.com/in/sachinlaad/" target="_blank" rel="noopener noreferrer"><strong id="headerCreator">Sachin Laad</strong><span class="author-link-mark" aria-hidden="true">↗</span></a></div></div></div></header>
-<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"><defs><g id="icon-house" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9 21v-8h6v8"/></g><g id="icon-book-open" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7c-3-2-6-2-10-1v14c4-1 7-1 10 1 3-2 6-2 10-1V6c-4-1-7-1-10 1z"/><path d="M12 7v14"/></g><g id="icon-languages" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h12M9 3v2m4 0c-.5 5-3 9-9 12m1-8c2 4 5 6 8 7M14 21l4-10 4 10m-6.5-4h5"/></g><g id="icon-layers" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 9 5-9 5-9-5 9-5zm-9 10 9 5 9-5M3 17l9 5 9-5"/></g><g id="icon-book-text" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5zM4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5M8 7h8M8 11h6"/></g><g id="icon-case-upper" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m4 20 6-16 6 16M6 15h8M19 4v16m-3-3 3 3 3-3"/></g><g id="icon-brain" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7a4 4 0 0 0-7-2 4 4 0 0 0-1 6 4 4 0 0 0 1 7 4 4 0 0 0 7 1V7zm0 0a4 4 0 0 1 7-2 4 4 0 0 1 1 6 4 4 0 0 1-1 7 4 4 0 0 1-7 1M8 9l-2 2m2 5 2-2m6-5 2 2m-2 5-2-2"/></g><g id="icon-messages-square" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v10l4-3h10a2 2 0 0 0 2-1zM8 17v2a2 2 0 0 0 2 2h8l3 2v-9"/></g><g id="icon-mic" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0m-7 7v5m-4 0h8"/></g><g id="icon-arrow-left-right" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 3 8l5 5M3 8h18m-5 13 5-5-5-5M21 16H3"/></g><g id="icon-settings" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M10 2h4l1 3 3 1 3-1 2 4-2 2v3l2 2-2 4-3-1-3 1-1 3h-4l-1-3-3-1-3 1-2-4 2-2v-3L1 9l2-4 3 1 3-1z"/></g><g id="icon-pen-line" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m4 20 4-.8L20 7a2 2 0 0 0-3-3L5 16l-1 4zm9-13 4 4M4 23h16"/></g></defs></svg>
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"><defs><g id="icon-house" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9 21v-8h6v8"/></g><g id="icon-book-open" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7c-3-2-6-2-10-1v14c4-1 7-1 10 1 3-2 6-2 10-1V6c-4-1-7-1-10 1z"/><path d="M12 7v14"/></g><g id="icon-languages" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h12M9 3v2m4 0c-.5 5-3 9-9 12m1-8c2 4 5 6 8 7M14 21l4-10 4 10m-6.5-4h5"/></g><g id="icon-layers" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 9 5-9 5-9-5 9-5zm-9 10 9 5 9-5M3 17l9 5 9-5"/></g><g id="icon-book-text" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5zM4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5M8 7h8M8 11h6"/></g><g id="icon-case-upper" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m4 20 6-16 6 16M6 15h8M19 4v16m-3-3 3 3 3-3"/></g><g id="icon-brain" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7a4 4 0 0 0-7-2 4 4 0 0 0-1 6 4 4 0 0 0 1 7 4 4 0 0 0 7 1V7zm0 0a4 4 0 0 1 7-2 4 4 0 0 1 1 6 4 4 0 0 1-1 7 4 4 0 0 1-7 1M8 9l-2 2m2 5 2-2m6-5 2 2m-2 5-2-2"/></g><g id="icon-messages-square" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v10l4-3h10a2 2 0 0 0 2-1zM8 17v2a2 2 0 0 0 2 2h8l3 2v-9"/></g><g id="icon-mic" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0m-7 7v5m-4 0h8"/></g><g id="icon-arrow-left-right" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 3 8l5 5M3 8h18m-5 13 5-5-5-5M21 16H3"/></g><g id="icon-settings" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M10 2h4l1 3 3 1 3-1 2 4-2 2v3l2 2-2 4-3-1-3 1-1 3h-4l-1-3-3-1-3 1-2-4 2-2v-3L1 9l2-4 3 1 3-1z"/></g><g id="icon-pen-line" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m4 20 4-.8L20 7a2 2 0 0 0-3-3L5 16l-1 4zm9-13 4 4M4 23h16"/></g><g id="icon-volume" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5zm4 4a5 5 0 0 1 0 6m3-9a9 9 0 0 1 0 12"/></g><g id="icon-turtle" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 13a6 6 0 0 1 12 0v3H6v-3zm12-2h3v3h-3M8 16v3m8-3v3M3 13h3M9 10h.01M14 10h.01"/></g><g id="icon-chart" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18M7 16v-4m5 4V8m5 8V5"/></g><g id="icon-palette" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="8" cy="9" r="1"/><circle cx="13" cy="7" r="1"/><circle cx="17" cy="11" r="1"/><path d="M12 21a3 3 0 0 1-2-5 2 2 0 0 0 2-3h2a5 5 0 0 1 0 8z"/></g><g id="icon-target" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></g><g id="icon-refresh" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7v5h-5M4 17v-5h5M5 9a8 8 0 0 1 14-2l1 5M4 12l1 5a8 8 0 0 0 14-2"/></g></defs></svg>
 <main>
 
 
@@ -164,28 +170,28 @@ main{max-width:1120px}
       <button type="button" id="splitStudyToggle" aria-pressed="false">◫ Study side by side</button>
       <label class="split-study-select hidden" for="splitStudyLeft">Left panel
         <select id="splitStudyLeft" disabled>
-          <option value="today">🏠 Today</option>
-          <option value="library" selected>📚 Vocabulary</option>
-          <option value="verbTrainer">🔤 Verbs</option>
-          <option value="flashcards">🗂️ Flashcards</option>
-          <option value="grammarGuide">📘 Grammar</option>
-          <option value="articleTrainer">🅰️ Articles</option>
-          <option value="spokenGerman">🗣️ Spoken German</option>
-          <option value="everyday">💬 Everyday German</option>
-          <option value="quiz">🧠 Quiz</option>
+          <option value="today">Today</option>
+          <option value="library" selected>Vocabulary</option>
+          <option value="verbTrainer">Verbs</option>
+          <option value="flashcards">Flashcards</option>
+          <option value="grammarGuide">Grammar</option>
+          <option value="articleTrainer">Articles</option>
+          <option value="spokenGerman">Spoken German</option>
+          <option value="everyday">Everyday German</option>
+          <option value="quiz">Quiz</option>
         </select>
       </label>
       <label class="split-study-select hidden" for="splitStudyRight">Right panel
         <select id="splitStudyRight" disabled>
-          <option value="today">🏠 Today</option>
-          <option value="library">📚 Vocabulary</option>
-          <option value="verbTrainer">🔤 Verbs</option>
-          <option value="flashcards">🗂️ Flashcards</option>
-          <option value="grammarGuide">📘 Grammar</option>
+          <option value="today">Today</option>
+          <option value="library">Vocabulary</option>
+          <option value="verbTrainer">Verbs</option>
+          <option value="flashcards">Flashcards</option>
+          <option value="grammarGuide">Grammar</option>
           <option value="articleTrainer" selected>🅰️ Articles</option>
-          <option value="spokenGerman">🗣️ Spoken German</option>
-          <option value="everyday">💬 Everyday German</option>
-          <option value="quiz">🧠 Quiz</option>
+          <option value="spokenGerman">Spoken German</option>
+          <option value="everyday">Everyday German</option>
+          <option value="quiz">Quiz</option>
         </select>
       </label>
     </div>
@@ -211,7 +217,7 @@ main{max-width:1120px}
     </details>
   </nav>
   <details class="focus-progress" id="focusProgressPanel">
-    <summary>📊 My progress & word lists <span class="focus-summary-help">Tap to see statistics and open matching words</span></summary>
+    <summary><svg class="ui-icon" aria-hidden="true"><use href="#icon-chart"></use></svg> My progress & word lists <span class="focus-summary-help">Tap to see statistics and open matching words</span></summary>
     <div class="focus-progress-content">
 <section class="panel" id="learningProgressPanel">
   <h2>My Learning Progress</h2>
@@ -233,7 +239,7 @@ main{max-width:1120px}
     <button type="button" class="stat v4-stat-button" data-vocab-stat="difficult" aria-label="Show words needing practice"><strong id="difficultStat">0</strong><span>Need practice</span></button>
   </section>
 
-    <div class="panel" id="v4MasteryPanel"><h2>📈 Your learning progress</h2><p class="small muted">Mastery is earned across three separate successful study days. Your existing saved results are preserved.</p><div class="v4-score v4-progress-actions">
+    <div class="panel" id="v4MasteryPanel"><h2><svg class="ui-icon" aria-hidden="true"><use href="#icon-chart"></use></svg> Your learning progress</h2><p class="small muted">Mastery is earned across three separate successful study days. Your existing saved results are preserved.</p><div class="v4-score v4-progress-actions">
 <button type="button" data-vocab-stat="learned" id="v4MasteredCount">0 mastered</button>
 <button type="button" data-vocab-stat="learning" id="v4LearningCount">0 learning</button>
 <button type="button" data-vocab-stat="practice" id="v4PracticeCount">0 need practice</button>
@@ -261,9 +267,9 @@ main{max-width:1120px}
       <div id="todayWordType" class="today-pill">Daily practice</div>
       <div id="todayWord" class="today-word">Your next German word appears here</div>
       <div class="today-audio">
-        <button type="button" id="todaySpeakWord" aria-label="Hear German word">🔊 Hear word</button>
-        <button type="button" id="todaySpeakSlow" aria-label="Hear German word slowly">🐢 Slow</button>
-        <button type="button" id="todaySpeakExample" class="hidden" aria-label="Hear German example sentence">🔊 Example</button>
+        <button type="button" id="todaySpeakWord" aria-label="Hear German word"><svg class="ui-icon" aria-hidden="true"><use href="#icon-volume"></use></svg> Hear word</button>
+        <button type="button" id="todaySpeakSlow" aria-label="Hear German word slowly"><svg class="ui-icon" aria-hidden="true"><use href="#icon-turtle"></use></svg> Slow</button>
+        <button type="button" id="todaySpeakExample" class="hidden" aria-label="Hear German example sentence"><svg class="ui-icon" aria-hidden="true"><use href="#icon-volume"></use></svg> Example</button>
       </div>
       <div id="todayAnswer" class="today-answer hidden" aria-live="polite"></div>
       <button type="button" id="todayReveal" class="primary">Show meaning</button>
@@ -281,10 +287,10 @@ main{max-width:1120px}
     <section class="home-paths" aria-labelledby="homePathsHeading">
       <h3 id="homePathsHeading">Explore your learning</h3>
       <div class="home-path-grid">
-        <button type="button" class="home-path" data-destination="library"><span class="home-icon" aria-hidden="true">📚</span><strong>Vocabulary</strong><span class="home-desc">Learn useful words</span><span class="home-arrow" aria-hidden="true">→</span></button>
-        <button type="button" class="home-path" data-destination="verbTrainer"><span class="home-icon" aria-hidden="true">🔤</span><strong>Verbs</strong><span class="home-desc">Examples & forms</span><span class="home-arrow" aria-hidden="true">→</span></button>
-        <button type="button" class="home-path" data-destination="grammarGuide"><span class="home-icon" aria-hidden="true">📖</span><strong>Grammar</strong><span class="home-desc">Clear explanations</span><span class="home-arrow" aria-hidden="true">→</span></button>
-        <button type="button" class="home-path" data-destination="quiz"><span class="home-icon" aria-hidden="true">🎯</span><strong>Practice</strong><span class="home-desc">Test what you know</span><span class="home-arrow" aria-hidden="true">→</span></button>
+        <button type="button" class="home-path" data-destination="library"><span class="home-icon" aria-hidden="true"><svg class="ui-icon" aria-hidden="true"><use href="#icon-book-open"></use></svg></span><strong>Vocabulary</strong><span class="home-desc">Learn useful words</span><span class="home-arrow" aria-hidden="true">→</span></button>
+        <button type="button" class="home-path" data-destination="verbTrainer"><span class="home-icon" aria-hidden="true"><svg class="ui-icon" aria-hidden="true"><use href="#icon-languages"></use></svg></span><strong>Verbs</strong><span class="home-desc">Examples & forms</span><span class="home-arrow" aria-hidden="true">→</span></button>
+        <button type="button" class="home-path" data-destination="grammarGuide"><span class="home-icon" aria-hidden="true"><svg class="ui-icon" aria-hidden="true"><use href="#icon-book-text"></use></svg></span><strong>Grammar</strong><span class="home-desc">Clear explanations</span><span class="home-arrow" aria-hidden="true">→</span></button>
+        <button type="button" class="home-path" data-destination="quiz"><span class="home-icon" aria-hidden="true"><svg class="ui-icon" aria-hidden="true"><use href="#icon-target"></use></svg></span><strong>Practice</strong><span class="home-desc">Test what you know</span><span class="home-arrow" aria-hidden="true">→</span></button>
       </div>
     </section>
     <details class="app-tour" id="appTour" aria-label="App walkthrough video">
@@ -335,9 +341,9 @@ main{max-width:1120px}
       <div class="muted" id="flashCount">No cards yet</div><div class="progress"><div id="flashProgress"></div></div>
       <div class="german" id="flashGerman">Add or import words to begin</div>
       <div class="today-audio" style="justify-content:center">
-        <button type="button" id="flashSpeakWord">🔊 Hear word</button>
-        <button type="button" id="flashSpeakSlow">🐢 Slow</button>
-        <button type="button" id="flashSpeakExample">🔊 Example</button>
+        <button type="button" id="flashSpeakWord"><svg class="ui-icon" aria-hidden="true"><use href="#icon-volume"></use></svg> Hear word</button>
+        <button type="button" id="flashSpeakSlow"><svg class="ui-icon" aria-hidden="true"><use href="#icon-turtle"></use></svg> Slow</button>
+        <button type="button" id="flashSpeakExample"><svg class="ui-icon" aria-hidden="true"><use href="#icon-volume"></use></svg> Example</button>
       </div>
       <div class="english hidden" id="flashEnglish"></div>
       <div class="example hidden" id="flashExample"></div>
@@ -436,7 +442,7 @@ main{max-width:1120px}
 <section id="settings" class="view hidden">
   <div class="panel"><h2>⚙️ Settings</h2><p class="muted small">Personalize your app, manage your account, and reset progress here. Your study screens stay distraction-free.</p></div>
 <section class="panel" id="appearancePanel">
-  <h2>🎨 Personalize app appearance</h2>
+  <h2><svg class="ui-icon" aria-hidden="true"><use href="#icon-palette"></use></svg> Personalize app appearance</h2>
   <p class="muted small">Choose a style and colors you like. Your choices are remembered on this device and do not change your vocabulary or learning progress.</p>
   <div class="formgrid">
     <label for="appearanceTheme">Color theme
@@ -473,13 +479,13 @@ main{max-width:1120px}
   <p id="appearanceStatus" class="small muted" aria-live="polite"></p>
 </section>
 <section class="panel" id="pronunciationPanel">
-  <h2>🔊 German Pronunciation (free)</h2>
+  <h2><svg class="ui-icon" aria-hidden="true"><use href="#icon-volume"></use></svg> German Pronunciation (free)</h2>
   <p class="muted small">Uses your device's speech voices; no Gemini tokens or paid API. On iPhone, select a German voice below if the Hear button shows “Speaking” but stays silent.</p>
   <label for="speechVoiceSelect">German voice on this device
     <select id="speechVoiceSelect"><option value="">Automatic German voice</option></select>
   </label>
   <div class="actions">
-    <button type="button" id="speechVoiceTest" class="primary">🔊 Test German voice</button>
+    <button type="button" id="speechVoiceTest" class="primary"><svg class="ui-icon" aria-hidden="true"><use href="#icon-volume"></use></svg> Test German voice</button>
     <button type="button" id="speechSoundTest">♫ Test device sound</button>
     <button type="button" id="speechVoiceRefresh">↻ Refresh voices</button>
     <button type="button" id="speechVoiceReset">Reset speaker</button>
@@ -544,7 +550,7 @@ main{max-width:1120px}
   </div>
 </section>
 <section class="panel" id="deckTransferPanel" aria-labelledby="deckTransferHeading">
-  <h2 id="deckTransferHeading">📚 Same deck order on phone and computer</h2>
+  <h2 id="deckTransferHeading"><svg class="ui-icon" aria-hidden="true"><use href="#icon-layers"></use></svg> Same deck order on phone and computer</h2>
   <p class="muted small">Your flashcard deck order is currently stored on each device, not synced with your account. A different word order is normal when the devices imported vocabulary at different times.</p>
   <p class="small"><strong>On the device with the correct decks:</strong> download the layout file. <strong>On the other device:</strong> choose that file, preview the match count, and apply it. Both devices can then use the same deck arrangement.</p>
   <div class="actions"><button type="button" id="deckTransferExport" class="primary">Download deck layout</button></div>
