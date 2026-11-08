@@ -251,6 +251,7 @@ test('top 300 noun library has unique reviewed articles plurals and forms',()=>{
  for(const w of model.words){
   assert.ok(['der','die','das'].includes(w.article),w.noun+' valid singular article');
   assert.ok(w.plural&&w.english&&w.genitive,w.noun+' has plural, translation, Genitiv');
+  assert.ok(model.exampleFor(w)?.de.length>15&&model.exampleFor(w)?.en.length>15,w.noun+' has bilingual contextual example');
   for(let i=0;i<4;i++)assert.ok(model.caseForm(w,i)?.includes(w.noun.slice(0,3)),w.noun+' has 4 nonempty case forms');
  }
  const sample={
