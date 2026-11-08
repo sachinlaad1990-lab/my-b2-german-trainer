@@ -1,0 +1,66 @@
+/* Mobile layout refinement: complete button borders and consistent spacing. */
+@media(max-width:700px){
+ main{width:100%!important;max-width:100%!important;padding-inline:14px!important;box-sizing:border-box!important}
+ main>*,main .view,main .panel,main .today-card{min-width:0;max-width:100%;box-sizing:border-box}
+ /* Two complete rows instead of a horizontally cropped navigation rail. */
+ main nav.focus-nav{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:7px!important;
+  overflow:visible!important;
+  padding:2px 1px 10px!important;
+  margin:0 0 10px!important;
+  width:100%!important;
+  align-items:stretch!important;
+ }
+ main nav.focus-nav>.tab{
+  min-width:0!important;width:100%!important;
+  padding:10px 4px!important;
+  white-space:normal!important;
+  display:flex!important;flex-direction:column!important;
+  align-items:center!important;justify-content:center!important;
+  gap:4px!important;line-height:1.2!important;
+  font-size:clamp(10px,2.75vw,12px)!important;
+  border-radius:12px!important;
+  overflow-wrap:anywhere;
+  min-height:64px!important;
+ }
+ main nav.focus-nav>.tab .ui-icon{width:21px!important;height:21px!important;margin:0!important;flex-shrink:0}
+ main nav.focus-nav>.focus-more{
+  min-width:0!important;width:100%!important;position:relative!important;
+  grid-column:auto!important;
+ }
+ main nav.focus-nav>.focus-more>summary{
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  min-height:64px!important;width:100%!important;
+  padding:8px 4px!important;border-radius:12px!important;
+  font-size:12px!important;box-sizing:border-box!important;
+ }
+ main nav.focus-nav .focus-more-items{right:0;max-width:min(280px,calc(100vw - 32px))}
+ /* No oversized empty toolbar around a single control. */
+ main>.split-study-toolbar{
+  padding:8px 10px!important;margin:0 0 10px!important;
+  min-height:0!important;border-radius:13px!important;
+ }
+ main>.split-study-toolbar .split-study-tools{
+  width:auto!important;gap:7px!important;
+ }
+ main>.split-study-toolbar #splitStudyToggle{
+  padding:8px 11px!important;min-height:38px!important;
+  border-radius:10px!important;font-size:13px!important;
+ }
+ main>.split-study-toolbar #splitStudyHint{font-size:12px;line-height:1.35}
+ main .focus-progress,main .focus-session-details,
+ main #today .today-card,main #today .today-hero{
+  border-radius:16px!important;overflow:visible;
+ }
+ main .focus-progress>summary,main .focus-session-details>summary{
+  overflow-wrap:anywhere;line-height:1.4;
+ }
+ main #today .today-card{padding:20px 16px!important}
+ main #today .today-heading h2{overflow-wrap:anywhere}
+}
+@media(max-width:370px){
+ main nav.focus-nav{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ main nav.focus-nav>.tab,main nav.focus-nav>.focus-more>summary{min-height:58px!important}
+}
