@@ -26,6 +26,10 @@ function init(){
  old.replaceWith(wrap);
  const iframe=wrap.querySelector('iframe'),dots=wrap.querySelector('.rst-dots');
  let current=0,loaded=false,auto=null;
+ const phone=wrap.querySelector('.rst-phone');
+ const resize=()=>phone.style.setProperty('--rst-scale',String((phone.clientWidth-16)/390));
+ resize();if(typeof ResizeObserver!=='undefined')new ResizeObserver(resize).observe(phone);
+ window.addEventListener('resize',resize);
  slides.forEach((slide,i)=>{const b=document.createElement('button');b.type='button';b.className='rst-dot';b.setAttribute('aria-label','Show '+slide.title);b.addEventListener('click',()=>show(i,true));dots.appendChild(b)});
  function navigate(){
   if(!loaded)return;
