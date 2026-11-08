@@ -149,9 +149,9 @@ test('contextual grammar examples have one exact answer and explanations for all
  const sandbox={window:{},localStorage:{getItem:()=>null,setItem:()=>{}},Date,Math};
  vm.runInNewContext(source('smart-grammar-v80.js'),sandbox,{timeout:3000});
  const g=sandbox.window.B2SmartGrammar;
- assert.equal(g.rules.length,19);
+ assert.equal(g.rules.length,24);
  const kinds=new Set(g.rules.map(r=>r.type));
- for(const kind of ['case-dative','case-accusative','double-object','fixed-preposition','nominalized-adjective','n-declension','adjective-declension','word-order','comparative'])
+ for(const kind of ['case-dative','case-accusative','double-object','fixed-preposition','nominalized-adjective','n-declension','adjective-declension','word-order','comparative','genitive'])
    assert.ok(kinds.has(kind),'Grammar category included: '+kind);
  for(const r of g.rules){
    assert.equal(r.options.length,4,r.id+' has four options');
@@ -162,6 +162,11 @@ test('contextual grammar examples have one exact answer and explanations for all
    assert.equal(g.shuffledOptions(r,()=>.73).filter(x=>x===r.correct).length,1,r.id+' retains correct choice after shuffle');
    assert.match(g.whyHTML(r,r.options.find(x=>x!==r.correct)),/Why the other options are wrong/,r.id+' explains all alternatives');
    assert.match(g.whyHTML(r,r.correct),/Correct:/,r.id+' explains correct answer');
+ }
+ for(const [id,correct] of [['genitiv-chef','des Chefs'],['genitiv-team','des Teams'],['genitiv-buch','des Buches'],['genitiv-firma','der Firma'],['genitiv-kollege','des Kollegen']]){
+  const rule=g.byId(id);assert.ok(rule,"Genitiv exercise included: "+id);
+  assert.equal(rule.correct,correct,"correct Genitiv phrase: "+id);
+  assert.equal(rule.options.filter(x=>x===correct).length,1,id+" has one valid correct option");
  }
  for(const [word,id] of [['helfen','helfen'],['anrufen','anrufen'],['sprechen mit','sprechen mit'],['warten auf','warten auf'],['der Vorgesetzte','vorgesetzte'],['der Angestellte','angestellte'],['der Arbeitslose','arbeitslose'],['der Bekannte','bekannte'],['der Deutsche','deutsche']]){
   assert.equal(g.forWord(word)?.id,id,'contextual label: '+word);
