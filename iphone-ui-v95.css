@@ -1,0 +1,69 @@
+/* iPhone visual correction v9.5: no cropped nav, no white split toolbar,
+   readable headings in dark mode. Intentionally scoped to phone widths. */
+@media (max-width:800px){
+ body main nav.focus-nav{
+  display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  width:100%!important;max-width:100%!important;min-width:0!important;
+  overflow:visible!important;overflow-x:visible!important;overflow-y:visible!important;
+  gap:8px!important;padding:0!important;margin:0 0 14px!important;
+  scroll-snap-type:none!important;
+ }
+ body main nav.focus-nav>.tab,body main nav.focus-nav>.focus-more{
+  width:100%!important;min-width:0!important;max-width:100%!important;
+  margin:0!important;flex:none!important;box-sizing:border-box!important;
+ }
+ body main nav.focus-nav>.tab{
+  display:flex!important;flex-direction:column!important;align-items:center!important;
+  justify-content:center!important;gap:5px!important;white-space:normal!important;
+  padding:10px 3px!important;min-height:66px!important;
+  font-size:clamp(11px,2.8vw,13px)!important;line-height:1.15!important;
+  border-radius:13px!important;
+ }
+ body main nav.focus-nav>.tab svg{margin:0!important;width:22px!important;height:22px!important;flex-shrink:0}
+ body main nav.focus-nav>.focus-more>summary{
+  display:flex!important;justify-content:center!important;align-items:center!important;
+  width:100%!important;min-height:66px!important;box-sizing:border-box!important;
+  padding:10px 3px!important;border-radius:13px!important;
+ }
+ body main>.split-study-toolbar{
+  display:flex!important;min-height:0!important;
+  background:var(--panel)!important;color:var(--ink)!important;
+  padding:9px 12px!important;margin:0 0 14px!important;
+  border:1px solid var(--line)!important;border-radius:14px!important;
+ }
+ body main>.split-study-toolbar .split-study-tools{width:auto!important;flex:0 0 auto!important}
+ body main>.split-study-toolbar #splitStudyToggle{
+  min-height:40px!important;padding:8px 12px!important;
+  font-size:14px!important;border-radius:10px!important;
+ }
+ body main>.split-study-toolbar #splitStudyHint{display:none!important}
+ body main{min-width:0!important;max-width:100%!important;overflow-x:clip}
+}
+@media(max-width:800px){
+ body[data-theme="dark"] main>.split-study-toolbar{
+  background:#202d43!important;color:#f3f6ff!important;border-color:#475a79!important;
+ }
+ body[data-theme="dark"] main>.split-study-toolbar #splitStudyToggle{
+  background:#2c405f!important;color:#f3f6ff!important;border:1px solid #627a9f!important;
+ }
+ body[data-theme="dark"] #today .today-heading h2,
+ body[data-theme="dark"] #today .today-heading h3,
+ body[data-theme="dark"] #today .today-card .today-word,
+ body[data-theme="dark"] #today .today-card h2,
+ body[data-theme="dark"] #today .today-card h3,
+ body[data-theme="dark"] #today .today-card .today-heading,
+ body[data-theme="dark"] main .focus-progress>summary,
+ body[data-theme="dark"] main .focus-session-details>summary{
+  color:#f1f5ff!important;
+  -webkit-text-fill-color:#f1f5ff!important;
+ }
+ body[data-theme="dark"] #today .today-card .muted,
+ body[data-theme="dark"] #today .today-session-row,
+ body[data-theme="dark"] #today .today-session-row span{
+  color:#cbd5e1!important;-webkit-text-fill-color:#cbd5e1!important;
+ }
+ body[data-theme="dark"] #today .today-card,
+ body[data-theme="dark"] #today .today-hero{
+  border-color:#465773!important;
+ }
+}
