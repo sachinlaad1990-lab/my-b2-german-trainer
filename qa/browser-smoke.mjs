@@ -58,10 +58,12 @@ try{
   await page.locator(".focus-nav .tab[data-tab='verbTrainer']").first().click();
   assert.match(await page.locator("#verbTrainer .vt-top").innerText(),/1 \/ 211 learned/,profile.name+": mastery persists");
   await page.locator("#vtQuiz").click();
-  await page.waitForSelector("#vtAnswer");
-  await page.locator("#vtAnswer").fill("incorrecttest");
-  await page.locator("#vtAnswerForm button").click();
-  assert.match(await page.locator("#vtFeedback").innerText(),/Correct:|✅/,profile.name+": quiz feedback");
+  await page.waitForSelector("#verbTrainer .smart-verb-choices button");
+  assert.equal(await page.locator("#verbTrainer .smart-verb-choices button").count(),4,profile.name+": verb four-answer MCQ");
+  await page.locator("#verbTrainer .smart-verb-choices button").first().click();
+  assert.match(await page.locator("#vtFeedback").innerText(),/Correct|Not quite/,profile.name+": verb quiz feedback");
+  assert.ok(await page.locator("#verbTrainer .smart-why").count(),profile.name+": verb quiz optional Why explanation");
+  assert.ok(await page.locator("#vtAnother").isEnabled(),profile.name+": next question available after answer");
   await page.locator("#vtLearn").click();
   await page.locator("#vtFilters").click();
   await page.locator("#vtSearch").fill("sich freuen");
