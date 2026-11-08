@@ -149,9 +149,9 @@ test('contextual grammar examples have one exact answer and explanations for all
  const sandbox={window:{},localStorage:{getItem:()=>null,setItem:()=>{}},Date,Math};
  vm.runInNewContext(source('smart-grammar-v80.js'),sandbox,{timeout:3000});
  const g=sandbox.window.B2SmartGrammar;
- assert.equal(g.rules.length,24);
+ assert.equal(g.rules.length,33);
  const kinds=new Set(g.rules.map(r=>r.type));
- for(const kind of ['case-dative','case-accusative','double-object','fixed-preposition','nominalized-adjective','n-declension','adjective-declension','word-order','comparative','genitive'])
+ for(const kind of ['case-dative','case-accusative','double-object','fixed-preposition','nominalized-adjective','n-declension','adjective-declension','word-order','comparative','genitive','personal-pronouns'])
    assert.ok(kinds.has(kind),'Grammar category included: '+kind);
  for(const r of g.rules){
    assert.equal(r.options.length,4,r.id+' has four options');
@@ -287,4 +287,33 @@ test('top 300 noun library has unique reviewed articles plurals and forms',()=>{
  assert.match(index,/top-nouns-v90-ui\.js/);
  assert.match(index,/top-nouns-v90-data\.js/);
  assert.match(index,/top-nouns-v90\.css/);
+});
+
+test('personal pronoun conversions: case, gender, and exact-answer explanations',()=>{
+ const env={window:{}};
+ vm.runInNewContext(source('smart-grammar-v80.js'),env,{timeout:5000});
+ const g=env.window.B2SmartGrammar;
+ const expected={
+  'pronoun-er-nom':'er',
+  'pronoun-ihn-akk':'ihn',
+  'pronoun-ihm-dat':'ihm',
+  'pronoun-es-nom':'Es',
+  'pronoun-es-akk':'es',
+  'pronoun-ihr-dat':'ihr',
+  'pronoun-sie-akk':'sie',
+  'pronoun-ihnen-plural':'ihnen',
+  'pronoun-ihm-neuter':'ihm'
+ };
+ for(const [id,correct] of Object.entries(expected)){
+  const rule=g.byId(id);
+  assert.ok(rule,'Personal-pronoun case rule '+id);
+  assert.equal(rule.correct,correct);
+  assert.equal(rule.options.filter(v=>v===correct).length,1);
+  assert.equal(new Set(rule.options).size,4);
+  for(const wrong of rule.options.filter(v=>v!==correct)){
+   assert.ok(rule.reasons[wrong],id+' explains '+wrong);
+   assert.match(g.whyHTML(rule,wrong),/Why the other options are wrong/);
+  }
+  assert.ok(g.shuffledOptions(rule,()=>.17).includes(correct));
+ }
 });
