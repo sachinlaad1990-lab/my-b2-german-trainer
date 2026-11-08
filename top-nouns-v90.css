@@ -1,0 +1,33 @@
+/* v9 noun library — reused Vocabulary, Flashcards, and Quiz pages; no navigation changes */
+.tn-header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 14px;border-bottom:1px solid var(--line);padding:0 0 14px}
+.tn-header strong{font-size:1.05rem}.tn-header p{margin:5px 0}
+.tn-actions{display:flex;gap:8px;flex-wrap:wrap}
+.tn-actions button{min-height:40px}
+.tn-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.tn-noun{border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:13px;min-width:0}
+.tn-noun strong{font-size:1.05rem}
+.tn-noun .muted{display:block;margin-top:3px}
+.tn-noun p{font-size:.87rem;line-height:1.5;margin:9px 0;overflow-wrap:anywhere}
+.tn-noun p b{font-size:.87rem}
+.tn-noun details{border-top:1px solid var(--line);padding-top:9px;font-size:.85rem}
+.tn-noun summary{cursor:pointer;color:var(--accent);font-weight:700}
+.tn-cases{display:grid;gap:5px;padding:10px 0}
+.tn-cases>div{display:flex;justify-content:space-between;flex-wrap:wrap;gap:5px}
+.tn-cases span{color:var(--muted)}
+.tn-cases strong{font-size:.84rem}
+#tnFlashPanel{margin-top:15px;padding:10px 2px}
+#tnFlashPanel[hidden]{display:none!important}
+.tn-flash-meta{text-align:center;color:var(--muted);font-size:.8rem}
+.tn-flash-question{border:1px solid var(--line);border-radius:18px;background:var(--panel);padding:24px 16px;text-align:center;margin:12px 0;min-height:210px}
+.tn-flash-question span{font-size:.86rem;color:var(--muted)}
+.tn-flash-question h2{font-size:clamp(1.5rem,5vw,2.3rem);margin:15px 0 10px}
+.tn-flash-question p{margin:7px 0}
+.tn-flash-question details{text-align:left;margin-top:15px;border-top:1px solid var(--line);padding-top:12px;font-size:.87rem}
+.tn-flash-question summary{cursor:pointer;color:var(--accent)}
+.tn-flash-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:11px 0}
+.tn-flash-actions button{min-height:44px}
+.tn-flash-active>#tnFlashPanel{display:block}
+.tn-flash-active>*:not(.row):not(#tnFlashPanel){display:none!important}
+#tnFlashPanel .muted{text-align:center}
+@media(max-width:650px){.tn-list{grid-template-columns:1fr}.tn-header{align-items:start}.tn-actions{width:100%}.tn-actions button{flex:1;min-width:0}.tn-flash-actions button{flex:1;min-width:0}}
+@media(prefers-reduced-motion:reduce){.tn-noun,.tn-flash-question{transition:none!important}}
