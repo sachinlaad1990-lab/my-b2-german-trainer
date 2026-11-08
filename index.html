@@ -139,6 +139,7 @@ main{max-width:1120px}
 <link rel="stylesheet" href="front-account-v73.css?v=7.3.0">
 <link rel="stylesheet" href="passkey-login-v74.css?v=7.5.0">
 <link rel="stylesheet" href="smart-grammar-v80.css?v=8.0.0">
+<link rel="stylesheet" href="top-nouns-v90.css?v=9.0.0">
 </head>
 <body>
 <header><div class="brandhead"><a class="author-photo-link" href="https://www.linkedin.com/in/sachinlaad/" target="_blank" rel="noopener noreferrer" aria-label="Sachin Laad — LinkedIn profile"><img id="headerPhoto" class="profile-pic" src="assets/author-sachin.webp" alt="Sachin Laad, creator of Deutsch B2 Beruf" width="64" height="64"></a><div class="brandcopy"><h1>Deutsch B2 Beruf <span style="font-size:.52em;vertical-align:middle;color:var(--accent);font-weight:700" aria-label="Version 6.0">v6.0</span></h1><p>Vocabulary · Flashcards · Grammar Made Easy · Everyday German</p><div class="credit">Created by <a class="author-link" href="https://www.linkedin.com/in/sachinlaad/" target="_blank" rel="noopener noreferrer"><strong id="headerCreator">Sachin Laad</strong><span class="author-link-mark" aria-hidden="true">↗</span></a></div></div></div></header>
@@ -311,14 +312,14 @@ main{max-width:1120px}
       </form>
     </div>
     <div class="panel" style="margin-top:14px">
-      <div class="row"><div><h2 style="margin:0">Your vocabulary</h2><p class="muted small" style="margin:4px 0 0">Stable 20-word decks. Word positions stay fixed even when you filter or reopen the app.</p></div><div><label for="search">Search</label><input id="search" placeholder="Search German, English, category…"></div><div><label for="filter">Show</label><select id="filter"><option value="all">All words</option><option value="bookmarked">All bookmarks</option><option value="exam">For exam</option><option value="azeez">Azeez suggestion</option><option value="difficult">Need practice</option><option value="learned">Learned</option><option value="unlearned">Not learned yet</option></select></div></div>
+      <div class="row"><div><h2 style="margin:0">Your vocabulary</h2><p class="muted small" style="margin:4px 0 0">Stable 20-word decks. Word positions stay fixed even when you filter or reopen the app.</p></div><div><label for="search">Search</label><input id="search" placeholder="Search German, English, category…"></div><div><label for="filter">Show</label><select id="filter"><option value="all">All words</option><option value="bookmarked">All bookmarks</option><option value="exam">For exam</option><option value="azeez">Azeez suggestion</option><option value="difficult">Need practice</option><option value="learned">Learned</option><option value="unlearned">Not learned yet</option><option value="topnouns">Top 300 Nouns</option></select></div></div>
       <div class="v4-vocab-toolbar"><div class="v4-nav"><button id="v4VocabPrev" type="button">← Previous deck</button><label for="v4VocabSelect">Vocabulary deck <select id="v4VocabSelect"></select></label><button id="v4VocabNext" class="primary" type="button">Next deck →</button><span id="v4VocabStatus" class="v4-nav-status"></span></div></div><div id="v4StatResultsBar" class="v4-stat-results hidden" role="status" aria-live="polite"><span id="v4StatResultsLabel"></span><button type="button" id="v4StatClear" class="secondary">← Back to fixed decks</button></div><div id="wordList" class="wordlist"></div>
     </div>
   </section>
 
   <section id="flashcards" class="view hidden">
     <div class="panel flash">
-      <div class="row"><div><label for="flashMode">Flashcard set</label><select id="flashMode"><option value="all">All vocabulary</option><option value="bookmarked">All bookmarks</option><option value="exam">For exam</option><option value="azeez">Azeez suggestion</option><option value="difficult">Need practice</option><option value="unlearned">Not learned yet</option></select></div><div><label for="deckSelect">Deck (10 words each)</label><select id="deckSelect"><option value="0">Deck 1</option></select></div></div>
+      <div class="row"><div><label for="flashMode">Flashcard set</label><select id="flashMode"><option value="all">All vocabulary</option><option value="bookmarked">All bookmarks</option><option value="exam">For exam</option><option value="azeez">Azeez suggestion</option><option value="difficult">Need practice</option><option value="unlearned">Not learned yet</option><option value="topnouns">Top 300 Nouns</option></select></div><div><label for="deckSelect">Deck (10 words each)</label><select id="deckSelect"><option value="0">Deck 1</option></select></div></div>
       <div class="muted" id="deckStatus" aria-live="polite">Deck progress appears here.</div>
       <div class="muted" id="flashCount">No cards yet</div><div class="progress"><div id="flashProgress"></div></div>
       <div class="german" id="flashGerman">Add or import words to begin</div>
@@ -347,7 +348,7 @@ main{max-width:1120px}
   <section id="quiz" class="view hidden">
     <div class="panel" style="text-align:center">
       <h2>German → English quiz</h2><p class="muted">Choose the correct English meaning. Your score is kept for this session.</p>
-      <div class="row" style="max-width:650px;margin:0 auto"><div><label for="quizMode">Question set</label><select id="quizMode"><option value="all">All vocabulary</option><option value="bookmarked">All bookmarks</option><option value="exam">For exam</option><option value="azeez">Azeez suggestion</option><option value="difficult">Need practice</option><option value="grammar">Grammar in context</option></select></div><div><label for="quizDeck">Word group (10 words)</label><select id="quizDeck"><option value="0">Group 1</option></select></div><div><label>Score</label><div style="padding:10px;font-weight:700" id="score">0 correct / 0 answered</div></div></div>
+      <div class="row" style="max-width:650px;margin:0 auto"><div><label for="quizMode">Question set</label><select id="quizMode"><option value="all">All vocabulary</option><option value="bookmarked">All bookmarks</option><option value="exam">For exam</option><option value="azeez">Azeez suggestion</option><option value="difficult">Need practice</option><option value="grammar">Grammar in context</option><option value="topnouns">Top Nouns: Articles & Cases</option></select></div><div><label for="quizDeck">Word group (10 words)</label><select id="quizDeck"><option value="0">Group 1</option></select></div><div><label>Score</label><div style="padding:10px;font-weight:700" id="score">0 correct / 0 answered</div></div></div>
       <div style="font-size:1.7rem;font-weight:750;margin:25px 0 10px" id="quizQuestion">Add or import at least 4 words to start a quiz.</div>
       <div id="quizOptions" class="quiz-options"></div><div id="quizFeedback" class="feedback" aria-live="polite"></div>
       <button class="primary" id="nextQuestion">Next question</button>
@@ -574,6 +575,7 @@ main{max-width:1120px}
 </section>
 </main>
 <script src="smart-grammar-v80.js?v=8.1.0"></script>
+<script src="top-nouns-v90-data.js?v=9.0.1"></script>
 <script src="mnemonic-engine-v45.js?v=4.6.0"></script>
 <script>
 
@@ -1038,6 +1040,7 @@ function v4OpenStatList(kind){
  document.getElementById('v4StatResultsBar')?.scrollIntoView({block:'start',behavior:'smooth'});
 }
 function renderList() {
+ if(document.getElementById("filter").value==="topnouns" && window.B2TopNounsUI){window.B2TopNounsUI.renderList();return;}
  const q=document.getElementById('search').value.trim().toLowerCase();
  const f=document.getElementById('filter').value;
  let filtered=words.filter(w=>{
@@ -1099,9 +1102,9 @@ document.getElementById('wordForm').addEventListener('submit',e=>{
 });
 function val(id){return document.getElementById(id).value.trim()}
 document.getElementById('cancelEdit').onclick=resetForm;
-document.getElementById('v4VocabPrev').onclick=()=>{v4VocabDeckIndex=Math.max(0,v4VocabDeckIndex-1);v4KeepIndex(V4_VOCAB_DECK_KEY,v4VocabDeckIndex);renderList()};
-document.getElementById('v4VocabNext').onclick=()=>{v4VocabDeckIndex=Math.min(Math.max(0,Math.ceil(deckOrder.length/20)-1),v4VocabDeckIndex+1);v4KeepIndex(V4_VOCAB_DECK_KEY,v4VocabDeckIndex);renderList()};
-document.getElementById('v4VocabSelect').onchange=e=>{v4VocabDeckIndex=Number(e.target.value)||0;v4KeepIndex(V4_VOCAB_DECK_KEY,v4VocabDeckIndex);renderList()};
+document.getElementById('v4VocabPrev').onclick=()=>{if(document.getElementById('filter').value==="topnouns"){window.B2TopNounsUI.setDeck(Math.max(0,window.B2TopNounsUI.getDeck()-1));renderList();return;}v4VocabDeckIndex=Math.max(0,v4VocabDeckIndex-1);v4KeepIndex(V4_VOCAB_DECK_KEY,v4VocabDeckIndex);renderList()};
+document.getElementById('v4VocabNext').onclick=()=>{if(document.getElementById('filter').value==="topnouns"){window.B2TopNounsUI.setDeck(Math.min(29,window.B2TopNounsUI.getDeck()+1));renderList();return;}v4VocabDeckIndex=Math.min(Math.max(0,Math.ceil(deckOrder.length/20)-1),v4VocabDeckIndex+1);v4KeepIndex(V4_VOCAB_DECK_KEY,v4VocabDeckIndex);renderList()};
+document.getElementById('v4VocabSelect').onchange=e=>{if(document.getElementById('filter').value==="topnouns"){window.B2TopNounsUI.setDeck(Number(e.target.value)||0);renderList();return;}v4VocabDeckIndex=Number(e.target.value)||0;v4KeepIndex(V4_VOCAB_DECK_KEY,v4VocabDeckIndex);renderList()};
 document.querySelectorAll('[data-vocab-stat]').forEach(button=>button.addEventListener('click',()=>v4OpenStatList(button.dataset.vocabStat)));
 document.getElementById('v4StatClear').onclick=()=>{v4StatsView=null;document.getElementById('search').value='';document.getElementById('filter').value='all';renderList()};
 document.getElementById('search').addEventListener('input',renderList);document.getElementById('filter').addEventListener('change',renderList);
@@ -1244,6 +1247,7 @@ function answerGrammarQuiz(choice){
  document.getElementById('score').textContent=quizCorrect+' correct / '+quizAnsweredCount+' answered';
 }
 function startQuiz(){
+ if(document.getElementById('quizMode').value==='topnouns'){window.B2TopNounsUI?.startQuiz();return;}
  if(document.getElementById('quizMode').value==='grammar'){startGrammarQuiz();return}
  smartGrammarCurrent=null;
  document.getElementById('quizDeck').disabled=false;
@@ -1793,6 +1797,7 @@ renderAll();
 <script src="deck-cloud-sync-v72.js?v=7.2.0"></script>
 <script src="front-account-v73.js?v=7.3.0"></script>
 <script src="smart-grammar-v80-ui.js?v=8.0.0"></script>
+<script src="top-nouns-v90-ui.js?v=9.0.0"></script>
 <script src="passkey-login-v74.js?v=7.5.1"></script>
 </body>
 </html>
