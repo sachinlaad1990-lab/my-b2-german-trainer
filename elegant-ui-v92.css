@@ -1,0 +1,211 @@
+/* Elegance pass v9.2.0: purely presentational, theme-aware and keyboard accessible.
+   Existing content, controls, routing, storage and spaced repetition remain unchanged. */
+:root{
+ --polish-radius:18px;
+ --polish-shadow:0 8px 26px rgba(24,47,83,.055);
+ --polish-shadow-hover:0 13px 32px rgba(24,47,83,.095);
+}
+body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+ letter-spacing:-.008em;line-height:1.57;-webkit-font-smoothing:antialiased}
+main{max-width:1120px}
+h1,h2,h3{letter-spacing:-.028em;line-height:1.22;text-wrap:pretty}
+p{line-height:1.62}
+header{background:var(--panel);border-bottom:1px solid var(--line);box-shadow:0 2px 9px rgba(22,43,72,.025)}
+.brandhead{gap:12px}
+.brandcopy h1{font-weight:780;letter-spacing:-.033em}
+.brandcopy p{color:var(--muted)}
+.panel,.card,.stat{
+ border:1px solid var(--line);
+ border-radius:var(--polish-radius);
+ box-shadow:var(--polish-shadow);
+}
+section.view>.panel{margin-bottom:17px}
+.panel h2,.panel h3{margin-top:0}
+nav[aria-label="Main navigation"] .tab,.focus-nav .tab{
+ border-radius:12px;
+ font-weight:675;
+ letter-spacing:-.005em
+}
+button,select,input,textarea{font:inherit}
+button,.vt-button{
+ border-radius:11px;
+ font-weight:650;
+ transition:transform .15s ease,box-shadow .2s ease,background-color .2s ease,border-color .2s ease;
+}
+button:not(:disabled):active{transform:translateY(1px) scale(.99)}
+button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible,
+.home-path:focus-visible,.tn-noun summary:focus-visible{
+ outline:3px solid var(--accent);
+ outline-offset:3px;
+}
+input,select,textarea{
+ border-radius:11px;
+ border:1px solid var(--line);
+ background:var(--panel);
+ color:var(--ink);
+}
+input:focus,select:focus,textarea:focus{border-color:var(--accent)}
+.muted,.small.muted{color:var(--muted)}
+/* Today's study: visual hierarchy without altering the current session mechanics. */
+#today .today-hero{
+ border-radius:22px;
+ background:linear-gradient(140deg,color-mix(in srgb,var(--accent) 11%,var(--panel)),var(--panel) 74%);
+ border-color:color-mix(in srgb,var(--accent) 18%,var(--line));
+ box-shadow:var(--polish-shadow);
+}
+#today .today-hero h2{font-size:clamp(1.55rem,3.6vw,2.15rem);margin:6px 0 7px}
+#today .today-hero .eyebrow{font-size:.73rem;letter-spacing:.12em;font-weight:750;color:var(--accent)}
+#today .today-target{border-radius:15px}
+#today .today-card{border-radius:22px;padding:clamp(17px,3vw,28px)}
+#today .today-word{
+ font-size:clamp(1.55rem,4vw,2.4rem);
+ font-weight:780;
+ line-height:1.25;
+ letter-spacing:-.035em;
+ overflow-wrap:anywhere;
+}
+#today .today-answer{line-height:1.68}
+#today .today-pill{border-radius:999px;font-weight:700}
+#today .today-progress-track,#today .progress{border-radius:999px;overflow:hidden}
+#today .rating-buttons button{min-height:46px}
+#today .home-paths h3{font-size:1.18rem;letter-spacing:-.018em;margin-bottom:13px}
+#today .home-path-grid{gap:12px}
+#today .home-path{
+ border-radius:17px;
+ border:1px solid var(--line);
+ background:var(--panel);
+ box-shadow:var(--polish-shadow);
+ min-height:114px;
+ padding:17px;
+}
+#today .home-path strong{font-size:1.03rem;letter-spacing:-.012em}
+#today .home-path .home-desc{color:var(--muted)}
+#today .home-path .home-icon{
+ display:inline-grid;place-items:center;
+ width:39px;height:39px;
+ background:color-mix(in srgb,var(--accent) 9%,var(--panel));
+ border-radius:12px;
+ font-size:1.25rem;
+}
+#today .home-path .home-arrow{color:var(--accent)}
+@media(hover:hover) and (pointer:fine){
+ #today .home-path:hover,
+ #library .word:hover,
+ #library .tn-noun:hover,
+ #verbTrainer .vt-card:hover{transform:translateY(-2px);box-shadow:var(--polish-shadow-hover)}
+}
+/* Existing vocabulary and the new curated noun deck share a single design language. */
+#library .vocab-decks{gap:15px}
+#library .word,#library .tn-noun{
+ border:1px solid var(--line);
+ border-radius:17px;
+ padding:clamp(15px,2.5vw,20px);
+ box-shadow:var(--polish-shadow);
+ background:var(--panel);
+ transition:transform .18s ease,box-shadow .18s ease;
+}
+#library .word h3{
+ font-size:clamp(1.18rem,2.5vw,1.43rem);
+ font-weight:790;
+ letter-spacing:-.027em;
+ line-height:1.27;
+ margin-bottom:7px;
+ overflow-wrap:anywhere;
+}
+#library .word p{line-height:1.55}
+#library .wordbuttons{gap:7px}
+#library .wordbuttons button{min-height:40px}
+#library .v4-nav,#library .v4-vocab-toolbar{gap:10px}
+#library .v4-form-list{gap:6px}
+#library .tn-list{gap:13px}
+#library .tn-noun>div:first-child>strong{font-size:1.22rem;letter-spacing:-.024em}
+#library .tn-noun details{margin-top:12px}
+#library .tn-cases>div{padding:4px 0;gap:12px}
+#library .tn-header{padding-bottom:16px}
+#library .tn-actions button{min-height:44px}
+#library .smart-case-tag{font-weight:690}
+/* Pronounced German terms; keep explanations hidden until requested. */
+#flashcards .panel.flash{max-width:820px;margin-left:auto;margin-right:auto;padding:clamp(16px,4vw,30px)}
+#flashcards .german{
+ font-size:clamp(1.65rem,5vw,2.55rem);
+ font-weight:785;
+ letter-spacing:-.033em;
+ line-height:1.27;
+ overflow-wrap:anywhere;
+}
+#flashcards #flashEnglish{font-size:1.13rem;font-weight:620}
+#flashcards #flashExample{font-size:.95rem;line-height:1.7}
+#flashcards .progress{height:8px;border-radius:999px;overflow:hidden}
+#flashcards .actions{gap:8px}
+#flashcards .actions button{min-height:44px}
+#flashcards .tn-flash-question{border-radius:19px;padding:clamp(18px,4vw,30px)}
+#flashcards .tn-flash-question h2{font-size:clamp(1.65rem,5vw,2.5rem)}
+/* Quiz options and feedback. All selection behavior is retained. */
+#quiz>.panel{max-width:850px;margin-inline:auto;padding:clamp(17px,3.5vw,30px)}
+#quiz #quizQuestion{
+ letter-spacing:-.028em;
+ line-height:1.32;
+ font-size:clamp(1.32rem,3vw,1.85rem)!important;
+}
+#quiz .quiz-options{gap:11px}
+#quiz .quiz-options button{
+ min-height:51px;
+ border:1px solid var(--line);
+ background:var(--panel);
+ color:var(--ink);
+ border-radius:13px;
+ padding:12px 15px;
+ text-align:left;
+ font-size:.98rem;
+ font-weight:620;
+}
+#quiz .quiz-options button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+#quiz .quiz-options button.smart-correct{border-color:var(--good)!important}
+#quiz .quiz-options button.smart-incorrect{border-color:var(--bad)!important}
+#quiz #quizFeedback{line-height:1.65;margin-block:13px}
+#quiz #quizFeedback:empty{display:none}
+#quiz #nextQuestion{min-height:45px;min-width:160px}
+#quiz .smart-why,#verbTrainer .smart-why{
+ border-radius:13px;
+ box-shadow:none;
+ overflow:hidden
+}
+#quiz .smart-why-body{font-size:.89rem;line-height:1.64}
+/* Consistent study progress and grammar cards. */
+#v4MasteryPanel,#grammarGuide .bh-workspace,#verbTrainer .vt-card{
+ border-radius:var(--polish-radius);
+ box-shadow:var(--polish-shadow);
+}
+#verbTrainer .vt-card h2{font-weight:785;letter-spacing:-.027em}
+#verbTrainer .vt-example{border-radius:13px}
+#verbTrainer .smart-verb-choices button{border-radius:13px;min-height:50px}
+#grammarGuide .bh-panel,#grammarGuide .bh-pattern,#grammarGuide .bh-memory{
+ border-radius:15px;
+}
+#v4MasteryPanel .v4-score button{border-radius:13px}
+#v4MasteryPanel .v4-word-progress{border-radius:999px;overflow:hidden}
+/* Article color is a secondary learning cue and never replaces the text. */
+#library .word h3[data-article="der"],#library .tn-noun[data-article="der"]>div:first-child>strong{color:var(--ink)}
+.art-masculine{color:#285fb4}
+.art-feminine{color:#b53664}
+.art-neuter{color:#258358}
+body[data-theme="dark"] .art-masculine{color:#8ebaff}
+body[data-theme="dark"] .art-feminine{color:#ff9ebb}
+body[data-theme="dark"] .art-neuter{color:#86d3a7}
+/* Keep small screens spacious, never horizontally overflow. */
+@media(max-width:700px){
+ main{width:100%;min-width:0}
+ section.view>.panel{border-radius:17px}
+ #today .today-hero,#today .today-card{border-radius:18px}
+ #today .home-path-grid{gap:9px}
+ #today .home-path{min-height:105px;padding:13px}
+ #library .v4-nav{flex-wrap:wrap}
+ #library .v4-vocab-toolbar{min-width:0}
+ #quiz .quiz-options button{font-size:.95rem}
+ #quiz #quizQuestion{margin-top:20px!important}
+ #flashcards .panel.flash{padding:17px}
+}
+@media(prefers-reduced-motion:reduce){
+ button,.vt-button,#today .home-path,#library .word,#library .tn-noun,#verbTrainer .vt-card{transition:none!important;animation:none!important}
+ #today .home-path:hover,#library .word:hover,#library .tn-noun:hover,#verbTrainer .vt-card:hover{transform:none}
+}
