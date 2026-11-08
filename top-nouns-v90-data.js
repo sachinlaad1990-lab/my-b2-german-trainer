@@ -16,6 +16,7 @@ const caseForm=(w,grammaticalCase)=>{
  if(!a)return null;
  if(w.noun==="Kosten")return ["die Kosten","die Kosten","den Kosten","der Kosten"][grammaticalCase];
  if(grammaticalCase===3)return a[3]+" "+w.genitive;
+ if(article==="die"&& /^(Angestellte|Arbeitslose)$/.test(w.noun)&&grammaticalCase===2)return a[2]+" "+w.genitive;
  // Special declension (weak masculine and nominalised adjectives) has explicit Genitiv form.
  if(article==="der" && /^(Kollege|Kunde|Lieferant|Patient|Vorgesetzte|Angestellte|Auszubildende|Arbeitslose)$/.test(w.noun) && grammaticalCase>0)return a[grammaticalCase]+" "+w.genitive;
  return a[grammaticalCase]+" "+w.noun;
