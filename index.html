@@ -575,7 +575,7 @@ main{max-width:1120px}
 </section>
 </main>
 <script src="smart-grammar-v80.js?v=8.1.0"></script>
-<script src="top-nouns-v90-data.js?v=9.0.2"></script>
+<script src="top-nouns-v90-data.js?v=9.0.3"></script>
 <script src="mnemonic-engine-v45.js?v=4.6.0"></script>
 <script>
 
@@ -1212,7 +1212,7 @@ function renderQuizGroups(){
  sel.innerHTML=groups.map((g,i)=>`<option value="${i}">Group ${i+1} (${g.length} words)</option>`).join('');
  if(groups.length)sel.value=String(Math.min(previous,groups.length-1));
 }
-document.getElementById('quizMode').onchange=()=>{quizGroupKey='';renderQuizGroups();startQuiz()};
+document.getElementById('quizMode').onchange=()=>{quizGroupKey='';if(document.getElementById('quizMode').value==='topnouns')document.getElementById('quizDeck').dataset.nounDeck='0';renderQuizGroups();startQuiz()};
 document.getElementById('quizDeck').onchange=()=>{quizGroupKey='';if(document.getElementById('quizMode').value==='topnouns')document.getElementById('quizDeck').dataset.nounDeck=document.getElementById('quizDeck').value;startQuiz()};
 let smartGrammarCurrent=null;
 function startGrammarQuiz(){
@@ -1797,7 +1797,7 @@ renderAll();
 <script src="deck-cloud-sync-v72.js?v=7.2.0"></script>
 <script src="front-account-v73.js?v=7.3.0"></script>
 <script src="smart-grammar-v80-ui.js?v=8.0.0"></script>
-<script src="top-nouns-v90-ui.js?v=9.0.2"></script>
+<script src="top-nouns-v90-ui.js?v=9.0.3"></script>
 <script src="passkey-login-v74.js?v=7.5.1"></script>
 </body>
 </html>
