@@ -145,6 +145,18 @@ main{max-width:1120px}
 .home-path .home-icon{display:inline-flex;align-items:center;justify-content:center}
 button>.ui-icon,h2>.ui-icon,summary>.ui-icon{width:18px;height:18px;vertical-align:-.2em;margin-right:6px;stroke:currentColor;fill:none}
 .focus-progress summary>.ui-icon{width:18px;height:18px}
+
+.app-tour-player{position:relative;max-width:390px;margin-inline:auto}
+.app-tour-player video{display:block;width:100%;height:auto}
+.app-tour-endcard:not([hidden]){position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:28px;text-align:center;background:linear-gradient(155deg,#0b1734f5,#1c3673f5);color:#fff;border-radius:16px;z-index:2}
+.app-tour-endcard strong{font-size:clamp(24px,5vw,34px);line-height:1.16;letter-spacing:-.03em}
+.app-tour-endcard span{font-size:14px;opacity:.9}
+.app-tour-endcard button{width:100%;max-width:280px;min-height:46px}
+.app-tour-guide{margin-top:18px;padding:20px;border:1px solid var(--border-color,#dbe2ed);border-radius:18px;background:var(--card-bg,#fff)}
+.app-tour-guide h3{margin:0 0 12px;font-size:18px}
+.app-tour-guide ol{margin:0 0 18px;padding-left:22px;line-height:1.65}
+.app-tour-guide li{margin:0 0 7px}
+.app-tour-guide button{min-height:44px}
 </style>
 <link rel="stylesheet" href="focus-layout-v54.css?v=5.4.1">
 <link rel="stylesheet" href="design-system-v55.css?v=6.0.0">
@@ -296,10 +308,32 @@ button>.ui-icon,h2>.ui-icon,summary>.ui-icon{width:18px;height:18px;vertical-ali
     <details class="app-tour" id="appTour" aria-label="App walkthrough video">
       <summary class="app-tour-summary"><span aria-hidden="true" class="app-tour-play">▶</span><span class="app-tour-copy"><strong>Watch app tour</strong><small>A quick spoken guide to vocabulary, verbs, flashcards and quizzes</small></span><span class="app-tour-caret" aria-hidden="true">⌄</span></summary>
       <div class="app-tour-content">
+        <div class="app-tour-player">
         <video id="appTourVideo" controls playsinline preload="none" aria-label="Deutsch B2 Beruf narrated walkthrough of the actual mobile app" width="390" height="844">
           <source src="media/Deutsch_B2_Beruf_App_Tour.mp4?voice=calm-20261106" type="video/mp4">
           Your browser does not support MP4 playback.
         </video>
+          <div class="app-tour-endcard" id="appTourEndcard" hidden role="status" aria-live="polite">
+            <strong>Ready to improve your German?</strong>
+            <span>Vocabulary · Grammar · Speaking · Practice</span>
+            <button type="button" id="appTourTryFree" class="primary">Try it free — Start learning</button>
+            <button type="button" id="appTourReplay" class="secondary">Replay the tour</button>
+          </div>
+        </div>
+        <div class="app-tour-guide" aria-label="How to navigate the app">
+          <h3>Explore the app step by step</h3>
+          <ol>
+            <li><strong>Today:</strong> Open your daily learning session and review words that are due.</li>
+            <li><strong>Vocabulary:</strong> Search words, see articles and examples, and mark familiar words as Learned.</li>
+            <li><strong>Verbs:</strong> Practise verb forms and examples used at work.</li>
+            <li><strong>Flashcards:</strong> Flip cards, hear pronunciation, and review difficult words.</li>
+            <li><strong>Grammar:</strong> Study cases, pronouns, sentence structure, and clear explanations.</li>
+            <li><strong>Articles:</strong> Practise der, die, das and noun forms.</li>
+            <li><strong>Practice:</strong> Test your knowledge with quizzes and check your progress.</li>
+            <li><strong>More:</strong> Find spoken German, everyday phrases, import/export, and settings.</li>
+          </ol>
+          <button type="button" class="primary" id="appTourTryFreeBelow">Try it free — Start learning</button>
+        </div>
         <p class="small muted">This guide demonstrates the actual mobile interface with sample learning data. The voice explanation is in English. <a href="media/Deutsch_B2_Beruf_App_Tour.mp4?voice=calm-20261106" target="_blank" rel="noopener noreferrer">Open video separately</a>.</p>
       </div>
     </details>
@@ -1816,5 +1850,17 @@ renderAll();
 <script src="smart-grammar-v80-ui.js?v=8.0.0"></script>
 <script src="top-nouns-v90-ui.js?v=9.2.0"></script>
 <script src="passkey-login-v74.js?v=7.5.1"></script>
+<script>
+/* Tour end card: an explicit written invitation, never voice-only. */
+(function(){
+  const video=document.getElementById('appTourVideo'),endcard=document.getElementById('appTourEndcard');
+  const start=()=>{endcard.hidden=true;const today=document.querySelector('.focus-nav [data-tab="today"]');if(today)today.click();document.getElementById('appTour').open=false;window.scrollTo({top:0,behavior:'smooth'});};
+  video.addEventListener('ended',()=>{endcard.hidden=false;});
+  video.addEventListener('play',()=>{endcard.hidden=true;});
+  document.getElementById('appTourTryFree').addEventListener('click',start);
+  document.getElementById('appTourTryFreeBelow').addEventListener('click',start);
+  document.getElementById('appTourReplay').addEventListener('click',()=>{endcard.hidden=true;video.currentTime=0;video.play().catch(()=>{});});
+})();
+</script>
 </body>
 </html>
