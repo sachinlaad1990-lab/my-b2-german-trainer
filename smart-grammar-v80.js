@@ -1,0 +1,99 @@
+/* Contextual grammar: curated rules, no speculative machine-generated corrections.
+ * Exercises use exact accepted answers from reviewed examples.
+ */
+(function(global){
+"use strict";
+const rules=[
+{id:"helfen",type:"case-dative",label:"Dativ",pattern:"jemandem helfen",prompt:"Ich helfe ___ Kollegen.",options:["meinen","meinem","mein","meiner"],correct:"meinem",rule:"Helfen takes Dativ. English 'whom' does not automatically mean Akkusativ in German.",example:"Ich helfe meinem Kollegen.",contrast:"Ich rufe meinen Kollegen an. (Akkusativ)",reasons:{"meinen":"'meinen Kollegen' is Akkusativ, but helfen needs Dativ.","mein":"The noun needs a declined possessive before Kollegen.","meiner":"The masculine Dativ form is 'meinem', not 'meiner'."}},
+{id:"anrufen",type:"case-accusative",label:"Akkusativ",pattern:"jemanden anrufen",prompt:"Ich rufe ___ Kollegen an.",options:["meinen","meinem","mein","meiner"],correct:"meinen",rule:"Anrufen takes a direct Akkusativ object: jemanden anrufen.",example:"Ich rufe meinen Kollegen an.",contrast:"Ich helfe meinem Kollegen. (Dativ)",reasons:{"meinem":"'meinem Kollegen' is Dativ; anrufen needs Akkusativ.","mein":"A masculine Akkusativ possessive ends in -en.","meiner":"'meiner' does not fit masculine Akkusativ here."}},
+{id:"danken",type:"case-dative",label:"Dativ",pattern:"jemandem danken",prompt:"Ich danke ___ Kollegin.",options:["der","die","den","das"],correct:"der",rule:"Danken takes Dativ: jemandem danken.",example:"Ich danke der Kollegin.",contrast:"Ich frage die Kollegin. (Akkusativ)",reasons:{"die":"'die Kollegin' is Nominativ/Akkusativ, not Dativ.","den":"The singular feminine Dativ article is 'der'.","das":"'das' is not the Dativ feminine article."}},
+{id:"fragen",type:"case-accusative",label:"Akkusativ",pattern:"jemanden fragen",prompt:"Ich frage ___ Kollegen.",options:["meinem","meinen","mein","meiner"],correct:"meinen",rule:"Fragen takes Akkusativ for the person you ask: jemanden fragen.",example:"Ich frage meinen Kollegen.",contrast:"Ich danke meinem Kollegen. (Dativ)",reasons:{"meinem":"'meinem Kollegen' is Dativ, not Akkusativ.","mein":"Masculine Akkusativ needs the -en ending.","meiner":"'meiner' is not masculine Akkusativ."}},
+{id:"schreiben",type:"double-object",label:"Dativ + Akkusativ",pattern:"jemandem etwas schreiben",prompt:"Ich schreibe ___ Vorgesetzten eine E-Mail.",options:["meinen","meinem","mein","meiner"],correct:"meinem",rule:"Schreiben often uses Dativ for the recipient (wem?) and Akkusativ for the thing written (was?): jemandem etwas schreiben.",example:"Ich schreibe meinem Vorgesetzten eine E-Mail.",contrast:"Ich rufe meinen Vorgesetzten an. (Akkusativ)",reasons:{"meinen":"'meinen Vorgesetzten' is Akkusativ; here the recipient is Dativ.","mein":"The Dativ article form is 'meinem'.","meiner":"For masculine Dativ use 'meinem'."}},
+{id:"sprechen mit",type:"fixed-preposition",label:"mit + Dativ",pattern:"mit jemandem sprechen",prompt:"Ich spreche mit ___ Chef.",options:["meinen","mein","meinem","meiner"],correct:"meinem",rule:"Mit always takes Dativ. Learn 'sprechen mit + Dativ' as one phrase.",example:"Ich spreche mit meinem Chef.",contrast:"Ich besuche meinen Chef. (Akkusativ)",reasons:{"meinen":"'meinen' is Akkusativ, but mit requires Dativ.","mein":"After mit, masculine Dativ is 'meinem'.","meiner":"For masculine nouns with 'mein', use 'meinem'."}},
+{id:"warten auf",type:"fixed-preposition",label:"auf + Akkusativ",pattern:"auf jemanden / etwas warten",prompt:"Wir warten auf ___ Termin.",options:["dem","der","den","das"],correct:"den",rule:"Warten auf takes Akkusativ. The preposition auf can take either case in other contexts, but warten auf uses Akkusativ.",example:"Wir warten auf den Termin.",contrast:"Wir sprechen mit dem Kunden. (Dativ)",reasons:{"dem":"'dem Termin' is Dativ; warten auf takes Akkusativ.","der":"Masculine Akkusativ is 'den'.","das":"Termin is masculine: der Termin → den Termin."}},
+{id:"vorgesetzte",type:"nominalized-adjective",label:"Nominalisiertes Adjektiv",pattern:"der Vorgesetzte · den Vorgesetzten · dem Vorgesetzten",prompt:"Ich schreibe meinem ___ eine E-Mail.",options:["Vorgesetzter","Vorgesetzten","Vorgesetzte","Vorgesetztem"],correct:"Vorgesetzten",rule:"Vorgesetzte is an adjective used as a noun. After 'meinem' (Dativ masculine), the adjective ending is -en. Contrast 'mein Vorgesetzter' (Nominativ).",example:"Ich schreibe meinem Vorgesetzten.",contrast:"Mein Vorgesetzter ist nett. / Ich rufe meinen Vorgesetzten an.",reasons:{"Vorgesetzter":"'Vorgesetzter' occurs after 'mein' in Nominativ, not 'meinem'.","Vorgesetzte":"Dativ masculine with 'meinem' takes -en.","Vorgesetztem":"'meinem' already signals Dativ; the noun/adjective takes -en."}},
+{id:"angestellte",type:"nominalized-adjective",label:"Nominalisiertes Adjektiv",pattern:"der Angestellte · den Angestellten · dem Angestellten",prompt:"Wir helfen dem ___ bei der Anmeldung.",options:["Angestellte","Angestellter","Angestellten","Angestelltem"],correct:"Angestellten",rule:"Angestellte is a nominalized adjective. With 'dem' (Dativ masculine), use -en: dem Angestellten.",example:"Wir helfen dem Angestellten.",contrast:"Ein Angestellter begrüßt uns. (Nominativ)",reasons:{"Angestellte":"After 'dem' use -en.","Angestellter":"The -er form occurs with 'ein' in Nominativ masculine.","Angestelltem":"'dem' already carries the Dativ ending; use -en."}},
+{id:"arbeitslose",type:"nominalized-adjective",label:"Nominalisiertes Adjektiv",pattern:"der Arbeitslose · den Arbeitslosen · dem Arbeitslosen",prompt:"Die Beraterin hilft dem ___ bei der Jobsuche.",options:["Arbeitslose","Arbeitslosen","Arbeitsloser","Arbeitslosem"],correct:"Arbeitslosen",rule:"Arbeitslose follows adjective endings. After 'dem' use -en: dem Arbeitslosen.",example:"Die Beraterin hilft dem Arbeitslosen.",contrast:"Ein Arbeitsloser sucht eine Stelle.",reasons:{"Arbeitslose":"After 'dem', Dativ masculine takes -en.","Arbeitsloser":"Use 'ein Arbeitsloser' in Nominativ, not after 'dem'.","Arbeitslosem":"The ending is -en after definite 'dem'."}},
+{id:"bekannte",type:"nominalized-adjective",label:"Nominalisiertes Adjektiv",pattern:"der Bekannte · den Bekannten · dem Bekannten",prompt:"Ich habe mit dem ___ telefoniert.",options:["Bekannte","Bekannter","Bekannten","Bekanntem"],correct:"Bekannten",rule:"Bekannte is a nominalized adjective. Nach 'mit dem' use Dativ masculine ending -en.",example:"Ich habe mit dem Bekannten telefoniert.",contrast:"Ein Bekannter hat mich angerufen.",reasons:{"Bekannte":"After 'dem' adjective endings are -en.","Bekannter":"'Ein Bekannter' is Nominativ masculine.","Bekanntem":"With 'dem' use -en."}},
+{id:"deutsche",type:"nominalized-adjective",label:"Nominalisiertes Adjektiv",pattern:"der Deutsche · den Deutschen · dem Deutschen",prompt:"Der Kursleiter spricht mit dem ___.",options:["Deutscher","Deutsche","Deutschen","Deutschem"],correct:"Deutschen",rule:"Deutsche is a nominalized adjective for a person. After 'dem', the ending is -en.",example:"Der Kursleiter spricht mit dem Deutschen.",contrast:"Ein Deutscher arbeitet hier.",reasons:{"Deutscher":"'Ein Deutscher' is Nominativ masculine, not after 'dem'.","Deutsche":"With 'dem' use -en.","Deutschem":"The article 'dem' already marks Dativ; use -en."}},
+{id:"n-declension",type:"n-declension",label:"N-Deklination",pattern:"der Kollege · den Kollegen · dem Kollegen",prompt:"Ich helfe meinem ___.",options:["Kollege","Kollegen","Kolleges","Kollegem"],correct:"Kollegen",rule:"Kollege is a weak masculine noun (N-Deklination). It adds -n outside Nominativ singular: der Kollege, den/dem Kollegen.",example:"Ich helfe meinem Kollegen.",contrast:"Der Kollege arbeitet heute im Büro. (Nominativ)",reasons:{"Kollege":"'Kollege' without -n is Nominativ singular.","Kolleges":"The weak noun does not use -s here.","Kollegem":"Dativ belongs on 'meinem'; Kollege becomes Kollegen."}},
+{id:"adjective-declension",type:"adjective-declension",label:"Adjektivdeklination",pattern:"eine wichtige Aufgabe · einen wichtigen Termin",prompt:"Wir haben einen ___ Termin.",options:["wichtiger","wichtigen","wichtiges","wichtige"],correct:"wichtigen",rule:"After 'einen' (masculine Akkusativ), the adjective ending is -en.",example:"Wir haben einen wichtigen Termin.",contrast:"Ein wichtiger Termin steht morgen an. (Nominativ)",reasons:{"wichtiger":"Use -er after 'ein' in Nominativ masculine.","wichtiges":"-es is for neuter forms here.","wichtige":"Masculine Akkusativ after einen requires -en."}},
+{id:"weil",type:"word-order",label:"weil → Verb am Ende",pattern:"weil + Nebensatz",prompt:"Ich lerne Deutsch, weil ich den Test ___ .",options:["bestehe möchte","möchte bestehen","bestehen möchte","möchte bestand"],correct:"bestehen möchte",rule:"Weil introduces a subordinate clause. The finite verb goes at the end: ... weil ich den Test bestehen möchte.",example:"Ich lerne Deutsch, weil ich den Test bestehen möchte.",contrast:"Ich lerne Deutsch, denn ich möchte den Test bestehen.",reasons:{"bestehe möchte":"With 'möchte', the infinitive is 'bestehen'.","möchte bestehen":"After weil, the finite verb 'möchte' belongs at the end.","möchte bestand":"The infinitive must be 'bestehen', and finite verb goes last."}},
+{id:"denn",type:"word-order",label:"denn → Hauptsatz",pattern:"denn + Verb an Position 2",prompt:"Ich gehe nach Hause, denn ich ___ müde.",options:["sehe","bin","sein","bist"],correct:"bin",rule:"Denn connects two main clauses. Keep normal main-clause word order: ich bin müde.",example:"Ich gehe nach Hause, denn ich bin müde.",contrast:"Ich gehe nach Hause, weil ich müde bin.",reasons:{"sehe":"'sehen' does not express being tired.","sein":"The verb must be conjugated: ich bin.","bist":"'bist' is the du form; ich bin."}},
+{id:"deshalb",type:"word-order",label:"deshalb → Inversion",pattern:"Deshalb + Verb + Subjekt",prompt:"Ich habe morgen einen Termin. Deshalb ___ ich früher.",options:["gehe","ich gehe","gehen","gegangen"],correct:"gehe",rule:"Deshalb is an adverb in the first position; the finite verb follows directly, then the subject: Deshalb gehe ich.",example:"Ich habe morgen einen Termin. Deshalb gehe ich früher.",contrast:"Ich gehe früher, weil ich einen Termin habe.",reasons:{"ich gehe":"This would place the verb in third position after deshalb.","gehen":"Use conjugated 'gehe' with ich.","gegangen":"The sentence needs a present-tense finite verb."}},
+{id:"obwohl",type:"word-order",label:"obwohl → Verb am Ende",pattern:"obwohl + Nebensatz",prompt:"Obwohl ich müde ___, arbeite ich weiter.",options:["bin","bist","sein","ist"],correct:"bin",rule:"Obwohl introduces a subordinate clause. The finite verb goes at the end of that clause.",example:"Obwohl ich müde bin, arbeite ich weiter.",contrast:"Ich bin müde. Trotzdem arbeite ich weiter.",reasons:{"bist":"'bist' is for du, not ich.","sein":"Use a conjugated verb: ich bin.","ist":"'ist' is for er/sie/es, not ich."}},
+{id:"je-desto",type:"comparative",label:"Je … desto",pattern:"je + Komparativ, desto + Komparativ",prompt:"Je mehr ich übe, desto ___ spreche ich.",options:["gut","bessere","besser","besten"],correct:"besser",rule:"Je ... desto pairs two comparatives. After 'desto besser', the finite verb follows: desto besser spreche ich.",example:"Je mehr ich übe, desto besser spreche ich.",contrast:"Je öfter ich lerne, desto sicherer werde ich.",reasons:{"gut":"Use the comparative 'besser', not 'gut'.","bessere":"Here 'besser' is an adverb; it takes no adjective ending.","besten":"That is a superlative form, not the comparative."}}
+];
+const direct={
+"helfen":"helfen","anrufen":"anrufen","danken":"danken","fragen":"fragen","schreiben":"schreiben",
+"sprechen mit":"sprechen mit","warten auf":"warten auf",
+"der vorgesetzte":"vorgesetzte","vorgesetzter":"vorgesetzte","vorgesetzte":"vorgesetzte",
+"der angestellte":"angestellte","angestellter":"angestellte","angestellte":"angestellte",
+"der arbeitslose":"arbeitslose","arbeitsloser":"arbeitslose","arbeitslose":"arbeitslose",
+"der bekannte":"bekannte","bekannter":"bekannte","bekannte":"bekannte",
+"der deutsche":"deutsche","deutscher":"deutsche","deutsche":"deutsche",
+"kollege":"n-declension","der kollege":"n-declension"
+};
+const normalize=v=>String(v||"").toLocaleLowerCase("de-DE").trim().replace(/\s+/g," ");
+function forWord(input){
+ const item=typeof input==="string"?{german:input}:input||{};
+ const name=normalize(item.german||item.name||"");
+ let key=direct[name];
+ if(!key){
+   if(/^(sich )?sprechen mit\b|^mit .* sprechen\b/.test(name))key="sprechen mit";
+   else if(/^warten auf\b/.test(name))key="warten auf";
+   else if(/^(jemandem )?helfen\b/.test(name))key="helfen";
+   else if(/^(jemanden )?anrufen\b/.test(name))key="anrufen";
+   else if(/^(jemandem )?danken\b/.test(name))key="danken";
+   else if(/^fragen\b/.test(name))key="fragen";
+   else if(/^schreiben\b/.test(name))key="schreiben";
+   else if(/vorgesetzt/.test(name))key="vorgesetzte";
+   else if(/angestellt/.test(name))key="angestellte";
+   else if(/arbeitslos/.test(name))key="arbeitslose";
+   else if(/bekannt/.test(name))key="bekannte";
+   else if(/deutsch(e|er|en|em|es)$/.test(name))key="deutsche";
+   else if(/(^|\s)kollege(n)?$/.test(name))key="n-declension";
+ }
+ return rules.find(r=>r.id===key)||null;
+}
+const byId=id=>rules.find(r=>r.id===id)||null;
+const escapeHTML=str=>String(str??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function whyHTML(rule,choice){
+ if(!rule)return "";
+ const r=typeof rule==="string"?byId(rule):rule;if(!r)return "";
+ const reason=choice&&choice!==r.correct?(r.reasons[choice]||"This does not match the required form."):"";
+ return '<details class="smart-why"><summary>Why?</summary><div class="smart-why-body"><p><strong>Rule:</strong> '+escapeHTML(r.rule)+'</p>'+(reason?'<p><strong>Why the selected answer is wrong:</strong> '+escapeHTML(reason)+'</p>':'')+'<p><strong>Correct:</strong> '+escapeHTML(r.example)+'</p>'+(r.contrast?'<p><strong>Compare:</strong> '+escapeHTML(r.contrast)+'</p>':'')+'</div></details>';
+}
+const storageKey="b2GrammarConceptMistakes_v1";
+function mistakes(){
+ try{const data=JSON.parse(localStorage.getItem(storageKey)||"{}");return data&&typeof data==="object"?data:{}}catch(_){return {}}
+}
+function record(id,correct){
+ const r=byId(id);if(!r)return;
+ const current=mistakes(),prior=current[id]||{wrong:0,right:0,dueAt:0};
+ const wrong=Number(prior.wrong)||0,right=Number(prior.right)||0,now=Date.now();
+ const updated=correct?{wrong:Math.max(0,wrong-1),right:right+1,dueAt:now+(wrong>1?86400000:259200000)}:{wrong:wrong+1,right,dueAt:now+600000};
+ current[id]=updated;
+ try{localStorage.setItem(storageKey,JSON.stringify(current))}catch(_){}
+}
+function choose(candidates=rules,random=Math.random){
+ if(!candidates.length)return null;
+ const info=mistakes(),now=Date.now();
+ // Hard concepts are more likely to return in later sessions; they cannot monopolize a session.
+ const weights=candidates.map(r=>{
+  const p=info[r.id]||{};
+  return 1+Math.min(5,(Number(p.wrong)||0)*2)+(p.dueAt&&p.dueAt<=now?2:0);
+ });
+ const total=weights.reduce((sum,n)=>sum+n,0);
+ let pick=Math.max(0,Math.min(.9999999999,Number(random())||0))*total;
+ for(let i=0;i<candidates.length;i++){pick-=weights[i];if(pick<0)return candidates[i]}
+ return candidates[candidates.length-1];
+}
+function shuffledOptions(r,random=Math.random){
+ if(!r)return [];
+ const a=[...r.options];
+ for(let i=a.length-1;i>0;i--){const k=Math.floor(random()*(i+1));[a[i],a[k]]=[a[k],a[i]]}
+ return a;
+}
+global.B2SmartGrammar=Object.freeze({rules,byId,forWord,whyHTML,record,mistakes,choose,shuffledOptions,escapeHTML});
+})(typeof window!=="undefined"?window:globalThis);
