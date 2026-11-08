@@ -188,3 +188,47 @@ test('grammar mistake tracking prioritizes difficult concepts and does not corru
  assert.equal(g.mistakes().helfen.wrong,2,'correct answer reduces mistake weight');
  assert.equal(Object.keys(values).length,1,'only grammar-specific progress key is saved');
 });
+
+test('grammar handbook: every lesson and quiz has a valid unique answer',()=>{
+ const env={window:{}};
+ vm.runInNewContext(source('grammar-data-v4.js'),env,{timeout:5000});
+ const {sections,tables,lessons}=env.window.B2_GRAMMAR_COMPLETE;
+ assert.ok(lessons.length>=60,"comprehensive handbook lessons");
+ assert.equal(new Set(lessons.map(x=>x.id)).size,lessons.length,"unique lesson IDs");
+ for(const lesson of lessons){
+   assert.ok(sections.some(x=>x[0]===lesson.section),lesson.id+" section exists");
+   assert.ok(tables[lesson.table],lesson.id+" reference table exists");
+   assert.ok(lesson.examples.length>=1,lesson.id+" natural examples");
+   assert.ok(lesson.quiz?.correct,lesson.id+" quiz answer exists");
+   const choices=[lesson.quiz.correct,...lesson.quiz.wrong];
+   assert.equal(choices.length,4,lesson.id+" four MCQ choices");
+   assert.equal(new Set(choices).size,4,lesson.id+" only one correct answer");
+   assert.ok(lesson.quiz.why,lesson.id+" provides an explanation");
+ }
+ for(const [key,table] of Object.entries(tables)){
+   assert.ok(table.head.length>=2,key+" table headers present");
+   assert.ok(table.rows.length>=1,key+" table rows present");
+   for(const [i,row] of table.rows.entries())
+     assert.equal(row.length,table.head.length,key+" row "+i+" matches header count");
+ }
+});
+test('Genitiv reference tables and weak noun exceptions stay consistent',()=>{
+ const env={window:{}};
+ vm.runInNewContext(source('grammar-data-v4.js'),env,{timeout:5000});
+ const tables=env.window.B2_GRAMMAR_COMPLETE.tables;
+ const lookup=(name)=>tables[name]?.rows.find(r=>r[0]==='Genitiv')||null;
+ const defs=lookup('articles');
+ const indef=lookup('ein');
+ const negative=lookup('kein');
+ const possessive=lookup('poss');
+ assert.deepEqual(Array.from(defs.slice(1)),['des (+s noun)','der','des (+s noun)','der']);
+ assert.deepEqual(Array.from(indef.slice(1)),['eines','einer','eines','—']);
+ assert.deepEqual(Array.from(negative.slice(1)),['keines','keiner','keines','keiner']);
+ assert.deepEqual(Array.from(possessive.slice(1)),['meines','meiner','meines','meiner']);
+ const joined=JSON.stringify(env.window.B2_GRAMMAR_COMPLETE);
+ for(const word of ['des Kollegen','des Kunden','des Chefs','des Problems'])
+   assert.ok(joined.includes(word),word+" documented");
+ assert.match(source('grammar-handbook-ui.js'),/n:\['Team','Team','Team','Teams'\]/);
+ assert.match(source('grammar-handbook-ui.js'),/printed=caseNoun\(gender,caseIndex\)/);
+ assert.ok(!source('index.html').includes("m.replace(/\\bdem\\b/i,'des')"),"no article-only Genitiv correction");
+});
