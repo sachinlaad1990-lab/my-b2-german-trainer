@@ -187,6 +187,36 @@ try{
   assert.deepEqual(sides,["left","right"],profile.name+": independent pane order maintained");
   await page.locator("#splitStudyToggle").click();
   assert.equal(await page.locator("main.split-study").count(),0,profile.name+": split mode exits cleanly");
+  // Smart grammar mode is an option inside the EXISTING quiz, not a new screen.
+  await page.locator(".focus-nav .tab[data-tab='quiz']").click();
+  await page.locator("#quizMode").selectOption("grammar");
+  assert.ok(await page.locator("#quizQuestion").innerText(),profile.name+": grammar question visible");
+  assert.equal(await page.locator("#quizOptions button").count(),4,profile.name+": four grammar choices");
+  const current=await page.evaluate(()=>{
+    const prompt=document.getElementById("quizQuestion").textContent;
+    const rule=window.B2SmartGrammar.rules.find(x=>x.prompt===prompt);
+    if(!rule)throw new Error("No grammar rule matches prompt");
+    return {id:rule.id,correct:rule.correct,wrong:rule.options.find(x=>x!==rule.correct)};
+  });
+  const clickChoice=async(choice)=>{
+    await page.locator("#quizOptions button").filter({hasText:choice}).first().click();
+  };
+  await clickChoice(current.wrong);
+  assert.match(await page.locator("#quizFeedback").innerText(),/Not quite/,profile.name+": wrong grammar answer is rejected");
+  assert.ok(await page.locator("#quizFeedback .smart-why").count(),profile.name+": Why disclosed on demand");
+  await page.locator("#quizFeedback .smart-why summary").click();
+  assert.match(await page.locator("#quizFeedback .smart-why").innerText(),/Why the other options are wrong/,profile.name+": explanations provided");
+  const mistake=await page.evaluate(id=>JSON.parse(localStorage.getItem("b2GrammarConceptMistakes_v1")||"{}")[id],current.id);
+  assert.equal(mistake.wrong,1,profile.name+": incorrect concept remembered");
+  await page.locator("#nextQuestion").click();
+  const correct=await page.evaluate(()=>{
+    const prompt=document.getElementById("quizQuestion").textContent;
+    return window.B2SmartGrammar.rules.find(x=>x.prompt===prompt)?.correct;
+  });
+  assert.ok(correct,profile.name+": second grammar question exists");
+  await clickChoice(correct);
+  assert.match(await page.locator("#quizFeedback").innerText(),/Correct/,profile.name+": correct grammar answer accepted");
+  assert.match(await page.locator("#score").innerText(),/1 correct \/ 2 answered/,profile.name+": scores reflect one right and one wrong");
   assert.ok(!jsErrors.length,profile.name+": browser JS errors: "+jsErrors.join("; "));
   console.log("PASS "+profile.name+": home shortcuts, verbs, example, next, search, progress, reload, quiz, left/right review swipes, vocabulary, spoken German, deck transfer & undo");
   await context.close();
