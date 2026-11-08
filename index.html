@@ -130,6 +130,15 @@ main{max-width:1120px}
 #today .today-heading h2{font-size:1.25rem}
 .focus-progress-content{padding:0 10px 10px}
 }
+
+/* Premium navigation icon system: consistent, monochrome vector icons */
+.focus-nav .tab{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:44px;transition:background-color .18s,border-color .18s,transform .18s;letter-spacing:-.01em}
+.focus-nav .tab .ui-icon{width:19px;height:19px;flex:none;stroke:currentColor;fill:none;overflow:visible}
+.focus-nav .tab:hover:not(:disabled){transform:translateY(-1px)}
+.focus-nav .tab:focus-visible,.focus-more summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.focus-more-items .tab{justify-content:flex-start;text-align:left;width:100%}
+@media(max-width:650px){.focus-nav .tab{gap:7px}.focus-nav .tab .ui-icon{width:18px;height:18px}}
+@media(prefers-reduced-motion:reduce){.focus-nav .tab{transition:none}.focus-nav .tab:hover:not(:disabled){transform:none}}
 </style>
 <link rel="stylesheet" href="focus-layout-v54.css?v=5.4.1">
 <link rel="stylesheet" href="design-system-v55.css?v=6.0.0">
@@ -144,6 +153,7 @@ main{max-width:1120px}
 </head>
 <body>
 <header><div class="brandhead"><a class="author-photo-link" href="https://www.linkedin.com/in/sachinlaad/" target="_blank" rel="noopener noreferrer" aria-label="Sachin Laad — LinkedIn profile"><img id="headerPhoto" class="profile-pic" src="assets/author-sachin.webp" alt="Sachin Laad, creator of Deutsch B2 Beruf" width="64" height="64"></a><div class="brandcopy"><h1>Deutsch B2 Beruf <span style="font-size:.52em;vertical-align:middle;color:var(--accent);font-weight:700" aria-label="Version 9.2">v9.2</span></h1><p>Vocabulary · Flashcards · Grammar Made Easy · Everyday German</p><div class="credit">Created by <a class="author-link" href="https://www.linkedin.com/in/sachinlaad/" target="_blank" rel="noopener noreferrer"><strong id="headerCreator">Sachin Laad</strong><span class="author-link-mark" aria-hidden="true">↗</span></a></div></div></div></header>
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"><defs><g id="icon-house" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9 21v-8h6v8"/></g><g id="icon-book-open" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7c-3-2-6-2-10-1v14c4-1 7-1 10 1 3-2 6-2 10-1V6c-4-1-7-1-10 1z"/><path d="M12 7v14"/></g><g id="icon-languages" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h12M9 3v2m4 0c-.5 5-3 9-9 12m1-8c2 4 5 6 8 7M14 21l4-10 4 10m-6.5-4h5"/></g><g id="icon-layers" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 9 5-9 5-9-5 9-5zm-9 10 9 5 9-5M3 17l9 5 9-5"/></g><g id="icon-book-text" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5zM4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5M8 7h8M8 11h6"/></g><g id="icon-case-upper" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m4 20 6-16 6 16M6 15h8M19 4v16m-3-3 3 3 3-3"/></g><g id="icon-brain" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7a4 4 0 0 0-7-2 4 4 0 0 0-1 6 4 4 0 0 0 1 7 4 4 0 0 0 7 1V7zm0 0a4 4 0 0 1 7-2 4 4 0 0 1 1 6 4 4 0 0 1-1 7 4 4 0 0 1-7 1M8 9l-2 2m2 5 2-2m6-5 2 2m-2 5-2-2"/></g><g id="icon-messages-square" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v10l4-3h10a2 2 0 0 0 2-1zM8 17v2a2 2 0 0 0 2 2h8l3 2v-9"/></g><g id="icon-mic" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0m-7 7v5m-4 0h8"/></g><g id="icon-arrow-left-right" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 3 8l5 5M3 8h18m-5 13 5-5-5-5M21 16H3"/></g><g id="icon-settings" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M10 2h4l1 3 3 1 3-1 2 4-2 2v3l2 2-2 4-3-1-3 1-1 3h-4l-1-3-3-1-3 1-2-4 2-2v-3L1 9l2-4 3 1 3-1z"/></g><g id="icon-pen-line" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m4 20 4-.8L20 7a2 2 0 0 0-3-3L5 16l-1 4zm9-13 4 4M4 23h16"/></g></defs></svg>
 <main>
 
 
@@ -182,21 +192,21 @@ main{max-width:1120px}
     <span id="splitStudyHint">Choose any two different lessons to study side by side.</span>
   </div>
   <nav aria-label="Main navigation" class="focus-nav">
-    <button class="tab active" data-tab="today">🏠 Today</button>
-    <button class="tab" data-tab="library">📚 Vocabulary</button>
-    <button class="tab" data-tab="verbTrainer">🔤 Verbs</button>
-    <button class="tab" data-tab="flashcards">🗂️ Flashcards</button>
-    <button class="tab" data-tab="grammarGuide">📘 Grammar</button>
-    <button class="tab" data-tab="articleTrainer">🅰️ Articles</button>
+    <button class="tab active" data-tab="today"><svg class="ui-icon" aria-hidden="true"><use href="#icon-house"></use></svg><span>Today</span></button>
+    <button class="tab" data-tab="library"><svg class="ui-icon" aria-hidden="true"><use href="#icon-book-open"></use></svg><span>Vocabulary</span></button>
+    <button class="tab" data-tab="verbTrainer"><svg class="ui-icon" aria-hidden="true"><use href="#icon-languages"></use></svg><span>Verbs</span></button>
+    <button class="tab" data-tab="flashcards"><svg class="ui-icon" aria-hidden="true"><use href="#icon-layers"></use></svg><span>Flashcards</span></button>
+    <button class="tab" data-tab="grammarGuide"><svg class="ui-icon" aria-hidden="true"><use href="#icon-book-text"></use></svg><span>Grammar</span></button>
+    <button class="tab" data-tab="articleTrainer"><svg class="ui-icon" aria-hidden="true"><use href="#icon-case-upper"></use></svg><span>Articles</span></button>
     <details class="focus-more" id="focusMoreMenu">
       <summary>More <span aria-hidden="true">⌄</span></summary>
       <div class="focus-more-items">
-        <button class="tab" data-tab="quiz">🧠 Quiz</button>
-        <button class="tab" data-tab="everyday">💬 Everyday German</button>
-        <button class="tab" data-tab="spokenGerman">🗣️ Spoken German</button>
-        <button class="tab" data-tab="import">⇅ Import / Export</button>
-        <button class="tab" data-tab="settings">⚙️ Settings</button>
-        <button class="tab hidden" data-tab="grammarTrainer" aria-hidden="true" tabindex="-1">✍️ Grammar Trainer (future)</button>
+        <button class="tab" data-tab="quiz"><svg class="ui-icon" aria-hidden="true"><use href="#icon-brain"></use></svg><span>Quiz</span></button>
+        <button class="tab" data-tab="everyday"><svg class="ui-icon" aria-hidden="true"><use href="#icon-messages-square"></use></svg><span>Everyday German</span></button>
+        <button class="tab" data-tab="spokenGerman"><svg class="ui-icon" aria-hidden="true"><use href="#icon-mic"></use></svg><span>Spoken German</span></button>
+        <button class="tab" data-tab="import"><svg class="ui-icon" aria-hidden="true"><use href="#icon-arrow-left-right"></use></svg><span>Import / Export</span></button>
+        <button class="tab" data-tab="settings"><svg class="ui-icon" aria-hidden="true"><use href="#icon-settings"></use></svg><span>Settings</span></button>
+        <button class="tab hidden" data-tab="grammarTrainer" aria-hidden="true" tabindex="-1"><svg class="ui-icon" aria-hidden="true"><use href="#icon-pen-line"></use></svg><span>Grammar Trainer (future)</span></button>
       </div>
     </details>
   </nav>
