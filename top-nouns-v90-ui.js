@@ -6,6 +6,7 @@ if(!model)return;
 const KEY="b2TopNounsProgress_v90";
 function read(){try{const x=JSON.parse(localStorage.getItem(KEY)||"{}");return x&&typeof x==="object"?x:{}}catch(_){return {}}}
 let progress=read(),deck=0,flashDeck=0,flashIndex=0,revealed=false,nounQuestion=null,nounAnswered=false;
+let nounQuizCorrect=0,nounQuizAnswered=0,lastNounQuestionId=null;
 const esc=x=>String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const persist=()=>{try{localStorage.setItem(KEY,JSON.stringify(progress))}catch(_){}};
 const study=w=>progress[w.id]||{correct:0,wrong:0,due:0};
@@ -81,12 +82,16 @@ function quiz(){
  sel.innerHTML=model.groups.map((g,i)=>'<option value="'+i+'">Deck '+(i+1)+' · '+esc(g.name)+'</option>').join("");
  const chosen=Math.max(0,Math.min(29,Number(sel.dataset.nounDeck||0)));sel.value=String(chosen);
  const candidates=nounBatch(chosen),now=Date.now();
- const weighted=[...candidates].sort((a,b)=>{
-  const ap=study(a),bp=study(b);
-  return ((bp.wrong||0)*2+((bp.due||0)<=now?1:0))-((ap.wrong||0)*2+((ap.due||0)<=now?1:0));
+ // Every word remains eligible; difficult and due words receive extra weight.
+ const eligible=candidates.length>1?candidates.filter(w=>w.id!==lastNounQuestionId):candidates;
+ const weights=eligible.map(w=>{
+  const item=study(w);
+  return 1+Math.min(6,(Number(item.wrong)||0)*2)+(item.due&&item.due<=now?2:0);
  });
- const pool=weighted.slice(0,Math.min(6,weighted.length));
- const w=pool[Math.floor(Math.random()*pool.length)];
+ const total=weights.reduce((a,b)=>a+b,0);
+ let pick=Math.random()*total,selected=eligible.length-1;
+ for(let i=0;i<eligible.length;i++){pick-=weights[i];if(pick<0){selected=i;break}}
+ const w=eligible[selected];lastNounQuestionId=w.id;
  const type=Math.random()<.5?"article":"genitive";
  const right=type==="article"?w.article:model.caseForm(w,3);
  const opts=type==="article"?shuffle(["der","die","das"]):genitiveOptions(w);
@@ -95,6 +100,7 @@ function quiz(){
  document.getElementById("quizQuestion").textContent=type==="article"?"Which article? ___ "+w.noun+" ("+w.english+")":"Choose the correct Genitiv for: "+w.article+" "+w.noun;
  document.getElementById("quizOptions").innerHTML=opts.map((a,i)=>'<button type="button" data-index="'+i+'">'+String.fromCharCode(65+i)+') '+esc(a)+'</button>').join("");
  document.getElementById("quizFeedback").textContent="";
+ document.getElementById("score").textContent=nounQuizCorrect+" correct / "+nounQuizAnswered+" answered · Top Nouns";
  document.getElementById("quizOptions").querySelectorAll("button").forEach((b,i)=>b.onclick=()=>answer(opts[i]));
  return true;
 }
@@ -102,7 +108,9 @@ function answer(choice){
  if(nounAnswered||!nounQuestion)return;
  nounAnswered=true;
  const {w,right,type}=nounQuestion,correct=choice===right;
+ nounQuizAnswered++;if(correct)nounQuizCorrect++;
  rate(w,correct);
+ document.getElementById("score").textContent=nounQuizCorrect+" correct / "+nounQuizAnswered+" answered · Top Nouns";
  const fb=document.getElementById("quizFeedback");fb.style.color=correct?"var(--good)":"var(--bad)";
  const rule=type==="article"?"Learn the article with the noun: "+w.article+" "+w.noun+".":"Genitiv: "+info(w);
  fb.innerHTML='<strong>'+(correct?"✓ Correct!":"✗ Not quite. Correct answer: "+esc(right))+'</strong><details class="smart-why"><summary>Why?</summary><div class="smart-why-body"><p>'+esc(rule)+'</p><p>Plural: '+esc(w.plural)+'</p><p>Compare: '+esc(model.caseForm(w,2))+' (Dativ) / '+esc(model.caseForm(w,3))+' (Genitiv)</p></div></details>';
@@ -116,9 +124,7 @@ function attach(){
  const flash=document.getElementById("flashMode"),selector=document.getElementById("deckSelect"),quizMode=document.getElementById("quizMode"),quizDeck=document.getElementById("quizDeck");
  flash.addEventListener("change",()=>{if(flash.value==="topnouns"){flashDeck=0;flashIndex=0;revealed=false}showFlash()});
  selector.addEventListener("change",()=>{if(flash.value==="topnouns"){flashDeck=Number(selector.value)||0;flashIndex=0;revealed=false;showFlash()}});
- quizMode.addEventListener("change",()=>{if(quizMode.value==="topnouns"){quizDeck.dataset.nounDeck="0";quiz()}else quizDeck.parentElement.hidden=quizMode.value==="grammar"});
- quizDeck.addEventListener("change",()=>{if(quizMode.value==="topnouns"){quizDeck.dataset.nounDeck=quizDeck.value;quiz()}});
- document.getElementById("nextQuestion").addEventListener("click",()=>{if(quizMode.value==="topnouns")quiz()});
+ quizMode.addEventListener("change",()=>{if(quizMode.value==="topnouns")quizDeck.dataset.nounDeck="0";else quizDeck.parentElement.hidden=quizMode.value==="grammar"});
  const originalFlashTab=document.querySelector('.tab[data-tab="flashcards"]');
  originalFlashTab?.addEventListener("click",()=>{if(flash.value==="topnouns")showFlash()});
 }
