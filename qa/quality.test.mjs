@@ -144,3 +144,47 @@ test('device passkey login is optional and does not store biometrics',()=>{
  assert.doesNotThrow(()=>new vm.Script(js));
  assert.ok(!js.includes('localStorage.setItem'),'Biometrics are never saved in local storage');
 });
+
+test('contextual grammar examples have one exact answer and explanations for all distractors',()=>{
+ const sandbox={window:{},localStorage:{getItem:()=>null,setItem:()=>{}},Date,Math};
+ vm.runInNewContext(source('smart-grammar-v80.js'),sandbox,{timeout:3000});
+ const g=sandbox.window.B2SmartGrammar;
+ assert.equal(g.rules.length,19);
+ const kinds=new Set(g.rules.map(r=>r.type));
+ for(const kind of ['case-dative','case-accusative','double-object','fixed-preposition','nominalized-adjective','n-declension','adjective-declension','word-order','comparative'])
+   assert.ok(kinds.has(kind),'Grammar category included: '+kind);
+ for(const r of g.rules){
+   assert.equal(r.options.length,4,r.id+' has four options');
+   assert.equal(new Set(r.options).size,4,r.id+' has unique options');
+   assert.equal(r.options.filter(v=>v===r.correct).length,1,r.id+' has one correct choice');
+   assert.ok(r.example.length>12&&r.rule.length>15,r.id+' explained with authentic example');
+   assert.ok(r.options.filter(v=>v!==r.correct).every(v=>r.reasons[v]),r.id+' gives a reason for every distractor');
+   assert.equal(g.shuffledOptions(r,()=>.73).filter(x=>x===r.correct).length,1,r.id+' retains correct choice after shuffle');
+   assert.match(g.whyHTML(r,r.options.find(x=>x!==r.correct)),/Why the other options are wrong/,r.id+' explains all alternatives');
+   assert.match(g.whyHTML(r,r.correct),/Correct:/,r.id+' explains correct answer');
+ }
+ for(const [word,id] of [['helfen','helfen'],['anrufen','anrufen'],['sprechen mit','sprechen mit'],['warten auf','warten auf'],['der Vorgesetzte','vorgesetzte'],['der Angestellte','angestellte'],['der Arbeitslose','arbeitslose'],['der Bekannte','bekannte'],['der Deutsche','deutsche']]){
+  assert.equal(g.forWord(word)?.id,id,'contextual label: '+word);
+ }
+ assert.equal(g.forWord('das Auto'),null,'no grammar hint for unrelated word');
+ assert.match(index,/value="grammar">Grammar in context/,'grammar MCQs integrated into current quiz');
+ assert.match(index,/smart-grammar-v80\.js/);
+ assert.match(index,/smart-grammar-v80-ui\.js/);
+ assert.match(index,/smart-grammar-v80\.css/);
+ for(const path of ['smart-grammar-v80.js','smart-grammar-v80-ui.js'])
+   assert.doesNotThrow(()=>new vm.Script(source(path),{filename:path}));
+});
+test('grammar mistake tracking prioritizes difficult concepts and does not corrupt other progress',()=>{
+ const values={};
+ const store={getItem:k=>values[k]||null,setItem:(k,v)=>{values[k]=String(v)}};
+ const sandbox={window:{},localStorage:store,Date,Math};
+ vm.runInNewContext(source('smart-grammar-v80.js'),sandbox,{timeout:3000});
+ const g=sandbox.window.B2SmartGrammar;
+ assert.equal(g.choose([g.byId('helfen'),g.byId('anrufen')],()=>.4).id,'helfen');
+ g.record('helfen',false);g.record('helfen',false);g.record('helfen',false);
+ assert.equal(g.mistakes().helfen.wrong,3);
+ assert.equal(g.choose([g.byId('helfen'),g.byId('anrufen')],()=>.4).id,'helfen','difficult concept receives higher probability');
+ g.record('helfen',true);
+ assert.equal(g.mistakes().helfen.wrong,2,'correct answer reduces mistake weight');
+ assert.equal(Object.keys(values).length,1,'only grammar-specific progress key is saved');
+});
