@@ -1,0 +1,85 @@
+/* Dark-mode contrast patch for the phone-first Today view.
+   Keeps existing layout, learning behavior and user theme selection intact. */
+body[data-theme="dark"]{
+ --dark-ui-foreground:#f1f5ff;
+ --dark-ui-secondary:#c3cee0;
+ --dark-ui-surface:#202d43;
+ --dark-ui-border:#465773;
+ --dark-ui-accent:#8cafff;
+}
+body[data-theme="dark"] .split-study-toolbar{
+ background:var(--dark-ui-surface)!important;
+ border-color:var(--dark-ui-border)!important;
+ color:var(--dark-ui-foreground)!important;
+}
+body[data-theme="dark"] .split-study-toolbar button,
+body[data-theme="dark"] .split-study-toolbar select{
+ background:#293a56!important;
+ color:var(--dark-ui-foreground)!important;
+ border-color:var(--dark-ui-border)!important;
+}
+body[data-theme="dark"] .split-study-toolbar button[aria-pressed="true"]{
+ background:#344b75!important;
+ border-color:var(--dark-ui-accent)!important;
+}
+body[data-theme="dark"] .focus-progress,
+body[data-theme="dark"] .focus-session-details{
+ background:var(--dark-ui-surface)!important;
+ border-color:var(--dark-ui-border)!important;
+}
+body[data-theme="dark"] .focus-progress>summary,
+body[data-theme="dark"] .focus-session-details>summary{
+ color:var(--dark-ui-foreground)!important;
+}
+body[data-theme="dark"] .focus-progress>summary::before,
+body[data-theme="dark"] .focus-session-details>summary::before{
+ color:var(--dark-ui-accent)!important;
+}
+body[data-theme="dark"] #today .today-hero,
+body[data-theme="dark"] #today .today-card{
+ color:var(--dark-ui-foreground)!important;
+ border-color:var(--dark-ui-border)!important;
+}
+body[data-theme="dark"] #today .today-heading h2,
+body[data-theme="dark"] #today .today-word,
+body[data-theme="dark"] #today .today-card h2,
+body[data-theme="dark"] #today .today-card h3,
+body[data-theme="dark"] #today .today-card strong{
+ color:var(--dark-ui-foreground)!important;
+}
+body[data-theme="dark"] #today .eyebrow,
+body[data-theme="dark"] #today .today-pill{
+ color:var(--dark-ui-accent)!important;
+}
+body[data-theme="dark"] #today .today-pill{
+ background:#2a3c60!important;
+ border-color:#435b8a!important;
+}
+body[data-theme="dark"] #today .today-session-row span,
+body[data-theme="dark"] #today .today-card .muted,
+body[data-theme="dark"] #today .today-heading .muted,
+body[data-theme="dark"] .focus-summary-help{
+ color:var(--dark-ui-secondary)!important;
+}
+body[data-theme="dark"] #today .today-progress-track{
+ background:#43516c!important;
+}
+body[data-theme="dark"] #today .today-card button:not(.primary),
+body[data-theme="dark"] #today .focus-session-details button{
+ background:#293a56!important;
+ color:var(--dark-ui-foreground)!important;
+ border-color:var(--dark-ui-border)!important;
+}
+body[data-theme="dark"] #today .today-card button:hover:not(:disabled){
+ background:#344866!important;
+}
+body[data-theme="dark"] .focus-nav>.tab.active{
+ color:var(--dark-ui-foreground)!important;
+ background:#344b75!important;
+ border-color:#7898d7!important;
+}
+body[data-theme="dark"] .focus-nav>.tab.active .ui-icon{color:var(--dark-ui-foreground)!important}
+body[data-theme="dark"] .focus-progress-content,
+body[data-theme="dark"] .focus-progress-content .panel{
+ color:var(--dark-ui-foreground)!important;
+}
