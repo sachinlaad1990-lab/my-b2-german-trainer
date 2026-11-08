@@ -218,6 +218,37 @@ try{
   await clickChoice(correct);
   assert.match(await page.locator("#quizFeedback").innerText(),/Correct/,profile.name+": correct grammar answer accepted");
   assert.match(await page.locator("#score").innerText(),/1 correct \/ 2 answered/,profile.name+": scores reflect one right and one wrong");
+  // Audit Genitiv in the live article/case builder across all four genders.
+  await page.locator('.focus-nav .tab[data-tab="grammarGuide"]').click();
+  await page.waitForSelector("#bhBuildResult");
+  const genCases=[
+    ["m","des Chefs","eines Chefs","keines Chefs","meines Chefs"],
+    ["f","der Firma","einer Firma","keiner Firma","meiner Firma"],
+    ["n","des Teams","eines Teams","keines Teams","meines Teams"],
+    ["p","der Kollegen","(no ein-plural)","keiner Kollegen","meiner Kollegen"]
+  ];
+  for(const [gender,...expected] of genCases){
+    await page.locator("#bhGender").selectOption(gender);
+    await page.locator("#bhCase").selectOption("3");
+    for(const [index,family] of ["definite","indefinite","negative","possessive"].entries()){
+      await page.locator("#bhFamily").selectOption(family);
+      assert.equal((await page.locator("#bhBuildResult strong").innerText()).trim(),expected[index],profile.name+": Genitiv "+gender+" "+family);
+    }
+  }
+  await page.locator("#bhGender").selectOption("n");
+  await page.locator("#bhFamily").selectOption("definite");
+  await page.locator("#bhCase").selectOption("0");
+  assert.equal((await page.locator("#bhBuildResult strong").innerText()).trim(),"das Team",profile.name+": neuter Nominativ unchanged");
+  await page.locator("#bhCase").selectOption("2");
+  assert.equal((await page.locator("#bhBuildResult strong").innerText()).trim(),"dem Team",profile.name+": neuter Dativ unchanged");
+  // The original offline checker must correct BOTH article and noun ending.
+  await page.evaluate(()=>document.querySelector('.focus-nav .tab[data-tab="grammarTrainer"]').click());
+  await page.locator("#grammarInput").fill("Wegen dem Team findet das Meeting später statt.");
+  await page.waitForTimeout(430);
+  assert.match(await page.locator("#liveGrammarResults").innerText(),/wegen des Teams/i,profile.name+": offline checker fixes Genitiv noun suffix");
+  await page.locator("#grammarInput").fill("Ich spreche mit den Kollege.");
+  await page.waitForTimeout(430);
+  assert.match(await page.locator("#liveGrammarResults").innerText(),/mit dem Kollegen/i,profile.name+": offline checker fixes weak-noun Dativ ending");
   assert.ok(!jsErrors.length,profile.name+": browser JS errors: "+jsErrors.join("; "));
   console.log("PASS "+profile.name+": home shortcuts, verbs, example, next, search, progress, reload, quiz, left/right review swipes, vocabulary, spoken German, deck transfer & undo");
   await context.close();
