@@ -15,10 +15,49 @@ HEADERS={"User-Agent":"GermanyJobFinder/3.0 public API consumer","Accept":"appli
 PATTERNS={
  "Project Manager":re.compile(r"project\s*(manager|lead)|projekt\s*(manager|leiter|leitung)|program(?:me)?\s*manager",re.I),
  "Strategy Consultant":re.compile(r"strategy\s*(consultant|advisor|manager)|management\s*consultant|strategieberater|unternehmensberater",re.I),
- "Business Development":re.compile(r"business\s*development|business\s*developer|biz\s*dev|geschäftsentwicklung|growth\s*manager",re.I)}
+ "Business Development":re.compile(r"business\s*development|business\s*developer|biz\s*dev|geschäftsentwicklung|growth\s*manager",re.I),
+ "Research / PhD":re.compile(r"\b(?:ph\.?d\.?|doctoral|doctorand|doktorand\w*|promotionsstelle\w*|promotion(?:sprojekt|sstelle|skandidat)|postdoc\w*|postdoctoral|research\s+(?:associate|scientist|fellow|assistant)|wissenschaftlich\w*\s+mitarbeiter\w*|forschungsmitarbeiter\w*|forschungsreferent\w*)\b",re.I)}
 CITIES=re.compile(r"\b(germany|deutschland|bundesweit|berlin|hamburg|münchen|munich|köln|cologne|frankfurt|stuttgart|düsseldorf|aachen|bonn|essen|dortmund|hannover|leipzig|bremen|nürnberg|karlsruhe|mannheim|dresden|freiburg|mainz|wiesbaden|bielefeld|münster|bochum|ulm|regensburg|augsburg|darmstadt|heidelberg|potsdam|paderborn|ingolstadt|wolfsburg|duisburg|kiel|mönchengladbach|wuppertal|erlangen|osnabrück|kassel|braunschweig|magdeburg|rostock)\b",re.I)
 JUNIOR=re.compile(r"\b(junior|internship|intern|praktikant|werkstudent|working student|trainee|student|graduate|ausbildung)\b",re.I)
-HIGH_GERMAN=re.compile(r"(german|deutsch)\W{0,28}(c1|c2|native|muttersprachlich|verhandlungssicher)|(c1|c2|muttersprachlich|verhandlungssicher)\W{0,28}(german|deutsch)",re.I)
+
+GERMAN_TERM=re.compile(r"\b(?:deutschkenntnisse\w*|deutsch(?:e|en|er|es)?\s*(?:sprache|kenntnisse)?|german(?:\s+language)?|deutschsprachig\w*)\b",re.I)
+CEFR=re.compile(r"\b(?:A1|A2|B1|B2|C1|C2)\b",re.I)
+OPTIONAL_WORDS=r"(?:nice[\s-]*to[\s-]*have|desirable|preferred|advantage(?:ous)?|plus|bonus|optional|wünschenswert|erwünscht|von\s+vorteil|kein\s+muss|nicht\s+zwingend|idealerweise)"
+def german_requirement(description):
+ """Conservative classification of explicit German requirements, not a proficiency prediction."""
+ s=re.sub(r"\s+"," ",description or "")
+ terms=list(GERMAN_TERM.finditer(s))
+ if not terms:return "Not specified","not_stated"
+ for match in terms:
+  near=s[max(0,match.start()-85):min(len(s),match.end()+110)]
+  if re.search(r"(?:german|deutschkenntnisse|deutsch)\W{0,28}(?:not\s+required|not\s+necessary|not\s+needed|nicht\s+erforderlich|keine?\s+voraussetzung)|(?:kein(?:e|en)?|ohne)\s+deutschkenntnisse|no\s+german\s+(?:required|necessary|needed)",near,re.I):
+   return "Not required","none"
+ for match in terms:
+  near=s[max(0,match.start()-90):min(len(s),match.end()+90)]
+  if re.search(OPTIONAL_WORDS,near,re.I):
+   # Require a short local relationship, avoiding unrelated 'advantage' elsewhere.
+   if re.search(r"(?:"+OPTIONAL_WORDS+r").{0,48}(?:german|deutsch)|(?:german|deutsch).{0,48}(?:"+OPTIONAL_WORDS+r")",near,re.I):
+    return "A plus (optional)","plus"
+ for match in terms:
+  near=s[max(0,match.start()-60):min(len(s),match.end()+75)]
+  if re.search(r"(?:english|englisch)\s+(?:or|oder)\s+(?:german|deutsch)|(?:german|deutsch)\s+(?:or|oder)\s+(?:english|englisch)",near,re.I):
+   return "English or German accepted","alternative"
+ level_hits=[]
+ for match in terms:
+  near=s[max(0,match.start()-55):min(len(s),match.end()+55)]
+  # Keep only levels within a short span of a German-language mention.
+  for l in CEFR.finditer(near):
+   if abs((max(0,match.start()-55)+l.start())-match.start())<=55:
+    level_hits.append(l.group().upper())
+ if level_hits:
+  level=max(level_hits,key=lambda x:{"A1":1,"A2":2,"B1":3,"B2":4,"C1":5,"C2":6}[x])
+  return level+" required",level.lower()
+ for match in terms:
+  near=s[max(0,match.start()-58):min(len(s),match.end()+58)]
+  if re.search(r"\b(?:fluent|native|business[\s-]*fluent|verhandlungssicher|muttersprachlich|fließend)\b",near,re.I):
+   return "Fluent / native (exact level unstated)","fluent"
+ return "Required / mentioned (level unstated)","required_unspecified"
+
 EMPLOYERS={
  "Greenhouse":["freenow","wongdoody","caronsale","project_a_ventures_management_gmbh","constellrgmbh"],
  "Lever":["Civitta","netlight","agicap","Nomagic","jobgether"],
@@ -40,7 +79,8 @@ def make(title,company,location,url,source,description="",posted="",employer=Fal
  title=text(title);company=text(company) or "Employer not supplied";location=text(location);description=text(description);url=str(url or "")
  if not title or JUNIOR.search(title) or not urlparse(url).scheme in ("http","https") or not urlparse(url).netloc:return None
  role=next((r for r,p in PATTERNS.items() if p.search(title)),None)
- if not role or (not germany and not CITIES.search(location)) or HIGH_GERMAN.search(description):return None
+ if not role or (not germany and not CITIES.search(location)):return None
+ german_label,german_category=german_requirement(description)
  posted=iso(posted)
  if posted and not employer:
   try:
@@ -49,7 +89,7 @@ def make(title,company,location,url,source,description="",posted="",employer=Fal
  ident=hashlib.sha256(("|".join([company.lower(),title.lower(),location.lower()])).encode()).hexdigest()[:22]
  score=65+(12 if re.search(r"\b(senior|lead|principal|head)\b",title,re.I) else 0)
  score+=8 if re.search(r"\b(automotive|engineering|manufacturing|mobility|industrial|energy|maschinenbau|battery)\b",description,re.I) else 0
- return {"id":ident,"title":title,"company":company,"location":location or "Germany","url":url,"role":role,"source":source,"posted":posted,"seen":NOW.date().isoformat(),"source_kind":"employer" if employer else "feed","verification":"On employer's published job board" if employer else "Observed in source feed","score":min(score,100),"summary":description[:350],"experience":"Mid / senior (not independently confirmed)","language":"English/German B2 suitability unverified"}
+ return {"id":ident,"title":title,"company":company,"location":location or "Germany","url":url,"role":role,"source":source,"posted":posted,"seen":NOW.date().isoformat(),"source_kind":"employer" if employer else "feed","verification":"On employer's published job board" if employer else "Observed in source feed","score":min(score,100),"summary":description[:350],"experience":"Mid / senior (not independently confirmed)","language":"German: "+german_label,"german_level":german_label,"german_category":german_category,"date_kind":"date supplied by source","language_verification":"Extracted from supplied description; verify full listing"}
 def arbeitnow():
  for page in range(1,9):
   d=fetch("https://www.arbeitnow.com/api/job-board-api",{"page":page})
@@ -61,7 +101,7 @@ def remotive():
   yield make(j.get("title"),j.get("company_name"),j.get("candidate_required_location"),j.get("url"),"Remotive",j.get("description"),j.get("publication_date"))
 def agentur():
  url="https://rest.arbeitsagentur.de/jobboerse/jobsuche-service/pc/v6/jobs"
- for term in ("Projektmanager","Projektleiter","Project Manager","Strategieberater","Unternehmensberater","Business Development"):
+ for term in ("Projektmanager","Projektleiter","Project Manager","Strategieberater","Unternehmensberater","Business Development","Doktorand","Wissenschaftlicher Mitarbeiter","Promotionsstelle","Forschungsmitarbeiter","Research Associate","PhD"):
   for page in (1,2):
    d=fetch(url,{"was":term,"page":page,"size":50,"angebotsart":1,"veroeffentlichtseit":60},{"X-API-Key":"jobboerse-jobsuche"})
    rows=d.get("ergebnisliste") or d.get("stellenangebote") or []
@@ -121,7 +161,7 @@ def run():
   try:age=(NOW.date()-dt.date.fromisoformat(j["seen"])).days
   except Exception:continue
   if age<=7:jobs[ident]={**j,"verification":"Not seen on latest refresh; check before applying"}
- ordered=sorted(jobs.values(),key=lambda x:(x["verification"].startswith("Not seen"),-x["score"],x.get("posted","")))
+ ordered=sorted(jobs.values(),key=lambda x:(x["verification"].startswith("Not seen"),-x["score"],-(int(x.get("posted","").replace("-","")) if re.match(r"^\d{4}-\d{2}-\d{2}$",x.get("posted","")) else 0)))
  OUT.write_text(json.dumps({"updated_at":NOW.isoformat(timespec="seconds"),"count":len(ordered),"jobs":ordered[:1200],"sources":sources,"errors":errors,"note":"No LinkedIn/XING/StepStone import until authorized job alerts are connected. Listings are not guaranteed open."},ensure_ascii=False,separators=(",",":"))+"\n")
  print(f"{len(ordered)} vacancies; {len(errors)} source errors")
  return 0 if any(s["status"]=="ok" for s in sources.values()) else 1
