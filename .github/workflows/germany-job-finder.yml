@@ -1,0 +1,33 @@
+name: Automated Germany Job Finder
+on:
+  schedule:
+    - cron: '15 6,18 * * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - 'job-finder/collect.py'
+      - '.github/workflows/germany-job-finder.yml'
+permissions:
+  contents: write
+concurrency:
+  group: germany-job-finder-collector
+  cancel-in-progress: false
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Retrieve new jobs
+        run: python job-finder/collect.py
+      - name: Save job data for public dashboard
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add job-finder/jobs.json
+          git diff --cached --quiet || (git commit -m "data: refresh German jobs" && git push)
