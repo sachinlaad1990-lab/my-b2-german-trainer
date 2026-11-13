@@ -206,6 +206,7 @@ button>.ui-icon,h2>.ui-icon,summary>.ui-icon{width:18px;height:18px;vertical-ali
     <button class="tab" data-tab="flashcards"><svg class="ui-icon" aria-hidden="true"><use href="#icon-layers"></use></svg><span>Flashcards</span></button>
     <button class="tab" data-tab="grammarGuide"><svg class="ui-icon" aria-hidden="true"><use href="#icon-book-text"></use></svg><span>Grammar</span></button>
     <button class="tab" data-tab="articleTrainer"><svg class="ui-icon" aria-hidden="true"><use href="#icon-case-upper"></use></svg><span>Articles</span></button>
+    <button class="tab" data-tab="examPractice" aria-label="Open B2 Beruf exam practice"><svg class="ui-icon" aria-hidden="true"><use href="#icon-clipboard-check"></use></svg><span>Exam Practice</span></button>
     <details class="focus-more" id="focusMoreMenu">
       <summary>More <span aria-hidden="true">⌄</span></summary>
       <div class="focus-more-items">
@@ -251,6 +252,20 @@ button>.ui-icon,h2>.ui-icon,summary>.ui-icon{width:18px;height:18px;vertical-ali
     </div>
   </details>
   <div id="speechFeedback" class="speech-feedback hidden" role="status" aria-live="polite" data-error="false"></div>
+
+  <section id="examPractice" class="view hidden" aria-label="B2 Beruf Exam Practice">
+    <div class="panel" style="padding:clamp(12px,2vw,20px)">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px">
+        <div>
+          <h2 style="margin:0 0 3px">B2 Beruf · Exam Practice</h2>
+          <p class="muted small" style="margin:0">Lesen · Schreiben · Hören · Sprechen · 602 records, including 25 flagged placeholders. German exercises with English notes.</p>
+        </div>
+        <a href="exam-practice.html" target="_blank" rel="noopener" class="tab" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap">Open full screen ↗</a>
+      </div>
+      <iframe title="B2 Beruf digital exam questions" src="exam-practice.html" loading="lazy" style="display:block;width:100%;height:min(82vh,960px);min-height:570px;border:1px solid var(--line);border-radius:12px;background:var(--panel)" allow="clipboard-write"></iframe>
+      <p class="muted small" style="margin:10px 0 0">Exam progress is stored separately in this browser. Incomplete or extraction-review questions are explicitly marked in the exam tool.</p>
+    </div>
+  </section>
 
   <section id="today" class="view">
     <div class="panel today-hero">
