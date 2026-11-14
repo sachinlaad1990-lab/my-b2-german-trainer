@@ -1,0 +1,90 @@
+{
+  "batch": "Batch 1",
+  "recorded_on": "2026-11-14",
+  "status": "recorded_for_later_batch_update_only",
+  "live_app_update": false,
+  "source": "User's explicit itemized review instructions",
+  "policy": "No paraphrase of original German PDF wording. Explicit user-requested Russian-to-German translation must be labeled as a translation and must retain both source variants.",
+  "items": [
+    {
+      "item": 1,
+      "pdf_page": 43,
+      "question": "Frau Schlosser",
+      "decision": "COMMENT",
+      "user_comment": "Needs further review",
+      "action": "Leave unresolved; recheck numbering and page 43 layout before any renumber."
+    },
+    {
+      "item": 2,
+      "pdf_page": 45,
+      "question": "Two variants of Question 15",
+      "decision": "COMMENT",
+      "user_comment": "convert this russion to german and kp 15a, 15 b ques tions",
+      "action": "Prepare German translation of the Russian heading, labeled TRANSLATED (not original PDF), and preserve both source variants as questions 15a and 15b. Do not alter original PDF transcription."
+    },
+    {
+      "item": 3,
+      "pdf_page": 92,
+      "question": "36. Juri",
+      "decision": "COMMENT",
+      "user_comment": "Needs further review",
+      "action": "Keep source issue under review; do not restore B until resolved."
+    },
+    {
+      "item": 4,
+      "pdf_page": 97,
+      "question": "35. Murat ist nicht sicher, ob",
+      "decision": "COMMENT",
+      "user_comment": "leave option c blank answr is b",
+      "action": "Keep option C empty, preserve literal source A/B, record user-selected B as a user-reviewed practice answer, NOT an official key, when later updating."
+    },
+    {
+      "item": 5,
+      "pdf_page": 100,
+      "question": "27. Frau xxx",
+      "decision": "COMMENT",
+      "user_comment": "Needs further review",
+      "action": "Leave under review; don't split B/C yet."
+    },
+    {
+      "item": 6,
+      "pdf_page": 102,
+      "question": "35. Die Geschäftsführung",
+      "decision": "COMMENT",
+      "user_comment": "Needs further review",
+      "action": "Leave under review; do not replace placeholder yet."
+    },
+    {
+      "item": 7,
+      "pdf_page": 103,
+      "question": "39. Barbara",
+      "decision": "COMMENT",
+      "user_comment": "it is fill in the blank no options",
+      "action": "For later update, represent as fill-in-the-blank without MCQ options; preserve exact available PDF text."
+    },
+    {
+      "item": 8,
+      "pdf_page": 107,
+      "question": "36. Andrea",
+      "decision": "APPROVE",
+      "user_comment": "APPROVE proposed action",
+      "action": "For later update, restore option C verbatim from PDF page 108: möchte Termin vereinbaren/anmelden; preserve A/B and question numbering."
+    },
+    {
+      "item": 9,
+      "pdf_page": 109,
+      "question": "Question 33",
+      "decision": "COMMENT",
+      "user_comment": "there is a transcript folowed by question",
+      "action": "Re-investigate PDF's transcript/question structure and variant boundaries; do not mark complete without exact source question."
+    },
+    {
+      "item": 10,
+      "pdf_page": 109,
+      "question": "Question 34",
+      "decision": "COMMENT",
+      "user_comment": "there is a transcript folowed by question",
+      "action": "Re-investigate PDF's transcript/question structure and variant boundaries; do not mark complete without exact source question."
+    }
+  ]
+}
