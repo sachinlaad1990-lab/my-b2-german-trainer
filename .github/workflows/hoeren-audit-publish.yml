@@ -34,7 +34,7 @@ jobs:
           sets=[e for e in b['exercises'] if e.get('section')=='Hören']
           qs=[q for e in sets for q in e['questions']]
           assert len(sets)==11 and len(qs)==218
-          assert 'b2beruf-listening-audio-v1' in s
+          assert 'hoeren-audio-local.js' in s
           assert 'transcript_review' in s
           assert len({q['id'] for q in qs})==218
           assert sum(q['completeness']=='transcript_review' for q in qs)>=140
