@@ -1,0 +1,333 @@
+{
+  "reviewed": 26,
+  "restored_verbatim_options": 6,
+  "source_incomplete_misclassified_mcqs": 20,
+  "restored": [
+    {
+      "id": "set079-p88-q25-1",
+      "page": 88,
+      "section": "Hören",
+      "from": "extraction_review",
+      "to": "transcript_review",
+      "original_choice_labels": [
+        "a",
+        "b",
+        "c"
+      ],
+      "options": [
+        {
+          "value": "a",
+          "label": "kennen das neue Betriebssystem bereits."
+        },
+        {
+          "value": "b",
+          "label": "müssen das ganze Wochenende in der Firma sein."
+        },
+        {
+          "value": "c",
+          "label": "у werden in das neue Betriebssystem eingewiesen."
+        }
+      ]
+    },
+    {
+      "id": "set079-p91-q33-1",
+      "page": 91,
+      "section": "Hören",
+      "from": "extraction_review",
+      "to": "transcript_review",
+      "original_choice_labels": [
+        "a",
+        "b",
+        "c"
+      ],
+      "options": [
+        {
+          "value": "a",
+          "label": "die Stimmung im Unternehmen ermittelt."
+        },
+        {
+          "value": "b",
+          "label": "die Entwicklung der Firma dokumentierte"
+        },
+        {
+          "value": "c",
+          "label": "ein Mitarbeiterprofil erstellt."
+        }
+      ]
+    },
+    {
+      "id": "set085-p118-q33-1",
+      "page": 118,
+      "section": "Hören",
+      "from": "extraction_review",
+      "to": "transcript_review",
+      "original_choice_labels": [
+        "d",
+        "e",
+        "f"
+      ],
+      "options": [
+        {
+          "value": "d",
+          "label": "reklamiert einen Schaden."
+        },
+        {
+          "value": "e",
+          "label": "trifft ihre Entscheidung aufgrund des Musters."
+        },
+        {
+          "value": "f",
+          "label": "wundert sich über den Preisunterschied."
+        }
+      ]
+    },
+    {
+      "id": "set085-p118-q35-1",
+      "page": 118,
+      "section": "Hören",
+      "from": "extraction_review",
+      "to": "transcript_review",
+      "original_choice_labels": [
+        "d",
+        "e",
+        "f"
+      ],
+      "options": [
+        {
+          "value": "d",
+          "label": "arbeitet diese Woche in einer anderen Gruppe."
+        },
+        {
+          "value": "e",
+          "label": "kann diese Woche keinen Spätdienst übernehmen."
+        },
+        {
+          "value": "f",
+          "label": "muss diese Woche zwei Gruppen betreuen."
+        }
+      ]
+    },
+    {
+      "id": "set085-p121-q38-1",
+      "page": 121,
+      "section": "Hören",
+      "from": "extraction_review",
+      "to": "transcript_review",
+      "original_choice_labels": [
+        "a",
+        "b",
+        "c"
+      ],
+      "options": [
+        {
+          "value": "a",
+          "label": "benötigt Dokumente für das Steuer Büro"
+        },
+        {
+          "value": "b",
+          "label": "bringt der Kollegin die Belege vorbei"
+        },
+        {
+          "value": "c",
+          "label": "hat gestern das Steuer Büro angerufen"
+        }
+      ]
+    },
+    {
+      "id": "set089-p140-q34-1",
+      "page": 140,
+      "section": "Hören",
+      "from": "extraction_review",
+      "to": "transcript_review",
+      "original_choice_labels": [
+        "a",
+        "b",
+        "c"
+      ],
+      "options": [
+        {
+          "value": "a",
+          "label": "auf den Reinigungswagen legen."
+        },
+        {
+          "value": "b",
+          "label": "in den Büros nachfüllen."
+        },
+        {
+          "value": "c",
+          "label": "zur Reinigung der Schreibtische einsetzen."
+        }
+      ]
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "set044-p53-q19-1",
+      "page": 53,
+      "section": "Schreiben",
+      "reason": "Beschwerde — answer fragments, no full A/B/C source",
+      "source_fragment": "will nur die geleisteten Stunden bezahlen",
+      "source_marked_answer_unofficial": "c"
+    },
+    {
+      "id": "set044-p53-q20-1",
+      "page": 53,
+      "section": "Schreiben",
+      "reason": "Beschwerde — answer fragments, no full A/B/C source",
+      "source_fragment": "hat zu wenige Stunden gearbeitet",
+      "source_marked_answer_unofficial": "b"
+    },
+    {
+      "id": "set045-p54-q19-1",
+      "page": 54,
+      "section": "Schreiben",
+      "reason": "Beschwerde — answer fragments, no full A/B/C source",
+      "source_fragment": "wartet dringend auf die Lieferung",
+      "source_marked_answer_unofficial": "c"
+    },
+    {
+      "id": "set046-p55-q19-2",
+      "page": 55,
+      "section": "Schreiben",
+      "reason": "Beschwerde — answer fragments, no full A/B/C source",
+      "source_fragment": "ist mit dem Entwurf der Agentur nicht einverstanden",
+      "source_marked_answer_unofficial": "a"
+    },
+    {
+      "id": "set046-p55-q20-2",
+      "page": 55,
+      "section": "Schreiben",
+      "reason": "Beschwerde — answer fragments, no full A/B/C source",
+      "source_fragment": "Änderungen nur gegen Aufpreis macht",
+      "source_marked_answer_unofficial": "a"
+    },
+    {
+      "id": "set048-p57-q19-1",
+      "page": 57,
+      "section": "Schreiben",
+      "reason": "Beschwerde — answer fragments, no full A/B/C source",
+      "source_fragment": "die Mitarbeiter der Firma",
+      "source_marked_answer_unofficial": "a"
+    },
+    {
+      "id": "set048-p57-q20-1",
+      "page": 57,
+      "section": "Schreiben",
+      "reason": "Beschwerde — answer fragments, no full A/B/C source",
+      "source_fragment": "verlangt Schadensersatz",
+      "source_marked_answer_unofficial": "c"
+    },
+    {
+      "id": "set080-p97-q32-2",
+      "page": 97,
+      "section": "Hören",
+      "reason": "Hören — older variant contains only selected answer phrases",
+      "source_fragment": "Die Firma hat zurzeit b) viele Ersthelfer wie gesetzlich vorgeschrieben",
+      "source_marked_answer_unofficial": null
+    },
+    {
+      "id": "set080-p97-q33-2",
+      "page": 97,
+      "section": "Hören",
+      "reason": "Hören — older variant contains only selected answer phrases",
+      "source_fragment": "Die Mitarbeiter b) können Lehrgang zur Unterschiedenen Themen besuch",
+      "source_marked_answer_unofficial": null
+    },
+    {
+      "id": "set080-p97-q34-2",
+      "page": 97,
+      "section": "Hören",
+      "reason": "Hören — older variant contains only selected answer phrases",
+      "source_fragment": "Wer sich anmelden möchte a) man sich an das Personalbüro werden",
+      "source_marked_answer_unofficial": null
+    },
+    {
+      "id": "set080-p97-q35-2",
+      "page": 97,
+      "section": "Hören",
+      "reason": "Hören — older variant contains only selected answer phrases",
+      "source_fragment": "Es ist noch ungeklärt b) ob Murat überhaupt als Ersthelfertätig sein darf.",
+      "source_marked_answer_unofficial": null
+    },
+    {
+      "id": "set081-p99-q25-1",
+      "page": 99,
+      "section": "Hören",
+      "reason": "Hören — competing C options for the same question",
+      "source_fragment": "Für das Fest braucht der Team noch",
+      "source_marked_answer_unofficial": null
+    },
+    {
+      "id": "set081-p102-q36-1",
+      "page": 102,
+      "section": "Hören",
+      "reason": "Hören — telephone-note answer fragments, no full A/B/C source",
+      "source_fragment": "Robert Krüger",
+      "source_marked_answer_unofficial": null
+    },
+    {
+      "id": "set081-p102-q37-1",
+      "page": 102,
+      "section": "Hören",
+      "reason": "Hören — telephone-note answer fragments, no full A/B/C source",
+      "source_fragment": "Katrin",
+      "source_marked_answer_unofficial": null
+    },
+    {
+      "id": "set081-p102-q38-1",
+      "page": 102,
+      "section": "Hören",
+      "reason": "Hören — telephone-note answer fragments, no full A/B/C source",
+      "source_fragment": "Stefan Kömer bietet",
+      "source_marked_answer_unofficial": null
+    },
+    {
+      "id": "set081-p103-q40-1",
+      "page": 103,
+      "section": "Hören",
+      "reason": "Hören — telephone-note answer fragments, no full A/B/C source",
+      "source_fragment": "Michaell Brüger möchte",
+      "source_marked_answer_unofficial": null
+    },
+    {
+      "id": "set083-p111-q29-1",
+      "page": 111,
+      "section": "Hören",
+      "reason": "Hören — matching answers interleaved with dialogues; original option order not established",
+      "source_fragment": "Manchmal müssen Kollegen auch die Aufgaben von andere übernehmen",
+      "source_marked_answer_unofficial": "c"
+    },
+    {
+      "id": "set083-p111-q30-1",
+      "page": 111,
+      "section": "Hören",
+      "reason": "Hören — matching answers interleaved with dialogues; original option order not established",
+      "source_fragment": "Einige Kollegen können nur zu bestimmten Zeiten Urlaub nehmen",
+      "source_marked_answer_unofficial": "b"
+    },
+    {
+      "id": "set083-p111-q31-1",
+      "page": 111,
+      "section": "Hören",
+      "reason": "Hören — matching answers interleaved with dialogues; original option order not established",
+      "source_fragment": "d) Unter gewissen Umständen gehen Urlaubstage nicht verloren",
+      "source_marked_answer_unofficial": null
+    },
+    {
+      "id": "set083-p112-q32-1",
+      "page": 112,
+      "section": "Hören",
+      "reason": "Hören — matching answers interleaved with dialogues; original option order not established",
+      "source_fragment": "Arbeitnehmer bekommen zu besonderen Anlässen frei",
+      "source_marked_answer_unofficial": "a"
+    }
+  ],
+  "statuses_after": {
+    "complete_source": 306,
+    "source_incomplete": 22,
+    "manual_review": 67,
+    "extraction_review": 31,
+    "transcript_review": 176
+  },
+  "policy": "Source PDF is the sole authority. No guessing, no paraphrasing, no invented choices. Source fragments remain unscored."
+}
