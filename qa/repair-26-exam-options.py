@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fix the 26 falsely letter-only A/B/C items, without inventing exam wording.
+"""Fix all 26 falsely letter-only A/B/C items, without inventing exam wording.
 
 Original source: Alle Information_от 13.02.2025.pdf, 149 pages.
 Six have complete choices across pages / inline / with labels d,e,f.
