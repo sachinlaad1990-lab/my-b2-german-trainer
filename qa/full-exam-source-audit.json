@@ -4,11 +4,108 @@
   "normalized_pdf_sha256": "460787d198cf8f5f8c4de2ceac076acd8284316083ae5b03021b980c76af53f2",
   "total_questions": 602,
   "restored_choices_question_ids": [],
-  "changes": [],
+  "changes": [
+    {
+      "id": "set044-reply-0",
+      "page": 53,
+      "field": "source_provenance",
+      "old": "not_verbatim_pdf",
+      "new": "editorial_practice_prompt",
+      "reason": "Report literal question wording status"
+    },
+    {
+      "id": "set045-reply-0",
+      "page": 54,
+      "field": "source_provenance",
+      "old": "not_verbatim_pdf",
+      "new": "editorial_practice_prompt",
+      "reason": "Report literal question wording status"
+    },
+    {
+      "id": "set046-reply-0",
+      "page": 55,
+      "field": "source_provenance",
+      "old": "not_verbatim_pdf",
+      "new": "editorial_practice_prompt",
+      "reason": "Report literal question wording status"
+    },
+    {
+      "id": "set046-reply-1",
+      "page": 55,
+      "field": "source_provenance",
+      "old": "not_verbatim_pdf",
+      "new": "editorial_practice_prompt",
+      "reason": "Report literal question wording status"
+    },
+    {
+      "id": "set047-reply-0",
+      "page": 56,
+      "field": "source_provenance",
+      "old": "not_verbatim_pdf",
+      "new": "editorial_practice_prompt",
+      "reason": "Report literal question wording status"
+    },
+    {
+      "id": "set048-reply-0",
+      "page": 57,
+      "field": "source_provenance",
+      "old": "not_verbatim_pdf",
+      "new": "editorial_practice_prompt",
+      "reason": "Report literal question wording status"
+    },
+    {
+      "id": "set049-reply-0",
+      "page": 58,
+      "field": "source_provenance",
+      "old": "not_verbatim_pdf",
+      "new": "editorial_practice_prompt",
+      "reason": "Report literal question wording status"
+    },
+    {
+      "id": "set050-reply-0",
+      "page": 59,
+      "field": "source_provenance",
+      "old": "not_verbatim_pdf",
+      "new": "editorial_practice_prompt",
+      "reason": "Report literal question wording status"
+    },
+    {
+      "id": "set051-reply-0",
+      "page": 60,
+      "field": "source_provenance",
+      "old": "not_verbatim_pdf",
+      "new": "editorial_practice_prompt",
+      "reason": "Report literal question wording status"
+    },
+    {
+      "id": "set052-reply-0",
+      "page": 61,
+      "field": "source_provenance",
+      "old": "not_verbatim_pdf",
+      "new": "editorial_practice_prompt",
+      "reason": "Report literal question wording status"
+    },
+    {
+      "id": "set052-reply-1",
+      "page": 61,
+      "field": "source_provenance",
+      "old": "not_verbatim_pdf",
+      "new": "editorial_practice_prompt",
+      "reason": "Report literal question wording status"
+    },
+    {
+      "id": "set053-reply-0",
+      "page": 62,
+      "field": "source_provenance",
+      "old": "not_verbatim_pdf",
+      "new": "editorial_practice_prompt",
+      "reason": "Report literal question wording status"
+    }
+  ],
   "provenance": {
-    "not_verbatim_pdf": 19,
+    "not_verbatim_pdf": 7,
     "verbatim_pdf": 423,
-    "editorial_practice_prompt": 160
+    "editorial_practice_prompt": 172
   },
   "option_provenance": {
     "source_matching_letters": 86,
@@ -24,8 +121,7 @@
     },
     "Schreiben": {
       "verbatim_pdf": 74,
-      "not_verbatim_pdf": 12,
-      "editorial_practice_prompt": 107
+      "editorial_practice_prompt": 119
     },
     "Hören": {
       "verbatim_pdf": 164,
@@ -102,15 +198,6 @@
       "status": "extraction_review"
     },
     {
-      "id": "set044-reply-0",
-      "page": 53,
-      "section": "Schreiben",
-      "prompt": "Schreiben Sie eine passende E-Mail als Antwort auf die Beschwerde. Beachten Sie alle Anweisungen der Vorgesetzten im Text.",
-      "provenance": "not_verbatim_pdf",
-      "options": "no_mc_choices",
-      "status": "manual_review"
-    },
-    {
       "id": "set045-p54-q19-1",
       "page": 54,
       "section": "Schreiben",
@@ -118,15 +205,6 @@
       "provenance": "verbatim_pdf",
       "options": "letter_only_not_extracted",
       "status": "extraction_review"
-    },
-    {
-      "id": "set045-reply-0",
-      "page": 54,
-      "section": "Schreiben",
-      "prompt": "Schreiben Sie eine passende E-Mail als Antwort auf die Beschwerde. Beachten Sie alle Anweisungen der Vorgesetzten im Text.",
-      "provenance": "not_verbatim_pdf",
-      "options": "no_mc_choices",
-      "status": "manual_review"
     },
     {
       "id": "set046-p55-q19-2",
@@ -147,33 +225,6 @@
       "status": "extraction_review"
     },
     {
-      "id": "set046-reply-0",
-      "page": 55,
-      "section": "Schreiben",
-      "prompt": "Schreiben Sie eine passende E-Mail als Antwort auf die Beschwerde. Beachten Sie alle Anweisungen der Vorgesetzten im Text.",
-      "provenance": "not_verbatim_pdf",
-      "options": "no_mc_choices",
-      "status": "manual_review"
-    },
-    {
-      "id": "set046-reply-1",
-      "page": 55,
-      "section": "Schreiben",
-      "prompt": "Schreiben Sie die Antwort für Beschwerde-Fall 2.",
-      "provenance": "not_verbatim_pdf",
-      "options": "no_mc_choices",
-      "status": "manual_review"
-    },
-    {
-      "id": "set047-reply-0",
-      "page": 56,
-      "section": "Schreiben",
-      "prompt": "Schreiben Sie eine passende E-Mail als Antwort auf die Beschwerde. Beachten Sie alle Anweisungen der Vorgesetzten im Text.",
-      "provenance": "not_verbatim_pdf",
-      "options": "no_mc_choices",
-      "status": "manual_review"
-    },
-    {
       "id": "set048-p57-q19-1",
       "page": 57,
       "section": "Schreiben",
@@ -190,69 +241,6 @@
       "provenance": "verbatim_pdf",
       "options": "letter_only_not_extracted",
       "status": "extraction_review"
-    },
-    {
-      "id": "set048-reply-0",
-      "page": 57,
-      "section": "Schreiben",
-      "prompt": "Schreiben Sie eine passende E-Mail als Antwort auf die Beschwerde. Beachten Sie alle Anweisungen der Vorgesetzten im Text.",
-      "provenance": "not_verbatim_pdf",
-      "options": "no_mc_choices",
-      "status": "manual_review"
-    },
-    {
-      "id": "set049-reply-0",
-      "page": 58,
-      "section": "Schreiben",
-      "prompt": "Schreiben Sie eine passende E-Mail als Antwort auf die Beschwerde. Beachten Sie alle Anweisungen der Vorgesetzten im Text.",
-      "provenance": "not_verbatim_pdf",
-      "options": "no_mc_choices",
-      "status": "manual_review"
-    },
-    {
-      "id": "set050-reply-0",
-      "page": 59,
-      "section": "Schreiben",
-      "prompt": "Schreiben Sie eine passende E-Mail als Antwort auf die Beschwerde. Beachten Sie alle Anweisungen der Vorgesetzten im Text.",
-      "provenance": "not_verbatim_pdf",
-      "options": "no_mc_choices",
-      "status": "manual_review"
-    },
-    {
-      "id": "set051-reply-0",
-      "page": 60,
-      "section": "Schreiben",
-      "prompt": "Schreiben Sie eine passende E-Mail als Antwort auf die Beschwerde. Beachten Sie alle Anweisungen der Vorgesetzten im Text.",
-      "provenance": "not_verbatim_pdf",
-      "options": "no_mc_choices",
-      "status": "manual_review"
-    },
-    {
-      "id": "set052-reply-0",
-      "page": 61,
-      "section": "Schreiben",
-      "prompt": "Schreiben Sie eine passende E-Mail als Antwort auf die Beschwerde. Beachten Sie alle Anweisungen der Vorgesetzten im Text.",
-      "provenance": "not_verbatim_pdf",
-      "options": "no_mc_choices",
-      "status": "manual_review"
-    },
-    {
-      "id": "set052-reply-1",
-      "page": 61,
-      "section": "Schreiben",
-      "prompt": "Schreiben Sie die Antwort für Beschwerde-Fall 2.",
-      "provenance": "not_verbatim_pdf",
-      "options": "no_mc_choices",
-      "status": "manual_review"
-    },
-    {
-      "id": "set053-reply-0",
-      "page": 62,
-      "section": "Schreiben",
-      "prompt": "Schreiben Sie eine passende E-Mail als Antwort auf die Beschwerde. Beachten Sie alle Anweisungen der Vorgesetzten im Text.",
-      "provenance": "not_verbatim_pdf",
-      "options": "no_mc_choices",
-      "status": "manual_review"
     },
     {
       "id": "set079-p88-q25-1",
