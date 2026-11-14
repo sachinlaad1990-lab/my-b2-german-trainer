@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Publish user-approved review changes, preserving all original PDF text."""
+"""Publish user-approved review changes, preserving all original PDF text.
+
+Execution is guarded by PDF SHA-256 and exact question-ID assertions.
+"""
 import collections,copy,hashlib,json,pathlib,re
 P=pathlib.Path("exam-practice.html")
 s=P.read_text(encoding="utf-8")
