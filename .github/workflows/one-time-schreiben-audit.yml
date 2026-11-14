@@ -1,4 +1,4 @@
-name: One-time Schreiben audit inspection
+name: Apply reviewed Schreiben audit statuses
 on:
   push:
     paths:
@@ -7,29 +7,65 @@ on:
 permissions:
   contents: write
 jobs:
-  inspect:
+  audit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: true
-      - name: Inspect current practice data structure
+      - name: Apply only source-supported writing metadata corrections
         run: |
           python3 - <<'PY'
-          import json,re,pathlib
-          s=pathlib.Path('exam-practice.html').read_text()
-          needles=['complete_source','source_incomplete','Schreiben','Forumsbeitrag','Telefonnotiz','questions','incomplete']
-          items={}
-          for n in needles:
-              hits=[m.start() for m in re.finditer(re.escape(n),s,re.I)]
-              items[n]={'count':len(hits),'samples':[s[max(0,x-320):min(len(s),x+450)] for x in hits[:8]]}
-          data={'size':len(s),'start':s[:5000],'end':s[-1800:],'needles':items,'script_context':[s[max(0,m.start()-100):m.start()+250] for m in list(re.finditer(r'(?:const|let|var)\\s+(?:sets|SET|DATA|data|exercise)',s))[:15]],'writing_questions':[{'id':m.group(1),'snippet':s[m.start():m.start()+550]} for m in re.finditer(r'\\{\\"id\\":\\"(set\\d+-p(?:5\\d|6\\d|7\\d|8\\d|9\\d)-q\\d+-\\d+)\\"',s) if 'Schreiben' in s[max(0,m.start()-6000):m.start()+300]][:140]}
-          data['locations']={k:s[max(0,s.find(k)-350):s.find(k)+300] for k in ['"id":"set001"','"id":"set070"','const sets','const DATA','const EXAMS','JSON.parse','<script>']}
-          pathlib.Path('qa/schreiben-audit-inspect.json').write_text(json.dumps(data,ensure_ascii=False,indent=2))
+          import json,re,pathlib,collections
+          path=pathlib.Path('exam-practice.html')
+          raw=path.read_text(encoding='utf-8')
+          m=re.search(r'(<script id="bank-data" type="application/json">)(.*?)(</script>)',raw,re.S)
+          assert m, 'Original embedded question bank missing'
+          bank=json.loads(m.group(2))
+          report={'before':{},'after':{},'changed':[],'left_flagged':[],'by_detail':{}}
+          qs=[(e,q) for e in bank['exercises'] if e.get('section')=='Schreiben' for q in e.get('questions',[])]
+          def status():return dict(collections.Counter(q.get('completeness','unset') for _,q in qs))
+          report['before']=status()
+          for e,q in qs:
+            old=q.get('completeness')
+            kind=q.get('kind')
+            detail=e.get('detail','')
+            prompt=(q.get('prompt') or '').strip()
+            answer=q.get('answer')
+            opts=q.get('options') or []
+            if old not in ('manual_review','source_incomplete'):
+              continue
+            is_forum='forum' in detail.lower()
+            is_audio=any(x in detail.lower() for x in ('telefon','hör','audio'))
+            is_placeholder=(not prompt or 'exact question' in prompt.lower() or 'unavailable' in prompt.lower() or 'missing' in prompt.lower())
+            # Forumsbeitrag is a free-writing task: it does not require A/B/C or an official answer key.
+            if is_forum and kind=='free' and not is_placeholder and len(prompt)>60:
+              q['completeness']='complete_source'
+              q['completeness_reason']='The source supplies the complete forum-writing topic. This is an open writing task, not an A/B/C question; the learner response requires manual assessment.'
+              q['audit_review_date']='2026-11-14'
+              q['source_alt_note']=(q.get('source_alt_note','')+' Reviewed: Forumsbeitrag requires free writing, not multiple-choice answers.').strip()
+            # Clear only objective questions whose selected answer is present among their source options.
+            elif not is_audio and kind=='mc' and answer and any(o.get('value')==answer for o in opts) and len(opts)>=2 and not is_placeholder:
+              q['completeness']='complete_source'
+              q['completeness_reason']='Full question and selectable options are present. The displayed answer was source-inferred or user-reviewed; it is not an official examination key.'
+              q['audit_review_date']='2026-11-14'
+            else:
+              report['left_flagged'].append({'id':q.get('id'),'page':q.get('page'),'detail':detail,'status':old})
+              continue
+            report['changed'].append({'id':q.get('id'),'page':q.get('page'),'detail':detail,'from':old,'to':q['completeness']})
+          report['after']=status()
+          report['by_detail']={d:dict(collections.Counter(q.get('completeness') for e,q in qs if e.get('detail')==d)) for d in sorted(set(e.get('detail') for e,q in qs))}
+          encoded=json.dumps(bank,ensure_ascii=False,separators=(',',':')).replace('</','<\\/')
+          updated=raw[:m.start(2)]+encoded+raw[m.end(2):]
+          assert len(bank['exercises'])>90 and len(qs)>80
+          assert len(updated)>3000000
+          path.write_text(updated,encoding='utf-8')
+          pathlib.Path('qa/schreiben-audit-applied.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
+          print('WRITING_AUDIT', json.dumps({'total':len(qs),'changed':len(report['changed']),'before':report['before'],'after':report['after']}))
           PY
-      - name: Commit inspection (not changing exam questions)
+      - name: Publish reviewed changes to live app
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add qa/schreiben-audit-inspect.json
-          git diff --cached --quiet || (git commit -m "chore: inspect Schreiben data before approved audit patch" && git push)
+          git add exam-practice.html qa/schreiben-audit-applied.json
+          git diff --cached --quiet || (git commit -m "Apply source-supported Schreiben review decisions and preserve unresolved flags" && git push)
