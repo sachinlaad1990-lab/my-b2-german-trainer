@@ -1,0 +1,12 @@
+{
+  "batch": 3,
+  "item": 31,
+  "question": 31,
+  "section": "Hören Teil 2",
+  "pdf_page": 124,
+  "variant": "Variant 3",
+  "decision": "APPROVE",
+  "approved_action": "Keep question source-incomplete; no invented options; retain original PDF variant boundaries and source text.",
+  "update_policy": "Record only; do not update live app.",
+  "recorded_on": "2026-11-14"
+}
