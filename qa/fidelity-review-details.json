@@ -1,5 +1,5 @@
 {
-  "n": 97,
+  "n": 58,
   "rows": [
     {
       "id": "set002-p2-q1-1",
@@ -119,134 +119,6 @@
       ]
     },
     {
-      "id": "set036-p39-q14-1",
-      "page": 39,
-      "section": "Lesen",
-      "detail": "Teil 4",
-      "kind": "mc",
-      "number": 14,
-      "prompt": "Der Termin der nächsten Sitzung",
-      "options": [
-        {
-          "value": "a",
-          "label": "muss noch entschieden werden."
-        },
-        {
-          "value": "b",
-          "label": "wird nach der Urlaubszeit abgestimmt."
-        },
-        {
-          "value": "c",
-          "label": "wurde während der Sitzung besprochen."
-        }
-      ],
-      "answer": "c",
-      "source": "source-inferred",
-      "status": "extraction_review",
-      "reason": null,
-      "provenance": "verbatim_pdf",
-      "option_provenance": "some_options_not_in_pdf",
-      "source_snippets": [
-        "e\n\nhat, soll sich dort bis Freitag nächster Woche anmelden.\n\n14.  Der Termin der nächsten Sitzung Новый вариант №030321 a muss noch entschieden werden.\n\nb wird nach der Urlaubszeit abgestimmt.\n\nc wurde während der Sitzung gesprochen.\n\n15.  Die Firma\n\na hat ohne Weiteres die Preiserhöhung des Zulieferers akzeptiert.\n\nb will sich an den höheren Transportkosten gern beteiligen.\n\nc wird einen neuen Vertragspartner suchen.\n\n16.  Die Abteilung Qualitätssicherung\n\na berichtet von 30 Prozent fehlerhafter Produkte.\n\nb hat keine Qualitätsprobleme.\n\nc verzeichnet erste Erfolge.\n\n17.  Die Mitarbeitenden\na haben mit dem Betriebsrat gesprochen.\nb können alle Überstunden als Freizeit nehmen.\nc müssen zurzeit Mehrarb"
-      ]
-    },
-    {
-      "id": "set037-p41-q15-1",
-      "page": 41,
-      "section": "Lesen",
-      "detail": "Teil 4",
-      "kind": "mc",
-      "number": 15,
-      "prompt": "Herr Hamann",
-      "options": [
-        {
-          "value": "a",
-          "label": "hat bereits ein Konzept vorbereitet."
-        },
-        {
-          "value": "b",
-          "label": "ist dienstlich verhindert."
-        },
-        {
-          "value": "c",
-          "label": "stellt die Resultate seiner Arbeit vor."
-        }
-      ],
-      "answer": "a",
-      "source": "source-inferred",
-      "status": "extraction_review",
-      "reason": null,
-      "provenance": "verbatim_pdf",
-      "option_provenance": "some_options_not_in_pdf",
-      "source_snippets": [
-        "bereitgestellt. 100% c wurden Kostenvoranschläge angefragt.\n\n15.  Herr Hamann\n\na hat bereits ein Konzept vorbereitet - 100%\n\nb ist dienstlich verhindert\n\nc stellt die Resultate seiner Arbeit vor.\n\n16.  Die Mittagspause\n\na ist 30 Minuten lang. 100%\n\nb wird um 30 Minuten verlängert.\n\nc wird um 30 Minuten verschoben.\n\n17.  Der Standort der neuen Fahrradständer\n\na wird an der Informationstafel bekanntgegeben. 100%\n\nb wird dem Betriebsrat mitgeteilt.\n\nC wird zwischen Tor 2 und 3 geplant.\n\n18.  Frau Schlosser\n\na macht Frau Schmidt ein Geschenk.\n\nb verlässt das Unternehmen.\n\nc wird von Frau Meier vertreten. 100%"
-      ]
-    },
-    {
-      "id": "set038-p43-q15-1",
-      "page": 43,
-      "section": "Lesen",
-      "detail": "Teil 4",
-      "kind": "mc",
-      "number": 15,
-      "prompt": "Herr Hamann",
-      "options": [
-        {
-          "value": "a",
-          "label": "hat erste Arbeitsergebnisse versendet."
-        },
-        {
-          "value": "b",
-          "label": "realisiert bis März die Maßnahmen zur Qualitätssicherung."
-        },
-        {
-          "value": "c",
-          "label": "stellt die Resultate seiner Arbeit vor."
-        }
-      ],
-      "answer": "a",
-      "source": "source-inferred",
-      "status": "extraction_review",
-      "reason": null,
-      "provenance": "verbatim_pdf",
-      "option_provenance": "some_options_not_in_pdf",
-      "source_snippets": [
-        "chließen.\n\nc werden bis zur nächsten Teamsitzung umgesetzt.\n\n15  Herr Hamann\n\na hat erste Arbeitsergebnisse versendet.\n\nb realisiert bis Marz die Maßnahmen zur Qualitätssicherung.\n\nc stellt die Resultate seiner Arbeit vor.\n\n16  Die Mittagspause\n\na wird um 30 Minuten verlängert.\n\nb wird um 30 Minuten verschoben.\n\nc ist 30 Minuten lang.\n\n17  Der Standort der neuen Fahrradständer\n\n18  a wird dem Betriebsrat mitgeteilt.\n\nb wird zwischen Tor 2 und 3 geplant.\n\nc wird an der Informationstafel bekanntgegeben\n19  Frau Schlosser\na verlässt das Unternehmen.\nb wird von Frau Meier vertreten.\nc macht Frau Schmidt ein Geschenk"
-      ]
-    },
-    {
-      "id": "set038-p43-q17-1",
-      "page": 43,
-      "section": "Lesen",
-      "detail": "Teil 4",
-      "kind": "mc",
-      "number": 17,
-      "prompt": "Der Standort der neuen Fahrradständer",
-      "options": [
-        {
-          "value": "a",
-          "label": "wird dem Betriebsrat mitgeteilt."
-        },
-        {
-          "value": "b",
-          "label": "wird zwischen Tor 2 und 3 geplant."
-        },
-        {
-          "value": "c",
-          "label": "wird an der Informationstafel bekanntgegeben."
-        }
-      ],
-      "answer": "c",
-      "source": "source-inferred",
-      "status": "extraction_review",
-      "reason": null,
-      "provenance": "verbatim_pdf",
-      "option_provenance": "some_options_not_in_pdf",
-      "source_snippets": [
-        ".\n\nb wird um 30 Minuten verschoben.\n\nc ist 30 Minuten lang.\n\n17  Der Standort der neuen Fahrradständer\n\n18  a wird dem Betriebsrat mitgeteilt.\n\nb wird zwischen Tor 2 und 3 geplant.\n\nc wird an der Informationstafel bekanntgegeben\n19  Frau Schlosser\na verlässt das Unternehmen.\nb wird von Frau Meier vertreten.\nc macht Frau Schmidt ein Geschenk"
-      ]
-    },
-    {
       "id": "set038-p43-q18-1",
       "page": 43,
       "section": "Lesen",
@@ -265,49 +137,17 @@
         },
         {
           "value": "c",
-          "label": "macht Frau Schmidt ein Geschenk."
+          "label": "macht Frau Schmidt ein Geschenk"
         }
       ],
       "answer": "b",
       "source": "source-inferred",
       "status": "extraction_review",
-      "reason": null,
+      "reason": "Options are literal, but the original PDF labels this Frau Schlosser question 19 and the preceding option block 18. Verify the source numbering.",
       "provenance": "verbatim_pdf",
-      "option_provenance": "some_options_not_in_pdf",
+      "option_provenance": "verbatim_pdf",
       "source_snippets": [
         "30 Minuten lang.\n\n17  Der Standort der neuen Fahrradständer\n\n18  a wird dem Betriebsrat mitgeteilt.\n\nb wird zwischen Tor 2 und 3 geplant.\n\nc wird an der Informationstafel bekanntgegeben\n19  Frau Schlosser\na verlässt das Unternehmen.\nb wird von Frau Meier vertreten.\nc macht Frau Schmidt ein Geschenk"
-      ]
-    },
-    {
-      "id": "set039-p45-q14-1",
-      "page": 45,
-      "section": "Lesen",
-      "detail": "Teil 4",
-      "kind": "mc",
-      "number": 14,
-      "prompt": "Bei der Sitzung wird",
-      "options": [
-        {
-          "value": "a",
-          "label": "das Protokoll der letzten Besprechung geändert."
-        },
-        {
-          "value": "b",
-          "label": "die Tagesordnung genehmigt."
-        },
-        {
-          "value": "c",
-          "label": "über Personalthemen gesprochen."
-        }
-      ],
-      "answer": "c",
-      "source": "source-inferred",
-      "status": "extraction_review",
-      "reason": null,
-      "provenance": "verbatim_pdf",
-      "option_provenance": "some_options_not_in_pdf",
-      "source_snippets": [
-        " sich zu nehmen. Ansonsten werden diese durch AW\n\nentsorgt.\n\n14.  Bei der Sitzung wird\na das Protokoll der letzten Besprechung geändert.\nb wie Tagesordnung genehmigt\nс über Personalthemen gesprochen - 100%\n15.  Einige Mitarbeiter machen Überstunden. 15. Что действует на предприятии\na da andere Urlaub machen.                  а Arbeit wird nicht komplett erledigt\nb obwohl sie krank sind.                     b Überstunden müssen im kommenden Jahr abgebaut werden\nс weil viele Kollegen krank sind.                 c Es gibt Urlaubssperre\n16. КM\n\na ist Wettbewerber der Firma.\n\nb möchte sein Konzept besprechen.\n\nc plant eine Rabattaktion im Frühling.\n\n17. Die Firma\n\na besucht die Frühjahrsmesse regelmäßig\n\nb"
       ]
     },
     {
@@ -321,23 +161,23 @@
       "options": [
         {
           "value": "a",
-          "label": "Arbeit wird nicht komplett erledigt."
+          "label": "Arbeit wird nicht komplett erledigt"
         },
         {
           "value": "b",
-          "label": "Überstunden müssen im kommenden Jahr abgebaut werden."
+          "label": "Überstunden müssen im kommenden Jahr abgebaut werden"
         },
         {
           "value": "c",
-          "label": "Es gibt Urlaubssperre."
+          "label": "Es gibt Urlaubssperre"
         }
       ],
       "answer": "c",
       "source": "source-inferred",
       "status": "extraction_review",
-      "reason": null,
+      "reason": "Source page includes two interleaved variants of question 15. Options match the second variant literally; the English question label is editorial and the answer remains unofficial.",
       "provenance": "not_verbatim_pdf",
-      "option_provenance": "some_options_not_in_pdf",
+      "option_provenance": "verbatim_pdf",
       "source_snippets": [
         "esordnung genehmigt\nс über Personalthemen gesprochen - 100%\n15.  Einige Mitarbeiter machen Überstunden. 15. Что действует на предприятии\na da andere Urlaub machen.                  а Arbeit wird nicht komplett erledigt\nb obwohl sie krank sind.                     b Überstunden müssen im kommenden Jahr abgebaut werden\nс weil viele Kollegen krank sind.                 c Es gibt Urlaubssperre\n16. КM\n\na ist Wettbewerber der Firma.\n\nb möchte sein Konzept besprechen.\n\nc plant eine Rabattaktion im Frühling.\n\n17. Die Firma\n\na besucht die Frühjahrsmesse regelmäßig\n\nb braucht Hilfe bei der Standgestaltung.\n\nc) lässt gerade Broschüren drucken\n18. Persönliche Gegenstände\na können nicht in der Küche bleiben.\nb sol"
       ]
@@ -375,225 +215,20 @@
       ]
     },
     {
-      "id": "set039-p45-q17-1",
-      "page": 45,
-      "section": "Lesen",
-      "detail": "Teil 4",
-      "kind": "mc",
-      "number": 17,
-      "prompt": "Die Firma",
-      "options": [
-        {
-          "value": "a",
-          "label": "besucht die Frühjahrsmesse regelmäßig."
-        },
-        {
-          "value": "b",
-          "label": "braucht Hilfe bei der Standgestaltung."
-        },
-        {
-          "value": "c",
-          "label": "lässt gerade Broschüren drucken."
-        }
-      ],
-      "answer": "c",
-      "source": "source-inferred",
-      "status": "extraction_review",
-      "reason": null,
-      "provenance": "verbatim_pdf",
-      "option_provenance": "some_options_not_in_pdf",
-      "source_snippets": [
-        "Konzept besprechen.\n\nc plant eine Rabattaktion im Frühling.\n\n17. Die Firma\n\na besucht die Frühjahrsmesse regelmäßig\n\nb braucht Hilfe bei der Standgestaltung.\n\nc) lässt gerade Broschüren drucken\n18. Persönliche Gegenstände\na können nicht in der Küche bleiben.\nb sollen am Donnerstag mitgenommen werden.\nc sollen weggeworfen werden."
-      ]
-    },
-    {
-      "id": "set040-p47-q14-1",
-      "page": 47,
-      "section": "Lesen",
-      "detail": "Teil 4",
-      "kind": "mc",
-      "number": 14,
-      "prompt": "Die neue Werbestrategie",
-      "options": [
-        {
-          "value": "a",
-          "label": "beinhaltet ein Video über die Produktionsabläufe."
-        },
-        {
-          "value": "b",
-          "label": "ist wegen der schlechten Verkaufszahlen notwendig."
-        },
-        {
-          "value": "c",
-          "label": "lässt sich sehr schnell und kostengünstig umsetzen."
-        }
-      ],
-      "answer": "b",
-      "source": "source-inferred",
-      "status": "extraction_review",
-      "reason": null,
-      "provenance": "verbatim_pdf",
-      "option_provenance": "some_options_not_in_pdf",
-      "source_snippets": [
-        " hat und seit dem 01.04. nicht mehr in der Firma tätig ist.\n\n14.  Die neue Werbestrategie\n\na beinhaltet ein Video über die Produktionsabläufe.\n\nb ist wegen der schlechten Verkaufszahlen notwendig\n\nc lässt sich sehr schnell und kostengünstig umsetzen.\n\n15.  Die Reinigungsfirma\n\na hält sich nicht an die vereinbarten Putzreiten\n\nb putzt die Büros der Firma nicht regelmäßig\n\nc wird den Vertrag demnächst kündigen.\n\n16.  Die Fortbildung für Ersthelfer\n\na ist nur mit begrenzter Teilnehmerzahl möglich\n\nb müssen die Teilnehmer nur einmal absolvieren.\n\nc wird beim Deutschen Roten Kreuz veranstaltet.\n\n17. Das Jobticket\na soll zu 60 Prozent finanziert werden.\nb kann in der Personalabteilung beantragt werden\n\nc wi"
-      ]
-    },
-    {
-      "id": "set040-p47-q15-1",
-      "page": 47,
-      "section": "Lesen",
-      "detail": "Teil 4",
-      "kind": "mc",
-      "number": 15,
-      "prompt": "Die Reinigungsfirma",
-      "options": [
-        {
-          "value": "a",
-          "label": "hält sich nicht an die vereinbarten Putzzeiten."
-        },
-        {
-          "value": "b",
-          "label": "putzt die Büros der Firma nicht regelmäßig."
-        },
-        {
-          "value": "c",
-          "label": "wird den Vertrag demnächst kündigen."
-        }
-      ],
-      "answer": "a",
-      "source": "source-inferred",
-      "status": "extraction_review",
-      "reason": null,
-      "provenance": "verbatim_pdf",
-      "option_provenance": "some_options_not_in_pdf",
-      "source_snippets": [
-        "ndig\n\nc lässt sich sehr schnell und kostengünstig umsetzen.\n\n15.  Die Reinigungsfirma\n\na hält sich nicht an die vereinbarten Putzreiten\n\nb putzt die Büros der Firma nicht regelmäßig\n\nc wird den Vertrag demnächst kündigen.\n\n16.  Die Fortbildung für Ersthelfer\n\na ist nur mit begrenzter Teilnehmerzahl möglich\n\nb müssen die Teilnehmer nur einmal absolvieren.\n\nc wird beim Deutschen Roten Kreuz veranstaltet.\n\n17. Das Jobticket\na soll zu 60 Prozent finanziert werden.\nb kann in der Personalabteilung beantragt werden\n\nc wird ab nächsten Monat eingeführt.\n\n18.  Der Streik in Litauen\n\na dauert immer noch an.\n\nb fand landesweit statt.\n\nc führte zu Lieferproblemen"
-      ]
-    },
-    {
-      "id": "set040-p47-q16-1",
-      "page": 47,
-      "section": "Lesen",
-      "detail": "Teil 4",
-      "kind": "mc",
-      "number": 16,
-      "prompt": "Die Fortbildung für Ersthelfer",
-      "options": [
-        {
-          "value": "a",
-          "label": "ist nur mit begrenzter Teilnehmerzahl möglich."
-        },
-        {
-          "value": "b",
-          "label": "müssen die Teilnehmer nur einmal absolvieren."
-        },
-        {
-          "value": "c",
-          "label": "wird beim Deutschen Roten Kreuz veranstaltet."
-        }
-      ],
-      "answer": "a",
-      "source": "source-inferred",
-      "status": "extraction_review",
-      "reason": null,
-      "provenance": "verbatim_pdf",
-      "option_provenance": "some_options_not_in_pdf",
-      "source_snippets": [
-        "ma nicht regelmäßig\n\nc wird den Vertrag demnächst kündigen.\n\n16.  Die Fortbildung für Ersthelfer\n\na ist nur mit begrenzter Teilnehmerzahl möglich\n\nb müssen die Teilnehmer nur einmal absolvieren.\n\nc wird beim Deutschen Roten Kreuz veranstaltet.\n\n17. Das Jobticket\na soll zu 60 Prozent finanziert werden.\nb kann in der Personalabteilung beantragt werden\n\nc wird ab nächsten Monat eingeführt.\n\n18.  Der Streik in Litauen\n\na dauert immer noch an.\n\nb fand landesweit statt.\n\nc führte zu Lieferproblemen"
-      ]
-    },
-    {
-      "id": "set040-p47-q17-1",
-      "page": 47,
-      "section": "Lesen",
-      "detail": "Teil 4",
-      "kind": "mc",
-      "number": 17,
-      "prompt": "Das Jobticket",
-      "options": [
-        {
-          "value": "a",
-          "label": "soll zu 60 Prozent finanziert werden."
-        },
-        {
-          "value": "b",
-          "label": "kann in der Personalabteilung beantragt werden."
-        },
-        {
-          "value": "c",
-          "label": "wird ab nächsten Monat eingeführt."
-        }
-      ],
-      "answer": "b",
-      "source": "source-inferred",
-      "status": "extraction_review",
-      "reason": null,
-      "provenance": "verbatim_pdf",
-      "option_provenance": "some_options_not_in_pdf",
-      "source_snippets": [
-        "solvieren.\n\nc wird beim Deutschen Roten Kreuz veranstaltet.\n\n17. Das Jobticket\na soll zu 60 Prozent finanziert werden.\nb kann in der Personalabteilung beantragt werden\n\nc wird ab nächsten Monat eingeführt.\n\n18.  Der Streik in Litauen\n\na dauert immer noch an.\n\nb fand landesweit statt.\n\nc führte zu Lieferproblemen"
-      ]
-    },
-    {
-      "id": "set040-p47-q18-1",
-      "page": 47,
-      "section": "Lesen",
-      "detail": "Teil 4",
-      "kind": "mc",
-      "number": 18,
-      "prompt": "Der Streik in Litauen",
-      "options": [
-        {
-          "value": "a",
-          "label": "dauert immer noch an."
-        },
-        {
-          "value": "b",
-          "label": "fand landesweit statt."
-        },
-        {
-          "value": "c",
-          "label": "führte zu Lieferproblemen."
-        }
-      ],
-      "answer": "c",
-      "source": "source-inferred",
-      "status": "extraction_review",
-      "reason": null,
-      "provenance": "verbatim_pdf",
-      "option_provenance": "some_options_not_in_pdf",
-      "source_snippets": [
-        "lung beantragt werden\n\nc wird ab nächsten Monat eingeführt.\n\n18.  Der Streik in Litauen\n\na dauert immer noch an.\n\nb fand landesweit statt.\n\nc führte zu Lieferproblemen"
-      ]
-    },
-    {
       "id": "set044-p53-q19-1",
       "page": 53,
       "section": "Schreiben",
       "detail": "Beschwerde",
-      "kind": "mc",
+      "kind": "note",
       "number": 19,
       "prompt": "will nur die geleisteten Stunden bezahlen",
-      "options": [
-        {
-          "value": "a",
-          "label": "A"
-        },
-        {
-          "value": "b",
-          "label": "B"
-        },
-        {
-          "value": "c",
-          "label": "C"
-        }
-      ],
-      "answer": "c",
+      "options": [],
+      "answer": null,
       "source": "user-reviewed",
-      "status": "extraction_review",
-      "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below.",
+      "status": "source_incomplete",
+      "reason": "Original PDF only provides an answer fragment or conflicting variants; complete A/B/C wording is not available. This is preserved as a NON-SCORABLE source fragment, not a reconstructed multiple-choice question. Source note: will nur die geleisteten Stunden bezahlen. Informal answer mark: C (not official).",
       "provenance": "verbatim_pdf",
-      "option_provenance": "letter_only_not_extracted",
+      "option_provenance": "no_mc_choices",
       "source_snippets": [
         "esen und Schreiben Teil Beschwerde (вариант № 1)\nPutzdienst\n19.   c – will nur die geleisteten Stunden bezahlen\n\n20.   b – hat zu wenige Stunden gearbeitet\n\nHallo Friederike,\n\ngerade habe ich die angehängte Mail von der Firma Huber GmbH gelesen und bin schockiert. Ich verstehe den Ärger von\n\nHerrn Lassner, kann aber kaum glauben, was er da schreibt. Bitte spricht mal mit unseren Leuten und kläre, was da los ist,\n\nund antworte dann Herrn Lassner. Es ist ganz wichtig, dass du ihm zusagst, dass so etwas nie wieder vorkommen wird. Gib\n\nihm auch einen Rabatt auf die nächste Rechnung in Höhe von 20 %. Wir dürfen die Firma mit diesem großen Auftrag\n\nkeinesfalls als Kunden verlieren.\n\nDanke dir und schönen Fe"
       ]
@@ -603,130 +238,37 @@
       "page": 53,
       "section": "Schreiben",
       "detail": "Beschwerde",
-      "kind": "mc",
+      "kind": "note",
       "number": 20,
       "prompt": "hat zu wenige Stunden gearbeitet",
-      "options": [
-        {
-          "value": "a",
-          "label": "A"
-        },
-        {
-          "value": "b",
-          "label": "B"
-        },
-        {
-          "value": "c",
-          "label": "C"
-        }
-      ],
-      "answer": "b",
+      "options": [],
+      "answer": null,
       "source": "user-reviewed",
-      "status": "extraction_review",
-      "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below.",
+      "status": "source_incomplete",
+      "reason": "Original PDF only provides an answer fragment or conflicting variants; complete A/B/C wording is not available. This is preserved as a NON-SCORABLE source fragment, not a reconstructed multiple-choice question. Source note: hat zu wenige Stunden gearbeitet. Informal answer mark: B (not official).",
       "provenance": "verbatim_pdf",
-      "option_provenance": "letter_only_not_extracted",
+      "option_provenance": "no_mc_choices",
       "source_snippets": [
         "zdienst\n19.   c – will nur die geleisteten Stunden bezahlen\n\n20.   b – hat zu wenige Stunden gearbeitet\n\nHallo Friederike,\n\ngerade habe ich die angehängte Mail von der Firma Huber GmbH gelesen und bin schockiert. Ich verstehe den Ärger von\n\nHerrn Lassner, kann aber kaum glauben, was er da schreibt. Bitte spricht mal mit unseren Leuten und kläre, was da los ist,\n\nund antworte dann Herrn Lassner. Es ist ganz wichtig, dass du ihm zusagst, dass so etwas nie wieder vorkommen wird. Gib\n\nihm auch einen Rabatt auf die nächste Rechnung in Höhe von 20 %. Wir dürfen die Firma mit diesem großen Auftrag\n\nkeinesfalls als Kunden verlieren.\n\nDanke dir und schönen Feierabend! Gruß, Heike\n\nSehr geehrte Frau Woller,\n\nle"
       ]
-    },
-    {
-      "id": "set044-reply-0",
-      "page": 53,
-      "section": "Schreiben",
-      "detail": "Beschwerde",
-      "kind": "free",
-      "number": 21,
-      "prompt": "Schreiben Sie eine passende E-Mail als Antwort auf die Beschwerde. Beachten Sie alle Anweisungen der Vorgesetzten im Text.",
-      "options": [],
-      "answer": null,
-      "source": null,
-      "status": "manual_review",
-      "reason": null,
-      "provenance": "not_verbatim_pdf",
-      "option_provenance": "no_mc_choices",
-      "source_snippets": []
     },
     {
       "id": "set045-p54-q19-1",
       "page": 54,
       "section": "Schreiben",
       "detail": "Beschwerde",
-      "kind": "mc",
+      "kind": "note",
       "number": 19,
       "prompt": "wartet dringend auf die Lieferung",
-      "options": [
-        {
-          "value": "a",
-          "label": "A"
-        },
-        {
-          "value": "b",
-          "label": "B"
-        },
-        {
-          "value": "c",
-          "label": "C"
-        }
-      ],
-      "answer": "c",
-      "source": "user-reviewed",
-      "status": "extraction_review",
-      "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below.",
-      "provenance": "verbatim_pdf",
-      "option_provenance": "letter_only_not_extracted",
-      "source_snippets": [
-        "esen und Schreiben Teil Beschwerde (вариант № 2)\nTischlampe\n19.  c) wartet dringend auf die Lieferung\n20 Die Renovierungsarbeiten\na)  stehen kurz bevor\nb)  verzögern sich\nc)  sollen zeitnah abgeschlossen werden.\nLieber Herr Klein,\n\nich habe schon wieder eine Beschwerde einer Kundin vorliegen. Sie hat Ihre bestellten Tischlampen nicht bekommen. Bitte\n\nantworten Sie Frau Berger und erklären Sie ihr, warum wir im Moment Lieferschwierigkeiten haben. Versuchen Sie auch, sie\n\ndavon zu überzeugen, noch bis nächste Woche zu warten und den Auftrag nicht zu stornieren. Bieten Sie ihr außerdem ein\n\nähnliches Modell an, das wir auf Lager haben. Danke!\n\nHerzliche Grüße,\n\nKnut Richter\n\nSehr geehrter Herr Richter,\n\n"
-      ]
-    },
-    {
-      "id": "set045-reply-0",
-      "page": 54,
-      "section": "Schreiben",
-      "detail": "Beschwerde",
-      "kind": "free",
-      "number": 21,
-      "prompt": "Schreiben Sie eine passende E-Mail als Antwort auf die Beschwerde. Beachten Sie alle Anweisungen der Vorgesetzten im Text.",
       "options": [],
       "answer": null,
-      "source": null,
-      "status": "manual_review",
-      "reason": null,
-      "provenance": "not_verbatim_pdf",
+      "source": "user-reviewed",
+      "status": "source_incomplete",
+      "reason": "Original PDF only provides an answer fragment or conflicting variants; complete A/B/C wording is not available. This is preserved as a NON-SCORABLE source fragment, not a reconstructed multiple-choice question. Source note: wartet dringend auf die Lieferung. Informal answer mark: C (not official).",
+      "provenance": "verbatim_pdf",
       "option_provenance": "no_mc_choices",
-      "source_snippets": []
-    },
-    {
-      "id": "set046-p55-q19-1",
-      "page": 55,
-      "section": "Schreiben",
-      "detail": "Beschwerde",
-      "kind": "mc",
-      "number": 19,
-      "prompt": "Frau Lutz",
-      "options": [
-        {
-          "value": "a",
-          "label": "erwartet eine umgehende Rückmeldung"
-        },
-        {
-          "value": "b",
-          "label": "möchte ein anderes Lampenmodell."
-        },
-        {
-          "value": "c",
-          "label": "storniert den Auftrag"
-        }
-      ],
-      "answer": "a",
-      "source": "source-inferred",
-      "status": "complete_source",
-      "reason": "The complete question and answer alternatives appear in the original PDF. This answer was inferred from the PDF text and accepted by the user on 2026-11-13; it is not an official answer key.",
-      "provenance": "not_verbatim_pdf",
-      "option_provenance": "verbatim_pdf",
       "source_snippets": [
-        "8.2024, тест №030321, номер 100221 от\n07.02.2025\nTischlampe\n19 Frau Lutz Новый вариант 030321\na)  erwartet eine umgehende Rückmeldung\nb)  möchte ein anderes Lampenmodell.\nc)  storniert den Auftrag\n20 Die Renovierungsarbeiten\nd)  stehen kurz bevor\ne)  verzögern sich\nc) sollen zeitnah abgeschlossen werden.\n\n\nHallo,\n\nich habe schon wieder eine Beschwerde einer Kundin vorliegen. Sie hat Ihre bestellten Tischlampen nicht bekommen.\n\nBitte antworten Sie Frau Lutz und erklären Sie ihr, warum wir im Moment Lieferschwierigkeiten haben. Versuchen Sie auch,\n\nsie davon zu überzeugen, noch bis nächste Woche zu warten und den Auftrag nicht zu stornieren. Bieten Sie ihr außerdem\n\nein ähnliches Modell an, das wir auf ",
-        "\nLesen und Schreiben Teil Beschwerde (вариант № 3)\nWebseite\n19.   a – ist mit dem Entwurf der Agentur nicht einverstanden\n\n20.   a – Änderungen nur gegen Aufpreis macht\n\nHallo Frau Holsten,\n\nich habe heute Mittag die untenstehende Mail bekommen. Die vertauschten Namen sind unter Fehler und die verbessern wir\n\nauch. Bitte bestätigen Sie dem Kunden das. Aber mehr ist nun wirklich nicht drin. Das ist schon das fünfte Mal, dass er\n\nKorrekturwünsche hat, obwohl wir uns immer an die Vorgaben gehalten haben. So viele Korrekturen waren nicht vereinbart!"
+        "esen und Schreiben Teil Beschwerde (вариант № 2)\nTischlampe\n19.  c) wartet dringend auf die Lieferung\n20 Die Renovierungsarbeiten\na)  stehen kurz bevor\nb)  verzögern sich\nc)  sollen zeitnah abgeschlossen werden.\nLieber Herr Klein,\n\nich habe schon wieder eine Beschwerde einer Kundin vorliegen. Sie hat Ihre bestellten Tischlampen nicht bekommen. Bitte\n\nantworten Sie Frau Berger und erklären Sie ihr, warum wir im Moment Lieferschwierigkeiten haben. Versuchen Sie auch, sie\n\ndavon zu überzeugen, noch bis nächste Woche zu warten und den Auftrag nicht zu stornieren. Bieten Sie ihr außerdem ein\n\nähnliches Modell an, das wir auf Lager haben. Danke!\n\nHerzliche Grüße,\n\nKnut Richter\n\nSehr geehrter Herr Richter,\n\n"
       ]
     },
     {
@@ -734,29 +276,16 @@
       "page": 55,
       "section": "Schreiben",
       "detail": "Beschwerde",
-      "kind": "mc",
+      "kind": "note",
       "number": 19,
       "prompt": "ist mit dem Entwurf der Agentur nicht einverstanden",
-      "options": [
-        {
-          "value": "a",
-          "label": "A"
-        },
-        {
-          "value": "b",
-          "label": "B"
-        },
-        {
-          "value": "c",
-          "label": "C"
-        }
-      ],
-      "answer": "a",
+      "options": [],
+      "answer": null,
       "source": "user-reviewed",
-      "status": "extraction_review",
-      "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below.",
+      "status": "source_incomplete",
+      "reason": "Original PDF only provides an answer fragment or conflicting variants; complete A/B/C wording is not available. This is preserved as a NON-SCORABLE source fragment, not a reconstructed multiple-choice question. Source note: ist mit dem Entwurf der Agentur nicht einverstanden. Informal answer mark: A (not official).",
       "provenance": "verbatim_pdf",
-      "option_provenance": "letter_only_not_extracted",
+      "option_provenance": "no_mc_choices",
       "source_snippets": [
         "8.2024, тест №030321, номер 100221 от\n07.02.2025\nTischlampe\n19 Frau Lutz Новый вариант 030321\na)  erwartet eine umgehende Rückmeldung\nb)  möchte ein anderes Lampenmodell.\nc)  storniert den Auftrag\n20 Die Renovierungsarbeiten\nd)  stehen kurz bevor\ne)  verzögern sich\nc) sollen zeitnah abgeschlossen werden.\n\n\nHallo,\n\nich habe schon wieder eine Beschwerde einer Kundin vorliegen. Sie hat Ihre bestellten Tischlampen nicht bekommen.\n\nBitte antworten Sie Frau Lutz und erklären Sie ihr, warum wir im Moment Lieferschwierigkeiten haben. Versuchen Sie auch,\n\nsie davon zu überzeugen, noch bis nächste Woche zu warten und den Auftrag nicht zu stornieren. Bieten Sie ihr außerdem\n\nein ähnliches Modell an, das wir auf ",
         "\nLesen und Schreiben Teil Beschwerde (вариант № 3)\nWebseite\n19.   a – ist mit dem Entwurf der Agentur nicht einverstanden\n\n20.   a – Änderungen nur gegen Aufpreis macht\n\nHallo Frau Holsten,\n\nich habe heute Mittag die untenstehende Mail bekommen. Die vertauschten Namen sind unter Fehler und die verbessern wir\n\nauch. Bitte bestätigen Sie dem Kunden das. Aber mehr ist nun wirklich nicht drin. Das ist schon das fünfte Mal, dass er\n\nKorrekturwünsche hat, obwohl wir uns immer an die Vorgaben gehalten haben. So viele Korrekturen waren nicht vereinbart!"
@@ -767,113 +296,36 @@
       "page": 55,
       "section": "Schreiben",
       "detail": "Beschwerde",
-      "kind": "mc",
+      "kind": "note",
       "number": 20,
       "prompt": "Änderungen nur gegen Aufpreis macht",
-      "options": [
-        {
-          "value": "a",
-          "label": "A"
-        },
-        {
-          "value": "b",
-          "label": "B"
-        },
-        {
-          "value": "c",
-          "label": "C"
-        }
-      ],
-      "answer": "a",
+      "options": [],
+      "answer": null,
       "source": "user-reviewed",
-      "status": "extraction_review",
-      "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below.",
+      "status": "source_incomplete",
+      "reason": "Original PDF only provides an answer fragment or conflicting variants; complete A/B/C wording is not available. This is preserved as a NON-SCORABLE source fragment, not a reconstructed multiple-choice question. Source note: Änderungen nur gegen Aufpreis macht. Informal answer mark: A (not official).",
       "provenance": "verbatim_pdf",
-      "option_provenance": "letter_only_not_extracted",
+      "option_provenance": "no_mc_choices",
       "source_snippets": [
         " möchte ein anderes Lampenmodell.\nc)  storniert den Auftrag\n20 Die Renovierungsarbeiten\nd)  stehen kurz bevor\ne)  verzögern sich\nc) sollen zeitnah abgeschlossen werden.\n\n\nHallo,\n\nich habe schon wieder eine Beschwerde einer Kundin vorliegen. Sie hat Ihre bestellten Tischlampen nicht bekommen.\n\nBitte antworten Sie Frau Lutz und erklären Sie ihr, warum wir im Moment Lieferschwierigkeiten haben. Versuchen Sie auch,\n\nsie davon zu überzeugen, noch bis nächste Woche zu warten und den Auftrag nicht zu stornieren. Bieten Sie ihr außerdem\n\nein ähnliches Modell an, das wir auf Lager haben. Danke!\n\nHerzliche Grüße,\n\nElias Philips\n\n\nSehr geehrter Herr Phillips,\n\nvergangene Woche habe ich bei Ihnen 15 Tischlampen M",
         ".   a – ist mit dem Entwurf der Agentur nicht einverstanden\n\n20.   a – Änderungen nur gegen Aufpreis macht\n\nHallo Frau Holsten,\n\nich habe heute Mittag die untenstehende Mail bekommen. Die vertauschten Namen sind unter Fehler und die verbessern wir\n\nauch. Bitte bestätigen Sie dem Kunden das. Aber mehr ist nun wirklich nicht drin. Das ist schon das fünfte Mal, dass er\n\nKorrekturwünsche hat, obwohl wir uns immer an die Vorgaben gehalten haben. So viele Korrekturen waren nicht vereinbart!"
       ]
     },
     {
-      "id": "set046-reply-0",
-      "page": 55,
-      "section": "Schreiben",
-      "detail": "Beschwerde",
-      "kind": "free",
-      "number": 21,
-      "prompt": "Schreiben Sie eine passende E-Mail als Antwort auf die Beschwerde. Beachten Sie alle Anweisungen der Vorgesetzten im Text.",
-      "options": [],
-      "answer": null,
-      "source": null,
-      "status": "manual_review",
-      "reason": null,
-      "provenance": "not_verbatim_pdf",
-      "option_provenance": "no_mc_choices",
-      "source_snippets": []
-    },
-    {
-      "id": "set046-reply-1",
-      "page": 55,
-      "section": "Schreiben",
-      "detail": "Beschwerde",
-      "kind": "free",
-      "number": 21,
-      "prompt": "Schreiben Sie die Antwort für Beschwerde-Fall 2.",
-      "options": [],
-      "answer": null,
-      "source": null,
-      "status": "manual_review",
-      "reason": null,
-      "provenance": "not_verbatim_pdf",
-      "option_provenance": "no_mc_choices",
-      "source_snippets": []
-    },
-    {
-      "id": "set047-reply-0",
-      "page": 56,
-      "section": "Schreiben",
-      "detail": "Beschwerde",
-      "kind": "free",
-      "number": 21,
-      "prompt": "Schreiben Sie eine passende E-Mail als Antwort auf die Beschwerde. Beachten Sie alle Anweisungen der Vorgesetzten im Text.",
-      "options": [],
-      "answer": null,
-      "source": null,
-      "status": "manual_review",
-      "reason": null,
-      "provenance": "not_verbatim_pdf",
-      "option_provenance": "no_mc_choices",
-      "source_snippets": []
-    },
-    {
       "id": "set048-p57-q19-1",
       "page": 57,
       "section": "Schreiben",
       "detail": "Beschwerde",
-      "kind": "mc",
+      "kind": "note",
       "number": 19,
       "prompt": "die Mitarbeiter der Firma",
-      "options": [
-        {
-          "value": "a",
-          "label": "A"
-        },
-        {
-          "value": "b",
-          "label": "B"
-        },
-        {
-          "value": "c",
-          "label": "C"
-        }
-      ],
-      "answer": "a",
+      "options": [],
+      "answer": null,
       "source": "user-reviewed",
-      "status": "extraction_review",
-      "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below.",
+      "status": "source_incomplete",
+      "reason": "Original PDF only provides an answer fragment or conflicting variants; complete A/B/C wording is not available. This is preserved as a NON-SCORABLE source fragment, not a reconstructed multiple-choice question. Source note: die Mitarbeiter der Firma. Informal answer mark: A (not official).",
       "provenance": "verbatim_pdf",
-      "option_provenance": "letter_only_not_extracted",
+      "option_provenance": "no_mc_choices",
       "source_snippets": [
         "\n\n\n\nLesen und Schreiben Teil Beschwerde (вариант № 5)\nUmzug\n19.    a – die Mitarbeiter der Firma\n\n20.    c – verlangt Schadensersatz\n\nЕсть второй вариант вопросов, ответы были b и b от 13.09.2024\n\nHallo Frau Kühne,\n\nbitte schauen Sie sich mal die untenstehende E-Mail an.\n\nDa ist wohl was schiefgegangen. Bitte schreiben Sie Herrn Zaun und erklären Sie ihm, warum es zu den Fehlern gekommen\n\nist. Sagen Sie ihm zu, dass am Mittwochmorgen pünktlich zwei Männer der sein werden, die alles fertig machen.\n\nNatürlich übernehmen wir auch die Verantwortung für die entstandenen Schaden.\n\nDie Firma hat uns das erste Mal gebucht und ich würde ungern einen negativen Eindruck hinterlassen. Ich verlasse mich auf\n\nSie.\n"
       ]
@@ -883,246 +335,18 @@
       "page": 57,
       "section": "Schreiben",
       "detail": "Beschwerde",
-      "kind": "mc",
+      "kind": "note",
       "number": 20,
       "prompt": "verlangt Schadensersatz",
-      "options": [
-        {
-          "value": "a",
-          "label": "A"
-        },
-        {
-          "value": "b",
-          "label": "B"
-        },
-        {
-          "value": "c",
-          "label": "C"
-        }
-      ],
-      "answer": "c",
+      "options": [],
+      "answer": null,
       "source": "user-reviewed",
-      "status": "extraction_review",
-      "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below.",
+      "status": "source_incomplete",
+      "reason": "Original PDF only provides an answer fragment or conflicting variants; complete A/B/C wording is not available. This is preserved as a NON-SCORABLE source fragment, not a reconstructed multiple-choice question. Source note: verlangt Schadensersatz. Informal answer mark: C (not official).",
       "provenance": "verbatim_pdf",
-      "option_provenance": "letter_only_not_extracted",
+      "option_provenance": "no_mc_choices",
       "source_snippets": [
         "de (вариант № 5)\nUmzug\n19.    a – die Mitarbeiter der Firma\n\n20.    c – verlangt Schadensersatz\n\nЕсть второй вариант вопросов, ответы были b и b от 13.09.2024\n\nHallo Frau Kühne,\n\nbitte schauen Sie sich mal die untenstehende E-Mail an.\n\nDa ist wohl was schiefgegangen. Bitte schreiben Sie Herrn Zaun und erklären Sie ihm, warum es zu den Fehlern gekommen\n\nist. Sagen Sie ihm zu, dass am Mittwochmorgen pünktlich zwei Männer der sein werden, die alles fertig machen.\n\nNatürlich übernehmen wir auch die Verantwortung für die entstandenen Schaden.\n\nDie Firma hat uns das erste Mal gebucht und ich würde ungern einen negativen Eindruck hinterlassen. Ich verlasse mich auf\n\nSie.\n\nDanke und viele Grüße,\n\nFrieda Börne"
-      ]
-    },
-    {
-      "id": "set048-reply-0",
-      "page": 57,
-      "section": "Schreiben",
-      "detail": "Beschwerde",
-      "kind": "free",
-      "number": 21,
-      "prompt": "Schreiben Sie eine passende E-Mail als Antwort auf die Beschwerde. Beachten Sie alle Anweisungen der Vorgesetzten im Text.",
-      "options": [],
-      "answer": null,
-      "source": null,
-      "status": "manual_review",
-      "reason": null,
-      "provenance": "not_verbatim_pdf",
-      "option_provenance": "no_mc_choices",
-      "source_snippets": []
-    },
-    {
-      "id": "set049-reply-0",
-      "page": 58,
-      "section": "Schreiben",
-      "detail": "Beschwerde",
-      "kind": "free",
-      "number": 21,
-      "prompt": "Schreiben Sie eine passende E-Mail als Antwort auf die Beschwerde. Beachten Sie alle Anweisungen der Vorgesetzten im Text.",
-      "options": [],
-      "answer": null,
-      "source": null,
-      "status": "manual_review",
-      "reason": null,
-      "provenance": "not_verbatim_pdf",
-      "option_provenance": "no_mc_choices",
-      "source_snippets": []
-    },
-    {
-      "id": "set050-reply-0",
-      "page": 59,
-      "section": "Schreiben",
-      "detail": "Beschwerde",
-      "kind": "free",
-      "number": 21,
-      "prompt": "Schreiben Sie eine passende E-Mail als Antwort auf die Beschwerde. Beachten Sie alle Anweisungen der Vorgesetzten im Text.",
-      "options": [],
-      "answer": null,
-      "source": null,
-      "status": "manual_review",
-      "reason": null,
-      "provenance": "not_verbatim_pdf",
-      "option_provenance": "no_mc_choices",
-      "source_snippets": []
-    },
-    {
-      "id": "set051-p60-q20-1",
-      "page": 60,
-      "section": "Schreiben",
-      "detail": "Beschwerde",
-      "kind": "mc",
-      "number": 20,
-      "prompt": "Die Nachlieferung",
-      "options": [
-        {
-          "value": "a",
-          "label": "bezahlt der Kunde."
-        },
-        {
-          "value": "b",
-          "label": "kommt im Sommer."
-        },
-        {
-          "value": "c",
-          "label": "umfasst 50 T-Shirts."
-        }
-      ],
-      "answer": "c",
-      "source": "source-inferred",
-      "status": "extraction_review",
-      "reason": null,
-      "provenance": "verbatim_pdf",
-      "option_provenance": "some_options_not_in_pdf",
-      "source_snippets": [
-        "r.\nc verlangt wegen der Lieferungsverzögerung einen Rabatt.\n\n20 Die Nachlieferung\na bezahlt der Kunde.\nb kommt im Sommer.\nc umfasst 50 T-Shirts\n Nummer 21 Schreiben Sie eine E-Mail an den Kunden.\n\n\n\nВариант 1\nSehr geehrter Herr Schramm,\nvielen Dank für Ihre E-Mail, in der Sie uns darüber informieren, dass Sie mir der gelieferten Ware nicht zufrieden sind. Wir\nentschuldigen uns für die verschmutzten Hosen, können Ihnen aber keinen Preisnachlass in Höhe von 60 Prozent geben. Bitte\nschicken Sie uns die Hosen zurück. Wir werden Ihnen die Hosen in Größe M und L erneut in einwandfreier Qualität schicken.\nAufgrund eines hohen Krankenstandes in unserer Firma ist die Nachlieferung der T-Shirts erst zum 12.05. "
-      ]
-    },
-    {
-      "id": "set051-reply-0",
-      "page": 60,
-      "section": "Schreiben",
-      "detail": "Beschwerde",
-      "kind": "free",
-      "number": 21,
-      "prompt": "Schreiben Sie eine passende E-Mail als Antwort auf die Beschwerde. Beachten Sie alle Anweisungen der Vorgesetzten im Text.",
-      "options": [],
-      "answer": null,
-      "source": null,
-      "status": "manual_review",
-      "reason": null,
-      "provenance": "not_verbatim_pdf",
-      "option_provenance": "no_mc_choices",
-      "source_snippets": []
-    },
-    {
-      "id": "set052-reply-0",
-      "page": 61,
-      "section": "Schreiben",
-      "detail": "Beschwerde",
-      "kind": "free",
-      "number": 21,
-      "prompt": "Schreiben Sie eine passende E-Mail als Antwort auf die Beschwerde. Beachten Sie alle Anweisungen der Vorgesetzten im Text.",
-      "options": [],
-      "answer": null,
-      "source": null,
-      "status": "manual_review",
-      "reason": null,
-      "provenance": "not_verbatim_pdf",
-      "option_provenance": "no_mc_choices",
-      "source_snippets": []
-    },
-    {
-      "id": "set052-reply-1",
-      "page": 61,
-      "section": "Schreiben",
-      "detail": "Beschwerde",
-      "kind": "free",
-      "number": 21,
-      "prompt": "Schreiben Sie die Antwort für Beschwerde-Fall 2.",
-      "options": [],
-      "answer": null,
-      "source": null,
-      "status": "manual_review",
-      "reason": null,
-      "provenance": "not_verbatim_pdf",
-      "option_provenance": "no_mc_choices",
-      "source_snippets": []
-    },
-    {
-      "id": "set053-reply-0",
-      "page": 62,
-      "section": "Schreiben",
-      "detail": "Beschwerde",
-      "kind": "free",
-      "number": 21,
-      "prompt": "Schreiben Sie eine passende E-Mail als Antwort auf die Beschwerde. Beachten Sie alle Anweisungen der Vorgesetzten im Text.",
-      "options": [],
-      "answer": null,
-      "source": null,
-      "status": "manual_review",
-      "reason": null,
-      "provenance": "not_verbatim_pdf",
-      "option_provenance": "no_mc_choices",
-      "source_snippets": []
-    },
-    {
-      "id": "set079-p88-q25-1",
-      "page": 88,
-      "section": "Hören",
-      "detail": "Listening variants",
-      "kind": "mc",
-      "number": 25,
-      "prompt": "Die Mitarbeiter* innen der Personalabteilung",
-      "options": [
-        {
-          "value": "a",
-          "label": "A"
-        },
-        {
-          "value": "b",
-          "label": "B"
-        },
-        {
-          "value": "c",
-          "label": "C"
-        }
-      ],
-      "answer": null,
-      "source": null,
-      "status": "extraction_review",
-      "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below.",
-      "provenance": "verbatim_pdf",
-      "option_provenance": "letter_only_not_extracted",
-      "source_snippets": [
-        "äch unterhalten sich zwei IT- Spezialisten\n\nrichtig/falsch?\n\n25 Die Mitarbeiter* innen der Personalabteilung\n\n\n\n\n                                                                            88"
-      ]
-    },
-    {
-      "id": "set079-p91-q33-1",
-      "page": 91,
-      "section": "Hören",
-      "detail": "Listening variants",
-      "kind": "mc",
-      "number": 33,
-      "prompt": "Mit den Fragebögen wird",
-      "options": [
-        {
-          "value": "a",
-          "label": "A"
-        },
-        {
-          "value": "b",
-          "label": "B"
-        },
-        {
-          "value": "c",
-          "label": "C"
-        }
-      ],
-      "answer": null,
-      "source": null,
-      "status": "extraction_review",
-      "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below.",
-      "provenance": "verbatim_pdf",
-      "option_provenance": "letter_only_not_extracted",
-      "source_snippets": [
-        "ter den Kollegen.\nc. wird von den Mitarbeitenden gefordert.\n33. Mit den Fragebögen wird\n\n\n\n                                                                            91"
       ]
     },
     {
@@ -1158,29 +382,16 @@
       "page": 97,
       "section": "Hören",
       "detail": "Listening variants",
-      "kind": "mc",
+      "kind": "note",
       "number": 32,
       "prompt": "Die Firma hat zurzeit b) viele Ersthelfer wie gesetzlich vorgeschrieben",
-      "options": [
-        {
-          "value": "a",
-          "label": "A"
-        },
-        {
-          "value": "b",
-          "label": "B"
-        },
-        {
-          "value": "c",
-          "label": "C"
-        }
-      ],
+      "options": [],
       "answer": null,
       "source": null,
-      "status": "extraction_review",
-      "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below.",
+      "status": "source_incomplete",
+      "reason": "Original PDF only provides an answer fragment or conflicting variants; complete A/B/C wording is not available. This is preserved as a NON-SCORABLE source fragment, not a reconstructed multiple-choice question. Source note: Die Firma hat zurzeit b) viele Ersthelfer wie gesetzlich vorgeschrieben.",
       "provenance": "verbatim_pdf",
-      "option_provenance": "letter_only_not_extracted",
+      "option_provenance": "no_mc_choices",
       "source_snippets": [
         "Kopf gehen. Jetzt habt aber erstmal einen schönen Feiertag.\n32 An dem Betrieb gibt es\na)  zurzeit mehr Ersthelfer, als gesetzlich vorgeschrieben\nb)  zurzeit genug Ersthelfer, als gesetzlich vorgeschrieben\nc)  zurzeit weniger Ersthelfer, als gesetzlich vorgeschrieben\n33 Ausbildung zum Ersthelfer\na)  ist kostenfrei\nb)  erlaubt nur beim Malteser\nc)  zählt zum Arbeitszeit\n34 Die Mitarbeiter\na)  müssen sich in Personalbūro anmelden\nb)  können sich bei dem Chef anmelden\nc)  sollen sich in 2 Wochen anmelden\n35 Murat ist nicht sicher, ob\na)  er, als Ersthelfer arbeiten darf\nb)  welche Dokumente er braucht\nc)  ?\n\n\nСтарый вариант вопросов к этому аудио (возможно аудио немного изменили).\nHören Teil 3\n32.    Die ",
         "этому аудио (возможно аудио немного изменили).\nHören Teil 3\n32.    Die Firma hat zurzeit b) viele Ersthelfer wie gesetzlich vorgeschrieben\n33.    Die Mitarbeiter b) können Lehrgang zur Unterschiedenen Themen besuch\n34.    Wer sich anmelden möchte a) man sich an das Personalbüro werden\n35.    Es ist noch ungeklärt b) ob Murat überhaupt als Ersthelfertätig sein darf.\nHören Teil 4\nSie hören fünf telefonische Mitteilungen. Zu jeder Mitteilung gibt es eine Aufgabe. Welche Lösung (a, b oder c) passt am\nbesten? Markieren Sie Ihre Lösungen für die Aufgaben 36-40 auf dem Antwortbogen.\nSie hören jede Mitteilung einmal.\nNummer 36\nHallo, hier ist Andrea Faber. Wir sind doch am Freitag zum Arbeitsfrühstück verabre"
@@ -1191,29 +402,16 @@
       "page": 97,
       "section": "Hören",
       "detail": "Listening variants",
-      "kind": "mc",
+      "kind": "note",
       "number": 33,
       "prompt": "Die Mitarbeiter b) können Lehrgang zur Unterschiedenen Themen besuch",
-      "options": [
-        {
-          "value": "a",
-          "label": "A"
-        },
-        {
-          "value": "b",
-          "label": "B"
-        },
-        {
-          "value": "c",
-          "label": "C"
-        }
-      ],
+      "options": [],
       "answer": null,
       "source": null,
-      "status": "extraction_review",
-      "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below.",
+      "status": "source_incomplete",
+      "reason": "Original PDF only provides an answer fragment or conflicting variants; complete A/B/C wording is not available. This is preserved as a NON-SCORABLE source fragment, not a reconstructed multiple-choice question. Source note: Die Mitarbeiter b) können Lehrgang zur Unterschiedenen Themen besuch.",
       "provenance": "verbatim_pdf",
-      "option_provenance": "letter_only_not_extracted",
+      "option_provenance": "no_mc_choices",
       "source_snippets": [
         "  zurzeit weniger Ersthelfer, als gesetzlich vorgeschrieben\n33 Ausbildung zum Ersthelfer\na)  ist kostenfrei\nb)  erlaubt nur beim Malteser\nc)  zählt zum Arbeitszeit\n34 Die Mitarbeiter\na)  müssen sich in Personalbūro anmelden\nb)  können sich bei dem Chef anmelden\nc)  sollen sich in 2 Wochen anmelden\n35 Murat ist nicht sicher, ob\na)  er, als Ersthelfer arbeiten darf\nb)  welche Dokumente er braucht\nc)  ?\n\n\nСтарый вариант вопросов к этому аудио (возможно аудио немного изменили).\nHören Teil 3\n32.    Die Firma hat zurzeit b) viele Ersthelfer wie gesetzlich vorgeschrieben\n33.    Die Mitarbeiter b) können Lehrgang zur Unterschiedenen Themen besuch\n34.    Wer sich anmelden möchte a) man sich an das Personalbüro",
         "t zurzeit b) viele Ersthelfer wie gesetzlich vorgeschrieben\n33.    Die Mitarbeiter b) können Lehrgang zur Unterschiedenen Themen besuch\n34.    Wer sich anmelden möchte a) man sich an das Personalbüro werden\n35.    Es ist noch ungeklärt b) ob Murat überhaupt als Ersthelfertätig sein darf.\nHören Teil 4\nSie hören fünf telefonische Mitteilungen. Zu jeder Mitteilung gibt es eine Aufgabe. Welche Lösung (a, b oder c) passt am\nbesten? Markieren Sie Ihre Lösungen für die Aufgaben 36-40 auf dem Antwortbogen.\nSie hören jede Mitteilung einmal.\nNummer 36\nHallo, hier ist Andrea Faber. Wir sind doch am Freitag zum Arbeitsfrühstück verabredet. Leider kann ich unseren Termin nicht\neinhalten. Wir haben ein spontanes Tr"
@@ -1224,29 +422,16 @@
       "page": 97,
       "section": "Hören",
       "detail": "Listening variants",
-      "kind": "mc",
+      "kind": "note",
       "number": 34,
       "prompt": "Wer sich anmelden möchte a) man sich an das Personalbüro werden",
-      "options": [
-        {
-          "value": "a",
-          "label": "A"
-        },
-        {
-          "value": "b",
-          "label": "B"
-        },
-        {
-          "value": "c",
-          "label": "C"
-        }
-      ],
+      "options": [],
       "answer": null,
       "source": null,
-      "status": "extraction_review",
-      "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below.",
+      "status": "source_incomplete",
+      "reason": "Original PDF only provides an answer fragment or conflicting variants; complete A/B/C wording is not available. This is preserved as a NON-SCORABLE source fragment, not a reconstructed multiple-choice question. Source note: Wer sich anmelden möchte a) man sich an das Personalbüro werden.",
       "provenance": "verbatim_pdf",
-      "option_provenance": "letter_only_not_extracted",
+      "option_provenance": "no_mc_choices",
       "source_snippets": [
         "rei\nb)  erlaubt nur beim Malteser\nc)  zählt zum Arbeitszeit\n34 Die Mitarbeiter\na)  müssen sich in Personalbūro anmelden\nb)  können sich bei dem Chef anmelden\nc)  sollen sich in 2 Wochen anmelden\n35 Murat ist nicht sicher, ob\na)  er, als Ersthelfer arbeiten darf\nb)  welche Dokumente er braucht\nc)  ?\n\n\nСтарый вариант вопросов к этому аудио (возможно аудио немного изменили).\nHören Teil 3\n32.    Die Firma hat zurzeit b) viele Ersthelfer wie gesetzlich vorgeschrieben\n33.    Die Mitarbeiter b) können Lehrgang zur Unterschiedenen Themen besuch\n34.    Wer sich anmelden möchte a) man sich an das Personalbüro werden\n35.    Es ist noch ungeklärt b) ob Murat überhaupt als Ersthelfertätig sein darf.\nHören Teil 4\nS",
         "beiter b) können Lehrgang zur Unterschiedenen Themen besuch\n34.    Wer sich anmelden möchte a) man sich an das Personalbüro werden\n35.    Es ist noch ungeklärt b) ob Murat überhaupt als Ersthelfertätig sein darf.\nHören Teil 4\nSie hören fünf telefonische Mitteilungen. Zu jeder Mitteilung gibt es eine Aufgabe. Welche Lösung (a, b oder c) passt am\nbesten? Markieren Sie Ihre Lösungen für die Aufgaben 36-40 auf dem Antwortbogen.\nSie hören jede Mitteilung einmal.\nNummer 36\nHallo, hier ist Andrea Faber. Wir sind doch am Freitag zum Arbeitsfrühstück verabredet. Leider kann ich unseren Termin nicht\neinhalten. Wir haben ein spontanes Treffen mit unserem Vertreter aus Wien. Kannst du auch nächste Woche Montag? D"
@@ -1290,29 +475,16 @@
       "page": 97,
       "section": "Hören",
       "detail": "Listening variants",
-      "kind": "mc",
+      "kind": "note",
       "number": 35,
       "prompt": "Es ist noch ungeklärt b) ob Murat überhaupt als Ersthelfertätig sein darf.",
-      "options": [
-        {
-          "value": "a",
-          "label": "A"
-        },
-        {
-          "value": "b",
-          "label": "B"
-        },
-        {
-          "value": "c",
-          "label": "C"
-        }
-      ],
+      "options": [],
       "answer": null,
       "source": null,
-      "status": "extraction_review",
-      "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below.",
+      "status": "source_incomplete",
+      "reason": "Original PDF only provides an answer fragment or conflicting variants; complete A/B/C wording is not available. This is preserved as a NON-SCORABLE source fragment, not a reconstructed multiple-choice question. Source note: Es ist noch ungeklärt b) ob Murat überhaupt als Ersthelfertätig sein darf..",
       "provenance": "verbatim_pdf",
-      "option_provenance": "letter_only_not_extracted",
+      "option_provenance": "no_mc_choices",
       "source_snippets": [
         " bei dem Chef anmelden\nc)  sollen sich in 2 Wochen anmelden\n35 Murat ist nicht sicher, ob\na)  er, als Ersthelfer arbeiten darf\nb)  welche Dokumente er braucht\nc)  ?\n\n\nСтарый вариант вопросов к этому аудио (возможно аудио немного изменили).\nHören Teil 3\n32.    Die Firma hat zurzeit b) viele Ersthelfer wie gesetzlich vorgeschrieben\n33.    Die Mitarbeiter b) können Lehrgang zur Unterschiedenen Themen besuch\n34.    Wer sich anmelden möchte a) man sich an das Personalbüro werden\n35.    Es ist noch ungeklärt b) ob Murat überhaupt als Ersthelfertätig sein darf.\nHören Teil 4\nSie hören fünf telefonische Mitteilungen. Zu jeder Mitteilung gibt es eine Aufgabe. Welche Lösung (a, b oder c) passt am\nbesten? Markier",
         "sich anmelden möchte a) man sich an das Personalbüro werden\n35.    Es ist noch ungeklärt b) ob Murat überhaupt als Ersthelfertätig sein darf.\nHören Teil 4\nSie hören fünf telefonische Mitteilungen. Zu jeder Mitteilung gibt es eine Aufgabe. Welche Lösung (a, b oder c) passt am\nbesten? Markieren Sie Ihre Lösungen für die Aufgaben 36-40 auf dem Antwortbogen.\nSie hören jede Mitteilung einmal.\nNummer 36\nHallo, hier ist Andrea Faber. Wir sind doch am Freitag zum Arbeitsfrühstück verabredet. Leider kann ich unseren Termin nicht\neinhalten. Wir haben ein spontanes Treffen mit unserem Vertreter aus Wien. Kannst du auch nächste Woche Montag? Das ist\nder 25. Ich halte dir mal den Vormittag frei. Sei doch so nett u"
@@ -1352,29 +524,16 @@
       "page": 99,
       "section": "Hören",
       "detail": "Listening variants",
-      "kind": "mc",
+      "kind": "note",
       "number": 25,
       "prompt": "Für das Fest braucht der Team noch",
-      "options": [
-        {
-          "value": "a",
-          "label": "A"
-        },
-        {
-          "value": "b",
-          "label": "B"
-        },
-        {
-          "value": "c",
-          "label": "C"
-        }
-      ],
+      "options": [],
       "answer": null,
       "source": null,
-      "status": "extraction_review",
-      "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below.",
+      "status": "source_incomplete",
+      "reason": "Original PDF only provides an answer fragment or conflicting variants; complete A/B/C wording is not available. This is preserved as a NON-SCORABLE source fragment, not a reconstructed multiple-choice question. Source note: Für das Fest braucht der Team noch.",
       "provenance": "verbatim_pdf",
-      "option_provenance": "letter_only_not_extracted",
+      "option_provenance": "no_mc_choices",
       "source_snippets": [
         "was schon geplant ist? (уже спланировано).\nrichtig / falsch\n25  Für das Fest braucht der Team noch\n\n\n\n                                                                            99"
       ]
@@ -1429,29 +588,16 @@
       "page": 102,
       "section": "Hören",
       "detail": "Listening variants",
-      "kind": "mc",
+      "kind": "note",
       "number": 36,
       "prompt": "Robert Krüger",
-      "options": [
-        {
-          "value": "a",
-          "label": "A"
-        },
-        {
-          "value": "b",
-          "label": "B"
-        },
-        {
-          "value": "c",
-          "label": "C"
-        }
-      ],
+      "options": [],
       "answer": null,
       "source": null,
-      "status": "extraction_review",
-      "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below.",
+      "status": "source_incomplete",
+      "reason": "Original PDF only provides an answer fragment or conflicting variants; complete A/B/C wording is not available. This is preserved as a NON-SCORABLE source fragment, not a reconstructed multiple-choice question. Source note: Robert Krüger.",
       "provenance": "verbatim_pdf",
-      "option_provenance": "letter_only_not_extracted",
+      "option_provenance": "no_mc_choices",
       "source_snippets": [
         "hlosen\nGerichten gibt. Deine Meinung hier wäre mir wichtig.\n36.  Robert Krüger\na) denkt an die Interessen der Vegetarier\nNummer 37\nHallo Bettina. Kathrin hier Hast du schon gehört, dass Herr Jung nächste Woche einen runden Geburtstag feiert?\nWir ihr Team, brauchen noch ein Geschenk für Sie, haben aber keine Idee. Du kennst sie ja privat. Hast du vielleicht einen\nVorschlag? Normalerweise gibt jeder 5 €. Es darf also etwa 70 € kosten. Wenn es etwas mehr kostet, ist es aber auch nicht\nschlimm. Kannst du mich später zurückrufen? Das wäre super.\n37.  Katrin\nb) sucht eine Anregung für Sache\nNummer 38\nHallo, Stefan Karner. Hier. Ich wollte Sie nur daran erinnern, dass die Brandmelder in den Büros demnächst a"
       ]
@@ -1461,29 +607,16 @@
       "page": 102,
       "section": "Hören",
       "detail": "Listening variants",
-      "kind": "mc",
+      "kind": "note",
       "number": 37,
       "prompt": "Katrin",
-      "options": [
-        {
-          "value": "a",
-          "label": "A"
-        },
-        {
-          "value": "b",
-          "label": "B"
-        },
-        {
-          "value": "c",
-          "label": "C"
-        }
-      ],
+      "options": [],
       "answer": null,
       "source": null,
-      "status": "extraction_review",
-      "reason": "Question stem is unusually short and may be incomplete; original PDF text is attached.",
+      "status": "source_incomplete",
+      "reason": "Original PDF only provides an answer fragment or conflicting variants; complete A/B/C wording is not available. This is preserved as a NON-SCORABLE source fragment, not a reconstructed multiple-choice question. Source note: Katrin.",
       "provenance": "verbatim_pdf",
-      "option_provenance": "letter_only_not_extracted",
+      "option_provenance": "no_mc_choices",
       "source_snippets": [
         "schlimm. Kannst du mich später zurückrufen? Das wäre super.\n37.  Katrin\nb) sucht eine Anregung für Sache\nNummer 38\nHallo, Stefan Karner. Hier. Ich wollte Sie nur daran erinnern, dass die Brandmelder in den Büros demnächst ausgetauscht\nwerden müssen. Bei der letzten Wartung hat uns der Fachmann von der Müller Brandschutz GmbH darauf aufmerksam\ngemacht, dass wir sie nur noch bis Ende des Jahres in Betrieb haben dürfen. Können Sie bitte bei der Firma anrufen und\nfragen, wann jemand bei uns vorbeikommen kann?\nBei Fragen rufen Sie mich einfach zurück.\n38.  Stefan Kömer bietet\n\n\n\n                                                                           102"
       ]
@@ -1493,29 +626,16 @@
       "page": 102,
       "section": "Hören",
       "detail": "Listening variants",
-      "kind": "mc",
+      "kind": "note",
       "number": 38,
       "prompt": "Stefan Kömer bietet",
-      "options": [
-        {
-          "value": "a",
-          "label": "A"
-        },
-        {
-          "value": "b",
-          "label": "B"
-        },
-        {
-          "value": "c",
-          "label": "C"
-        }
-      ],
+      "options": [],
       "answer": null,
       "source": null,
-      "status": "extraction_review",
-      "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below.",
+      "status": "source_incomplete",
+      "reason": "Original PDF only provides an answer fragment or conflicting variants; complete A/B/C wording is not available. This is preserved as a NON-SCORABLE source fragment, not a reconstructed multiple-choice question. Source note: Stefan Kömer bietet.",
       "provenance": "verbatim_pdf",
-      "option_provenance": "letter_only_not_extracted",
+      "option_provenance": "no_mc_choices",
       "source_snippets": [
         "orbeikommen kann?\nBei Fragen rufen Sie mich einfach zurück.\n38.  Stefan Kömer bietet\n\n\n\n                                                                           102"
       ]
@@ -1542,29 +662,16 @@
       "page": 103,
       "section": "Hören",
       "detail": "Listening variants",
-      "kind": "mc",
+      "kind": "note",
       "number": 40,
       "prompt": "Michaell Brüger möchte",
-      "options": [
-        {
-          "value": "a",
-          "label": "A"
-        },
-        {
-          "value": "b",
-          "label": "B"
-        },
-        {
-          "value": "c",
-          "label": "C"
-        }
-      ],
+      "options": [],
       "answer": null,
       "source": null,
-      "status": "extraction_review",
-      "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below.",
+      "status": "source_incomplete",
+      "reason": "Original PDF only provides an answer fragment or conflicting variants; complete A/B/C wording is not available. This is preserved as a NON-SCORABLE source fragment, not a reconstructed multiple-choice question. Source note: Michaell Brüger möchte.",
       "provenance": "verbatim_pdf",
-      "option_provenance": "letter_only_not_extracted",
+      "option_provenance": "no_mc_choices",
       "source_snippets": [
         "lappt. Rufen Sie mich bitte in den\nnächsten Stunden zurück.\n40. Michaell Brüger möchte\nb)  die Heizung repariert wird\n\n\n\n\n\n                                                                           103"
       ]
@@ -1602,29 +709,16 @@
       "page": 111,
       "section": "Hören",
       "detail": "Listening variants",
-      "kind": "mc",
+      "kind": "note",
       "number": 29,
       "prompt": "Manchmal müssen Kollegen auch die Aufgaben von andere übernehmen",
-      "options": [
-        {
-          "value": "a",
-          "label": "A"
-        },
-        {
-          "value": "b",
-          "label": "B"
-        },
-        {
-          "value": "c",
-          "label": "C"
-        }
-      ],
-      "answer": "c",
+      "options": [],
+      "answer": null,
       "source": "source-marked",
-      "status": "extraction_review",
-      "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below.",
+      "status": "source_incomplete",
+      "reason": "Original PDF only provides an answer fragment or conflicting variants; complete A/B/C wording is not available. This is preserved as a NON-SCORABLE source fragment, not a reconstructed multiple-choice question. Source note: Manchmal müssen Kollegen auch die Aufgaben von andere übernehmen. Informal answer mark: C (not official).",
       "provenance": "verbatim_pdf",
-      "option_provenance": "letter_only_not_extracted",
+      "option_provenance": "no_mc_choices",
       "source_snippets": [
         "inen schönen Urlaub.\nМужской голос:\n– Danke, du bist super.\n29.  c) Manchmal müssen Kollegen auch die Aufgaben von andere übernehmen\nNummer 29\nСсылка на запись диалога https://t.me/B2_C2_Deutsch/65534/124137\nЖенский голос 1:\n– Wisst ihr eigentlich, bis wann wir unseren Jahresurlaub einreichen müssen?\nЖенский голос 2:\n– Ich denke, wie immer bis Ende Januar. Aber im Frühjahr bist du besser, weil ich sonst noch absprechen kann. Hast du dir\ndenn schon überlegt, wann du Urlaub machen willst?\nЖенский голос 1:\n– Am nächsten, im August. Da hat meine Familie in der Türkei auch Urlaub. Dann können wir alle zusammen ins Urlaub\ngehen.\nЖенский голос 2:\n– Das klingt super. Aber du weißt ja, ich bin wegen der Kinder"
       ]
@@ -1634,29 +728,16 @@
       "page": 111,
       "section": "Hören",
       "detail": "Listening variants",
-      "kind": "mc",
+      "kind": "note",
       "number": 30,
       "prompt": "Einige Kollegen können nur zu bestimmten Zeiten Urlaub nehmen",
-      "options": [
-        {
-          "value": "a",
-          "label": "A"
-        },
-        {
-          "value": "b",
-          "label": "B"
-        },
-        {
-          "value": "c",
-          "label": "C"
-        }
-      ],
-      "answer": "b",
+      "options": [],
+      "answer": null,
       "source": "source-marked",
-      "status": "extraction_review",
-      "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below.",
+      "status": "source_incomplete",
+      "reason": "Original PDF only provides an answer fragment or conflicting variants; complete A/B/C wording is not available. This is preserved as a NON-SCORABLE source fragment, not a reconstructed multiple-choice question. Source note: Einige Kollegen können nur zu bestimmten Zeiten Urlaub nehmen. Informal answer mark: B (not official).",
       "provenance": "verbatim_pdf",
-      "option_provenance": "letter_only_not_extracted",
+      "option_provenance": "no_mc_choices",
       "source_snippets": [
         "inverstanden. Jetzt warten wir mal, was der Chef dazu sagt.\n30.  b) Einige Kollegen können nur zu bestimmten Zeiten Urlaub nehmen\nNummer 30\nСсылка на запись диалога https://t.me/B2_C2_Deutsch/65534/124138\nЖенский голос:\n– Hallo Jens. Ich war jetzt im Urlaub. Bist du gut erholt?\nМужской голос:\n– Nein, gar nicht. Mich hat schon gleich am 1. Urlaubstag eine Erkältung erwischt. Ich lag die meiste Zeit im Bett, statt\ndraußen in der Sonne.\nЖенский голос:\n– Ach du Armer, das tut mir aber leid. Hast du dir wenigstens einen Attest vom Arzt besorgt, damit du dir die Urlaubstage\nzurückholen kannst?\nМужской голос:\n– Nee, ich war doch im Ausland. Und da wollte ich nicht zum Arzt gehen. Aber wenigstens für die letz"
       ]
@@ -1666,29 +747,16 @@
       "page": 111,
       "section": "Hören",
       "detail": "Listening variants",
-      "kind": "mc",
+      "kind": "note",
       "number": 31,
       "prompt": "d) Unter gewissen Umständen gehen Urlaubstage nicht verloren",
-      "options": [
-        {
-          "value": "a",
-          "label": "A"
-        },
-        {
-          "value": "b",
-          "label": "B"
-        },
-        {
-          "value": "c",
-          "label": "C"
-        }
-      ],
+      "options": [],
       "answer": null,
       "source": null,
-      "status": "extraction_review",
-      "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below.",
+      "status": "source_incomplete",
+      "reason": "Original PDF only provides an answer fragment or conflicting variants; complete A/B/C wording is not available. This is preserved as a NON-SCORABLE source fragment, not a reconstructed multiple-choice question. Source note: d) Unter gewissen Umständen gehen Urlaubstage nicht verloren.",
       "provenance": "verbatim_pdf",
-      "option_provenance": "letter_only_not_extracted",
+      "option_provenance": "no_mc_choices",
       "source_snippets": [
         "mit der Arbeit an.\nЖенский голос:\n– Seid einem guten Start.\n31.  d) Unter gewissen Umständen gehen Urlaubstage nicht verloren\nNummer 31\nСсылка на запись диалога https://t.me/B2_C2_Deutsch/65534/124139\nМужской голос:\n– Ich habe gehört, dass du vor kurzem umgezogen bist. Wusstest du, dass bei mir demnächst auch ein Umzug ansteht?\nЖенский голос:\n\n\n\n\n                                                                           111"
       ]
@@ -1698,29 +766,16 @@
       "page": 112,
       "section": "Hören",
       "detail": "Listening variants",
-      "kind": "mc",
+      "kind": "note",
       "number": 32,
       "prompt": "Arbeitnehmer bekommen zu besonderen Anlässen frei",
-      "options": [
-        {
-          "value": "a",
-          "label": "A"
-        },
-        {
-          "value": "b",
-          "label": "B"
-        },
-        {
-          "value": "c",
-          "label": "C"
-        }
-      ],
-      "answer": "a",
+      "options": [],
+      "answer": null,
       "source": "source-marked",
-      "status": "extraction_review",
-      "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below.",
+      "status": "source_incomplete",
+      "reason": "Original PDF only provides an answer fragment or conflicting variants; complete A/B/C wording is not available. This is preserved as a NON-SCORABLE source fragment, not a reconstructed multiple-choice question. Source note: Arbeitnehmer bekommen zu besonderen Anlässen frei. Informal answer mark: A (not official).",
       "provenance": "verbatim_pdf",
-      "option_provenance": "letter_only_not_extracted",
+      "option_provenance": "no_mc_choices",
       "source_snippets": [
         "й голос:\n– Okay. Dann begebe ich das mal sofort. Danke dir.\n32.  a) Arbeitnehmer bekommen zu besonderen Anlässen frei\ne)  Viele Menschen träumen während der Arbeitszeit vom Sommerurlaub\nf)  Wer im Urlaub krank wird, kann Sonderurlaub beantragen\nHören Teil 3 (вариант №3, запись от 27.09.2024)\nHören Teil 4 (вариант №1, запись от 22.05.2024)\n\n\n\n\n\n                                                                           112"
       ]
@@ -2049,102 +1104,6 @@
       "source_snippets": []
     },
     {
-      "id": "set085-p118-q33-1",
-      "page": 118,
-      "section": "Hören",
-      "detail": "Listening variants",
-      "kind": "mc",
-      "number": 33,
-      "prompt": "Frau Liedke",
-      "options": [
-        {
-          "value": "a",
-          "label": "A"
-        },
-        {
-          "value": "b",
-          "label": "B"
-        },
-        {
-          "value": "c",
-          "label": "C"
-        }
-      ],
-      "answer": null,
-      "source": null,
-      "status": "extraction_review",
-      "reason": "Question stem is unusually short and may be incomplete; original PDF text is attached.",
-      "provenance": "verbatim_pdf",
-      "option_provenance": "letter_only_not_extracted",
-      "source_snippets": [
-        " Herr Thoma verkauft Bodenbeläge (Teppich).\nRichtig /falsch\n\n33.  Frau Liedke\nd)  reklamiert einen Schaden.\ne)   trifft ihre Entscheidung aufgrund des Musters.\nf)  wundert sich über den Preisunterschied.\n\nNummer 26 und 27\nFrau Müller: Hallo Frau Herbst. Herzlich Willkommen im Team.\nAmira Herbst: Guten Morgen. Dankeschön.\nFrau Müller: Das ist Ignacio Lopez. Ignacio, das ist Frau Herbst.\nIgnacio Lopez: Hallo. Wir arbeiten zusammen in der Gänseblümchen-Gruppe. Wollen wir uns nicht duzen?\nAmira Herbst: Ja klar, gerne. Ich bin Amira. Ich dachte, ich wäre in der Mäuse-Gruppe.\nIgnacio Lopez: Normalerweise schon. Aber diese Woche mussten wir das etwas anders organisieren. Denn\nheute Morgen hat sich eine Kolle"
-      ]
-    },
-    {
-      "id": "set085-p118-q35-1",
-      "page": 118,
-      "section": "Hören",
-      "detail": "Listening variants",
-      "kind": "mc",
-      "number": 35,
-      "prompt": "Die Erzieherin (Amira Herbst)",
-      "options": [
-        {
-          "value": "a",
-          "label": "A"
-        },
-        {
-          "value": "b",
-          "label": "B"
-        },
-        {
-          "value": "c",
-          "label": "C"
-        }
-      ],
-      "answer": null,
-      "source": null,
-      "status": "extraction_review",
-      "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below.",
-      "provenance": "verbatim_pdf",
-      "option_provenance": "letter_only_not_extracted",
-      "source_snippets": [
-        "io spricht mit Amiras über den Dienstplan.\n\nRichtig / falsh\n\n35.  Die Erzieherin (Amira Herbst)\n\n\n\n                                                                           118"
-      ]
-    },
-    {
-      "id": "set085-p121-q38-1",
-      "page": 121,
-      "section": "Hören",
-      "detail": "Listening variants",
-      "kind": "mc",
-      "number": 38,
-      "prompt": "Lara Hartmann",
-      "options": [
-        {
-          "value": "a",
-          "label": "A"
-        },
-        {
-          "value": "b",
-          "label": "B"
-        },
-        {
-          "value": "c",
-          "label": "C"
-        }
-      ],
-      "answer": null,
-      "source": null,
-      "status": "extraction_review",
-      "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below.",
-      "provenance": "verbatim_pdf",
-      "option_provenance": "letter_only_not_extracted",
-      "source_snippets": [
-        "t.\nFür Rückfragen erreichen Sie mich heute noch bis 17 Uhr.\n38.  Lara Hartmann\na)  benötigt Dokumente für das Steuer Büro\n\n\n\n\n                                                                           121"
-      ]
-    },
-    {
       "id": "set086-missing-28",
       "page": 123,
       "section": "Hören",
@@ -2213,38 +1172,6 @@
       "source_snippets": []
     },
     {
-      "id": "set089-p140-q34-1",
-      "page": 140,
-      "section": "Hören",
-      "detail": "Listening variants",
-      "kind": "mc",
-      "number": 34,
-      "prompt": "Die Putzkräfte müssen die Hygienetücher a) auf den Reinigungswagen legen.",
-      "options": [
-        {
-          "value": "a",
-          "label": "A"
-        },
-        {
-          "value": "b",
-          "label": "B"
-        },
-        {
-          "value": "c",
-          "label": "C"
-        }
-      ],
-      "answer": null,
-      "source": null,
-      "status": "extraction_review",
-      "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below.",
-      "provenance": "verbatim_pdf",
-      "option_provenance": "letter_only_not_extracted",
-      "source_snippets": [
-        "ensibel konstruiert.\nc)  sind kompliziert in der Anwendung.\n34.  Die Putzkräfte müssen die Hygienetücher a) auf den Reinigungswagen legen.\n\nb)  in den Büros nachfüllen.\n\nc)  zur Reinigung der Schreibtische einsetzen.\n35. Das Desinfektionsmittel\na)  bestellt der Auftraggeber.\nb)  bringt die Reinigungsfirma mit.\nc)  wurde mehrfach ausgetauscht.\n\n\nHören Teil 4\nSie hören fünf telefonische Mitteilungen. Zu jeder Mitteilung gibt es eine Aufgabe. Welche Lösung (a, b oder c) passt am\nbesten? Markieren Sie Ihre Lösungen für die Aufgaben 36-40 auf dem Antwortbogen.\nSie hören jede Mitteilung einmal.\nNummer 36\nHi, hier Tina. Ich bin bei einer Kundin, der wir ein falsches Netzkabel für ihren neuen Fernseher gelief"
-      ]
-    },
-    {
       "id": "set091-speak-6",
       "page": 143,
       "section": "Sprechen",
@@ -2274,142 +1201,6 @@
       "source": null,
       "status": "manual_review",
       "reason": "Source statement and discussion prompts are available across pages 144–145; speaking needs human assessment.",
-      "provenance": "not_verbatim_pdf",
-      "option_provenance": "no_mc_choices",
-      "source_snippets": []
-    },
-    {
-      "id": "set093-extra-1",
-      "page": 145,
-      "section": "Sprechen",
-      "detail": "Situations",
-      "kind": "free",
-      "number": 1,
-      "prompt": "Zusätzliches mündliches Thema: Drucker/ Backofen ist kaputt.",
-      "options": [],
-      "answer": null,
-      "source": null,
-      "status": "manual_review",
-      "reason": null,
-      "provenance": "not_verbatim_pdf",
-      "option_provenance": "no_mc_choices",
-      "source_snippets": []
-    },
-    {
-      "id": "set093-extra-2",
-      "page": 145,
-      "section": "Sprechen",
-      "detail": "Situations",
-      "kind": "free",
-      "number": 2,
-      "prompt": "Zusätzliches mündliches Thema: Vermieter hat Miete erhöht.",
-      "options": [],
-      "answer": null,
-      "source": null,
-      "status": "manual_review",
-      "reason": null,
-      "provenance": "not_verbatim_pdf",
-      "option_provenance": "no_mc_choices",
-      "source_snippets": []
-    },
-    {
-      "id": "set093-extra-3",
-      "page": 145,
-      "section": "Sprechen",
-      "detail": "Situations",
-      "kind": "free",
-      "number": 3,
-      "prompt": "Zusätzliches mündliches Thema: In allen Wohnungen die Batterie nicht funktioniert",
-      "options": [],
-      "answer": null,
-      "source": null,
-      "status": "manual_review",
-      "reason": null,
-      "provenance": "not_verbatim_pdf",
-      "option_provenance": "no_mc_choices",
-      "source_snippets": []
-    },
-    {
-      "id": "set093-extra-4",
-      "page": 145,
-      "section": "Sprechen",
-      "detail": "Situations",
-      "kind": "free",
-      "number": 4,
-      "prompt": "Zusätzliches mündliches Thema: Wir müssen mit dem Koch sprechen, eine Idee für neue Gerichte, wo wir nach Produkten suchen werden",
-      "options": [],
-      "answer": null,
-      "source": null,
-      "status": "manual_review",
-      "reason": null,
-      "provenance": "not_verbatim_pdf",
-      "option_provenance": "no_mc_choices",
-      "source_snippets": []
-    },
-    {
-      "id": "set093-extra-5",
-      "page": 145,
-      "section": "Sprechen",
-      "detail": "Situations",
-      "kind": "free",
-      "number": 5,
-      "prompt": "Zusätzliches mündliches Thema: Die Schulsaison steht vor der Tür und der Lieferant verzögert die Lieferung von Schreibwaren",
-      "options": [],
-      "answer": null,
-      "source": null,
-      "status": "manual_review",
-      "reason": null,
-      "provenance": "not_verbatim_pdf",
-      "option_provenance": "no_mc_choices",
-      "source_snippets": []
-    },
-    {
-      "id": "set093-extra-6",
-      "page": 145,
-      "section": "Sprechen",
-      "detail": "Situations",
-      "kind": "free",
-      "number": 6,
-      "prompt": "Zusätzliches mündliches Thema: Sie arbeiten in einem Restaurant und haben verdorbenes Essen erhalten, was vielen Besuchern passieren sollte",
-      "options": [],
-      "answer": null,
-      "source": null,
-      "status": "manual_review",
-      "reason": null,
-      "provenance": "not_verbatim_pdf",
-      "option_provenance": "no_mc_choices",
-      "source_snippets": []
-    },
-    {
-      "id": "set093-extra-7",
-      "page": 145,
-      "section": "Sprechen",
-      "detail": "Situations",
-      "kind": "free",
-      "number": 7,
-      "prompt": "Zusätzliches mündliches Thema: Ein Gast aus dem Ausland sollte für eine Rast arrangiert werden/übernachtsmöglichkeit",
-      "options": [],
-      "answer": null,
-      "source": null,
-      "status": "manual_review",
-      "reason": null,
-      "provenance": "not_verbatim_pdf",
-      "option_provenance": "no_mc_choices",
-      "source_snippets": []
-    },
-    {
-      "id": "set093-extra-8",
-      "page": 145,
-      "section": "Sprechen",
-      "detail": "Situations",
-      "kind": "free",
-      "number": 8,
-      "prompt": "Zusätzliches mündliches Thema: Wir arbeiten in einem Krankenhaus, Patienten beschweren sich über einen Kollegen.",
-      "options": [],
-      "answer": null,
-      "source": null,
-      "status": "manual_review",
-      "reason": null,
       "provenance": "not_verbatim_pdf",
       "option_provenance": "no_mc_choices",
       "source_snippets": []
