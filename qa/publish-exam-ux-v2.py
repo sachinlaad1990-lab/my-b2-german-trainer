@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Publish exam UX v2 without modifying source PDF, prompts, options, or answers."""
+"""Publish exam UX v2 without modifying source PDF, prompts, options, or answers.
+
+Guarded first-party redesign: all bank bytes remain identical.
+"""
 import pathlib,re,hashlib,json,collections
 p=pathlib.Path('exam-practice.html')
 original=p.read_text(encoding='utf-8')
