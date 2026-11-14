@@ -1,0 +1,807 @@
+{
+  "source_hash": "460787d198cf8f5f8c4de2ceac076acd8284316083ae5b03021b980c76af53f2",
+  "changes": [
+    {
+      "id": "set039-p45-q15a-source",
+      "field": "created",
+      "reason": "User requested both 15a and 15b, rather than one blended variant."
+    },
+    {
+      "id": "set039-p45-q15-1",
+      "field": "number",
+      "reason": "Label second source variant 15b",
+      "before": "15",
+      "after": "15b"
+    },
+    {
+      "id": "set039-p45-q15-1",
+      "field": "prompt",
+      "reason": "User-requested German translation of source Russian, NOT original German PDF wording",
+      "before": "What rule applies in the company?",
+      "after": "Was gilt im Unternehmen?"
+    },
+    {
+      "id": "set039-p45-q15-1",
+      "field": "source_heading_original_russian",
+      "reason": "Keep original Russian heading",
+      "before": "None",
+      "after": "Что действует на предприятии"
+    },
+    {
+      "id": "set039-p45-q15-1",
+      "field": "source_provenance",
+      "reason": "Translated heading, not original German",
+      "before": "not_verbatim_pdf",
+      "after": "editorial_practice_prompt"
+    },
+    {
+      "id": "set039-p45-q15-1",
+      "field": "completeness",
+      "reason": "German answer choices complete; translated heading explicitly labeled",
+      "before": "extraction_review",
+      "after": "complete_source"
+    },
+    {
+      "id": "set039-p45-q15-1",
+      "field": "completeness_reason",
+      "reason": "Translation provenance",
+      "before": "Source page includes two interleaved variants of question 15. Options match the second variant literally; the English question lab",
+      "after": "German heading translated at the user's request from original Russian, and clearly labeled. Choices A/B/C reproduce the original PDF German wording; no official key is claimed."
+    },
+    {
+      "id": "set039-p45-q15-1",
+      "field": "source_alt_note",
+      "reason": "Source caveat",
+      "before": "PDF page 45 contains two question-15 variants in parallel columns. This question represents the variant titled “Что действует на п",
+      "after": "PDF page 45 contains two question-15 variants in parallel columns. This question represents the variant titled “Что действует на предприятии” in Russian. The English instruction is a translation, not original German text. 15b: German translation (NOT"
+    },
+    {
+      "id": "set080-p97-q35-1",
+      "field": "options",
+      "reason": "User requested C be blank: source prints c) ?",
+      "before": "[{'value': 'a', 'label': 'er, als Ersthelfer arbeiten darf'}, {'value': 'b', 'label': 'welche Dokumente er braucht'}, {'value': 'c",
+      "after": "[{'value': 'a', 'label': 'er, als Ersthelfer arbeiten darf'}, {'value': 'b', 'label': 'welche Dokumente er braucht'}, {'value': 'c', 'label': ''}]"
+    },
+    {
+      "id": "set080-p97-q35-1",
+      "field": "answer",
+      "reason": "User-selected practice answer B (unofficial)",
+      "before": "None",
+      "after": "b"
+    },
+    {
+      "id": "set080-p97-q35-1",
+      "field": "source",
+      "reason": "User answer, not PDF/official solution",
+      "before": "None",
+      "after": "user-reviewed"
+    },
+    {
+      "id": "set080-p97-q35-1",
+      "field": "completeness",
+      "reason": "Source C missing",
+      "before": "extraction_review",
+      "after": "source_incomplete"
+    },
+    {
+      "id": "set080-p97-q35-1",
+      "field": "completeness_reason",
+      "reason": "Distinguish incomplete source and unofficial key",
+      "before": "None",
+      "after": "Original page 97 prints option c) ? with no wording. C intentionally blank. B is user-selected for practice and NOT an official key."
+    },
+    {
+      "id": "set080-p97-q35-1",
+      "field": "source_option_provenance",
+      "reason": "Cannot claim all options verbatim",
+      "before": "verbatim_pdf",
+      "after": "missing_source_c"
+    },
+    {
+      "id": "set080-p97-q35-1",
+      "field": "source_alt_note",
+      "reason": "Source caveat",
+      "before": "NUMBER REPEATED: the PDF contains alternative wording or extraction overlap. Check both against source.",
+      "after": "NUMBER REPEATED: the PDF contains alternative wording or extraction overlap. Check both against source. Original source prints c) ?. Option C intentionally BLANK. Answer B is user-reviewed only; not an official key."
+    },
+    {
+      "id": "set081-missing-39",
+      "field": "kind",
+      "reason": "User explicitly identified this as fill-in-the-blank",
+      "before": "note",
+      "after": "gap"
+    },
+    {
+      "id": "set081-missing-39",
+      "field": "prompt",
+      "reason": "Literal PDF question heading",
+      "before": "Question 39: exact complete question text has not been reliably digitized for this variant. See the original PDF source pages show",
+      "after": "39.Barbara"
+    },
+    {
+      "id": "set081-missing-39",
+      "field": "source_provenance",
+      "reason": "Literal source heading",
+      "before": "editorial_practice_prompt",
+      "after": "verbatim_pdf"
+    },
+    {
+      "id": "set081-missing-39",
+      "field": "completeness",
+      "reason": "Only one answer fragment is supplied; not a full MCQ source",
+      "before": "extraction_review",
+      "after": "source_incomplete"
+    },
+    {
+      "id": "set081-missing-39",
+      "field": "completeness_reason",
+      "reason": "Source still incomplete",
+      "before": "The original PDF text includes a possible reference to this question number, but a reliable standalone question and its options we",
+      "after": "User-requested fill-in-the-blank. PDF page 103 provides transcript and a single answer fragment, not A/B/C. No automatic answer key."
+    },
+    {
+      "id": "set081-missing-39",
+      "field": "source_alt_note",
+      "reason": "Source caveat",
+      "before": "INCOMPLETE — The original PDF text includes a possible reference to this question number, but a reliable standalone question and i",
+      "after": "INCOMPLETE — The original PDF text includes a possible reference to this question number, but a reliable standalone question and its options were not extracted. Do not attempt to score this placeholder. PDF fragment: a) kümmert sich um die Verpflegun"
+    },
+    {
+      "id": "set082-p107-q36-1",
+      "field": "options",
+      "reason": "Restore verbatim C from next original PDF page",
+      "before": "[{'value': 'a', 'label': 'kann nicht Termin einhalten.'}, {'value': 'b', 'label': 'braucht Termin verschieben.'}]",
+      "after": "[{'value': 'a', 'label': 'kann nicht Termin einhalten.'}, {'value': 'b', 'label': 'braucht Termin verschieben.'}, {'value': 'c', 'label': 'möchte Termin vereinbaren/anmelden'}]"
+    },
+    {
+      "id": "set082-p107-q36-1",
+      "field": "completeness",
+      "reason": "Text complete, listening answer not audio verified",
+      "before": "extraction_review",
+      "after": "transcript_review"
+    },
+    {
+      "id": "set082-p107-q36-1",
+      "field": "completeness_reason",
+      "reason": "Preserve provenance",
+      "before": "Question stem is unusually short and may be incomplete; original PDF text is attached.",
+      "after": "All three choices copied literally from original PDF pages 107–108; audio not verified."
+    },
+    {
+      "id": "set082-p107-q36-1",
+      "field": "source_alt_note",
+      "reason": "Source caveat",
+      "before": "CHECK QUESTION WORDING against source page.",
+      "after": "CHECK QUESTION WORDING against source page. Option C continues on original PDF page 108. Listening solution remains unofficial."
+    },
+    {
+      "id": "set085-missing-28",
+      "field": "page",
+      "reason": "Question's source matching passage on page 119",
+      "before": "117",
+      "after": "119"
+    },
+    {
+      "id": "set085-missing-28",
+      "field": "prompt",
+      "reason": "Original PDF heading, not invented",
+      "before": "Question 28: exact complete question text has not been reliably digitized for this variant. See the original PDF source pages show",
+      "after": "Nummer 28."
+    },
+    {
+      "id": "set085-missing-28",
+      "field": "kind",
+      "reason": "Original exercise is A–F matching",
+      "before": "note",
+      "after": "mc"
+    },
+    {
+      "id": "set085-missing-28",
+      "field": "options",
+      "reason": "Exact A–F pool in original source order",
+      "before": "[]",
+      "after": "[{'value': 'a', 'label': 'Regelungen zur Arbeitsunfähigkeit unterscheiden sich von Unternehmen zu Unternehmen.'}, {'value': 'b', 'label': 'Die Arbeitsplatzgestaltung hat einen Einfluss auf die Gesundheit der Mitarbeiter.'}, {'value': 'c', 'label': 'A"
+    },
+    {
+      "id": "set085-missing-28",
+      "field": "answer",
+      "reason": "Informal source-marked letter, not an official key",
+      "before": "None",
+      "after": "f"
+    },
+    {
+      "id": "set085-missing-28",
+      "field": "source",
+      "reason": "Original PDF's informal contributor mark",
+      "before": "None",
+      "after": "source-marked"
+    },
+    {
+      "id": "set085-missing-28",
+      "field": "source_provenance",
+      "reason": "Literal PDF dialogue number",
+      "before": "editorial_practice_prompt",
+      "after": "verbatim_pdf"
+    },
+    {
+      "id": "set085-missing-28",
+      "field": "source_option_provenance",
+      "reason": "Literal PDF A–F text",
+      "before": "no_mc_choices",
+      "after": "verbatim_pdf"
+    },
+    {
+      "id": "set085-missing-28",
+      "field": "completeness",
+      "reason": "Original text usable, audio not independently verified",
+      "before": "extraction_review",
+      "after": "transcript_review"
+    },
+    {
+      "id": "set085-missing-28",
+      "field": "completeness_reason",
+      "reason": "Source verification caveat",
+      "before": "This question number is not available as a reliably identifiable standalone task in the selected source variant. The relevant orig",
+      "after": "Original A–F list and marked letter appear in PDF page 119; Question 31's transcript continues onto page 120. Marks are unofficial; audio not independently verified."
+    },
+    {
+      "id": "set085-missing-28",
+      "field": "source_alt_note",
+      "reason": "Keep unofficial keys distinct",
+      "before": "INCOMPLETE — This question number is not available as a reliably identifiable standalone task in the selected source variant. The ",
+      "after": "Source-marked F is not an official answer key. Original PDF contains the full A–F choices on page 119 and transcript continues onto page 120 for Q31."
+    },
+    {
+      "id": "set085-missing-29",
+      "field": "page",
+      "reason": "Question's source matching passage on page 119",
+      "before": "117",
+      "after": "119"
+    },
+    {
+      "id": "set085-missing-29",
+      "field": "prompt",
+      "reason": "Original PDF heading, not invented",
+      "before": "Question 29: exact complete question text has not been reliably digitized for this variant. See the original PDF source pages show",
+      "after": "Nummer 29."
+    },
+    {
+      "id": "set085-missing-29",
+      "field": "kind",
+      "reason": "Original exercise is A–F matching",
+      "before": "note",
+      "after": "mc"
+    },
+    {
+      "id": "set085-missing-29",
+      "field": "options",
+      "reason": "Exact A–F pool in original source order",
+      "before": "[]",
+      "after": "[{'value': 'a', 'label': 'Regelungen zur Arbeitsunfähigkeit unterscheiden sich von Unternehmen zu Unternehmen.'}, {'value': 'b', 'label': 'Die Arbeitsplatzgestaltung hat einen Einfluss auf die Gesundheit der Mitarbeiter.'}, {'value': 'c', 'label': 'A"
+    },
+    {
+      "id": "set085-missing-29",
+      "field": "answer",
+      "reason": "Informal source-marked letter, not an official key",
+      "before": "None",
+      "after": "d"
+    },
+    {
+      "id": "set085-missing-29",
+      "field": "source",
+      "reason": "Original PDF's informal contributor mark",
+      "before": "None",
+      "after": "source-marked"
+    },
+    {
+      "id": "set085-missing-29",
+      "field": "source_provenance",
+      "reason": "Literal PDF dialogue number",
+      "before": "editorial_practice_prompt",
+      "after": "verbatim_pdf"
+    },
+    {
+      "id": "set085-missing-29",
+      "field": "source_option_provenance",
+      "reason": "Literal PDF A–F text",
+      "before": "no_mc_choices",
+      "after": "verbatim_pdf"
+    },
+    {
+      "id": "set085-missing-29",
+      "field": "completeness",
+      "reason": "Original text usable, audio not independently verified",
+      "before": "extraction_review",
+      "after": "transcript_review"
+    },
+    {
+      "id": "set085-missing-29",
+      "field": "completeness_reason",
+      "reason": "Source verification caveat",
+      "before": "This question number is not available as a reliably identifiable standalone task in the selected source variant. The relevant orig",
+      "after": "Original A–F list and marked letter appear in PDF page 119; Question 31's transcript continues onto page 120. Marks are unofficial; audio not independently verified."
+    },
+    {
+      "id": "set085-missing-29",
+      "field": "source_alt_note",
+      "reason": "Keep unofficial keys distinct",
+      "before": "INCOMPLETE — This question number is not available as a reliably identifiable standalone task in the selected source variant. The ",
+      "after": "Source-marked D is not an official answer key. Original PDF contains the full A–F choices on page 119 and transcript continues onto page 120 for Q31."
+    },
+    {
+      "id": "set085-missing-30",
+      "field": "page",
+      "reason": "Question's source matching passage on page 119",
+      "before": "117",
+      "after": "119"
+    },
+    {
+      "id": "set085-missing-30",
+      "field": "prompt",
+      "reason": "Original PDF heading, not invented",
+      "before": "Question 30: exact complete question text has not been reliably digitized for this variant. See the original PDF source pages show",
+      "after": "Nummer 30."
+    },
+    {
+      "id": "set085-missing-30",
+      "field": "kind",
+      "reason": "Original exercise is A–F matching",
+      "before": "note",
+      "after": "mc"
+    },
+    {
+      "id": "set085-missing-30",
+      "field": "options",
+      "reason": "Exact A–F pool in original source order",
+      "before": "[]",
+      "after": "[{'value': 'a', 'label': 'Regelungen zur Arbeitsunfähigkeit unterscheiden sich von Unternehmen zu Unternehmen.'}, {'value': 'b', 'label': 'Die Arbeitsplatzgestaltung hat einen Einfluss auf die Gesundheit der Mitarbeiter.'}, {'value': 'c', 'label': 'A"
+    },
+    {
+      "id": "set085-missing-30",
+      "field": "answer",
+      "reason": "Informal source-marked letter, not an official key",
+      "before": "None",
+      "after": "c"
+    },
+    {
+      "id": "set085-missing-30",
+      "field": "source",
+      "reason": "Original PDF's informal contributor mark",
+      "before": "None",
+      "after": "source-marked"
+    },
+    {
+      "id": "set085-missing-30",
+      "field": "source_provenance",
+      "reason": "Literal PDF dialogue number",
+      "before": "editorial_practice_prompt",
+      "after": "verbatim_pdf"
+    },
+    {
+      "id": "set085-missing-30",
+      "field": "source_option_provenance",
+      "reason": "Literal PDF A–F text",
+      "before": "no_mc_choices",
+      "after": "verbatim_pdf"
+    },
+    {
+      "id": "set085-missing-30",
+      "field": "completeness",
+      "reason": "Original text usable, audio not independently verified",
+      "before": "extraction_review",
+      "after": "transcript_review"
+    },
+    {
+      "id": "set085-missing-30",
+      "field": "completeness_reason",
+      "reason": "Source verification caveat",
+      "before": "This question number is not available as a reliably identifiable standalone task in the selected source variant. The relevant orig",
+      "after": "Original A–F list and marked letter appear in PDF page 119; Question 31's transcript continues onto page 120. Marks are unofficial; audio not independently verified."
+    },
+    {
+      "id": "set085-missing-30",
+      "field": "source_alt_note",
+      "reason": "Keep unofficial keys distinct",
+      "before": "INCOMPLETE — This question number is not available as a reliably identifiable standalone task in the selected source variant. The ",
+      "after": "Source-marked C is not an official answer key. Original PDF contains the full A–F choices on page 119 and transcript continues onto page 120 for Q31."
+    },
+    {
+      "id": "set085-missing-31",
+      "field": "page",
+      "reason": "Question's source matching passage on page 119",
+      "before": "117",
+      "after": "119"
+    },
+    {
+      "id": "set085-missing-31",
+      "field": "prompt",
+      "reason": "Original PDF heading, not invented",
+      "before": "Question 31: exact complete question text has not been reliably digitized for this variant. See the original PDF source pages show",
+      "after": "Nummer 31."
+    },
+    {
+      "id": "set085-missing-31",
+      "field": "kind",
+      "reason": "Original exercise is A–F matching",
+      "before": "note",
+      "after": "mc"
+    },
+    {
+      "id": "set085-missing-31",
+      "field": "options",
+      "reason": "Exact A–F pool in original source order",
+      "before": "[]",
+      "after": "[{'value': 'a', 'label': 'Regelungen zur Arbeitsunfähigkeit unterscheiden sich von Unternehmen zu Unternehmen.'}, {'value': 'b', 'label': 'Die Arbeitsplatzgestaltung hat einen Einfluss auf die Gesundheit der Mitarbeiter.'}, {'value': 'c', 'label': 'A"
+    },
+    {
+      "id": "set085-missing-31",
+      "field": "answer",
+      "reason": "Informal source-marked letter, not an official key",
+      "before": "None",
+      "after": "b"
+    },
+    {
+      "id": "set085-missing-31",
+      "field": "source",
+      "reason": "Original PDF's informal contributor mark",
+      "before": "None",
+      "after": "source-marked"
+    },
+    {
+      "id": "set085-missing-31",
+      "field": "source_provenance",
+      "reason": "Literal PDF dialogue number",
+      "before": "editorial_practice_prompt",
+      "after": "verbatim_pdf"
+    },
+    {
+      "id": "set085-missing-31",
+      "field": "source_option_provenance",
+      "reason": "Literal PDF A–F text",
+      "before": "no_mc_choices",
+      "after": "verbatim_pdf"
+    },
+    {
+      "id": "set085-missing-31",
+      "field": "completeness",
+      "reason": "Original text usable, audio not independently verified",
+      "before": "extraction_review",
+      "after": "transcript_review"
+    },
+    {
+      "id": "set085-missing-31",
+      "field": "completeness_reason",
+      "reason": "Source verification caveat",
+      "before": "This question number is not available as a reliably identifiable standalone task in the selected source variant. The relevant orig",
+      "after": "Original A–F list and marked letter appear in PDF page 119; Question 31's transcript continues onto page 120. Marks are unofficial; audio not independently verified."
+    },
+    {
+      "id": "set085-missing-31",
+      "field": "source_alt_note",
+      "reason": "Keep unofficial keys distinct",
+      "before": "INCOMPLETE — This question number is not available as a reliably identifiable standalone task in the selected source variant. The ",
+      "after": "Source-marked B is not an official answer key. Original PDF contains the full A–F choices on page 119 and transcript continues onto page 120 for Q31."
+    },
+    {
+      "id": "set083-missing-35",
+      "field": "completeness",
+      "reason": "Approved: original source doesn't include a safely identifiable standalone task for this variant",
+      "before": "extraction_review",
+      "after": "source_incomplete"
+    },
+    {
+      "id": "set083-missing-35",
+      "field": "completeness_reason",
+      "reason": "Preserve missing source evidence",
+      "before": "This question number is not available as a reliably identifiable standalone task in the selected source variant. The relevant orig",
+      "after": "Reviewed original PDF: no unambiguous complete standalone question/options for this specific variant. Retain source pages; do not invent wording or borrow an unrelated variant."
+    },
+    {
+      "id": "set083-missing-36",
+      "field": "completeness",
+      "reason": "Approved: original source doesn't include a safely identifiable standalone task for this variant",
+      "before": "extraction_review",
+      "after": "source_incomplete"
+    },
+    {
+      "id": "set083-missing-36",
+      "field": "completeness_reason",
+      "reason": "Preserve missing source evidence",
+      "before": "This question number is not available as a reliably identifiable standalone task in the selected source variant. The relevant orig",
+      "after": "Reviewed original PDF: no unambiguous complete standalone question/options for this specific variant. Retain source pages; do not invent wording or borrow an unrelated variant."
+    },
+    {
+      "id": "set083-missing-37",
+      "field": "completeness",
+      "reason": "Approved: original source doesn't include a safely identifiable standalone task for this variant",
+      "before": "extraction_review",
+      "after": "source_incomplete"
+    },
+    {
+      "id": "set083-missing-37",
+      "field": "completeness_reason",
+      "reason": "Preserve missing source evidence",
+      "before": "This question number is not available as a reliably identifiable standalone task in the selected source variant. The relevant orig",
+      "after": "Reviewed original PDF: no unambiguous complete standalone question/options for this specific variant. Retain source pages; do not invent wording or borrow an unrelated variant."
+    },
+    {
+      "id": "set083-missing-38",
+      "field": "completeness",
+      "reason": "Approved: original source doesn't include a safely identifiable standalone task for this variant",
+      "before": "extraction_review",
+      "after": "source_incomplete"
+    },
+    {
+      "id": "set083-missing-38",
+      "field": "completeness_reason",
+      "reason": "Preserve missing source evidence",
+      "before": "This question number is not available as a reliably identifiable standalone task in the selected source variant. The relevant orig",
+      "after": "Reviewed original PDF: no unambiguous complete standalone question/options for this specific variant. Retain source pages; do not invent wording or borrow an unrelated variant."
+    },
+    {
+      "id": "set083-missing-39",
+      "field": "completeness",
+      "reason": "Approved: original source doesn't include a safely identifiable standalone task for this variant",
+      "before": "extraction_review",
+      "after": "source_incomplete"
+    },
+    {
+      "id": "set083-missing-39",
+      "field": "completeness_reason",
+      "reason": "Preserve missing source evidence",
+      "before": "This question number is not available as a reliably identifiable standalone task in the selected source variant. The relevant orig",
+      "after": "Reviewed original PDF: no unambiguous complete standalone question/options for this specific variant. Retain source pages; do not invent wording or borrow an unrelated variant."
+    },
+    {
+      "id": "set083-missing-40",
+      "field": "completeness",
+      "reason": "Approved: original source doesn't include a safely identifiable standalone task for this variant",
+      "before": "extraction_review",
+      "after": "source_incomplete"
+    },
+    {
+      "id": "set083-missing-40",
+      "field": "completeness_reason",
+      "reason": "Preserve missing source evidence",
+      "before": "This question number is not available as a reliably identifiable standalone task in the selected source variant. The relevant orig",
+      "after": "Reviewed original PDF: no unambiguous complete standalone question/options for this specific variant. Retain source pages; do not invent wording or borrow an unrelated variant."
+    },
+    {
+      "id": "set084-missing-29",
+      "field": "completeness",
+      "reason": "Approved: original source doesn't include a safely identifiable standalone task for this variant",
+      "before": "extraction_review",
+      "after": "source_incomplete"
+    },
+    {
+      "id": "set084-missing-29",
+      "field": "completeness_reason",
+      "reason": "Preserve missing source evidence",
+      "before": "This question number is not available as a reliably identifiable standalone task in the selected source variant. The relevant orig",
+      "after": "Reviewed original PDF: no unambiguous complete standalone question/options for this specific variant. Retain source pages; do not invent wording or borrow an unrelated variant."
+    },
+    {
+      "id": "set084-missing-30",
+      "field": "completeness",
+      "reason": "Approved: original source doesn't include a safely identifiable standalone task for this variant",
+      "before": "extraction_review",
+      "after": "source_incomplete"
+    },
+    {
+      "id": "set084-missing-30",
+      "field": "completeness_reason",
+      "reason": "Preserve missing source evidence",
+      "before": "This question number is not available as a reliably identifiable standalone task in the selected source variant. The relevant orig",
+      "after": "Reviewed original PDF: no unambiguous complete standalone question/options for this specific variant. Retain source pages; do not invent wording or borrow an unrelated variant."
+    },
+    {
+      "id": "set084-missing-31",
+      "field": "completeness",
+      "reason": "Approved: original source doesn't include a safely identifiable standalone task for this variant",
+      "before": "extraction_review",
+      "after": "source_incomplete"
+    },
+    {
+      "id": "set084-missing-31",
+      "field": "completeness_reason",
+      "reason": "Preserve missing source evidence",
+      "before": "This question number is not available as a reliably identifiable standalone task in the selected source variant. The relevant orig",
+      "after": "Reviewed original PDF: no unambiguous complete standalone question/options for this specific variant. Retain source pages; do not invent wording or borrow an unrelated variant."
+    },
+    {
+      "id": "set085-missing-24",
+      "field": "completeness",
+      "reason": "Approved: original source doesn't include a safely identifiable standalone task for this variant",
+      "before": "extraction_review",
+      "after": "source_incomplete"
+    },
+    {
+      "id": "set085-missing-24",
+      "field": "completeness_reason",
+      "reason": "Preserve missing source evidence",
+      "before": "This question number is not available as a reliably identifiable standalone task in the selected source variant. The relevant orig",
+      "after": "Reviewed original PDF: no unambiguous complete standalone question/options for this specific variant. Retain source pages; do not invent wording or borrow an unrelated variant."
+    },
+    {
+      "id": "set085-missing-25",
+      "field": "completeness",
+      "reason": "Approved: original source doesn't include a safely identifiable standalone task for this variant",
+      "before": "extraction_review",
+      "after": "source_incomplete"
+    },
+    {
+      "id": "set085-missing-25",
+      "field": "completeness_reason",
+      "reason": "Preserve missing source evidence",
+      "before": "This question number is not available as a reliably identifiable standalone task in the selected source variant. The relevant orig",
+      "after": "Reviewed original PDF: no unambiguous complete standalone question/options for this specific variant. Retain source pages; do not invent wording or borrow an unrelated variant."
+    },
+    {
+      "id": "set085-missing-26",
+      "field": "completeness",
+      "reason": "Approved: original source doesn't include a safely identifiable standalone task for this variant",
+      "before": "extraction_review",
+      "after": "source_incomplete"
+    },
+    {
+      "id": "set085-missing-26",
+      "field": "completeness_reason",
+      "reason": "Preserve missing source evidence",
+      "before": "This question number is not available as a reliably identifiable standalone task in the selected source variant. The relevant orig",
+      "after": "Reviewed original PDF: no unambiguous complete standalone question/options for this specific variant. Retain source pages; do not invent wording or borrow an unrelated variant."
+    },
+    {
+      "id": "set086-missing-28",
+      "field": "completeness",
+      "reason": "Approved: original source doesn't include a safely identifiable standalone task for this variant",
+      "before": "extraction_review",
+      "after": "source_incomplete"
+    },
+    {
+      "id": "set086-missing-28",
+      "field": "completeness_reason",
+      "reason": "Preserve missing source evidence",
+      "before": "This question number is not available as a reliably identifiable standalone task in the selected source variant. The relevant orig",
+      "after": "Reviewed original PDF: no unambiguous complete standalone question/options for this specific variant. Retain source pages; do not invent wording or borrow an unrelated variant."
+    },
+    {
+      "id": "set086-missing-29",
+      "field": "completeness",
+      "reason": "Approved: original source doesn't include a safely identifiable standalone task for this variant",
+      "before": "extraction_review",
+      "after": "source_incomplete"
+    },
+    {
+      "id": "set086-missing-29",
+      "field": "completeness_reason",
+      "reason": "Preserve missing source evidence",
+      "before": "This question number is not available as a reliably identifiable standalone task in the selected source variant. The relevant orig",
+      "after": "Reviewed original PDF: no unambiguous complete standalone question/options for this specific variant. Retain source pages; do not invent wording or borrow an unrelated variant."
+    },
+    {
+      "id": "set086-missing-30",
+      "field": "completeness",
+      "reason": "Approved: original source doesn't include a safely identifiable standalone task for this variant",
+      "before": "extraction_review",
+      "after": "source_incomplete"
+    },
+    {
+      "id": "set086-missing-30",
+      "field": "completeness_reason",
+      "reason": "Preserve missing source evidence",
+      "before": "This question number is not available as a reliably identifiable standalone task in the selected source variant. The relevant orig",
+      "after": "Reviewed original PDF: no unambiguous complete standalone question/options for this specific variant. Retain source pages; do not invent wording or borrow an unrelated variant."
+    },
+    {
+      "id": "set086-missing-31",
+      "field": "completeness",
+      "reason": "Approved: original source doesn't include a safely identifiable standalone task for this variant",
+      "before": "extraction_review",
+      "after": "source_incomplete"
+    },
+    {
+      "id": "set086-missing-31",
+      "field": "completeness_reason",
+      "reason": "Preserve missing source evidence",
+      "before": "This question number is not available as a reliably identifiable standalone task in the selected source variant. The relevant orig",
+      "after": "Reviewed original PDF: no unambiguous complete standalone question/options for this specific variant. Retain source pages; do not invent wording or borrow an unrelated variant."
+    }
+  ],
+  "items_applied": [
+    2,
+    4,
+    7,
+    8,
+    24,
+    25,
+    26,
+    27,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    21,
+    22,
+    23,
+    28,
+    29,
+    30,
+    31
+  ],
+  "needs_further_review": [
+    {
+      "item": 1,
+      "id": "set038-p43-q18-1",
+      "pdf_page": 43
+    },
+    {
+      "item": 3,
+      "id": "set079-p92-q36-1",
+      "pdf_page": 92
+    },
+    {
+      "item": 5,
+      "id": "set081-p100-q27-1",
+      "pdf_page": 100
+    },
+    {
+      "item": 6,
+      "id": "set081-missing-35",
+      "pdf_page": 99
+    },
+    {
+      "item": 9,
+      "id": "set083-missing-33",
+      "pdf_page": 109
+    },
+    {
+      "item": 10,
+      "id": "set083-missing-34",
+      "pdf_page": 109
+    },
+    {
+      "item": 20,
+      "id": "set085-missing-22",
+      "pdf_page": 117
+    }
+  ],
+  "total_questions": 603,
+  "source_pages_preserved": 149,
+  "by_section": {
+    "Lesen": {
+      "complete_source": 164,
+      "source_incomplete": 1,
+      "manual_review": 1,
+      "extraction_review": 1
+    },
+    "Schreiben": {
+      "source_incomplete": 7,
+      "manual_review": 42,
+      "complete_source": 144
+    },
+    "Hören": {
+      "transcript_review": 181,
+      "extraction_review": 6,
+      "source_incomplete": 31
+    },
+    "Sprechen": {
+      "manual_review": 24,
+      "source_incomplete": 1
+    }
+  },
+  "by_status": {
+    "complete_source": 308,
+    "source_incomplete": 40,
+    "manual_review": 67,
+    "extraction_review": 7,
+    "transcript_review": 181
+  },
+  "ready": 489,
+  "flagged": 114,
+  "disclaimer": "The PDF is authoritative. Original German wording unchanged. Russian heading is translated and labeled. Source- and user-marked answers are unofficial; listening audio is unverified."
+}
