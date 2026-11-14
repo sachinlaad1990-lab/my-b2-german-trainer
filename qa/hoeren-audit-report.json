@@ -1,0 +1,1296 @@
+{
+  "sets": 11,
+  "before": {
+    "requires_audio": 90,
+    "extraction_review": 128
+  },
+  "updates": [
+    {
+      "id": "set079-p88-q22-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set079-p88-q23-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set079-p88-q24-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set079-p89-q26-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set079-p89-q27-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set079-matching-89-28",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set079-matching-89-29",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set079-matching-89-30",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set079-matching-89-31",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set079-p91-q32-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set079-p92-q34-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set079-p92-q35-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set079-p92-q37-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set079-p92-q38-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set079-p93-q39-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set079-p93-q40-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set080-p94-q22-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set080-p94-q23-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set080-p94-q24-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set080-p95-q26-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set080-p95-q27-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set080-p95-q28-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set080-p95-q29-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set080-p95-q30-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set080-p95-q31-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set080-p97-q32-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set080-p97-q33-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set080-p97-q34-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set080-p97-q36-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set080-p97-q37-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set080-p98-q38-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set080-p98-q39-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set080-p98-q40-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set081-p99-q22-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set081-p99-q23-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set081-p99-q24-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set081-p99-q24-2",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set081-p100-q26-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set081-p100-q28-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set081-p100-q29-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set081-p100-q30-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set081-p100-q31-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set081-p102-q32-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set081-p102-q33-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set081-p102-q34-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set082-p104-q22-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set082-p104-q23-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set082-p104-q24-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set082-p104-q25-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set082-p105-q26-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set082-p105-q26-2",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set082-p105-q27-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set082-p105-q28-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set082-p105-q29-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set082-p105-q30-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set082-p105-q31-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set082-p107-q32-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set082-p107-q33-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set082-p107-q34-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set082-p107-q35-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set082-p108-q37-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set082-p108-q38-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set082-p108-q39-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set082-p108-q40-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set083-p109-q22-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set083-p109-q23-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set083-p109-q24-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set083-p110-q25-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set083-p110-q26-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set083-p110-q27-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set083-p110-q28-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set084-p113-q22-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set084-p113-q23-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set084-p113-q24-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set084-p113-q25-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set084-p114-q26-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set084-p114-q27-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set084-p114-q28-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set084-p115-q32-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set084-p115-q33-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set084-p115-q34-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set084-p115-q35-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set084-p115-q36-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set084-p116-q37-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set084-p116-q38-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set084-p116-q39-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set084-p116-q40-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set085-p117-q23-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set085-p117-q23-2",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set085-p118-q27-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set085-p118-q32-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set085-p120-q32-2",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set085-p121-q33-2",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set085-p118-q34-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set085-p121-q36-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set085-p121-q37-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set085-p122-q39-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set085-p122-q40-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set086-p123-q22-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set086-p123-q23-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set086-p124-q24-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set086-p124-q25-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set086-p124-q26-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set086-p124-q27-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set086-p124-q32-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set086-p125-q33-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set086-p125-q34-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set086-p125-q35-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set086-p125-q36-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set086-p125-q37-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set086-p125-q38-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set086-p126-q39-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set086-p126-q40-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set087-p127-q22-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set087-p127-q23-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set087-p127-q24-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set087-p127-q25-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set087-p128-q26-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set087-p128-q27-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set087-p128-q28-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set087-p128-q29-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set087-p128-q30-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set087-p128-q31-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set087-p130-q32-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set087-p130-q33-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set087-p130-q34-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set087-p130-q35-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set087-p130-q36-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set087-p130-q37-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set087-p131-q38-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set087-p131-q39-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set087-p131-q40-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set088-p132-q22-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set088-p132-q24-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set088-p133-q26-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set088-p133-q28-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set088-p133-q29-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set088-p133-q30-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set088-p133-q31-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set088-p135-q38-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set089-p137-q22-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set089-p137-q24-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set089-p138-q26-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set089-p138-q27-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set089-p138-q28-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set089-p138-q29-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set089-p138-q30-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set089-p138-q31-1",
+      "from": "extraction_review",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set089-p140-q32-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set089-p140-q33-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    },
+    {
+      "id": "set089-p140-q35-1",
+      "from": "requires_audio",
+      "to": "transcript_review"
+    }
+  ],
+  "answers_added": [
+    {
+      "id": "set080-p95-q28-1",
+      "answer": "a",
+      "basis": "informal source annotation, not official"
+    },
+    {
+      "id": "set080-p95-q29-1",
+      "answer": "b",
+      "basis": "informal source annotation, not official"
+    },
+    {
+      "id": "set080-p95-q30-1",
+      "answer": "e",
+      "basis": "informal source annotation, not official"
+    },
+    {
+      "id": "set080-p95-q31-1",
+      "answer": "d",
+      "basis": "informal source annotation, not official"
+    },
+    {
+      "id": "set081-p100-q28-1",
+      "answer": "b",
+      "basis": "informal source annotation, not official"
+    },
+    {
+      "id": "set081-p100-q29-1",
+      "answer": "d",
+      "basis": "informal source annotation, not official"
+    },
+    {
+      "id": "set081-p100-q30-1",
+      "answer": "c",
+      "basis": "informal source annotation, not official"
+    },
+    {
+      "id": "set081-p100-q31-1",
+      "answer": "a",
+      "basis": "informal source annotation, not official"
+    },
+    {
+      "id": "set082-p105-q28-1",
+      "answer": "c",
+      "basis": "informal source annotation, not official"
+    },
+    {
+      "id": "set082-p105-q29-1",
+      "answer": "d",
+      "basis": "informal source annotation, not official"
+    },
+    {
+      "id": "set082-p105-q30-1",
+      "answer": "e",
+      "basis": "informal source annotation, not official"
+    },
+    {
+      "id": "set082-p105-q31-1",
+      "answer": "b",
+      "basis": "informal source annotation, not official"
+    },
+    {
+      "id": "set087-p128-q28-1",
+      "answer": "e",
+      "basis": "informal source annotation, not official"
+    },
+    {
+      "id": "set087-p128-q29-1",
+      "answer": "b",
+      "basis": "informal source annotation, not official"
+    },
+    {
+      "id": "set087-p128-q30-1",
+      "answer": "c",
+      "basis": "informal source annotation, not official"
+    },
+    {
+      "id": "set087-p128-q31-1",
+      "answer": "d",
+      "basis": "informal source annotation, not official"
+    },
+    {
+      "id": "set088-p133-q28-1",
+      "answer": "f",
+      "basis": "informal source annotation, not official"
+    },
+    {
+      "id": "set088-p133-q29-1",
+      "answer": "c",
+      "basis": "informal source annotation, not official"
+    },
+    {
+      "id": "set088-p133-q30-1",
+      "answer": "e",
+      "basis": "informal source annotation, not official"
+    },
+    {
+      "id": "set088-p133-q31-1",
+      "answer": "a",
+      "basis": "informal source annotation, not official"
+    },
+    {
+      "id": "set089-p138-q28-1",
+      "answer": "f",
+      "basis": "informal source annotation, not official"
+    },
+    {
+      "id": "set089-p138-q29-1",
+      "answer": "e",
+      "basis": "informal source annotation, not official"
+    },
+    {
+      "id": "set089-p138-q30-1",
+      "answer": "c",
+      "basis": "informal source annotation, not official"
+    },
+    {
+      "id": "set089-p138-q31-1",
+      "answer": "a",
+      "basis": "informal source annotation, not official"
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "set079-p88-q25-1",
+      "page": 88,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set079-p91-q33-1",
+      "page": 91,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set079-p92-q36-1",
+      "page": 92,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set080-p94-q25-1",
+      "page": 94,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set080-p97-q32-2",
+      "page": 97,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set080-p97-q33-2",
+      "page": 97,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set080-p97-q34-2",
+      "page": 97,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set080-p97-q35-1",
+      "page": 97,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set080-p97-q35-2",
+      "page": 97,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set081-p99-q25-1",
+      "page": 99,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set081-p100-q27-1",
+      "page": 100,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set081-missing-35",
+      "page": 99,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set081-p102-q36-1",
+      "page": 102,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set081-p102-q37-1",
+      "page": 102,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set081-p102-q38-1",
+      "page": 102,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set081-missing-39",
+      "page": 103,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set081-p103-q40-1",
+      "page": 103,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set082-p107-q36-1",
+      "page": 107,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set083-p111-q29-1",
+      "page": 111,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set083-p111-q30-1",
+      "page": 111,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set083-p111-q31-1",
+      "page": 111,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set083-p112-q32-1",
+      "page": 112,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set083-missing-33",
+      "page": 109,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set083-missing-34",
+      "page": 109,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set083-missing-35",
+      "page": 109,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set083-missing-36",
+      "page": 109,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set083-missing-37",
+      "page": 109,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set083-missing-38",
+      "page": 109,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set083-missing-39",
+      "page": 109,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set083-missing-40",
+      "page": 109,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set084-missing-29",
+      "page": 113,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set084-missing-30",
+      "page": 113,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set084-missing-31",
+      "page": 113,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set085-missing-22",
+      "page": 117,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set085-missing-24",
+      "page": 117,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set085-missing-25",
+      "page": 117,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set085-missing-26",
+      "page": 117,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set085-missing-28",
+      "page": 117,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set085-missing-29",
+      "page": 117,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set085-missing-30",
+      "page": 117,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set085-missing-31",
+      "page": 117,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set085-p118-q33-1",
+      "page": 118,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set085-p118-q35-1",
+      "page": 118,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set085-p121-q38-1",
+      "page": 121,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set086-missing-28",
+      "page": 123,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set086-missing-29",
+      "page": 123,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set086-missing-30",
+      "page": 123,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set086-missing-31",
+      "page": 123,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set088-p132-q23-1",
+      "page": 132,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set088-p132-q25-1",
+      "page": 132,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set088-p133-q27-1",
+      "page": 133,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set088-p135-q32-1",
+      "page": 135,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set088-p135-q33-1",
+      "page": 135,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set088-p135-q34-1",
+      "page": 135,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set088-p135-q35-1",
+      "page": 135,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set088-p135-q36-1",
+      "page": 135,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set088-p135-q37-1",
+      "page": 135,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set088-p136-q39-1",
+      "page": 136,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set088-p136-q40-1",
+      "page": 136,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set089-p137-q23-1",
+      "page": 137,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set089-p137-q25-1",
+      "page": 137,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set089-p140-q34-1",
+      "page": 140,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set089-p140-q36-1",
+      "page": 140,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set089-p140-q37-1",
+      "page": 140,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set089-p140-q38-1",
+      "page": 140,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set089-p141-q39-1",
+      "page": 141,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    },
+    {
+      "id": "set089-p141-q40-1",
+      "page": 141,
+      "status": "extraction_review",
+      "reason": "Check source wording/options; recording may be needed"
+    }
+  ],
+  "after": {
+    "transcript_review": 151,
+    "extraction_review": 67
+  },
+  "total": 218,
+  "keyed": 31
+}
