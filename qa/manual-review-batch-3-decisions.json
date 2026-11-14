@@ -1,0 +1,78 @@
+{
+  "batch": 3,
+  "recorded_at": "2026-11-14",
+  "mode": "record_only_no_live_app_update",
+  "source_policy": "All original PDF German text and source option labels must remain exact; source-marked unofficial answer keys are not official.",
+  "entries": [
+    {
+      "item": 21,
+      "pdf_pages": "117–118",
+      "question": 24,
+      "decision": "APPROVE",
+      "proposed_action": "Keep Q24 flagged; preserve Teppichboden transcript and original printed numbering; do not invent question text."
+    },
+    {
+      "item": 22,
+      "pdf_pages": "117–118",
+      "question": 25,
+      "decision": "APPROVE",
+      "proposed_action": "Keep flagged, preserve existing D/E/F labels as in the original for Frau Liedke Q33; investigate numbering and do not convert D/E/F into A/B/C."
+    },
+    {
+      "item": 23,
+      "pdf_pages": "118",
+      "question": 26,
+      "decision": "APPROVE",
+      "proposed_action": "Preserve both printed variants for Ignacio; keep unprinted Q26 incomplete."
+    },
+    {
+      "item": 24,
+      "pdf_pages": "119",
+      "question": 28,
+      "decision": "APPROVE",
+      "proposed_action": "For later update, restore original Hören Teil 2 A–F matching statements; preserve unofficial source-marked F."
+    },
+    {
+      "item": 25,
+      "pdf_pages": "119",
+      "question": 29,
+      "decision": "APPROVE",
+      "proposed_action": "For later update, restore original Hören Teil 2 A–F matching statements; preserve unofficial source-marked D."
+    },
+    {
+      "item": 26,
+      "pdf_pages": "119",
+      "question": 30,
+      "decision": "APPROVE",
+      "proposed_action": "For later update, restore original Hören Teil 2 A–F matching statements; preserve unofficial source-marked C."
+    },
+    {
+      "item": 27,
+      "pdf_pages": "119–120",
+      "question": 31,
+      "decision": "APPROVE",
+      "proposed_action": "For later update, restore original Hören Teil 2 A–F matching statements; preserve unofficial source-marked B, and transcript continuation on PDF page 120."
+    },
+    {
+      "item": 28,
+      "pdf_pages": "124",
+      "question": 28,
+      "decision": "APPROVE",
+      "proposed_action": "Preserve variant distinction; keep Q28 incomplete, no copying answer pool from another variant."
+    },
+    {
+      "item": 29,
+      "pdf_pages": "124",
+      "question": 29,
+      "decision": "APPROVE",
+      "proposed_action": "Keep Q29 incomplete under this variant; no invented question/options."
+    },
+    {
+      "item": 30,
+      "pdf_pages": "124",
+      "question": 30,
+      "decision": "APPROVE",
+      "proposed_action": "Keep Q30 incomplete under this variant; no invented question/options."
+    }
+  ]
+}
