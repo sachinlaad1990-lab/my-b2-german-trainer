@@ -1,0 +1,67 @@
+name: Publish 31 user-approved B2 exam reviews
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'qa/apply-approved-31-reviews.py'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: publish-approved-exam-reviews
+  cancel-in-progress: false
+jobs:
+  apply:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply approved source-checked review decisions
+        run: python3 qa/apply-approved-31-reviews.py
+      - name: Validate all pages, variant choices, matching and source caveats
+        run: |
+          python3 - <<'PY'
+          import json,re,pathlib,collections,hashlib
+          s=pathlib.Path('exam-practice.html').read_text(encoding='utf-8')
+          match=re.search(r'<script id="bank-data" type="application/json">(.*?)</script>',s,re.S)
+          assert match
+          bank=json.loads(match.group(1))
+          pages={x['page']:x['original_text'] for x in bank['source_page_records']}
+          assert len(pages)==149
+          norm=lambda t:re.sub(r'\s+','',t or '')
+          source_hash=hashlib.sha256('\n<<<PAGE>>>\n'.join(norm(pages[k]) for k in sorted(pages)).encode()).hexdigest()
+          assert source_hash=='460787d198cf8f5f8c4de2ceac076acd8284316083ae5b03021b980c76af53f2'
+          ex=[e for e in bank['exercises'] if e['section'] in ('Lesen','Schreiben','Hören','Sprechen')]
+          q={x['id']:x for e in ex for x in e['questions']}
+          assert len(q)==603
+          assert q['set039-p45-q15a-source']['number']=='15a'
+          assert q['set039-p45-q15-1']['number']=='15b'
+          assert 'translation' in q['set039-p45-q15-1']['source_alt_note']
+          assert q['set080-p97-q35-1']['answer']=='b'
+          assert q['set080-p97-q35-1']['options'][2]['label']==''
+          assert q['set080-p97-q35-1']['source']=='user-reviewed'
+          assert q['set081-missing-39']['kind']=='gap'
+          assert len(q['set082-p107-q36-1']['options'])==3
+          for n,answer in [(28,'f'),(29,'d'),(30,'c'),(31,'b')]:
+            item=q['set085-missing-'+str(n)]
+            assert item['kind']=='mc' and len(item['options'])==6 and item['answer']==answer
+            assert all(norm(option['label']) in norm(pages[119]) for option in item['options'])
+          report=json.loads(pathlib.Path('qa/approved-31-review-update-report.json').read_text())
+          assert len(report['items_applied'])==24
+          assert len(report['needs_further_review'])==7
+          assert report['ready']+report['flagged']==603
+          print('SOURCE_REVIEW_VALIDATED',report['by_status'])
+          PY
+      - name: Run existing exam/app QA
+        run: node --test qa/quality.test.mjs
+      - name: Commit approved updates and updated statistics
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add exam-practice.html qa/approved-31-review-update-report.json qa/question-bank-status.json
+          git diff --cached --quiet || (git commit -m "Publish user-approved 31-question audit decisions with exact PDF wording" && git push)
