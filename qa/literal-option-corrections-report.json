@@ -1,0 +1,493 @@
+{
+  "corrected_option_groups": 14,
+  "remaining_mixed_variants": [
+    "set038-p43-q18-1",
+    "set039-p45-q15-1"
+  ],
+  "changes": [
+    {
+      "id": "set036-p39-q14-1",
+      "page": 39,
+      "previous_status": "extraction_review",
+      "new_status": "complete_source",
+      "before": [
+        {
+          "value": "a",
+          "label": "muss noch entschieden werden."
+        },
+        {
+          "value": "b",
+          "label": "wird nach der Urlaubszeit abgestimmt."
+        },
+        {
+          "value": "c",
+          "label": "wurde während der Sitzung besprochen."
+        }
+      ],
+      "after": [
+        {
+          "value": "a",
+          "label": "muss noch entschieden werden."
+        },
+        {
+          "value": "b",
+          "label": "wird nach der Urlaubszeit abgestimmt."
+        },
+        {
+          "value": "c",
+          "label": "wurde während der Sitzung gesprochen."
+        }
+      ]
+    },
+    {
+      "id": "set037-p41-q15-1",
+      "page": 41,
+      "previous_status": "extraction_review",
+      "new_status": "complete_source",
+      "before": [
+        {
+          "value": "a",
+          "label": "hat bereits ein Konzept vorbereitet."
+        },
+        {
+          "value": "b",
+          "label": "ist dienstlich verhindert."
+        },
+        {
+          "value": "c",
+          "label": "stellt die Resultate seiner Arbeit vor."
+        }
+      ],
+      "after": [
+        {
+          "value": "a",
+          "label": "hat bereits ein Konzept vorbereitet"
+        },
+        {
+          "value": "b",
+          "label": "ist dienstlich verhindert"
+        },
+        {
+          "value": "c",
+          "label": "stellt die Resultate seiner Arbeit vor."
+        }
+      ]
+    },
+    {
+      "id": "set038-p43-q15-1",
+      "page": 43,
+      "previous_status": "extraction_review",
+      "new_status": "complete_source",
+      "before": [
+        {
+          "value": "a",
+          "label": "hat erste Arbeitsergebnisse versendet."
+        },
+        {
+          "value": "b",
+          "label": "realisiert bis März die Maßnahmen zur Qualitätssicherung."
+        },
+        {
+          "value": "c",
+          "label": "stellt die Resultate seiner Arbeit vor."
+        }
+      ],
+      "after": [
+        {
+          "value": "a",
+          "label": "hat erste Arbeitsergebnisse versendet."
+        },
+        {
+          "value": "b",
+          "label": "realisiert bis Marz die Maßnahmen zur Qualitätssicherung."
+        },
+        {
+          "value": "c",
+          "label": "stellt die Resultate seiner Arbeit vor."
+        }
+      ]
+    },
+    {
+      "id": "set038-p43-q17-1",
+      "page": 43,
+      "previous_status": "extraction_review",
+      "new_status": "complete_source",
+      "before": [
+        {
+          "value": "a",
+          "label": "wird dem Betriebsrat mitgeteilt."
+        },
+        {
+          "value": "b",
+          "label": "wird zwischen Tor 2 und 3 geplant."
+        },
+        {
+          "value": "c",
+          "label": "wird an der Informationstafel bekanntgegeben."
+        }
+      ],
+      "after": [
+        {
+          "value": "a",
+          "label": "wird dem Betriebsrat mitgeteilt."
+        },
+        {
+          "value": "b",
+          "label": "wird zwischen Tor 2 und 3 geplant."
+        },
+        {
+          "value": "c",
+          "label": "wird an der Informationstafel bekanntgegeben"
+        }
+      ]
+    },
+    {
+      "id": "set038-p43-q18-1",
+      "page": 43,
+      "previous_status": "extraction_review",
+      "new_status": "extraction_review",
+      "before": [
+        {
+          "value": "a",
+          "label": "verlässt das Unternehmen."
+        },
+        {
+          "value": "b",
+          "label": "wird von Frau Meier vertreten."
+        },
+        {
+          "value": "c",
+          "label": "macht Frau Schmidt ein Geschenk."
+        }
+      ],
+      "after": [
+        {
+          "value": "a",
+          "label": "verlässt das Unternehmen."
+        },
+        {
+          "value": "b",
+          "label": "wird von Frau Meier vertreten."
+        },
+        {
+          "value": "c",
+          "label": "macht Frau Schmidt ein Geschenk"
+        }
+      ]
+    },
+    {
+      "id": "set039-p45-q14-1",
+      "page": 45,
+      "previous_status": "extraction_review",
+      "new_status": "complete_source",
+      "before": [
+        {
+          "value": "a",
+          "label": "das Protokoll der letzten Besprechung geändert."
+        },
+        {
+          "value": "b",
+          "label": "die Tagesordnung genehmigt."
+        },
+        {
+          "value": "c",
+          "label": "über Personalthemen gesprochen."
+        }
+      ],
+      "after": [
+        {
+          "value": "a",
+          "label": "das Protokoll der letzten Besprechung geändert."
+        },
+        {
+          "value": "b",
+          "label": "wie Tagesordnung genehmigt"
+        },
+        {
+          "value": "c",
+          "label": "über Personalthemen gesprochen"
+        }
+      ]
+    },
+    {
+      "id": "set039-p45-q15-1",
+      "page": 45,
+      "previous_status": "extraction_review",
+      "new_status": "extraction_review",
+      "before": [
+        {
+          "value": "a",
+          "label": "Arbeit wird nicht komplett erledigt."
+        },
+        {
+          "value": "b",
+          "label": "Überstunden müssen im kommenden Jahr abgebaut werden."
+        },
+        {
+          "value": "c",
+          "label": "Es gibt Urlaubssperre."
+        }
+      ],
+      "after": [
+        {
+          "value": "a",
+          "label": "Arbeit wird nicht komplett erledigt"
+        },
+        {
+          "value": "b",
+          "label": "Überstunden müssen im kommenden Jahr abgebaut werden"
+        },
+        {
+          "value": "c",
+          "label": "Es gibt Urlaubssperre"
+        }
+      ]
+    },
+    {
+      "id": "set039-p45-q17-1",
+      "page": 45,
+      "previous_status": "extraction_review",
+      "new_status": "complete_source",
+      "before": [
+        {
+          "value": "a",
+          "label": "besucht die Frühjahrsmesse regelmäßig."
+        },
+        {
+          "value": "b",
+          "label": "braucht Hilfe bei der Standgestaltung."
+        },
+        {
+          "value": "c",
+          "label": "lässt gerade Broschüren drucken."
+        }
+      ],
+      "after": [
+        {
+          "value": "a",
+          "label": "besucht die Frühjahrsmesse regelmäßig"
+        },
+        {
+          "value": "b",
+          "label": "braucht Hilfe bei der Standgestaltung."
+        },
+        {
+          "value": "c",
+          "label": "lässt gerade Broschüren drucken"
+        }
+      ]
+    },
+    {
+      "id": "set040-p47-q14-1",
+      "page": 47,
+      "previous_status": "extraction_review",
+      "new_status": "complete_source",
+      "before": [
+        {
+          "value": "a",
+          "label": "beinhaltet ein Video über die Produktionsabläufe."
+        },
+        {
+          "value": "b",
+          "label": "ist wegen der schlechten Verkaufszahlen notwendig."
+        },
+        {
+          "value": "c",
+          "label": "lässt sich sehr schnell und kostengünstig umsetzen."
+        }
+      ],
+      "after": [
+        {
+          "value": "a",
+          "label": "beinhaltet ein Video über die Produktionsabläufe."
+        },
+        {
+          "value": "b",
+          "label": "ist wegen der schlechten Verkaufszahlen notwendig"
+        },
+        {
+          "value": "c",
+          "label": "lässt sich sehr schnell und kostengünstig umsetzen."
+        }
+      ]
+    },
+    {
+      "id": "set040-p47-q15-1",
+      "page": 47,
+      "previous_status": "extraction_review",
+      "new_status": "complete_source",
+      "before": [
+        {
+          "value": "a",
+          "label": "hält sich nicht an die vereinbarten Putzzeiten."
+        },
+        {
+          "value": "b",
+          "label": "putzt die Büros der Firma nicht regelmäßig."
+        },
+        {
+          "value": "c",
+          "label": "wird den Vertrag demnächst kündigen."
+        }
+      ],
+      "after": [
+        {
+          "value": "a",
+          "label": "hält sich nicht an die vereinbarten Putzreiten"
+        },
+        {
+          "value": "b",
+          "label": "putzt die Büros der Firma nicht regelmäßig"
+        },
+        {
+          "value": "c",
+          "label": "wird den Vertrag demnächst kündigen."
+        }
+      ]
+    },
+    {
+      "id": "set040-p47-q16-1",
+      "page": 47,
+      "previous_status": "extraction_review",
+      "new_status": "complete_source",
+      "before": [
+        {
+          "value": "a",
+          "label": "ist nur mit begrenzter Teilnehmerzahl möglich."
+        },
+        {
+          "value": "b",
+          "label": "müssen die Teilnehmer nur einmal absolvieren."
+        },
+        {
+          "value": "c",
+          "label": "wird beim Deutschen Roten Kreuz veranstaltet."
+        }
+      ],
+      "after": [
+        {
+          "value": "a",
+          "label": "ist nur mit begrenzter Teilnehmerzahl möglich"
+        },
+        {
+          "value": "b",
+          "label": "müssen die Teilnehmer nur einmal absolvieren."
+        },
+        {
+          "value": "c",
+          "label": "wird beim Deutschen Roten Kreuz veranstaltet."
+        }
+      ]
+    },
+    {
+      "id": "set040-p47-q17-1",
+      "page": 47,
+      "previous_status": "extraction_review",
+      "new_status": "complete_source",
+      "before": [
+        {
+          "value": "a",
+          "label": "soll zu 60 Prozent finanziert werden."
+        },
+        {
+          "value": "b",
+          "label": "kann in der Personalabteilung beantragt werden."
+        },
+        {
+          "value": "c",
+          "label": "wird ab nächsten Monat eingeführt."
+        }
+      ],
+      "after": [
+        {
+          "value": "a",
+          "label": "soll zu 60 Prozent finanziert werden."
+        },
+        {
+          "value": "b",
+          "label": "kann in der Personalabteilung beantragt werden"
+        },
+        {
+          "value": "c",
+          "label": "wird ab nächsten Monat eingeführt."
+        }
+      ]
+    },
+    {
+      "id": "set040-p47-q18-1",
+      "page": 47,
+      "previous_status": "extraction_review",
+      "new_status": "complete_source",
+      "before": [
+        {
+          "value": "a",
+          "label": "dauert immer noch an."
+        },
+        {
+          "value": "b",
+          "label": "fand landesweit statt."
+        },
+        {
+          "value": "c",
+          "label": "führte zu Lieferproblemen."
+        }
+      ],
+      "after": [
+        {
+          "value": "a",
+          "label": "dauert immer noch an."
+        },
+        {
+          "value": "b",
+          "label": "fand landesweit statt."
+        },
+        {
+          "value": "c",
+          "label": "führte zu Lieferproblemen"
+        }
+      ]
+    },
+    {
+      "id": "set051-p60-q20-1",
+      "page": 60,
+      "previous_status": "extraction_review",
+      "new_status": "complete_source",
+      "before": [
+        {
+          "value": "a",
+          "label": "bezahlt der Kunde."
+        },
+        {
+          "value": "b",
+          "label": "kommt im Sommer."
+        },
+        {
+          "value": "c",
+          "label": "umfasst 50 T-Shirts."
+        }
+      ],
+      "after": [
+        {
+          "value": "a",
+          "label": "bezahlt der Kunde."
+        },
+        {
+          "value": "b",
+          "label": "kommt im Sommer."
+        },
+        {
+          "value": "c",
+          "label": "umfasst 50 T-Shirts"
+        }
+      ]
+    }
+  ],
+  "status_after": {
+    "complete_source": 306,
+    "source_incomplete": 2,
+    "manual_review": 67,
+    "extraction_review": 57,
+    "transcript_review": 170
+  },
+  "note": "Only characters copied literally from original PDF; unverified answer keys not treated as official."
+}
