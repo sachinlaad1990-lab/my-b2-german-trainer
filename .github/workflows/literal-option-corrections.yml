@@ -1,0 +1,35 @@
+name: Correct original PDF wording discrepancies
+on:
+  push:
+    paths: ['qa/literal-option-corrections.py']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: pdf-literal-correction
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with: {persist-credentials: true}
+      - name: Apply verified literal options only
+        run: python3 qa/literal-option-corrections.py
+      - name: Confirm all source records and 602 original questions remain
+        run: |
+          python3 - <<'PY'
+          import json,re,pathlib
+          s=pathlib.Path('exam-practice.html').read_text()
+          b=json.loads(re.search(r'<script id="bank-data" type="application/json">(.*?)</script>',s,re.S).group(1))
+          assert len(b['source_page_records'])==149
+          q=[q for e in b['exercises'] if e['section'] in ('Lesen','Schreiben','Hören','Sprechen') for q in e['questions']]
+          assert len(q)==602 and len(set(x['id'] for x in q))==602
+          assert len(json.loads(pathlib.Path('qa/literal-option-corrections-report.json').read_text())['changes'])==14
+          PY
+      - name: Commit the app corrections
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add exam-practice.html qa/literal-option-corrections-report.json
+          git diff --cached --quiet || (git commit -m "Correct 14 German option groups against original PDF verbatim" && git push)
