@@ -154,6 +154,22 @@ for e in ex:
   if provenance=="not_verbatim_pdf" or option_status in ("letter_only_not_extracted","some_options_not_in_pdf"):
    unverified.append({"id":q["id"],"page":q["page"],"section":e["section"],"prompt":prompt[:200],"provenance":provenance,"options":option_status,"status":q.get("completeness")})
 
+# Prevent conflating a variant annotation with original German wording.
+for exercise in ex:
+ for question in exercise["questions"]:
+  if question["id"]=="set046-p55-q19-1" and has(question,"Frau Lutz"):
+   if question["prompt"].startswith("Frau Lutz "):
+    change(question,"prompt","Frau Lutz","Remove appended 'New variant' annotation from PDF question stem")
+    add_note(question,"The original page has a separate variant annotation; not part of question wording.")
+
+# Explicit provenance warnings are displayed beside each interactive question.
+qhtml_original='<div class="question-prompt">${esc(q.prompt)}</div>${q.source_alt_note?'
+qhtml_revised='<div class="question-prompt">${esc(q.prompt)}</div><div class="mini muted" style="margin:5px 0 8px">${q.source_provenance==="verbatim_pdf"?"✓ Exact PDF wording (whitespace normalized)":q.source_provenance==="editorial_practice_prompt"?"Practice task formatting — not original question wording":"⚠ Question wording not identical to PDF; check original page"}${q.source_option_provenance==="some_options_not_in_pdf"?" · ⚠ Some choices differ from PDF":q.source_option_provenance==="letter_only_not_extracted"?" · Choices not fully extracted":""}</div>${q.source_alt_note?'
+if qhtml_original in s:
+ s=s.replace(qhtml_original,qhtml_revised,1)
+elif "✓ Exact PDF wording (whitespace normalized)" not in s:
+ raise RuntimeError("Cannot find question renderer for source-fidelity labels")
+
 encoded=json.dumps(bank,ensure_ascii=False,separators=(",",":")).replace("</","<\\/")
 match=pat.search(s)
 s=s[:match.start(2)]+encoded+s[match.end(2):]
