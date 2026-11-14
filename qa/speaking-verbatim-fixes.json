@@ -1,0 +1,45 @@
+{
+  "repaired": 8,
+  "items": [
+    {
+      "id": "set093-extra-1",
+      "before": "Zusätzliches mündliches Thema: Drucker/ Backofen ist kaputt.",
+      "after": "-Drucker/ Backofen ist kaputt."
+    },
+    {
+      "id": "set093-extra-2",
+      "before": "Zusätzliches mündliches Thema: Vermieter hat Miete erhöht.",
+      "after": "-Vermieter hat Miete erhöht."
+    },
+    {
+      "id": "set093-extra-3",
+      "before": "Zusätzliches mündliches Thema: In allen Wohnungen die Batterie nicht funktioniert",
+      "after": "-In allen Wohnungen die Batterie nicht funktioniert"
+    },
+    {
+      "id": "set093-extra-4",
+      "before": "Zusätzliches mündliches Thema: Wir müssen mit dem Koch sprechen, eine Idee für neue Gerichte, wo wir nach Produkten suchen werden",
+      "after": "-Wir müssen mit dem Koch sprechen, eine Idee für neue Gerichte, wo wir nach Produkten suchen werden"
+    },
+    {
+      "id": "set093-extra-5",
+      "before": "Zusätzliches mündliches Thema: Die Schulsaison steht vor der Tür und der Lieferant verzögert die Lieferung von Schreibwaren",
+      "after": "-Die Schulsaison steht vor der Tür und der Lieferant verzögert die Lieferung von Schreibwaren"
+    },
+    {
+      "id": "set093-extra-6",
+      "before": "Zusätzliches mündliches Thema: Sie arbeiten in einem Restaurant und haben verdorbenes Essen erhalten, was vielen Besuchern passieren sollte",
+      "after": "-Sie arbeiten in einem Restaurant und haben verdorbenes Essen erhalten, was vielen Besuchern passieren sollte"
+    },
+    {
+      "id": "set093-extra-7",
+      "before": "Zusätzliches mündliches Thema: Ein Gast aus dem Ausland sollte für eine Rast arrangiert werden/übernachtsmöglichkeit",
+      "after": "-Ein Gast aus dem Ausland sollte für eine Rast arrangiert werden/übernachtsmöglichkeit"
+    },
+    {
+      "id": "set093-extra-8",
+      "before": "Zusätzliches mündliches Thema: Wir arbeiten in einem Krankenhaus, Patienten beschweren sich über einen Kollegen.",
+      "after": "-Wir arbeiten in einem Krankenhaus, Patienten beschweren sich über einen Kollegen."
+    }
+  ]
+}
