@@ -133,7 +133,8 @@ for e in ex:
   page144=pages[144];page145=pages[145]
   start=page144.rfind(begin)
   assert start>=0,"Source situation opening missing"
-  first=page144[start:].strip()
+  stop=page144.index("danach",start)+len("danach")
+  first=page144[start:stop].strip()
   assert first.endswith("danach"),"Source page break changed"
   cut=page145.index("Situation: Sie arbeiten in einem großen Möbelgeschäft")
   continuation=page145[page145.index("fragen."):cut].strip()
