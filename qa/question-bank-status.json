@@ -1,0 +1,276 @@
+{
+  "total_questions": 602,
+  "exercise_groups": 243,
+  "statuses": {
+    "complete_source": 308,
+    "source_incomplete": 2,
+    "manual_review": 67,
+    "extraction_review": 135,
+    "requires_audio": 90
+  },
+  "by_section": {
+    "Lesen": {
+      "complete_source": 164,
+      "source_incomplete": 1,
+      "manual_review": 1
+    },
+    "Schreiben": {
+      "extraction_review": 7,
+      "manual_review": 42,
+      "complete_source": 144
+    },
+    "Hören": {
+      "requires_audio": 90,
+      "extraction_review": 128
+    },
+    "Sprechen": {
+      "manual_review": 24,
+      "source_incomplete": 1
+    }
+  },
+  "by_detail": {
+    "Lesen | Teil 1": {
+      "complete_source": 50
+    },
+    "Lesen | Teil 2": {
+      "complete_source": 33,
+      "source_incomplete": 1,
+      "manual_review": 1
+    },
+    "Lesen | Teil 3": {
+      "complete_source": 36
+    },
+    "Lesen | Teil 4": {
+      "complete_source": 45
+    },
+    "Schreiben | Beschwerde": {
+      "extraction_review": 7,
+      "manual_review": 12,
+      "complete_source": 9
+    },
+    "Schreiben | Sprachbausteine 1": {
+      "complete_source": 54
+    },
+    "Schreiben | Sprachbausteine 2": {
+      "complete_source": 42
+    },
+    "Schreiben | Forumsbeitrag": {
+      "complete_source": 39,
+      "manual_review": 19
+    },
+    "Schreiben | Telefonnotiz": {
+      "manual_review": 11
+    },
+    "Hören | Listening variants": {
+      "requires_audio": 90,
+      "extraction_review": 128
+    },
+    "Sprechen | Situations": {
+      "manual_review": 24,
+      "source_incomplete": 1
+    }
+  },
+  "flagged_examples": {
+    "Lesen | Teil 2": [
+      {
+        "id": "set013-p13-q7-2",
+        "page": 13,
+        "number": 7,
+        "status": "source_incomplete",
+        "reason": "The exact German Question 7 wording is missing from PDF page 13. This new question stem was reconstructed for practice; its correctness and answer have not been verified."
+      },
+      {
+        "id": "set022-p22-q9-2",
+        "page": 22,
+        "number": 9,
+        "status": "manual_review",
+        "reason": "Accepted B for practice, but source text can also support A; ambiguity unresolved."
+      }
+    ],
+    "Schreiben | Beschwerde": [
+      {
+        "id": "set044-p53-q19-1",
+        "page": 53,
+        "number": 19,
+        "status": "extraction_review",
+        "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below."
+      },
+      {
+        "id": "set044-p53-q20-1",
+        "page": 53,
+        "number": 20,
+        "status": "extraction_review",
+        "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below."
+      },
+      {
+        "id": "set044-reply-0",
+        "page": 53,
+        "number": 21,
+        "status": "manual_review",
+        "reason": ""
+      },
+      {
+        "id": "set045-p54-q19-1",
+        "page": 54,
+        "number": 19,
+        "status": "extraction_review",
+        "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below."
+      },
+      {
+        "id": "set045-reply-0",
+        "page": 54,
+        "number": 21,
+        "status": "manual_review",
+        "reason": ""
+      }
+    ],
+    "Schreiben | Forumsbeitrag": [
+      {
+        "id": "set070-p79-q10-1",
+        "page": 79,
+        "number": 10,
+        "status": "manual_review",
+        "reason": ""
+      },
+      {
+        "id": "set070-p79-q15-1",
+        "page": 79,
+        "number": 15,
+        "status": "manual_review",
+        "reason": ""
+      },
+      {
+        "id": "set071-p80-q1-1",
+        "page": 80,
+        "number": 1,
+        "status": "manual_review",
+        "reason": ""
+      },
+      {
+        "id": "set071-p80-q2-1",
+        "page": 80,
+        "number": 2,
+        "status": "manual_review",
+        "reason": ""
+      },
+      {
+        "id": "set071-p80-q3-1",
+        "page": 80,
+        "number": 3,
+        "status": "manual_review",
+        "reason": ""
+      }
+    ],
+    "Schreiben | Telefonnotiz": [
+      {
+        "id": "set072-note-0",
+        "page": 81,
+        "number": 41,
+        "status": "manual_review",
+        "reason": ""
+      },
+      {
+        "id": "set072-note-1",
+        "page": 81,
+        "number": 41,
+        "status": "manual_review",
+        "reason": ""
+      },
+      {
+        "id": "set072-note-2",
+        "page": 81,
+        "number": 41,
+        "status": "manual_review",
+        "reason": ""
+      },
+      {
+        "id": "set073-note-0",
+        "page": 82,
+        "number": 41,
+        "status": "manual_review",
+        "reason": ""
+      },
+      {
+        "id": "set074-note-0",
+        "page": 83,
+        "number": 41,
+        "status": "manual_review",
+        "reason": ""
+      }
+    ],
+    "Hören | Listening variants": [
+      {
+        "id": "set079-p88-q22-1",
+        "page": 88,
+        "number": 22,
+        "status": "requires_audio",
+        "reason": ""
+      },
+      {
+        "id": "set079-p88-q23-1",
+        "page": 88,
+        "number": 23,
+        "status": "extraction_review",
+        "reason": "Question stem is unusually short and may be incomplete; original PDF text is attached."
+      },
+      {
+        "id": "set079-p88-q24-1",
+        "page": 88,
+        "number": 24,
+        "status": "requires_audio",
+        "reason": ""
+      },
+      {
+        "id": "set079-p88-q25-1",
+        "page": 88,
+        "number": 25,
+        "status": "extraction_review",
+        "reason": "One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below."
+      },
+      {
+        "id": "set079-p89-q26-1",
+        "page": 89,
+        "number": 26,
+        "status": "requires_audio",
+        "reason": ""
+      }
+    ],
+    "Sprechen | Situations": [
+      {
+        "id": "set091-speak-1",
+        "page": 143,
+        "number": 1,
+        "status": "manual_review",
+        "reason": ""
+      },
+      {
+        "id": "set091-speak-2",
+        "page": 143,
+        "number": 2,
+        "status": "manual_review",
+        "reason": ""
+      },
+      {
+        "id": "set091-speak-3",
+        "page": 143,
+        "number": 3,
+        "status": "manual_review",
+        "reason": ""
+      },
+      {
+        "id": "set091-speak-4",
+        "page": 143,
+        "number": 4,
+        "status": "manual_review",
+        "reason": ""
+      },
+      {
+        "id": "set091-speak-5",
+        "page": 143,
+        "number": 5,
+        "status": "manual_review",
+        "reason": ""
+      }
+    ]
+  }
+}
