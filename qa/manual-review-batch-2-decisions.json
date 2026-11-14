@@ -1,0 +1,62 @@
+{
+  "batch": 2,
+  "recorded_on": "2026-11-14",
+  "mode": "record_only_no_live_app_update",
+  "instructions": "Preserve original source wording exactly, no paraphrasing. Do not modify exam-practice.html.",
+  "entries": [
+    {
+      "item": 11,
+      "decision": "APPROVE",
+      "comment": "Approve proposed action from Batch 2; retain source ambiguity/incompleteness, do not create choices or combine variants without source evidence."
+    },
+    {
+      "item": 12,
+      "decision": "APPROVE",
+      "comment": "Approve proposed action from Batch 2; retain source ambiguity/incompleteness, do not create choices or combine variants without source evidence."
+    },
+    {
+      "item": 13,
+      "decision": "APPROVE",
+      "comment": "Approve proposed action from Batch 2; retain source ambiguity/incompleteness, do not create choices or combine variants without source evidence."
+    },
+    {
+      "item": 14,
+      "decision": "APPROVE",
+      "comment": "Approve proposed action from Batch 2; retain source ambiguity/incompleteness, do not create choices or combine variants without source evidence."
+    },
+    {
+      "item": 15,
+      "decision": "APPROVE",
+      "comment": "Approve proposed action from Batch 2; retain source ambiguity/incompleteness, do not create choices or combine variants without source evidence."
+    },
+    {
+      "item": 16,
+      "decision": "APPROVE",
+      "comment": "Approve proposed action from Batch 2; retain source ambiguity/incompleteness, do not create choices or combine variants without source evidence."
+    },
+    {
+      "item": 17,
+      "decision": "APPROVE",
+      "comment": "Approve proposed action from Batch 2; retain source ambiguity/incompleteness, do not create choices or combine variants without source evidence."
+    },
+    {
+      "item": 18,
+      "decision": "APPROVE",
+      "comment": "Approve proposed action from Batch 2; retain source ambiguity/incompleteness, do not create choices or combine variants without source evidence."
+    },
+    {
+      "item": 19,
+      "decision": "APPROVE",
+      "comment": "Approve proposed action from Batch 2; retain source ambiguity/incompleteness, do not create choices or combine variants without source evidence."
+    },
+    {
+      "item": 20,
+      "question": 22,
+      "pdf_page": 117,
+      "decision": "COMMENT",
+      "original_comment": "keep all question my be a, b, c",
+      "interpretation": "Preserve all possibly relevant original questions and alternatives; do not delete or renumber on current evidence. Review whether A/B/C belongs to the following source question."
+    }
+  ],
+  "next_batch": "Batch 3 — items 21–30"
+}
