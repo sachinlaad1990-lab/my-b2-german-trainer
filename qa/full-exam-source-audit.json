@@ -4,19 +4,10 @@
   "normalized_pdf_sha256": "460787d198cf8f5f8c4de2ceac076acd8284316083ae5b03021b980c76af53f2",
   "total_questions": 602,
   "restored_choices_question_ids": [],
-  "changes": [
-    {
-      "id": "set046-p55-q19-1",
-      "page": 55,
-      "field": "source_provenance",
-      "old": "not_verbatim_pdf",
-      "new": "verbatim_pdf",
-      "reason": "Report literal question wording status"
-    }
-  ],
+  "changes": [],
   "provenance": {
-    "not_verbatim_pdf": 27,
-    "verbatim_pdf": 415,
+    "not_verbatim_pdf": 19,
+    "verbatim_pdf": 423,
     "editorial_practice_prompt": 160
   },
   "option_provenance": {
@@ -42,8 +33,8 @@
       "not_verbatim_pdf": 1
     },
     "Sprechen": {
-      "verbatim_pdf": 16,
-      "not_verbatim_pdf": 9
+      "verbatim_pdf": 24,
+      "not_verbatim_pdf": 1
     }
   },
   "review_needed": [
@@ -448,78 +439,6 @@
       "page": 144,
       "section": "Sprechen",
       "prompt": "Situation: Sie arbeiten in einem Supermarkt. Es ist Montagmorgen, und laut Prospekt sollten ab heute günstige\nSchreibwaren zum Schulanfang erhältlich sein. Leider sind diese nicht geliefert worden, ob",
-      "provenance": "not_verbatim_pdf",
-      "options": "no_mc_choices",
-      "status": "manual_review"
-    },
-    {
-      "id": "set093-extra-1",
-      "page": 145,
-      "section": "Sprechen",
-      "prompt": "Zusätzliches mündliches Thema: Drucker/ Backofen ist kaputt.",
-      "provenance": "not_verbatim_pdf",
-      "options": "no_mc_choices",
-      "status": "manual_review"
-    },
-    {
-      "id": "set093-extra-2",
-      "page": 145,
-      "section": "Sprechen",
-      "prompt": "Zusätzliches mündliches Thema: Vermieter hat Miete erhöht.",
-      "provenance": "not_verbatim_pdf",
-      "options": "no_mc_choices",
-      "status": "manual_review"
-    },
-    {
-      "id": "set093-extra-3",
-      "page": 145,
-      "section": "Sprechen",
-      "prompt": "Zusätzliches mündliches Thema: In allen Wohnungen die Batterie nicht funktioniert",
-      "provenance": "not_verbatim_pdf",
-      "options": "no_mc_choices",
-      "status": "manual_review"
-    },
-    {
-      "id": "set093-extra-4",
-      "page": 145,
-      "section": "Sprechen",
-      "prompt": "Zusätzliches mündliches Thema: Wir müssen mit dem Koch sprechen, eine Idee für neue Gerichte, wo wir nach Produkten suchen werden",
-      "provenance": "not_verbatim_pdf",
-      "options": "no_mc_choices",
-      "status": "manual_review"
-    },
-    {
-      "id": "set093-extra-5",
-      "page": 145,
-      "section": "Sprechen",
-      "prompt": "Zusätzliches mündliches Thema: Die Schulsaison steht vor der Tür und der Lieferant verzögert die Lieferung von Schreibwaren",
-      "provenance": "not_verbatim_pdf",
-      "options": "no_mc_choices",
-      "status": "manual_review"
-    },
-    {
-      "id": "set093-extra-6",
-      "page": 145,
-      "section": "Sprechen",
-      "prompt": "Zusätzliches mündliches Thema: Sie arbeiten in einem Restaurant und haben verdorbenes Essen erhalten, was vielen Besuchern passieren sollte",
-      "provenance": "not_verbatim_pdf",
-      "options": "no_mc_choices",
-      "status": "manual_review"
-    },
-    {
-      "id": "set093-extra-7",
-      "page": 145,
-      "section": "Sprechen",
-      "prompt": "Zusätzliches mündliches Thema: Ein Gast aus dem Ausland sollte für eine Rast arrangiert werden/übernachtsmöglichkeit",
-      "provenance": "not_verbatim_pdf",
-      "options": "no_mc_choices",
-      "status": "manual_review"
-    },
-    {
-      "id": "set093-extra-8",
-      "page": 145,
-      "section": "Sprechen",
-      "prompt": "Zusätzliches mündliches Thema: Wir arbeiten in einem Krankenhaus, Patienten beschweren sich über einen Kollegen.",
       "provenance": "not_verbatim_pdf",
       "options": "no_mc_choices",
       "status": "manual_review"
