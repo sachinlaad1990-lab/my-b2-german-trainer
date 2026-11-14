@@ -6,100 +6,12 @@
   "restored_choices_question_ids": [],
   "changes": [
     {
-      "id": "set044-reply-0",
-      "page": 53,
-      "field": "source_provenance",
-      "old": "not_verbatim_pdf",
-      "new": "editorial_practice_prompt",
-      "reason": "Report literal question wording status"
-    },
-    {
-      "id": "set045-reply-0",
-      "page": 54,
-      "field": "source_provenance",
-      "old": "not_verbatim_pdf",
-      "new": "editorial_practice_prompt",
-      "reason": "Report literal question wording status"
-    },
-    {
-      "id": "set046-reply-0",
-      "page": 55,
-      "field": "source_provenance",
-      "old": "not_verbatim_pdf",
-      "new": "editorial_practice_prompt",
-      "reason": "Report literal question wording status"
-    },
-    {
-      "id": "set046-reply-1",
-      "page": 55,
-      "field": "source_provenance",
-      "old": "not_verbatim_pdf",
-      "new": "editorial_practice_prompt",
-      "reason": "Report literal question wording status"
-    },
-    {
-      "id": "set047-reply-0",
-      "page": 56,
-      "field": "source_provenance",
-      "old": "not_verbatim_pdf",
-      "new": "editorial_practice_prompt",
-      "reason": "Report literal question wording status"
-    },
-    {
-      "id": "set048-reply-0",
-      "page": 57,
-      "field": "source_provenance",
-      "old": "not_verbatim_pdf",
-      "new": "editorial_practice_prompt",
-      "reason": "Report literal question wording status"
-    },
-    {
-      "id": "set049-reply-0",
-      "page": 58,
-      "field": "source_provenance",
-      "old": "not_verbatim_pdf",
-      "new": "editorial_practice_prompt",
-      "reason": "Report literal question wording status"
-    },
-    {
-      "id": "set050-reply-0",
-      "page": 59,
-      "field": "source_provenance",
-      "old": "not_verbatim_pdf",
-      "new": "editorial_practice_prompt",
-      "reason": "Report literal question wording status"
-    },
-    {
-      "id": "set051-reply-0",
-      "page": 60,
-      "field": "source_provenance",
-      "old": "not_verbatim_pdf",
-      "new": "editorial_practice_prompt",
-      "reason": "Report literal question wording status"
-    },
-    {
-      "id": "set052-reply-0",
-      "page": 61,
-      "field": "source_provenance",
-      "old": "not_verbatim_pdf",
-      "new": "editorial_practice_prompt",
-      "reason": "Report literal question wording status"
-    },
-    {
-      "id": "set052-reply-1",
-      "page": 61,
-      "field": "source_provenance",
-      "old": "not_verbatim_pdf",
-      "new": "editorial_practice_prompt",
-      "reason": "Report literal question wording status"
-    },
-    {
-      "id": "set053-reply-0",
-      "page": 62,
-      "field": "source_provenance",
-      "old": "not_verbatim_pdf",
-      "new": "editorial_practice_prompt",
-      "reason": "Report literal question wording status"
+      "id": "set092-speak-8",
+      "page": 144,
+      "field": "source_alt_note",
+      "old": "This speaking situation continues onto the first lines of original PDF page 145; both pages are included.",
+      "new": "This speaking situation continues onto the first lines of original PDF page 145; both pages are included. This original exam situation continues across PDF pages 144–145; the full continuation and bullets were copied lit",
+      "reason": "Preserve editorial caveat"
     }
   ],
   "provenance": {
