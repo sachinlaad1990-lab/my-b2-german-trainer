@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Repair selected option-wording discrepancies only with literal source substrings."""
+"""Repair selected option-wording discrepancies only with literal source substrings.
+
+No grammar fixes, translations, or guessed answer keys are permitted.
+"""
 import json,re,pathlib,collections
 file=pathlib.Path("exam-practice.html")
 s=file.read_text(encoding="utf-8")
