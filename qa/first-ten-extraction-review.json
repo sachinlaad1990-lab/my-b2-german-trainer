@@ -1,0 +1,287 @@
+{
+  "count": 31,
+  "first_ten": [
+    {
+      "id": "set038-p43-q18-1",
+      "page": 43,
+      "section": "Lesen",
+      "detail": "Teil 4",
+      "kind": "mc",
+      "number": 18,
+      "prompt": "Frau Schlosser",
+      "options": [
+        {
+          "value": "a",
+          "label": "verlässt das Unternehmen."
+        },
+        {
+          "value": "b",
+          "label": "wird von Frau Meier vertreten."
+        },
+        {
+          "value": "c",
+          "label": "macht Frau Schmidt ein Geschenk"
+        }
+      ],
+      "answer": "b",
+      "source": "source-inferred",
+      "status": "extraction_review",
+      "reason": "Options are literal, but the original PDF labels this Frau Schlosser question 19 and the preceding option block 18. Verify the source numbering.",
+      "provenance": "verbatim_pdf",
+      "option_provenance": "verbatim_pdf",
+      "source_snippets": [
+        "30 Minuten lang.\n\n17  Der Standort der neuen Fahrradständer\n\n18  a wird dem Betriebsrat mitgeteilt.\n\nb wird zwischen Tor 2 und 3 geplant.\n\nc wird an der Informationstafel bekanntgegeben\n19  Frau Schlosser\na verlässt das Unternehmen.\nb wird von Frau Meier vertreten.\nc macht Frau Schmidt ein Geschenk"
+      ]
+    },
+    {
+      "id": "set039-p45-q15-1",
+      "page": 45,
+      "section": "Lesen",
+      "detail": "Teil 4",
+      "kind": "mc",
+      "number": 15,
+      "prompt": "What rule applies in the company?",
+      "options": [
+        {
+          "value": "a",
+          "label": "Arbeit wird nicht komplett erledigt"
+        },
+        {
+          "value": "b",
+          "label": "Überstunden müssen im kommenden Jahr abgebaut werden"
+        },
+        {
+          "value": "c",
+          "label": "Es gibt Urlaubssperre"
+        }
+      ],
+      "answer": "c",
+      "source": "source-inferred",
+      "status": "extraction_review",
+      "reason": "Source page includes two interleaved variants of question 15. Options match the second variant literally; the English question label is editorial and the answer remains unofficial.",
+      "provenance": "not_verbatim_pdf",
+      "option_provenance": "verbatim_pdf",
+      "source_snippets": [
+        "esordnung genehmigt\nс über Personalthemen gesprochen - 100%\n15.  Einige Mitarbeiter machen Überstunden. 15. Что действует на предприятии\na da andere Urlaub machen.                  а Arbeit wird nicht komplett erledigt\nb obwohl sie krank sind.                     b Überstunden müssen im kommenden Jahr abgebaut werden\nс weil viele Kollegen krank sind.                 c Es gibt Urlaubssperre\n16. КM\n\na ist Wettbewerber der Firma.\n\nb möchte sein Konzept besprechen.\n\nc plant eine Rabattaktion im Frühling.\n\n17. Die Firma\n\na besucht die Frühjahrsmesse regelmäßig\n\nb braucht Hilfe bei der Standgestaltung.\n\nc) lässt gerade Broschüren drucken\n18. Persönliche Gegenstände\na können nicht in der Küche bleiben.\nb sol"
+      ]
+    },
+    {
+      "id": "set079-p92-q36-1",
+      "page": 92,
+      "section": "Hören",
+      "detail": "Listening variants",
+      "kind": "mc",
+      "number": 36,
+      "prompt": "Juri",
+      "options": [
+        {
+          "value": "a",
+          "label": "bereitet den Raum für die Veranstaltung vor."
+        },
+        {
+          "value": "c",
+          "label": "hält am nächsten Tag einen Vortrag."
+        }
+      ],
+      "answer": null,
+      "source": null,
+      "status": "extraction_review",
+      "reason": "Question stem is unusually short and may be incomplete; original PDF text is attached.",
+      "provenance": "verbatim_pdf",
+      "option_provenance": "verbatim_pdf",
+      "source_snippets": [
+        "bitten, entsprechend viele Mappen vorzubereiten. Danke dir.\n     36 Juri\n\n       a) bereitet den Raum für die Veranstaltung vor.\n\n     b braucht von Tim eine Power-Point-präsentation.\n\n       c) hält am nächsten Tag einen Vortrag.\n\n    Nummer 37\n\nСсылка на запись https://t.me/B2_C2_Deutsch/65534/153251\n\nAnita aus Buchhaltung hier. Hallo Steffi. Ich kann für die Rechnung Nr. C134, die wir vor 6 Wochen an die Firma Schneider\nWaren geschickt haben, noch immer keinen Zahlungseingang feststellen. Weißt du, was da los ist? Sie haben die Ware doch\nerhalten, oder? Schau doch bitte mal in deinen Unterlagen nach und sag mir Bescheid. Wenn von unserer Seite aus alles in\nOrdnung ist, werde ich nämlich heute eine "
+      ]
+    },
+    {
+      "id": "set080-p97-q35-1",
+      "page": 97,
+      "section": "Hören",
+      "detail": "Listening variants",
+      "kind": "mc",
+      "number": 35,
+      "prompt": "Murat ist nicht sicher, ob",
+      "options": [
+        {
+          "value": "a",
+          "label": "er, als Ersthelfer arbeiten darf"
+        },
+        {
+          "value": "b",
+          "label": "welche Dokumente er braucht"
+        },
+        {
+          "value": "c",
+          "label": "?"
+        }
+      ],
+      "answer": null,
+      "source": null,
+      "status": "extraction_review",
+      "reason": null,
+      "provenance": "verbatim_pdf",
+      "option_provenance": "verbatim_pdf",
+      "source_snippets": [
+        " bei dem Chef anmelden\nc)  sollen sich in 2 Wochen anmelden\n35 Murat ist nicht sicher, ob\na)  er, als Ersthelfer arbeiten darf\nb)  welche Dokumente er braucht\nc)  ?\n\n\nСтарый вариант вопросов к этому аудио (возможно аудио немного изменили).\nHören Teil 3\n32.    Die Firma hat zurzeit b) viele Ersthelfer wie gesetzlich vorgeschrieben\n33.    Die Mitarbeiter b) können Lehrgang zur Unterschiedenen Themen besuch\n34.    Wer sich anmelden möchte a) man sich an das Personalbüro werden\n35.    Es ist noch ungeklärt b) ob Murat überhaupt als Ersthelfertätig sein darf.\nHören Teil 4\nSie hören fünf telefonische Mitteilungen. Zu jeder Mitteilung gibt es eine Aufgabe. Welche Lösung (a, b oder c) passt am\nbesten? Markier",
+        "sich anmelden möchte a) man sich an das Personalbüro werden\n35.    Es ist noch ungeklärt b) ob Murat überhaupt als Ersthelfertätig sein darf.\nHören Teil 4\nSie hören fünf telefonische Mitteilungen. Zu jeder Mitteilung gibt es eine Aufgabe. Welche Lösung (a, b oder c) passt am\nbesten? Markieren Sie Ihre Lösungen für die Aufgaben 36-40 auf dem Antwortbogen.\nSie hören jede Mitteilung einmal.\nNummer 36\nHallo, hier ist Andrea Faber. Wir sind doch am Freitag zum Arbeitsfrühstück verabredet. Leider kann ich unseren Termin nicht\neinhalten. Wir haben ein spontanes Treffen mit unserem Vertreter aus Wien. Kannst du auch nächste Woche Montag? Das ist\nder 25. Ich halte dir mal den Vormittag frei. Sei doch so nett u"
+      ]
+    },
+    {
+      "id": "set081-p100-q27-1",
+      "page": 100,
+      "section": "Hören",
+      "detail": "Listening variants",
+      "kind": "mc",
+      "number": 27,
+      "prompt": "Frau xxx",
+      "options": [
+        {
+          "value": "a",
+          "label": "gibt Herr Klein Schutzkleidung"
+        },
+        {
+          "value": "b",
+          "label": "stellt Herr Klein den Leiter vor c) verlangt noch einige Unterlagen"
+        }
+      ],
+      "answer": null,
+      "source": null,
+      "status": "extraction_review",
+      "reason": "Question stem is unusually short and may be incomplete; original PDF text is attached.",
+      "provenance": "verbatim_pdf",
+      "option_provenance": "verbatim_pdf",
+      "source_snippets": [
+        "Herr Klein arbeiten zusammen in einem Lager\nRichtig/ Falsch\n27 Frau xxx\na)  gibt Herr Klein Schutzkleidung\nb)   stellt Herr Klein den Leiter vor c) verlangt noch einige Unterlagen\n\n\n\n\nHören Teil 2\n\nSie hören vier Gespräche. Welcher der Sätze a-f passt am besten zu welchem Gespräch? Markieren Sie Ihre Lösungen für\ndie Aufgaben 28-31 auf dem Antwortbogen.\nLesen Sie jetzt die Sätze a-f. Dazu haben Sie eine Minute Zeit. Danach hören Sie die Gespräche einmal.\n28 … (b)\n29 … (d)\n30 … (c)\n31 … (a)\na)  Die Firma möchte, dass alle Mitarbeiter ihre Englischkenntnisse verbessern.\nb)  Ein Mitarbeiter nutzt eine besondere Urlaubsregelung, um seine Sprachkenntnisse zu verbessern.\nc)  Ein Mitarbeiter hilft einem Koll"
+      ]
+    },
+    {
+      "id": "set081-missing-35",
+      "page": 99,
+      "section": "Hören",
+      "detail": "Listening variants",
+      "kind": "note",
+      "number": 35,
+      "prompt": "Question 35: exact complete question text has not been reliably digitized for this variant. See the original PDF source pages shown with this exercise.",
+      "options": [],
+      "answer": null,
+      "source": null,
+      "status": "extraction_review",
+      "reason": "This question number is not available as a reliably identifiable standalone task in the selected source variant. The relevant original source pages are still included below.",
+      "provenance": "editorial_practice_prompt",
+      "option_provenance": "no_mc_choices",
+      "source_snippets": []
+    },
+    {
+      "id": "set081-missing-39",
+      "page": 103,
+      "section": "Hören",
+      "detail": "Listening variants",
+      "kind": "note",
+      "number": 39,
+      "prompt": "Question 39: exact complete question text has not been reliably digitized for this variant. See the original PDF source pages shown with this exercise.",
+      "options": [],
+      "answer": null,
+      "source": null,
+      "status": "extraction_review",
+      "reason": "The original PDF text includes a possible reference to this question number, but a reliable standalone question and its options were not extracted.",
+      "provenance": "editorial_practice_prompt",
+      "option_provenance": "no_mc_choices",
+      "source_snippets": []
+    },
+    {
+      "id": "set082-p107-q36-1",
+      "page": 107,
+      "section": "Hören",
+      "detail": "Listening variants",
+      "kind": "mc",
+      "number": 36,
+      "prompt": "Andrea",
+      "options": [
+        {
+          "value": "a",
+          "label": "kann nicht Termin einhalten."
+        },
+        {
+          "value": "b",
+          "label": "braucht Termin verschieben."
+        }
+      ],
+      "answer": null,
+      "source": null,
+      "status": "extraction_review",
+      "reason": "Question stem is unusually short and may be incomplete; original PDF text is attached.",
+      "provenance": "verbatim_pdf",
+      "option_provenance": "verbatim_pdf",
+      "source_snippets": [
+        "Es ist wichtig, dass wir uns zeitnah zusammensetzen. Danke.\n36.  Andrea\na)  kann nicht Termin einhalten.\nb)  braucht Termin verschieben.\n\n\n\n\n                                                                           107"
+      ]
+    },
+    {
+      "id": "set083-missing-33",
+      "page": 109,
+      "section": "Hören",
+      "detail": "Listening variants",
+      "kind": "note",
+      "number": 33,
+      "prompt": "Question 33: exact complete question text has not been reliably digitized for this variant. See the original PDF source pages shown with this exercise.",
+      "options": [],
+      "answer": null,
+      "source": null,
+      "status": "extraction_review",
+      "reason": "This question number is not available as a reliably identifiable standalone task in the selected source variant. The relevant original source pages are still included below.",
+      "provenance": "editorial_practice_prompt",
+      "option_provenance": "no_mc_choices",
+      "source_snippets": []
+    },
+    {
+      "id": "set083-missing-34",
+      "page": 109,
+      "section": "Hören",
+      "detail": "Listening variants",
+      "kind": "note",
+      "number": 34,
+      "prompt": "Question 34: exact complete question text has not been reliably digitized for this variant. See the original PDF source pages shown with this exercise.",
+      "options": [],
+      "answer": null,
+      "source": null,
+      "status": "extraction_review",
+      "reason": "This question number is not available as a reliably identifiable standalone task in the selected source variant. The relevant original source pages are still included below.",
+      "provenance": "editorial_practice_prompt",
+      "option_provenance": "no_mc_choices",
+      "source_snippets": []
+    }
+  ],
+  "all_ids": [
+    "set038-p43-q18-1",
+    "set039-p45-q15-1",
+    "set079-p92-q36-1",
+    "set080-p97-q35-1",
+    "set081-p100-q27-1",
+    "set081-missing-35",
+    "set081-missing-39",
+    "set082-p107-q36-1",
+    "set083-missing-33",
+    "set083-missing-34",
+    "set083-missing-35",
+    "set083-missing-36",
+    "set083-missing-37",
+    "set083-missing-38",
+    "set083-missing-39",
+    "set083-missing-40",
+    "set084-missing-29",
+    "set084-missing-30",
+    "set084-missing-31",
+    "set085-missing-22",
+    "set085-missing-24",
+    "set085-missing-25",
+    "set085-missing-26",
+    "set085-missing-28",
+    "set085-missing-29",
+    "set085-missing-30",
+    "set085-missing-31",
+    "set086-missing-28",
+    "set086-missing-29",
+    "set086-missing-30",
+    "set086-missing-31"
+  ]
+}
