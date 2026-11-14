@@ -1,0 +1,27 @@
+{
+  "questions": 603,
+  "original_pdf_pages": 149,
+  "bank_sha256_unchanged": "af22f826dd334dcf6bb831e7fea857a5358a7255c9fb80406f17497b8ef79c8b",
+  "questions_by_section": {
+    "Lesen": 41,
+    "Schreiben": 34,
+    "Hören": 11,
+    "Sprechen": 3
+  },
+  "files_added": [
+    "exam-ux-v2.css",
+    "exam-ux-v2.js"
+  ],
+  "features": [
+    "four always-visible exam section tabs",
+    "exercise selector",
+    "one-at-a-time question navigation",
+    "prominent question and answer styling",
+    "collapsible source annotations",
+    "responsive switch between question and source on mobile",
+    "persistent sidebar toggle",
+    "preserved saved practice answers",
+    "unchanged original source text"
+  ],
+  "guard": "No PDF original page text, question prompts, option labels, answer keys, app progress state, or audio attachments have been changed."
+}

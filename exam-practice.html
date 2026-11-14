@@ -30,6 +30,7 @@ html[data-theme="dark"]{color-scheme:dark;--bg:#111923;--surface:#1a2532;--text:
 .qstatus.important{color:#a55d1e;font-weight:700}
 body .source-page pre{max-height:450px;overflow:auto}
 </style>
+<link rel="stylesheet" href="exam-ux-v2.css">
 </head>
 <body>
 <div class="shell">
@@ -111,9 +112,11 @@ $('themeBtn').onclick=()=>{s.theme=s.theme==='dark'?'light':'dark';applyTheme();
 $('printBtn').onclick=()=>window.print();
 $('exportBtn').onclick=()=>{const exportData={exportedAt:new Date().toISOString(),source:'B2 Beruf Digital Exam Practice',questions:allQs().map(q=>({id:q.id,page:q.page,number:q.number,prompt:q.prompt,response:s.answers[q.id]||'',sourceMarkedAnswer:q.answer||null}))};const blob=new Blob([JSON.stringify(exportData,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='b2-beruf-my-answers.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
 document.addEventListener('keydown',e=>{if(e.ctrlKey&&e.key.toLowerCase()==='k'){e.preventDefault();$('sidebar').classList.add('open');$('search').focus()}});
+window.__b2ExamUX={getSets:()=>sets,getCurrentExercise:()=>byId[s.current],selectSet:(id)=>selectSet(id),setSection:(section)=>{s.section=section;renderSidebar();}};
 applyTheme();renderPage();
 </script>
 <style>.local-audio-box{border:1px solid var(--line);background:var(--surface);border-radius:9px;padding:13px 15px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:10px}.local-audio-player{display:flex;gap:10px;align-items:center;flex-wrap:wrap;width:100%;font-size:12px}.local-audio-picker{cursor:pointer}</style>
 <script src="hoeren-audio-local.js" defer></script>
+<script src="exam-ux-v2.js" defer></script>
 </body>
 </html>
