@@ -63,9 +63,35 @@ jobs:
           pathlib.Path('qa/schreiben-audit-applied.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
           print('WRITING_AUDIT', json.dumps({'total':len(qs),'changed':len(report['changed']),'before':report['before'],'after':report['after']}))
           PY
+      - name: Count current question-bank gaps across all sections
+        run: |
+          python3 - <<'PY'
+          import pathlib,re,json,collections
+          s=pathlib.Path('exam-practice.html').read_text(encoding='utf-8')
+          m=re.search(r'<script id="bank-data" type="application/json">(.*?)</script>',s,re.S)
+          assert m, 'Question bank missing'
+          bank=json.loads(m.group(1))
+          sections={}
+          details={}
+          totals=collections.Counter()
+          examples={}
+          for exercise in bank['exercises']:
+              section=exercise.get('section','Unknown')
+              detail=exercise.get('detail','Unknown')
+              for q in exercise.get('questions',[]):
+                  status=q.get('completeness','unclassified')
+                  totals[status]+=1
+                  sections.setdefault(section,collections.Counter())[status]+=1
+                  details.setdefault(section+' | '+detail,collections.Counter())[status]+=1
+                  if status not in ('complete_source',):
+                      examples.setdefault(section+' | '+detail,[]).append({'id':q.get('id'),'page':q.get('page'),'number':q.get('number'),'status':status,'reason':q.get('completeness_reason','')[:220]})
+          report={'total_questions':sum(totals.values()),'exercise_groups':len(bank['exercises']),'statuses':dict(totals),'by_section':{k:dict(v) for k,v in sections.items()},'by_detail':{k:dict(v) for k,v in details.items()},'flagged_examples':{k:v[:5] for k,v in examples.items()}}
+          pathlib.Path('qa/question-bank-status.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
+          print('QUESTION_BANK_STATS',json.dumps({'total':report['total_questions'],'status':report['statuses'],'sections':report['by_section']}))
+          PY
       - name: Publish reviewed changes to live app
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add exam-practice.html qa/schreiben-audit-applied.json
+          git add exam-practice.html qa/schreiben-audit-applied.json qa/question-bank-status.json
           git diff --cached --quiet || (git commit -m "Apply source-supported Schreiben review decisions and preserve unresolved flags" && git push)
