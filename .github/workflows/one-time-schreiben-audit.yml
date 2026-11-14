@@ -1,0 +1,34 @@
+name: One-time Schreiben audit inspection
+on:
+  push:
+    paths:
+      - '.github/workflows/one-time-schreiben-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Inspect current practice data structure
+        run: |
+          python3 - <<'PY'
+          import json,re,pathlib
+          s=pathlib.Path('exam-practice.html').read_text()
+          needles=['complete_source','source_incomplete','Schreiben','Forumsbeitrag','Telefonnotiz','questions','incomplete']
+          items={}
+          for n in needles:
+              hits=[m.start() for m in re.finditer(re.escape(n),s,re.I)]
+              items[n]={'count':len(hits),'samples':[s[max(0,x-320):min(len(s),x+450)] for x in hits[:8]]}
+          data={'size':len(s),'start':s[:5000],'end':s[-1800:],'needles':items}
+          pathlib.Path('qa/schreiben-audit-inspect.json').write_text(json.dumps(data,ensure_ascii=False,indent=2))
+          PY
+      - name: Commit inspection (not changing exam questions)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add qa/schreiben-audit-inspect.json
+          git diff --cached --quiet || (git commit -m "chore: inspect Schreiben data before approved audit patch" && git push)
