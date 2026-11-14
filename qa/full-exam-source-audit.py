@@ -130,7 +130,7 @@ for e in ex:
  for q in e["questions"]:
   prompt=q.get("prompt","")
   if has(q,prompt): provenance="verbatim_pdf"
-  elif q["kind"] in ("gap","note") or e["detail"] in ("Telefonnotiz","Forumsbeitrag") or prompt.startswith("Gespräch "):
+  elif q["kind"] in ("gap","note") or e["detail"] in ("Telefonnotiz","Forumsbeitrag") or (e["detail"]=="Beschwerde" and q["kind"]=="free") or prompt.startswith("Gespräch "):
    provenance="editorial_practice_prompt"
   else:provenance="not_verbatim_pdf"
   opts=q.get("options") or []
