@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit all digital questions against the PDF's verbatim page-text records.
+"""Re-audit all digital questions against the PDF's verbatim page-text records.
 PDF text fidelity was independently verified against all 149 PDF pages.
 Only source-exact, unambiguous corrections are applied.
 """
