@@ -1,0 +1,54 @@
+name: Publish reviewed Hören practice and local audio attachments
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'qa/hoeren-audit-patch.py'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: hoeren-audit-publish
+  cancel-in-progress: false
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Update Hören questions from source text
+        run: python3 qa/hoeren-audit-patch.py
+      - name: Check generated question bank and local audio widget
+        run: |
+          python3 - <<'PY'
+          import json,pathlib,re,collections
+          s=pathlib.Path('exam-practice.html').read_text(encoding='utf-8')
+          m=re.search(r'<script id="bank-data" type="application/json">(.*?)</script>',s,re.S)
+          assert m
+          b=json.loads(m.group(1))
+          sets=[e for e in b['exercises'] if e.get('section')=='Hören']
+          qs=[q for e in sets for q in e['questions']]
+          assert len(sets)==11 and len(qs)==218
+          assert 'b2beruf-listening-audio-v1' in s
+          assert 'transcript_review' in s
+          assert len({q['id'] for q in qs})==218
+          assert sum(q['completeness']=='transcript_review' for q in qs)>=140
+          assert all(q.get('answer') in ([o.get('value') for o in q.get('options',[])] if q.get('answer') is not None else [None]) for q in qs)
+          print('Current Hören statuses:',dict(collections.Counter(q['completeness'] for q in qs)))
+          PY
+      - name: Run established core QA suite
+        run: node --test qa/quality.test.mjs
+      - name: Commit app changes and audit report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add exam-practice.html qa/hoeren-audit-report.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Audit 218 Hören questions, restore source options, add local audio uploads"
+            git push
+          fi
