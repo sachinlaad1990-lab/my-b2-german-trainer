@@ -1,0 +1,561 @@
+{
+  "before": {
+    "extraction_review": 7,
+    "manual_review": 81,
+    "complete_source": 105
+  },
+  "after": {
+    "extraction_review": 7,
+    "manual_review": 42,
+    "complete_source": 144
+  },
+  "changed": [
+    {
+      "id": "set070-p79-q1-1",
+      "page": 79,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set070-p79-q2-1",
+      "page": 79,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set070-p79-q3-1",
+      "page": 79,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set070-p79-q4-1",
+      "page": 79,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set070-p79-q5-1",
+      "page": 79,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set070-p79-q6-1",
+      "page": 79,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set070-p79-q7-1",
+      "page": 79,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set070-p79-q8-1",
+      "page": 79,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set070-p79-q9-1",
+      "page": 79,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set070-p79-q11-1",
+      "page": 79,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set070-p79-q12-1",
+      "page": 79,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set070-p79-q13-1",
+      "page": 79,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set070-p79-q14-1",
+      "page": 79,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set070-p79-q16-1",
+      "page": 79,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set070-p79-q17-1",
+      "page": 79,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set070-p79-q18-1",
+      "page": 79,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set070-p79-q19-1",
+      "page": 79,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set070-p79-q20-1",
+      "page": 79,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set070-p79-q21-1",
+      "page": 79,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set070-p79-q22-1",
+      "page": 79,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set070-p79-q23-1",
+      "page": 79,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set070-p79-q24-1",
+      "page": 79,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set070-p79-q25-1",
+      "page": 79,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set071-p80-q26-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set071-p80-q4-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set071-p80-q5-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set071-p80-q12-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set071-p80-q13-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set071-p80-q14-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set071-p80-q17-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set071-p80-q20-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set071-p80-q21-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set071-p80-q22-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set071-p80-q25-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set071-p80-q27-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set071-p80-q28-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set071-p80-q29-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set071-p80-q30-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    },
+    {
+      "id": "set071-p80-q32-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "from": "manual_review",
+      "to": "complete_source"
+    }
+  ],
+  "left_flagged": [
+    {
+      "id": "set044-reply-0",
+      "page": 53,
+      "detail": "Beschwerde",
+      "status": "manual_review"
+    },
+    {
+      "id": "set045-reply-0",
+      "page": 54,
+      "detail": "Beschwerde",
+      "status": "manual_review"
+    },
+    {
+      "id": "set046-reply-0",
+      "page": 55,
+      "detail": "Beschwerde",
+      "status": "manual_review"
+    },
+    {
+      "id": "set046-reply-1",
+      "page": 55,
+      "detail": "Beschwerde",
+      "status": "manual_review"
+    },
+    {
+      "id": "set047-reply-0",
+      "page": 56,
+      "detail": "Beschwerde",
+      "status": "manual_review"
+    },
+    {
+      "id": "set048-reply-0",
+      "page": 57,
+      "detail": "Beschwerde",
+      "status": "manual_review"
+    },
+    {
+      "id": "set049-reply-0",
+      "page": 58,
+      "detail": "Beschwerde",
+      "status": "manual_review"
+    },
+    {
+      "id": "set050-reply-0",
+      "page": 59,
+      "detail": "Beschwerde",
+      "status": "manual_review"
+    },
+    {
+      "id": "set051-reply-0",
+      "page": 60,
+      "detail": "Beschwerde",
+      "status": "manual_review"
+    },
+    {
+      "id": "set052-reply-0",
+      "page": 61,
+      "detail": "Beschwerde",
+      "status": "manual_review"
+    },
+    {
+      "id": "set052-reply-1",
+      "page": 61,
+      "detail": "Beschwerde",
+      "status": "manual_review"
+    },
+    {
+      "id": "set053-reply-0",
+      "page": 62,
+      "detail": "Beschwerde",
+      "status": "manual_review"
+    },
+    {
+      "id": "set070-p79-q10-1",
+      "page": 79,
+      "detail": "Forumsbeitrag",
+      "status": "manual_review"
+    },
+    {
+      "id": "set070-p79-q15-1",
+      "page": 79,
+      "detail": "Forumsbeitrag",
+      "status": "manual_review"
+    },
+    {
+      "id": "set071-p80-q1-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "status": "manual_review"
+    },
+    {
+      "id": "set071-p80-q2-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "status": "manual_review"
+    },
+    {
+      "id": "set071-p80-q3-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "status": "manual_review"
+    },
+    {
+      "id": "set071-p80-q6-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "status": "manual_review"
+    },
+    {
+      "id": "set071-p80-q7-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "status": "manual_review"
+    },
+    {
+      "id": "set071-p80-q8-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "status": "manual_review"
+    },
+    {
+      "id": "set071-p80-q9-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "status": "manual_review"
+    },
+    {
+      "id": "set071-p80-q10-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "status": "manual_review"
+    },
+    {
+      "id": "set071-p80-q11-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "status": "manual_review"
+    },
+    {
+      "id": "set071-p80-q15-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "status": "manual_review"
+    },
+    {
+      "id": "set071-p80-q16-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "status": "manual_review"
+    },
+    {
+      "id": "set071-p80-q18-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "status": "manual_review"
+    },
+    {
+      "id": "set071-p80-q19-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "status": "manual_review"
+    },
+    {
+      "id": "set071-p80-q23-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "status": "manual_review"
+    },
+    {
+      "id": "set071-p80-q24-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "status": "manual_review"
+    },
+    {
+      "id": "set071-p80-q26-2",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "status": "manual_review"
+    },
+    {
+      "id": "set071-p80-q31-1",
+      "page": 80,
+      "detail": "Forumsbeitrag",
+      "status": "manual_review"
+    },
+    {
+      "id": "set072-note-0",
+      "page": 81,
+      "detail": "Telefonnotiz",
+      "status": "manual_review"
+    },
+    {
+      "id": "set072-note-1",
+      "page": 81,
+      "detail": "Telefonnotiz",
+      "status": "manual_review"
+    },
+    {
+      "id": "set072-note-2",
+      "page": 81,
+      "detail": "Telefonnotiz",
+      "status": "manual_review"
+    },
+    {
+      "id": "set073-note-0",
+      "page": 82,
+      "detail": "Telefonnotiz",
+      "status": "manual_review"
+    },
+    {
+      "id": "set074-note-0",
+      "page": 83,
+      "detail": "Telefonnotiz",
+      "status": "manual_review"
+    },
+    {
+      "id": "set074-note-1",
+      "page": 83,
+      "detail": "Telefonnotiz",
+      "status": "manual_review"
+    },
+    {
+      "id": "set075-note-0",
+      "page": 84,
+      "detail": "Telefonnotiz",
+      "status": "manual_review"
+    },
+    {
+      "id": "set075-note-1",
+      "page": 84,
+      "detail": "Telefonnotiz",
+      "status": "manual_review"
+    },
+    {
+      "id": "set076-note-0",
+      "page": 85,
+      "detail": "Telefonnotiz",
+      "status": "manual_review"
+    },
+    {
+      "id": "set076-note-1",
+      "page": 85,
+      "detail": "Telefonnotiz",
+      "status": "manual_review"
+    },
+    {
+      "id": "set077-note-0",
+      "page": 86,
+      "detail": "Telefonnotiz",
+      "status": "manual_review"
+    }
+  ],
+  "by_detail": {
+    "Beschwerde": {
+      "extraction_review": 7,
+      "manual_review": 12,
+      "complete_source": 9
+    },
+    "Forumsbeitrag": {
+      "complete_source": 39,
+      "manual_review": 19
+    },
+    "Sprachbausteine 1": {
+      "complete_source": 54
+    },
+    "Sprachbausteine 2": {
+      "complete_source": 42
+    },
+    "Telefonnotiz": {
+      "manual_review": 11
+    }
+  }
+}
