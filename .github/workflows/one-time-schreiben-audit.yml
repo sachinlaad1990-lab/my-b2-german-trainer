@@ -23,7 +23,7 @@ jobs:
           for n in needles:
               hits=[m.start() for m in re.finditer(re.escape(n),s,re.I)]
               items[n]={'count':len(hits),'samples':[s[max(0,x-320):min(len(s),x+450)] for x in hits[:8]]}
-          data={'size':len(s),'start':s[:5000],'end':s[-1800:],'needles':items}
+          data={'size':len(s),'start':s[:5000],'end':s[-1800:],'needles':items,'script_context':[s[max(0,m.start()-100):m.start()+250] for m in list(re.finditer(r'(?:const|let|var)\\s+(?:sets|SET|DATA|data|exercise)',s))[:15]],'writing_questions':[{'id':m.group(1),'snippet':s[m.start():m.start()+550]} for m in re.finditer(r'\\{\\"id\\":\\"(set\\d+-p(?:5\\d|6\\d|7\\d|8\\d|9\\d)-q\\d+-\\d+)\\"',s) if 'Schreiben' in s[max(0,m.start()-6000):m.start()+300]][:140]}
           pathlib.Path('qa/schreiben-audit-inspect.json').write_text(json.dumps(data,ensure_ascii=False,indent=2))
           PY
       - name: Commit inspection (not changing exam questions)
