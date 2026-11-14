@@ -20,3 +20,5 @@ pathlib.Path("qa/fidelity-review-details.json").write_text(json.dumps({"n":len(r
 review=[r for r in rows if r["status"]=="extraction_review"]
 pathlib.Path("qa/first-ten-extraction-review.json").write_text(json.dumps({"count":len(review),"first_ten":review[:10],"all_ids":[r["id"] for r in review]},ensure_ascii=False,indent=2))
 print("INSPECT",len(rows),collections.Counter(x["section"] for x in rows),"REMAINING",len(review))
+
+# Publish the first ten unresolved extraction flags for manual review.
