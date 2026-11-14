@@ -8,30 +8,21 @@
     {
       "id": "set046-p55-q19-1",
       "page": 55,
-      "field": "prompt",
-      "old": "Frau Lutz New variant 030321",
-      "new": "Frau Lutz",
-      "reason": "Remove appended 'New variant' annotation from PDF question stem"
-    },
-    {
-      "id": "set046-p55-q19-1",
-      "page": 55,
-      "field": "source_alt_note",
-      "old": "PDF page 55, Frau Lutz Q19: 'Ich bitte um eine schnelle Antwort!' supports A. B is not requested and C is only a conditional future cancellation. Accepted during Schreibe",
-      "new": "PDF page 55, Frau Lutz Q19: 'Ich bitte um eine schnelle Antwort!' supports A. B is not requested and C is only a conditional future cancellation. Accepted during Schreiben audit on 2026-11-13. Source-inferred practice an",
-      "reason": "Preserve editorial caveat"
+      "field": "source_provenance",
+      "old": "not_verbatim_pdf",
+      "new": "verbatim_pdf",
+      "reason": "Report literal question wording status"
     }
   ],
   "provenance": {
-    "not_verbatim_pdf": 28,
-    "verbatim_pdf": 414,
+    "not_verbatim_pdf": 27,
+    "verbatim_pdf": 415,
     "editorial_practice_prompt": 160
   },
   "option_provenance": {
     "source_matching_letters": 86,
     "standard_richtig_falsch_controls": 58,
-    "verbatim_pdf": 191,
-    "some_options_not_in_pdf": 14,
+    "verbatim_pdf": 205,
     "letter_only_not_extracted": 26,
     "no_mc_choices": 227
   },
@@ -41,8 +32,8 @@
       "verbatim_pdf": 161
     },
     "Schreiben": {
-      "verbatim_pdf": 73,
-      "not_verbatim_pdf": 13,
+      "verbatim_pdf": 74,
+      "not_verbatim_pdf": 12,
       "editorial_practice_prompt": 107
     },
     "Hören": {
@@ -84,66 +75,12 @@
       "status": "complete_source"
     },
     {
-      "id": "set036-p39-q14-1",
-      "page": 39,
-      "section": "Lesen",
-      "prompt": "Der Termin der nächsten Sitzung",
-      "provenance": "verbatim_pdf",
-      "options": "some_options_not_in_pdf",
-      "status": "extraction_review"
-    },
-    {
-      "id": "set037-p41-q15-1",
-      "page": 41,
-      "section": "Lesen",
-      "prompt": "Herr Hamann",
-      "provenance": "verbatim_pdf",
-      "options": "some_options_not_in_pdf",
-      "status": "extraction_review"
-    },
-    {
-      "id": "set038-p43-q15-1",
-      "page": 43,
-      "section": "Lesen",
-      "prompt": "Herr Hamann",
-      "provenance": "verbatim_pdf",
-      "options": "some_options_not_in_pdf",
-      "status": "extraction_review"
-    },
-    {
-      "id": "set038-p43-q17-1",
-      "page": 43,
-      "section": "Lesen",
-      "prompt": "Der Standort der neuen Fahrradständer",
-      "provenance": "verbatim_pdf",
-      "options": "some_options_not_in_pdf",
-      "status": "extraction_review"
-    },
-    {
-      "id": "set038-p43-q18-1",
-      "page": 43,
-      "section": "Lesen",
-      "prompt": "Frau Schlosser",
-      "provenance": "verbatim_pdf",
-      "options": "some_options_not_in_pdf",
-      "status": "extraction_review"
-    },
-    {
-      "id": "set039-p45-q14-1",
-      "page": 45,
-      "section": "Lesen",
-      "prompt": "Bei der Sitzung wird",
-      "provenance": "verbatim_pdf",
-      "options": "some_options_not_in_pdf",
-      "status": "extraction_review"
-    },
-    {
       "id": "set039-p45-q15-1",
       "page": 45,
       "section": "Lesen",
       "prompt": "What rule applies in the company?",
       "provenance": "not_verbatim_pdf",
-      "options": "some_options_not_in_pdf",
+      "options": "verbatim_pdf",
       "status": "extraction_review"
     },
     {
@@ -154,60 +91,6 @@
       "provenance": "not_verbatim_pdf",
       "options": "verbatim_pdf",
       "status": "complete_source"
-    },
-    {
-      "id": "set039-p45-q17-1",
-      "page": 45,
-      "section": "Lesen",
-      "prompt": "Die Firma",
-      "provenance": "verbatim_pdf",
-      "options": "some_options_not_in_pdf",
-      "status": "extraction_review"
-    },
-    {
-      "id": "set040-p47-q14-1",
-      "page": 47,
-      "section": "Lesen",
-      "prompt": "Die neue Werbestrategie",
-      "provenance": "verbatim_pdf",
-      "options": "some_options_not_in_pdf",
-      "status": "extraction_review"
-    },
-    {
-      "id": "set040-p47-q15-1",
-      "page": 47,
-      "section": "Lesen",
-      "prompt": "Die Reinigungsfirma",
-      "provenance": "verbatim_pdf",
-      "options": "some_options_not_in_pdf",
-      "status": "extraction_review"
-    },
-    {
-      "id": "set040-p47-q16-1",
-      "page": 47,
-      "section": "Lesen",
-      "prompt": "Die Fortbildung für Ersthelfer",
-      "provenance": "verbatim_pdf",
-      "options": "some_options_not_in_pdf",
-      "status": "extraction_review"
-    },
-    {
-      "id": "set040-p47-q17-1",
-      "page": 47,
-      "section": "Lesen",
-      "prompt": "Das Jobticket",
-      "provenance": "verbatim_pdf",
-      "options": "some_options_not_in_pdf",
-      "status": "extraction_review"
-    },
-    {
-      "id": "set040-p47-q18-1",
-      "page": 47,
-      "section": "Lesen",
-      "prompt": "Der Streik in Litauen",
-      "provenance": "verbatim_pdf",
-      "options": "some_options_not_in_pdf",
-      "status": "extraction_review"
     },
     {
       "id": "set044-p53-q19-1",
@@ -253,15 +136,6 @@
       "provenance": "not_verbatim_pdf",
       "options": "no_mc_choices",
       "status": "manual_review"
-    },
-    {
-      "id": "set046-p55-q19-1",
-      "page": 55,
-      "section": "Schreiben",
-      "prompt": "Frau Lutz New variant 030321",
-      "provenance": "not_verbatim_pdf",
-      "options": "verbatim_pdf",
-      "status": "complete_source"
     },
     {
       "id": "set046-p55-q19-2",
@@ -352,15 +226,6 @@
       "provenance": "not_verbatim_pdf",
       "options": "no_mc_choices",
       "status": "manual_review"
-    },
-    {
-      "id": "set051-p60-q20-1",
-      "page": 60,
-      "section": "Schreiben",
-      "prompt": "Die Nachlieferung",
-      "provenance": "verbatim_pdf",
-      "options": "some_options_not_in_pdf",
-      "status": "extraction_review"
     },
     {
       "id": "set051-reply-0",
@@ -661,10 +526,10 @@
     }
   ],
   "question_statuses": {
-    "complete_source": 294,
+    "complete_source": 306,
     "source_incomplete": 2,
     "manual_review": 67,
-    "extraction_review": 69,
+    "extraction_review": 57,
     "transcript_review": 170
   },
   "warning": "Verbatim means exact match to the original PDF text after whitespace normalization; no official answer-key or audio verification is claimed."
