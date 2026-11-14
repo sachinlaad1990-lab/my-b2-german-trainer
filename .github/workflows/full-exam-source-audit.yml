@@ -1,0 +1,50 @@
+name: Full source-fidelity audit — 602 exam questions
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'qa/full-exam-source-audit.py'
+      - '.github/workflows/full-exam-source-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: full-exam-source-audit
+  cancel-in-progress: false
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify PDF checksum and audit all 602 questions
+        run: python3 qa/full-exam-source-audit.py
+      - name: Validate source records and options
+        run: |
+          python3 - <<'PY'
+          import json, pathlib,re,collections
+          page=pathlib.Path('exam-practice.html').read_text(encoding='utf-8')
+          m=re.search(r'<script id="bank-data" type="application/json">(.*?)</script>',page,re.S)
+          assert m
+          b=json.loads(m.group(1))
+          qs=[q for e in b['exercises'] if e['section'] in ('Lesen','Schreiben','Hören','Sprechen') for q in e['questions']]
+          assert len(qs)==602
+          assert len({q['id'] for q in qs})==602
+          assert len(b['source_page_records'])==149
+          assert all(q['source_provenance'] in ('verbatim_pdf','editorial_practice_prompt','not_verbatim_pdf') for q in qs)
+          assert all(q.get('source_option_provenance') for q in qs)
+          print('AUDIT_RESULTS',json.dumps(collections.Counter(q['source_provenance'] for q in qs)))
+          PY
+      - name: Core QA tests
+        run: node --test qa/quality.test.mjs
+      - name: Publish verified corrections and transparent audit report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add exam-practice.html qa/full-exam-source-audit.json
+          git diff --cached --quiet || (git commit -m "Audit all 602 questions against verbatim PDF and restore verified text only" && git push)
