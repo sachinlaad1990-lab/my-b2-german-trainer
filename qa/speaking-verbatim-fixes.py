@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Remove only added editorial prefixes from eight speaking topics on PDF page 145."""
+"""Remove only editorial prefixes from eight original speaking topics, page 145.
+
+The original German PDF bullet text is preserved without paraphrasing.
+"""
 import json,re,pathlib,collections
 path=pathlib.Path("exam-practice.html")
 s=path.read_text(encoding="utf-8")
