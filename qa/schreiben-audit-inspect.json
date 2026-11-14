@@ -92,5 +92,7 @@
         "tions\":[{\"value\":\"a\",\"label\":\"A\"},{\"value\":\"b\",\"label\":\"B\"},{\"value\":\"c\",\"label\":\"C\"}],\"answer\":null,\"source\":null,\"completeness\":\"extraction_review\",\"completeness_reason\":\"One or more selectable options lack reliable wording in the digitized exercise. Refer to the complete original PDF page below.\",\"source_alt_note\":\"INCOMPLETE DIGITAL OPTIONS: A, B, C. Check the source page.\"},{\"id\":\"set079-p89-q26-1\",\"page\":89,\"number\":26,\"prompt\":\"Herr Neumeier nimmt eine Reklamation entgegen.\",\"kind\":\"tf\",\"options\":[{\"value\":\"richtig\",\"label\":\"Richtig\"},{\"value\":\"falsch\",\"label\":\"Falsch\"}],\"answer\":null,\"source\":null,\"completeness\":\"requires_audio\"},{\"id\":\"set079-p89-q27-1\",\"page\":89,\"number\":27,\"prompt\":\"Frau Kerner\",\"kind\":\"mc\",\"options\":[{\"value\":\"a\",\"label\":\"benötigt "
       ]
     }
-  }
+  },
+  "script_context": [],
+  "writing_questions": []
 }
