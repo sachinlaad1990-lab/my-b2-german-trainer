@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Apply a conservative, repeatable Hören transcript review to the live question bank."""
+"""Apply a conservative, repeatable Hören transcript review to the live question bank.
+Safeguards: preserve PDF wording, label unofficial keys, allow later audio attachments.
+"""
 import pathlib,json,re,collections
 file=pathlib.Path("exam-practice.html")
 s=file.read_text(encoding="utf-8")
