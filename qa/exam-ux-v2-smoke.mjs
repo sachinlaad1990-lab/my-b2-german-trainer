@@ -1,3 +1,4 @@
+// Dedicated exam navigation regression checks, desktop and mobile.
 import { chromium } from "playwright";
 import { createServer } from "node:http";
 import { readFileSync, existsSync } from "node:fs";
