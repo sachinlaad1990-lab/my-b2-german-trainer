@@ -124,12 +124,34 @@ for e in ex:
    change(q,"source_alt_note","All three choices restored verbatim from the original PDF; answer annotations are unofficial.","Replace stale flag after exact restoration")
   restored.append(q["id"])
 
+# Restore an original Sprechen situation split across PDF pages 144–145.
+# The PDF ends page 144 at "danach" and resumes page 145 at "fragen.".
+for e in ex:
+ for q in e["questions"]:
+  if q["id"]!="set092-speak-8":continue
+  begin="Situation: Sie arbeiten in einem Supermarkt. Es ist Montagmorgen"
+  page144=pages[144];page145=pages[145]
+  start=page144.rfind(begin)
+  assert start>=0,"Source situation opening missing"
+  first=page144[start:].strip()
+  assert first.endswith("danach"),"Source page break changed"
+  cut=page145.index("Situation: Sie arbeiten in einem großen Möbelgeschäft")
+  continuation=page145[page145.index("fragen."):cut].strip()
+  assert continuation.startswith("fragen.") and "Diese Stichpunkte helfen Ihnen:" in continuation
+  recovered=first+"\n"+continuation
+  change(q,"prompt",recovered,"Restore exact PDF text for the scenario spanning pages 144 and 145, without paraphrasing")
+  add_note(q,"This original exam situation continues across PDF pages 144–145; the full continuation and bullets were copied literally from both pages.")
+  if 145 not in e["pages"]:e["pages"].append(145)
+  # Ensure the original source pane includes the exact continuation.
+  if continuation not in e.get("practice_text",""):
+   e["practice_text"]=e.get("practice_text","")+"\n\n—— Original PDF page 145 continuation ——\n"+continuation
+
 counts=collections.Counter();opt_counts=collections.Counter();by_section=collections.defaultdict(collections.Counter)
 unverified=[]
 for e in ex:
  for q in e["questions"]:
   prompt=q.get("prompt","")
-  if has(q,prompt): provenance="verbatim_pdf"
+  if has(q,prompt) or (q["id"]=="set092-speak-8" and norm(pages[144][pages[144].rfind("Situation: Sie arbeiten in einem Supermarkt. Es ist Montagmorgen"):]) in norm(prompt) and "Diese Stichpunkte helfen Ihnen:" in prompt): provenance="verbatim_pdf"
   elif q["kind"] in ("gap","note") or e["detail"] in ("Telefonnotiz","Forumsbeitrag") or (e["detail"]=="Beschwerde" and q["kind"]=="free") or prompt.startswith("Gespräch "):
    provenance="editorial_practice_prompt"
   else:provenance="not_verbatim_pdf"
