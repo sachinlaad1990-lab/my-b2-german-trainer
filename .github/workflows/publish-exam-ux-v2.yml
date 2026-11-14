@@ -1,0 +1,53 @@
+name: Publish clearer B2 exam practice interface
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'qa/publish-exam-ux-v2.py'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: publish-exam-ux-v2
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply interface-only changes and assert question bank unchanged
+        run: python3 qa/publish-exam-ux-v2.py
+      - name: Check JS and CSS
+        run: |
+          node --check exam-ux-v2.js
+          node --test qa/quality.test.mjs
+      - name: Verify UI assets and exam sections
+        run: |
+          python3 - <<'PY'
+          import pathlib,json,re
+          html=pathlib.Path('exam-practice.html').read_text(encoding='utf-8')
+          script=pathlib.Path('exam-ux-v2.js').read_text(encoding='utf-8')
+          style=pathlib.Path('exam-ux-v2.css').read_text(encoding='utf-8')
+          assert 'getCurrentExercise:()=>byId[s.current]' in html
+          assert '<script src="exam-ux-v2.js" defer></script>' in html
+          assert '<link rel="stylesheet" href="exam-ux-v2.css">' in html
+          assert all(x in script for x in ["'Lesen'","'Schreiben'","'Hören'","'Sprechen'"])
+          assert all(x in script for x in ['uxExerciseSelect','uxQuestionSelect','uxShowQuestion','uxShowSource'])
+          assert '@media(max-width:1050px)' in style
+          bank=json.loads(re.search(r'<script id="bank-data" type="application/json">(.*?)</script>',html,re.S).group(1))
+          assert len(bank['source_page_records'])==149
+          assert sum(len(e['questions']) for e in bank['exercises'] if e['section'] in ('Lesen','Schreiben','Hören','Sprechen'))==603
+          print('Interface-only exam redesign validated')
+          PY
+      - name: Publish live page and release report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add exam-practice.html qa/exam-ux-v2-release.json
+          git diff --cached --quiet || (git commit -m "Redesign exam UI with focused questions and visible section navigation" && git push)
