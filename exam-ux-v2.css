@@ -1,0 +1,103 @@
+/* Exam workspace V2: presentation only; source and answer data remain untouched. */
+:root{--ux-focus:#315ca4;--ux-tint:#eef3fc;--ux-line:#d5e0ef}
+html[data-theme=dark]{--ux-focus:#acd0ff;--ux-tint:#243952;--ux-line:#3d5370}
+body.exam-ux-enhanced .shell{grid-template-columns:258px minmax(0,1fr)}
+body.exam-ux-enhanced .sidebar{padding:15px 11px}
+body.exam-ux-enhanced .main{padding:13px clamp(14px,2vw,32px) 50px}
+body.exam-ux-enhanced .topbar{margin-bottom:11px}
+body.exam-ux-enhanced #sectionLabel{margin-top:11px}
+body.exam-ux-enhanced #title{font-size:clamp(21px,2vw,28px);line-height:1.25;letter-spacing:-.025em;margin:2px 0 5px}
+body.exam-ux-enhanced #meta{margin-bottom:10px;font-size:12px}
+body.exam-ux-enhanced .stats,body.exam-ux-enhanced .top-progress{display:none}
+body.exam-ux-enhanced #audioLinks{margin:2px 0 12px}
+body.exam-ux-enhanced .workspace{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:15px}
+body.exam-ux-enhanced .workspace>.panel{border-radius:13px;box-shadow:0 4px 18px rgba(26,51,88,.065)}
+body.exam-ux-enhanced .panel-heading{position:sticky;top:0;z-index:2;background:var(--surface);padding:13px 17px}
+body.exam-ux-enhanced .panel-heading h2{font-size:16px}
+body.exam-ux-enhanced #sourcePanel{scroll-margin-top:170px}
+body.exam-ux-enhanced #answerPanel{scroll-margin-top:170px}
+body.exam-ux-enhanced #sourcePanel .reader{padding:18px;max-height:calc(100vh - 260px);min-height:300px;overflow-y:auto;overscroll-behavior:contain}
+body.exam-ux-enhanced #answerPanel .question-panel{padding:16px 19px 22px;max-height:none;overflow:visible}
+body.exam-ux-enhanced .question{padding:0;border:0}
+body.exam-ux-enhanced .question[hidden]{display:none!important}
+body.exam-ux-enhanced .question-top{border-bottom:1px solid var(--line);padding:0 0 13px;margin:0 0 16px;align-items:flex-start}
+body.exam-ux-enhanced .question-top .qnum{font-size:12px;font-weight:850;letter-spacing:.05em;color:var(--strong)}
+body.exam-ux-enhanced .question-top .qstatus{text-align:right;max-width:55%;font-size:11px}
+body.exam-ux-enhanced .question-prompt{font-size:19px;line-height:1.55;font-weight:700;letter-spacing:-.01em;margin:0 0 15px;white-space:pre-wrap;overflow-wrap:anywhere}
+body.exam-ux-enhanced .ux-question-label{color:var(--ux-focus);font-size:10px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;margin:0 0 8px}
+body.exam-ux-enhanced .ux-answer-block{border:1px solid var(--ux-line);background:var(--ux-tint);border-radius:12px;padding:14px;margin:16px 0 12px}
+body.exam-ux-enhanced .ux-answer-title{color:var(--ux-focus);font-size:11px;font-weight:850;letter-spacing:.11em;text-transform:uppercase;margin:0 0 11px}
+body.exam-ux-enhanced .ux-answer-block .choice{display:flex;background:var(--surface);border:1px solid var(--line);border-radius:9px;min-height:50px;padding:12px;margin:8px 0;font-size:14px;align-items:center}
+body.exam-ux-enhanced .ux-answer-block .choice:hover{border-color:var(--ux-focus)}
+body.exam-ux-enhanced .ux-answer-block .choice.checked{border-color:var(--ux-focus);box-shadow:0 0 0 2px color-mix(in srgb,var(--ux-focus) 22%,transparent)}
+body.exam-ux-enhanced .ux-answer-block .choice.correct{border-color:var(--success);background:var(--soft-success)}
+body.exam-ux-enhanced .ux-answer-block .choice.wrong{border-color:var(--error);background:var(--soft-error)}
+body.exam-ux-enhanced .ux-answer-block .choice input{height:17px;width:17px;margin:0}
+body.exam-ux-enhanced .ux-answer-block .choice b{display:grid;place-items:center;min-width:27px;height:27px;border-radius:7px;background:var(--ux-tint);color:var(--ux-focus);font-size:12px}
+body.exam-ux-enhanced .ux-answer-block .choice.checked b{background:var(--strong);color:#fff}
+body.exam-ux-enhanced .ux-answer-block .choice span{overflow-wrap:anywhere}
+body.exam-ux-enhanced .ux-answer-block .answer-input{background:var(--surface);font-size:15px}
+body.exam-ux-enhanced .ux-source-note{border:1px solid var(--line);border-radius:8px;margin-top:13px;padding:9px 12px}
+body.exam-ux-enhanced .ux-source-note summary{cursor:pointer;color:var(--muted);font-size:12px;font-weight:700}
+body.exam-ux-enhanced .ux-source-note .marking{margin:9px 0 0}
+body.exam-ux-enhanced .ux-no-question{border:1px dashed var(--ux-line);border-radius:9px;background:var(--ux-tint);padding:12px;color:var(--muted);font-size:13px;margin-top:12px}
+body.exam-ux-enhanced .ux-bottom-pager{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:14px 19px;border-top:1px solid var(--line)}
+body.exam-ux-enhanced .ux-bottom-pager .ux-counter{color:var(--muted);font-size:12px}
+body.exam-ux-enhanced .ux-review-wrap{margin:10px 0 12px;border:1px solid var(--line);border-radius:9px;background:var(--surface)}
+body.exam-ux-enhanced .ux-review-wrap summary{cursor:pointer;padding:9px 13px;font-size:12px;font-weight:750;color:var(--muted)}
+body.exam-ux-enhanced .ux-review-wrap #notice{border:0;border-top:1px solid var(--line);border-radius:0;padding:9px 13px;margin:0}
+body.exam-ux-enhanced .ux-review-wrap #notice .completeness-banner{margin:0 0 8px}
+.exam-ux-bar{position:sticky;top:0;z-index:30;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:0 5px 19px rgba(18,43,77,.10);padding:11px 13px;margin-bottom:14px}
+.exam-ux-sections{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.exam-ux-sections button{border:1px solid var(--line);background:var(--bg);border-radius:9px;padding:7px 13px;min-height:37px;color:var(--muted);font-weight:750;font-size:13px}
+.exam-ux-sections button[aria-current=true]{background:var(--strong);color:#fff;border-color:var(--strong)}
+.exam-ux-sections .ux-side-toggle{margin-left:auto;font-size:11px;padding:7px 10px;background:var(--surface)}
+.exam-ux-controls{display:grid;grid-template-columns:minmax(150px,1fr) auto;gap:12px;align-items:end;border-top:1px solid var(--line);padding-top:9px}
+.exam-ux-controls label{display:flex;flex-direction:column;gap:3px;min-width:0}
+.exam-ux-label{display:block;color:var(--muted);font-size:10px;font-weight:850;letter-spacing:.09em;text-transform:uppercase}
+.exam-ux-controls select{border:1px solid var(--line);background:var(--bg);border-radius:8px;min-height:38px;padding:7px 10px;font-size:12px;max-width:100%;min-width:0}
+.exam-ux-questions{display:flex;align-items:end;gap:6px}
+.exam-ux-questions .ux-step{height:38px;min-width:38px;background:var(--surface);border:1px solid var(--line);border-radius:8px;font-size:19px}
+.exam-ux-questions .ux-step:disabled{opacity:.4;cursor:default}
+.exam-ux-questions .ux-number-select{min-width:105px;max-width:185px}
+.exam-ux-progress{color:var(--muted);font-size:12px;align-self:center;white-space:nowrap}
+.exam-ux-mobile-view{display:none}
+body.exam-side-collapsed .shell{grid-template-columns:0 minmax(0,1fr)}
+body.exam-side-collapsed .sidebar{display:none}
+@media(min-width:1051px){body.exam-ux-enhanced #sourcePanel{position:sticky;top:166px}}
+@media(max-width:1050px){
+body.exam-ux-enhanced .shell{display:block}
+body.exam-ux-enhanced .sidebar{display:block}
+body.exam-ux-enhanced .main{padding:12px 15px 45px}
+body.exam-ux-enhanced .workspace{display:block}
+body.exam-ux-enhanced .workspace[data-study-view=question] #sourcePanel{display:none}
+body.exam-ux-enhanced .workspace[data-study-view=source] #answerPanel{display:none}
+body.exam-ux-enhanced #sourcePanel .reader{max-height:none;min-height:0}
+.exam-ux-mobile-view{display:flex;gap:7px;border-top:1px solid var(--line);margin-top:10px;padding-top:9px}
+.exam-ux-mobile-view button{flex:1;border:1px solid var(--line);border-radius:8px;background:var(--bg);min-height:39px;font-weight:750;font-size:12.5px}
+.exam-ux-mobile-view button[aria-pressed=true]{background:var(--strong);color:#fff;border-color:var(--strong)}
+.exam-ux-sections .ux-side-toggle{display:none}
+}
+@media(max-width:640px){
+.exam-ux-bar{padding:9px 10px}
+.exam-ux-sections{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+.exam-ux-sections button{font-size:11px;padding:6px 3px}
+.exam-ux-controls{grid-template-columns:1fr;gap:7px}
+.exam-ux-questions{justify-content:space-between}
+.exam-ux-questions .ux-number-select{max-width:none}
+body.exam-ux-enhanced .main{padding:10px 10px 40px}
+body.exam-ux-enhanced .topbar{gap:6px}
+body.exam-ux-enhanced .topbar .toolbar .btn{font-size:11px;padding:6px}
+body.exam-ux-enhanced #title{font-size:19px}
+body.exam-ux-enhanced .panel-heading{padding:11px 12px}
+body.exam-ux-enhanced .panel-heading h2{font-size:15px}
+body.exam-ux-enhanced #answerPanel .question-panel{padding:13px 12px}
+body.exam-ux-enhanced .question-prompt{font-size:17px}
+body.exam-ux-enhanced .ux-answer-block{padding:11px 9px}
+body.exam-ux-enhanced .ux-answer-block .choice{padding:10px;font-size:13px}
+}
+@media print{
+body.exam-ux-enhanced .exam-ux-bar,body.exam-ux-enhanced .ux-bottom-pager{display:none!important}
+body.exam-ux-enhanced .question[hidden]{display:block!important}
+body.exam-ux-enhanced #sourcePanel,body.exam-ux-enhanced #answerPanel{display:block!important;position:static}
+}
