@@ -1,0 +1,145 @@
+{
+  "total": 602,
+  "restored_count": 0,
+  "restored": [],
+  "unresolved_letter_only": [
+    {
+      "id": "set044-p53-q19-1",
+      "pdf_page": 53,
+      "source_matches": 0
+    },
+    {
+      "id": "set044-p53-q20-1",
+      "pdf_page": 53,
+      "source_matches": 0
+    },
+    {
+      "id": "set045-p54-q19-1",
+      "pdf_page": 54,
+      "source_matches": 0
+    },
+    {
+      "id": "set046-p55-q19-2",
+      "pdf_page": 55,
+      "source_matches": 0
+    },
+    {
+      "id": "set046-p55-q20-2",
+      "pdf_page": 55,
+      "source_matches": 0
+    },
+    {
+      "id": "set048-p57-q19-1",
+      "pdf_page": 57,
+      "source_matches": 0
+    },
+    {
+      "id": "set048-p57-q20-1",
+      "pdf_page": 57,
+      "source_matches": 0
+    },
+    {
+      "id": "set079-p88-q25-1",
+      "pdf_page": 88,
+      "source_matches": 0
+    },
+    {
+      "id": "set079-p91-q33-1",
+      "pdf_page": 91,
+      "source_matches": 0
+    },
+    {
+      "id": "set080-p97-q32-2",
+      "pdf_page": 97,
+      "source_matches": 0
+    },
+    {
+      "id": "set080-p97-q33-2",
+      "pdf_page": 97,
+      "source_matches": 0
+    },
+    {
+      "id": "set080-p97-q34-2",
+      "pdf_page": 97,
+      "source_matches": 0
+    },
+    {
+      "id": "set080-p97-q35-2",
+      "pdf_page": 97,
+      "source_matches": 0
+    },
+    {
+      "id": "set081-p99-q25-1",
+      "pdf_page": 99,
+      "source_matches": 0
+    },
+    {
+      "id": "set081-p102-q36-1",
+      "pdf_page": 102,
+      "source_matches": 0
+    },
+    {
+      "id": "set081-p102-q37-1",
+      "pdf_page": 102,
+      "source_matches": 0
+    },
+    {
+      "id": "set081-p102-q38-1",
+      "pdf_page": 102,
+      "source_matches": 0
+    },
+    {
+      "id": "set081-p103-q40-1",
+      "pdf_page": 103,
+      "source_matches": 0
+    },
+    {
+      "id": "set083-p111-q29-1",
+      "pdf_page": 111,
+      "source_matches": 0
+    },
+    {
+      "id": "set083-p111-q30-1",
+      "pdf_page": 111,
+      "source_matches": 0
+    },
+    {
+      "id": "set083-p111-q31-1",
+      "pdf_page": 111,
+      "source_matches": 0
+    },
+    {
+      "id": "set083-p112-q32-1",
+      "pdf_page": 112,
+      "source_matches": 0
+    },
+    {
+      "id": "set085-p118-q33-1",
+      "pdf_page": 118,
+      "source_matches": 0
+    },
+    {
+      "id": "set085-p118-q35-1",
+      "pdf_page": 118,
+      "source_matches": 0
+    },
+    {
+      "id": "set085-p121-q38-1",
+      "pdf_page": 121,
+      "source_matches": 0
+    },
+    {
+      "id": "set089-p140-q34-1",
+      "pdf_page": 140,
+      "source_matches": 0
+    }
+  ],
+  "status": {
+    "complete_source": 294,
+    "source_incomplete": 2,
+    "manual_review": 67,
+    "extraction_review": 69,
+    "transcript_review": 170
+  },
+  "policy": "Only literal PDF options; audio and answer keys unverified."
+}
