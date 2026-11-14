@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Restore unambiguous PDF-literal A/B/C options. No inferred German words or answer keys."""
+"""Restore unambiguous PDF-literal A/B/C options.
+
+Never substitute paraphrases, invented German text, or unofficial answer keys.
+"""
 import json,re,pathlib,collections
 file=pathlib.Path('exam-practice.html')
 s=file.read_text(encoding='utf-8')
