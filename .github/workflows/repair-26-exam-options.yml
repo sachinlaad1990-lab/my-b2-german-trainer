@@ -1,0 +1,53 @@
+name: Repair 26 incomplete exam option groups
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'qa/repair-26-exam-options.py'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: repair-26-source-options
+  cancel-in-progress: false
+jobs:
+  repair:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply literal PDF corrections and non-scorable source fragments
+        run: python3 qa/repair-26-exam-options.py
+      - name: Validate question bank and unresolved notes
+        run: |
+          python3 - <<'PY'
+          import pathlib,json,re,collections
+          s=pathlib.Path('exam-practice.html').read_text(encoding='utf-8')
+          b=json.loads(re.search(r'<script id="bank-data" type="application/json">(.*?)</script>',s,re.S).group(1))
+          qs=[q for e in b['exercises'] if e.get('section') in ('Lesen','Schreiben','Hören','Sprechen') for q in e.get('questions',[])]
+          assert len(qs)==602 and len({q['id'] for q in qs})==602
+          assert len(b['source_page_records'])==149
+          r=json.loads(pathlib.Path('qa/twenty-six-options-audit.json').read_text())
+          assert r['restored_verbatim_options']==6
+          assert r['source_incomplete_misclassified_mcqs']==20
+          assert len(r['unresolved'])==20
+          assert all(q.get('source_option_provenance')!='letter_only_not_extracted' for q in qs)
+          assert all(not(q.get('kind')=='mc' and q.get('options') and any(o['label'].upper()==o['value'].upper() for o in q['options'])) for q in qs if q['id'] in {u['id'] for u in r['unresolved']})
+          for q in qs:
+            if q.get('answer') is not None and q.get('kind')=='mc':
+              assert q['answer'] in [o['value'] for o in q.get('options',[])],q['id']
+          print('Validated original 602 questions and source-exact 26-item corrections')
+          PY
+      - name: Run Node exam quality suite
+        run: node --test qa/quality.test.mjs
+      - name: Publish revised questions and full exception report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add exam-practice.html qa/twenty-six-options-audit.json
+          git diff --cached --quiet || (git commit -m "Restore six source-verbatim option sets and safely flag twenty incomplete fragments" && git push)
